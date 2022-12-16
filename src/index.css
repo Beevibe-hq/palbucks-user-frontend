@@ -15,3 +15,69 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+@layer base{
+    /* clears the ‘X’  in search input field from Internet Explorer */
+    input[type="search"]::-ms-clear {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    input[type="search"]::-ms-reveal {
+      display: none;
+      width: 0;
+      height: 0;
+    } 
+    /* clears the ‘X’ from Chrome */
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+      display: none;
+    }
+
+    
+    /* Chrome, Safari, Edge, Opera  hide arrow in input type number*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    } 
+    /* Firefox hide arrow in input type number */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    /*Style progress bar across different browsers*/
+    /* firefox */
+    progress[value] {
+      -moz-appearance: none;
+      appearance: none;    
+      border: none;
+    }
+    progress::-moz-progress-bar { 
+      background-color: #2CA9F2;
+      border-radius: 5px;    
+    }
+
+    /* Chrome and safari */
+    progress.progressbar::-webkit-progress-value { 
+      background: #2CA9F2;
+      border-radius: 5px;
+      border: 0;
+    }
+    progress.progressbar::-webkit-progress-bar { 
+      background-color: #c4e4f7;    
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    /* IE10 / Edge */
+    progress {
+    color: #2CA9F2;
+    background-color:#c4e4f7;
+    }
+
+}

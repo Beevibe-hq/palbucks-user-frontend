@@ -44,7 +44,8 @@ function Homebody(){
                         return(
                           <Fundevent category = {item.category} placeholder = {item.placeholder} accountimages = {item.organizerimg}
                           organizeraccounts = {item.organizeraccounts} title = {item.title} description = {item.description}  
-                          value = {item.value} target = {item.target} categoryimg = {item.categoryimg} key = {i} />
+                          value = {item.value} target = {item.target} categoryimg = {item.categoryimg} 
+                          location = {item.location} key = {i} />
                         )
                     })
                 }
@@ -72,7 +73,8 @@ let data = [
       //title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
       value: 10000,
-      target:12000
+      target:12000,
+      location:'Cyprus'
   
     },
     {
@@ -84,7 +86,8 @@ let data = [
       //title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
       //value: 10000,
-      //target:12000
+      //target:12000,
+      location:'Singapore'
   
     }/* ,
     {

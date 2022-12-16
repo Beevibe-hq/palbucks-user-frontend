@@ -1,10 +1,12 @@
 import eventimg from "../../images/eventimg.png";
 import environmentimg from '../../images/environment label.svg'
+import likeicon from '../../images/likeicon.svg'
+import locateicon from '../../images/locateicon.svg'
 
 function Fundevent(props){
 
     return(
-        <div className = 'max-w-[300px] xl:max-w-[310px] max-h-[430px] min-w-[200px] inline-block my-[35px] mx-auto border-red-100 border-2 relative'>
+        <div className = 'max-w-[300px] xl:max-w-[310px] max-h-[430px] min-w-[200px] inline-block my-[35px] mx-auto relative'>
             
             <div className = 'flex gap-2 mb-3'>
                 
@@ -44,7 +46,7 @@ function Fundevent(props){
                 </div>
             </div>
             
-            <div className = 'bg-white pt-[10px]'>
+            <div className = 'bg-white pt-[10px] rounded-b-[20px] pb-2 px-[10px] mb-3 '>
                 <h5 className = "font-bold" >
                     {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
                 </h5>
@@ -52,6 +54,23 @@ function Fundevent(props){
                 <p className='text-[14px]'>
                     {props.description ? props.description : "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read thir...."}
                 </p>
+
+                <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2' />
+                    
+                <p className= 'text-[13px] font-bold mt-[2px] mb-[5px]'>{props.value ? props.value.toLocaleString() : '23,543'} USDT raised 
+                <span className='font-normal text-[#bba7a7] float-right' > {props.target ? props.target.toLocaleString() : '150,000'} USDT target</span> 
+                </p>
+            </div>
+
+            <div className='flex gap-[20px] justify-end'> 
+                <button className = "flex items-center justify-center gap-[3px] h-[28px] bg-white rounded-md p-3" >
+                    <img src={likeicon} alt = 'like icon' className = "w-[16px]" />
+                    <span>Like</span>
+                </button>
+                <button className = "flex items-center justify-center gap-[3px] h-[28px] bg-white rounded-md p-3" >
+                    <img src = {locateicon} alt = 'location icon' className = "w-[16px]" />
+                    <span>{props.location}</span>
+                </button>
             </div>
             
 
