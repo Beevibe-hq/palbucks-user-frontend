@@ -1,8 +1,17 @@
 import arrowdown from '../../images/arrowdown.svg'
 import userimg from '../../images/user.png'
 import userimg2 from '../../images/user2.svg'
+import userimg3 from '../../images/user3.svg'
+import userimg4 from '../../images/user4.svg'
+import userimg5 from '../../images/user5.svg'
+import userimg6 from '../../images/user6.svg'
 import eventimg from "../../images/eventimg.png";
+import eventimg2 from "../../images/eventimg2.png";
+import eventimg3 from "../../images/eventimg3.png";
+
 import environmentimg from '../../images/environment label.svg'
+import medicalimg from '../../images/medical label.svg'
+import animalimg from '../../images/animal label.svg'
 
 import Fundevent from '../fundevent/fundevent'
 
@@ -45,7 +54,7 @@ function Homebody(){
                           <Fundevent category = {item.category} placeholder = {item.placeholder} accountimages = {item.organizerimg}
                           organizeraccounts = {item.organizeraccounts} title = {item.title} description = {item.description}  
                           value = {item.value} target = {item.target} categoryimg = {item.categoryimg} 
-                          location = {item.location} key = {i} />
+                          location = {item.location} key = {i} eventimg = {item.placeholder} />
                         )
                     })
                 }
@@ -65,11 +74,11 @@ export default Homebody;
 
 let data = [
     {
-      organizerimg:[userimg2,userimg],
+      organizerimg:[userimg2],
       category:'Environment',
       categoryimg: environmentimg,
       placeholder: eventimg,
-      organizeraccounts:['Username001','Username002','Username003'],
+      organizeraccounts:['Username001'],
       //title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
       value: 10000,
@@ -78,28 +87,31 @@ let data = [
   
     },
     {
-      organizerimg:[userimg2],
+      organizerimg:[userimg3, userimg4],
       category:'Refugee',
-      categoryimg: environmentimg,
-      organizeraccounts:['Username005','Username003'],
-      placeholder: eventimg,
+      categoryimg: animalimg,
+      organizeraccounts:['Username001','Username002'],
+      placeholder: eventimg2,
       //title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
       //value: 10000,
       //target:12000,
       location:'Singapore'
   
-    }/* ,
+    },
     {
-      organizerimg:[accountimg3],    
-      placeholder: eventimg2,
+      organizerimg:[userimg3],
+      category:'Medical',
+      categoryimg:medicalimg,    
+      placeholder: eventimg3,
       organizeraccounts:['Username002','Username003'],
       //title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
       value: 372550,
       target:800000,
+      location:'Texas'
   
-    },
+    }/*,
     {
       organizerimg:[accountimage],
       category:'Donate',

@@ -38,7 +38,7 @@ function Fundevent(props){
             </div>
 
             <div className = 'relative'>
-                <img src={eventimg} alt="Fund event image" className = 'w-full h-[160px]' />
+                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = 'w-full h-[160px]' />
                 
                 <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-2 rounded-lg py-[0px] items-center'>
                     <img src={props.categoryimg} alt="Event category icon" className = 'w-[15px]' />
