@@ -46,7 +46,7 @@ function Homebody(){
                 </button>
             </div>
 
-            <div className = 'space-x-14'>
+            <div className = 'eventparent'>
                 
                 {
                     data.map((item,i)=>{
@@ -111,18 +111,20 @@ let data = [
       target:800000,
       location:'Texas'
   
-    }/*,
-    {
-      organizerimg:[accountimage],
-      category:'Donate',
-      placeholder: eventimg4,
-      organizeraccounts:['Username001','Username002','Username003'],
-      //title: 'Title for this particular fundevent',
-      //description: "Description of the ongoing event that users will read to know what it's about",
-      //value: 10000,
-      //target:12000
-  
     },
+    {
+      organizerimg:[userimg2],
+      category:'Donate',
+      placeholder: eventimg2,
+      categoryimg:medicalimg,  
+      organizeraccounts:['Username001','Username002','Username003'],
+      title: 'Title for this particular fundevent',
+      description: "Description of the ongoing event that users will read to know what it's about",
+      value: 10000,
+      target:12000,
+      location:'Abuja'
+  
+    },/*
     {
       organizerimg:[accountimg2,accountimg3],
       category:'Music',

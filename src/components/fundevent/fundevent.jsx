@@ -6,7 +6,7 @@ import locateicon from '../../images/locateicon.svg'
 function Fundevent(props){
 
     return(
-        <div className = 'max-w-[300px] xl:max-w-[310px] max-h-[430px] min-w-[200px] inline-block my-[35px] mx-auto relative'>
+        <div className = 'max-w-[300px] xl:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
             
             <div className = 'flex gap-2 mb-3'>
                 
@@ -46,20 +46,23 @@ function Fundevent(props){
                 </div>
             </div>
             
-            <div className = 'bg-white pt-[10px] rounded-b-[20px] pb-2 px-[10px] mb-3 '>
-                <h5 className = "font-bold" >
-                    {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
-                </h5>
+            <div className = 'bg-white pt-[10px] rounded-b-[20px] pb-2 px-[10px] mb-3 h-[200.5px] relative '>
+                <div>
+                    <h5 className = "font-bold" >
+                        {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
+                    </h5>
+                    <p className='text-[14px]'>
+                        {props.description ? props.description : "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read thir...."}
+                    </p>
+                </div>
 
-                <p className='text-[14px]'>
-                    {props.description ? props.description : "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read thir...."}
-                </p>
-
-                <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2' />
+                <div className = 'absolute w-[93%] bottom-2'>
+                    <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-1' />
                     
-                <p className= 'text-[13px] font-bold mt-[2px] mb-[5px]'>{props.value ? props.value.toLocaleString() : '23,543'} USDT raised 
-                <span className='font-normal text-[#bba7a7] float-right' > {props.target ? props.target.toLocaleString() : '150,000'} USDT target</span> 
-                </p>
+                    <p className= 'text-[13px] font-bold mt-[2px] mb-[5px]'>{props.value ? props.value.toLocaleString() : '23,543'} USDT raised
+                    <span className='font-normal text-[#bba7a7] float-right' > {props.target ? props.target.toLocaleString() : '150,000'} USDT target</span>
+                    </p>
+                </div>
             </div>
 
             <div className='flex gap-[20px] justify-end'> 

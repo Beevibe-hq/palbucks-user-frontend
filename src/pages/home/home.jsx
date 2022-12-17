@@ -5,9 +5,9 @@ import Sidebar from "../../components/sidebar/sidebar";
 function Home(){
 
     return(
-        <div className=' bg-[#F9F9F9] flex' >
+        <div className=' bg-[#F9F9F9] h-full' >
             <Sidebar />
-            <div className = 'w-full' >
+            <div className = 'ml-[350px]' >
                 <Navbar />
                 <Homebody />
             </div>
