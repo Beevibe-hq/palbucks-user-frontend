@@ -18,7 +18,7 @@ import Fundevent from '../fundevent/fundevent'
 function Homebody(){
 
     return(
-        <div className = 'px-10 py-14'>
+        <div className = 'px-10 py-14 mt-[100px]'>
             <div className = 'mb-12'>
                 <h1 className = 'font-bold text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
                 <p className = 'font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
