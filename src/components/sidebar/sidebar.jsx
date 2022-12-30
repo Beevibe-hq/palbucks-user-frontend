@@ -11,7 +11,7 @@ import Navelements from '../navelements/navelements'
 function Sidebar(){
 
     return(
-        <div className = ' w-[280px] xl:w-[320px] h-full fixed z-10 overflow-x-hidden top-0 border-orange-600 border-0 px-[25px] py-[35px] bg-white flex-shrink-0'>
+        <div className = ' w-[250px] lg:w-[280px] xl:w-[320px] h-full fixed z-10 overflow-x-hidden top-0 border-orange-600 border-0 px-[25px] py-[35px] bg-white flex-shrink-0'>
             
             <div className = 'mb-[40px]'>
                 <img src={palbuckslogo} alt="Palbucks logo" className = 'mx-auto cursor-pointer' />

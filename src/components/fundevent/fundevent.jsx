@@ -6,7 +6,7 @@ import locateicon from '../../images/locateicon.svg'
 function Fundevent(props){
 
     return(
-        <div className = 'max-w-[300px] xl:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
+        <div className = 'max-w-[280px] smlaptops:max-w-[325px] mdlaptops:max-w-[285px] xl:max-w-[315px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
             
             <div className = 'flex gap-2 mb-3'>
                 
@@ -14,7 +14,7 @@ function Fundevent(props){
                     {
                         props.accountimages.map((item,i)=>{
                             return(
-                                <img src = {item} alt = 'Organizer profile picture' className='min-w-[50px] h-[50px]' key = {i} />                                
+                                <img src = {item} alt = 'Organizer profile picture' className='min-w-[47px] h-[47px]' key = {i} />                                
                             )
                         })
                     }
@@ -26,9 +26,15 @@ function Fundevent(props){
                             props.organizeraccounts.map((item,i,arr)=>{
                                 
                                 return(
-                                    i === arr.length - 1 ? (item) :
+                                    /* i === arr.length - 1 ? (item) :
                                     i === arr.length - 2 ? item + ' and ' :
-                                    item + ' ,'
+                                    item + ' ,' */
+                                    arr.length === 1 ? item:
+                                    arr.length >= 2 && i === 0 ? item + ' and ': 
+                                    arr.length == 2 && i ===1  ?  item : 
+                                    arr.length > 2 && i > 1 ? arr.length -1 + ' others' :
+                                    ''
+
                                 )
                             })
                         }

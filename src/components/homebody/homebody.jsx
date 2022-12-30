@@ -104,7 +104,7 @@ let data = [
       category:'Medical',
       categoryimg:medicalimg,    
       placeholder: eventimg3,
-      organizeraccounts:['Username002','Username003'],
+      organizeraccounts:['Username003'],
       //title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
       value: 372550,
@@ -113,7 +113,7 @@ let data = [
   
     },
     {
-      organizerimg:[userimg2],
+      organizerimg:[userimg2, userimg3, userimg4],
       category:'Donate',
       placeholder: eventimg2,
       categoryimg:medicalimg,  
