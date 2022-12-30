@@ -6,7 +6,7 @@ import locateicon from '../../images/locateicon.svg'
 function Fundevent(props){
 
     return(
-        <div className = 'max-w-[280px] smlaptops:max-w-[325px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
+        <div className = 'max-w-[280px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
             
             <div className = 'flex gap-2 mb-3'>
                 
