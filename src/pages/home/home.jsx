@@ -7,7 +7,7 @@ function Home(){
     return(
         <div className=' bg-[#F9F9F9] h-full' >
             <Sidebar />
-            <div className = ' ml-[250px] lg:ml-[280px] xl:ml-[320px]' >
+            <div className = ' md:ml-[250px] lg:ml-[280px] xl:ml-[320px]' >
                 <Navbar />
                 <Homebody />
             </div>
