@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       screens:{
         'smlaptops':'1100px',
-        'mdlaptops':'1230px'
+        'mdlaptops':'1230px',
+        'lglaptops':'1280px'
       }
     },
   },
