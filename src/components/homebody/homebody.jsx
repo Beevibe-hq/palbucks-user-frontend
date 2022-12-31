@@ -18,10 +18,10 @@ import Fundevent from '../fundevent/fundevent'
 function Homebody(){
 
     return(
-        <div className = 'px-10 py-14 mt-[100px]'>
-            <div className = 'mb-12'>
-                <h1 className = 'font-bold text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
-                <p className = 'font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
+        <div className = 'px-6 md:px-10 py-6 md:py-14 mt-[90px] md:mt-[100px]'>
+            <div className = 'mb-9 md:mb-12'>
+                <h1 className = 'font-bold text-3xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
+                <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 
             <div className = 'flex gap-6 mb-6 font-semibold text-lg'>
