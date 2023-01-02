@@ -18,13 +18,13 @@ import Fundevent from '../fundevent/fundevent'
 function Homebody(){
 
     return(
-        <div className = 'px-6 md:px-10 py-6 md:py-14 mt-[90px] md:mt-[100px]'>
-            <div className = 'mb-9 md:mb-12'>
-                <h1 className = 'font-bold text-3xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
+        <div className = 'fold:px-2 phones:px-6 md:px-10 py-6 md:py-14 mt-[90px] md:mt-[100px] w-full'>
+            <div className = 'fold:mb-7 phones:mb-9 md:mb-12'>
+                <h1 className = 'font-bold fold:text-2xl phones:text-3xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 
-            <div className = 'flex gap-6 mb-6 font-semibold text-lg'>
+            <div className = 'flex fold:gap-4 phones:gap-6 mb-6 font-semibold text-lg'>
                 <button className = ' w-[102px] bg-[#D8D8D8] h-[42px] rounded-3xl '>
                     Others
                 </button>
@@ -33,20 +33,20 @@ function Homebody(){
                 </button>
             </div>
             
-            <div className = 'flex gap-3'>
-                <button className = {`bg-white w-[172px] h-[39px] flex items-center  justify-between pr-5 pl-3 rounded-tl-[10px] 
+            <div className = 'flex gap-3 font-medium fold:text-base phones:text-lg'>
+                <button className = {`bg-white fold:w-[130px] phones:w-[172px] h-[39px] flex items-center  justify-between pr-5 pl-3 rounded-tl-[10px] 
                 rounded-tr-[30px] rounded-bl-[10px] rounded-br-[30px] `}>
-                    <span className =' font-medium text-lg ' >Popular</span>
+                    <span className ='  ' >Popular</span>
                     <img src={arrowdown} alt="down arrow icon" />
                 </button>
-                <button className = {`bg-white w-[132px] h-[39px] flex items-center  justify-between pr-5 pl-3 rounded-tl-[10px] 
+                <button className = {`bg-white fold:w-[90px] phones:w-[132px] h-[39px] flex items-center  justify-between pr-5 pl-3 rounded-tl-[10px] 
                 rounded-tr-[30px] rounded-bl-[10px] rounded-br-[30px] `}>
-                    <span className =' font-medium text-lg ' >All</span>
+                    <span className =' ' >All</span>
                     <img src={arrowdown} alt="down arrow icon" />
                 </button>
             </div>
 
-            <div className = 'eventparent'>
+            <div className = 'eventparent w-full'>
                 
                 {
                     data.map((item,i)=>{
