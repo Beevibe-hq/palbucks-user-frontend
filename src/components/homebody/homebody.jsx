@@ -20,7 +20,7 @@ function Homebody(){
     return(
         <div className = 'fold:px-2 phones:px-6 md:px-10 py-6 md:py-14 mt-[90px] md:mt-[100px] w-full'>
             <div className = 'fold:mb-7 phones:mb-9 md:mb-12'>
-                <h1 className = 'font-bold fold:text-2xl phones:text-3xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
+                <h1 className = 'font-bold fold:text-2xl phones:text-2xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 

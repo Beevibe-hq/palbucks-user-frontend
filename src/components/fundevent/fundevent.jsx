@@ -6,7 +6,7 @@ import locateicon from '../../images/locateicon.svg'
 function Fundevent(props){
 
     return(
-        <div className = 'fold:max-w-[265px] phones:max-w-[310px] sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
+        <div className = 'w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
             
             <div className = 'flex gap-2 mb-3'>
                 
@@ -43,7 +43,7 @@ function Fundevent(props){
                 </div>
             </div>
 
-            <div className = 'relative'>
+            <div className = 'relative w-full'>
                 <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = 'w-full h-[160px]' />
                 
                 <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-2 rounded-lg py-[0px] items-center'>
