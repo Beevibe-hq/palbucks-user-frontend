@@ -17,7 +17,7 @@ function Navbar(){
                 <Searchbar />
             </div>
 
-            <div className = 'flex items-center gap-[15px] md:gap-4'>
+            <div className = 'flex items-center gap-[15px] md:gap-4 lg:gap-8'>
                 <img src={notificationsicon} alt="notifications icon" className = 'hidden md:block w-[23px]' />
                 <img src={userimg} alt="user avatar" className='w-[28px] phones:w-[35px] md:w-[40px]' />
                 <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
