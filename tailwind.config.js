@@ -2,6 +2,7 @@
 
 const { screens } = require('tailwindcss/defaultTheme')
 
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -15,6 +16,11 @@ module.exports = {
         'mdlaptops':'1230px',
         'lglaptops':'1280px',
         ...screens
+      },
+      extend:{
+        fontFamily:{
+          'inter':['inter']
+        }
       }
   },
   plugins: [],

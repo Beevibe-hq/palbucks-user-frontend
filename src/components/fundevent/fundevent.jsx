@@ -6,7 +6,7 @@ import locateicon from '../../images/locateicon.svg'
 function Fundevent(props){
 
     return(
-        <div className = 'w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px] '>
+        <div className = 'w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px]'>
             
             <div className = 'flex gap-2 mb-3'>
                 
@@ -14,14 +14,14 @@ function Fundevent(props){
                     {
                         props.accountimages.map((item,i)=>{
                             return(
-                                <img src = {item} alt = 'Organizer profile picture' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[47px] phones:h-[47px]' key = {i} />                                
+                                <img src = {item} alt = 'Organizer profile picture' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[50px] phones:h-[50px]' key = {i} />                                
                             )
                         })
                     }
                 </div>
 
                 <div className="flex flex-col relative max-w-[100%] truncate">
-                    <h3 className = "font-semibold text-[15px] truncate">                        
+                    <h3 className = "font-bold text-[15px] truncate">                        
                         {
                             props.organizeraccounts.map((item,i,arr)=>{
                                 
@@ -47,14 +47,14 @@ function Fundevent(props){
                 <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = 'w-full h-[160px]' />
                 
                 <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-2 rounded-lg py-[0px] items-center'>
-                    <img src={props.categoryimg} alt="Event category icon" className = 'w-[15px]' />
+                    <img src={props.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
                     <span className = 'text-sm' >{props.category}</span>
                 </div>
             </div>
             
             <div className = 'bg-white pt-[10px] rounded-b-[20px] pb-2 px-[10px] mb-3 h-[200.5px] relative '>
                 <div>
-                    <h5 className = "font-bold" >
+                    <h5 className = "font-bold text-base" >
                         {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
                     </h5>
                     <p className='text-[14px]'>
