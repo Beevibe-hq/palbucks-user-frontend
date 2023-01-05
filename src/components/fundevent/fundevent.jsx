@@ -1,9 +1,17 @@
+import { useMediaQuery } from "react-responsive";
+
 import eventimg from "../../images/eventimg.png";
 import environmentimg from '../../images/environment label.svg'
 import likeicon from '../../images/likeicon.svg'
 import locateicon from '../../images/locateicon.svg'
 
+
 function Fundevent(props){
+
+    //a react package for responsiveness
+    const isMobile = useMediaQuery({
+        query: '(max-width: 768px)'
+    })
 
     return(
         <div className = 'w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px]'>
@@ -44,7 +52,7 @@ function Fundevent(props){
             </div>
 
             <div className = 'relative w-full'>
-                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = 'w-full h-[160px]' />
+                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = 'w-full phones:h-[200px] md:h-[180px]' />
                 
                 <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-2 rounded-lg py-[0px] items-center'>
                     <img src={props.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
@@ -52,20 +60,24 @@ function Fundevent(props){
                 </div>
             </div>
             
-            <div className = 'bg-white pt-[10px] rounded-b-[20px] pb-2 px-[10px] mb-3 h-[200.5px] relative '>
-                <div>
-                    <h5 className = "font-bold text-base" >
+            <div className = 'bg-white pt-[17px] rounded-b-[20px] pb-2 px-[10px] mb-3 h-[198px] md:h-[205.5px] relative '>
+                <div className = 'mb-6 mx-auto'>
+                    <h5 className = "font-bold text-[18px] leading-6 mb-[11px] md:mb-2 " >
                         {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
                     </h5>
-                    <p className='text-[14px]'>
-                        {props.description ? props.description : "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read thir...."}
+                    <p className='text-[16px] md:text-sm mt-0'>
+                        {
+                            isMobile ? 'Click to know more about this campaign': props.description ? 
+                            props.description : 
+                            "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read thir...."
+                        }
                     </p>
                 </div>
 
-                <div className = 'absolute w-[93%] bottom-2'>
-                    <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-1' />
+                <div className = 'md:absolute w-[100%] md:w-[93.5%] mx-auto md:bottom-2'>
+                    <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-5 md:mb-[5px]' />
                     
-                    <p className= 'text-[13px] font-bold mt-[2px] mb-[5px]'>{props.value ? props.value.toLocaleString() : '23,543'} USDT raised
+                    <p className= 'text-[13px] font-bold mb-[5px]'>{props.value ? props.value.toLocaleString() : '23,543'} USDT raised
                     <span className='font-normal text-[#bba7a7] float-right' > {props.target ? props.target.toLocaleString() : '150,000'} USDT target</span>
                     </p>
                 </div>
