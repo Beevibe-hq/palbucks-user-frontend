@@ -24,11 +24,11 @@ function Homebody(){
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 
-            <div className = 'flex fold:gap-4 phones:gap-6 mb-4 md:mb-6 font-semibold text-lg'>
-                <button className = ' w-[102px] bg-[#D8D8D8] h-[42px] rounded-3xl '>
+            <div className = 'flex fold:gap-4 phones:gap-6 mb-4 md:mb-6 font-semibold text-base md:text-lg'>
+                <button className = 'w-[82px] md:w-[102px] bg-[#D8D8D8] h-[35px] md:h-[42px] py-1 px-3 rounded-3xl '>
                     Others
                 </button>
-                <button className = ' w-[112px] bg-inherit h-[42px] rounded-3xl hover:bg-[#D8D8D8] '>
+                <button className = 'w-[92px] md:w-[112px] bg-inherit h-[35px] md:h-[42px] rounded-3xl hover:bg-[#D8D8D8] py-1 px-3 '>
                     For you
                 </button>
             </div>

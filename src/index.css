@@ -42,7 +42,14 @@ code {
   @media screen and (max-width: 610px) {
     .eventparent{
       grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-      gap:47px;
+      gap:40px;
+    }
+  }
+
+  @media screen and (max-width: 395px) {
+    .eventparent{
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+      gap:30px;
     }
   }
 }
