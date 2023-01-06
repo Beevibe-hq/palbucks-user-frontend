@@ -47,9 +47,14 @@ code {
   }
 
   @media screen and (max-width: 395px) {
-    .eventparent{
-      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    .eventparent{      
       gap:30px;
+    }
+  }
+
+  @media screen and (max-width: 295px) {
+    .eventparent{      
+      gap:0px;
     }
   }
 }

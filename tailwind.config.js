@@ -12,6 +12,7 @@ module.exports = {
         'fold':'270px',
         'phones':'350px',
         'xphones':'400px',
+        'minitablet':'550px',
         'smlaptops':'1100px',
         'mdlaptops':'1230px',
         'lglaptops':'1280px',
