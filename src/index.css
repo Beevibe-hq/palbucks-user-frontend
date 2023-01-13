@@ -23,12 +23,14 @@ code {
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap:15px;
+    row-gap:30px;
   }
 
   @media screen and (max-width: 1280px) {
     .eventparent{
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap:15px;      
+      row-gap:30px;
     }
   }
 
@@ -36,6 +38,7 @@ code {
     .eventparent{
       grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
       gap:5px;
+      row-gap:30px;
     }
   }
 
@@ -43,18 +46,21 @@ code {
     .eventparent{
       grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
       gap:40px;
+      row-gap:40px;
     }
   }
 
   @media screen and (max-width: 395px) {
     .eventparent{      
       gap:30px;
+      row-gap:20px;
     }
   }
 
   @media screen and (max-width: 295px) {
     .eventparent{      
       gap:0px;
+      row-gap:0px;
     }
   }
 }
