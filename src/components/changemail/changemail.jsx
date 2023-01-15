@@ -18,14 +18,14 @@ function Changemail(){
 
     return(
         <div className = " w-[90%] lg:w-[80] xl:w-[75%] bg-white " >
-                    <div className = "flex justify-between py-5 px-7" >
+                    <div className = "flex justify-between items-center py-5 px-7" >
                         <h3 className = "text-lg font-bold" >Email address</h3>
                         <img src={openemail? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "
                             onClick = {managemailname}  />
                     </div>
 
                     <hr className = " border-[1px] border-[#C4C4C4] " />
-                    <div className = "px-7 py-5 " >
+                    <div className = "px-7 py-6 " >
                         
                         <div className ={` ${openemail ? 'flex' : 'hidden'} mb-3 gap-8 items-center `} >
                             
