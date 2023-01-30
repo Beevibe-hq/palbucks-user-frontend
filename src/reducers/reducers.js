@@ -20,9 +20,29 @@ const managelinkcolor = (state = 'home' , action) =>{
     }
 }
 
+const managehomeorevent = (state = 'home', action) =>{
+    switch(action.type){
+        case 'sethomeorevent':
+            return action.payload
+        default:
+            return state
+    }
+}
+
+const managehomebodydata = (state = [], action) =>{
+    switch(action.type){
+        case 'sethomebodydata':
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
-    managelinkcolor
+    managelinkcolor,
+    managehomeorevent,
+    managehomebodydata
 })
 
 export default allreducers;

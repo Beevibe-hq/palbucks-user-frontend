@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router";
 import Sidebar from "./components/sidebar/sidebar";
 import Home from "./pages/home/home";
 import Settings from "./pages/settings/settings";
+import Detailedevent from "./components/detailedevent/detailedevent";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           
           <Route path='/' element = { <Home /> } />
+          <Route path='/detailed' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />
 
         </Routes>

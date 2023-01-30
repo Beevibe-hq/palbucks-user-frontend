@@ -36,7 +36,7 @@ function Sidebar(){
 
     //a react package for responsiveness
     const isMobile = useMediaQuery({
-        query: '(max-width: 768px)'
+        query: '(max-width: 767px)'
     })
 
 
@@ -110,7 +110,7 @@ function Sidebar(){
 
             </nav>
 
-            <div className = 'absolute bottom-12 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-medium cursor-pointer'>
+            <div className = 'absolute bottom-[5%] flex items-center gap-4 text-[#525252] text-base xl:text-lg font-medium cursor-pointer'>
                 <img src={logouticon} alt="Logout icon" className="w-[24px]" />
                 <h3>Logout</h3>
             </div>

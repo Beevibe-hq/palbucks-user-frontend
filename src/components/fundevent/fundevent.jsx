@@ -4,17 +4,36 @@ import eventimg from "../../images/eventimg.png";
 import environmentimg from '../../images/environment label.svg'
 import likeicon from '../../images/likeicon.svg'
 import locateicon from '../../images/locateicon.svg'
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sethomeorevent } from "../../actions/actions";
 
 
 function Fundevent(props){
+
+    const dispatch = useDispatch()
 
     //a react package for responsiveness
     const isMobile = useMediaQuery({
         query: '(max-width: 768px)'
     })
 
+
+    /* This will navigate each event to its particular detailed page with its id or second method of rendering between 
+    homebody and Detailedevent of each eventpage */
+    const navigate  = useNavigate()
+    function detailedevent(){
+        //navigate(`/detailed/${props.id}`)
+        dispatch(sethomeorevent(`event${props.id}`))
+
+    }
+
     return(
-        <div className = 'w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px] lglaptops:max-w-[310px] h-[430px] min-w-[200px] inline-block mx-auto my-[35px]'>
+        <div className = {`w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px]
+         lglaptops:max-w-[310px] h-[430px] min-w-[200px] cursor-pointer inline-block mx-auto my-[35px]`}
+
+         onClick = {detailedevent}
+        >
             
             <div className = 'flex gap-2 mb-3'>
                 
@@ -52,7 +71,7 @@ function Fundevent(props){
             </div>
 
             <div className = 'relative w-full rounded-t-[15px]'>
-                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = 'w-full phones:h-[175px] xphones:h-[200px] md:h-[180px]' />
+                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = ' rounded-t-2xl w-full phones:h-[175px] xphones:h-[200px] md:h-[180px]' />
                 
                 <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-2 rounded-lg py-[0px] items-center'>
                     <img src={props.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />

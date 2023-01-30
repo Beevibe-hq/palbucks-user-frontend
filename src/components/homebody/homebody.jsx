@@ -8,17 +8,26 @@ import userimg6 from '../../images/user6.svg'
 import eventimg from "../../images/eventimg.png";
 import eventimg2 from "../../images/eventimg2.png";
 import eventimg3 from "../../images/eventimg3.png";
+import eventimg4 from "../../images/eventimg4.jpg";
+import eventimg5 from "../../images/eventimg5.jpg";
+import eventimg6 from "../../images/eventimg7.jpg";
 
 import environmentimg from '../../images/environment label.svg'
 import medicalimg from '../../images/medical label.svg'
 import animalimg from '../../images/animal label.svg'
 
 import Fundevent from '../fundevent/fundevent'
+import { useDispatch } from 'react-redux'
+import { sethomebodydata } from '../../actions/actions'
 
 function Homebody(){
 
+  //stores all the events data in redux so it can be accessed anywhere
+  const dispatch = useDispatch()
+  dispatch(sethomebodydata(data))
+
     return(
-        <div className = 'fold:px-2 phones:px-6 md:px-10 py-8 md:py-14 mt-[90px] md:mt-[100px] w-full h-full'>
+        <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full'>
             <div className = 'fold:mb-5 phones:mb-6 md:mb-12'>
                 <h1 className = 'font-bold fold:text-2xl phones:text-2xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
@@ -54,7 +63,7 @@ function Homebody(){
                           <Fundevent category = {item.category} placeholder = {item.placeholder} accountimages = {item.organizerimg}
                           organizeraccounts = {item.organizeraccounts} title = {item.title} description = {item.description}  
                           value = {item.value} target = {item.target} categoryimg = {item.categoryimg} 
-                          location = {item.location} key = {i} eventimg = {item.placeholder} />
+                          location = {item.location} key = {i} eventimg = {item.placeholder} id = {i} />
                         )
                     })
                 }
@@ -83,7 +92,9 @@ let data = [
       //description: "Description of the ongoing event that users will read to know what it's about",
       value: 10000,
       target:12000,
-      location:'Cyprus'
+      location:'Cyprus',
+      days:'30',
+      totaldonations:20403
   
     },
     {
@@ -96,7 +107,9 @@ let data = [
       //description: "Description of the ongoing event that users will read to know what it's about",
       //value: 10000,
       //target:12000,
-      location:'Singapore'
+      location:'Singapore',
+      days:'49',
+      totaldonations:20403,
   
     },
     {
@@ -109,7 +122,9 @@ let data = [
       //description: "Description of the ongoing event that users will read to know what it's about",
       value: 372550,
       target:800000,
-      location:'Texas'
+      location:'Texas',
+      days:'10',
+      totaldonations:2040323,
   
     },
     {
@@ -122,9 +137,57 @@ let data = [
       description: "Description of the ongoing event that users will read to know what it's about",
       value: 10000,
       target:12000,
-      location:'Abuja'
+      location:'Abuja',
+      days:'19',
+      totaldonations:12420403,
   
-    },/*
+    },
+    {
+      organizerimg:[userimg2, userimg3, userimg4],
+      category:'Family',
+      placeholder: eventimg4,
+      categoryimg:medicalimg,  
+      organizeraccounts:['Username001','Username002','Username003'],
+      title: 'Title for this particular fundevent',
+      description: "Description of the ongoing event that users will read to know what it's about",
+      value: 10000,
+      target:12000,
+      location:'Abuja',
+      days:'19',
+      totaldonations:327820403,
+  
+    },
+    {
+      organizerimg:[userimg2, userimg3, userimg4],
+      category:'Faith',
+      placeholder: eventimg5,
+      categoryimg:medicalimg,  
+      organizeraccounts:['Username001','Username002','Username003'],
+      title: 'Title for this particular fundevent',
+      description: "Description of the ongoing event that users will read to know what it's about",
+      value: 10000,
+      target:12000,
+      location:'Abuja',
+      days:'19',
+      totaldonations:204032332,
+  
+    },
+    {
+      organizerimg:[userimg2, userimg3, userimg4],
+      category:'Environment',
+      placeholder: eventimg6,
+      categoryimg:medicalimg,  
+      organizeraccounts:['Username001','Username002','Username003'],
+      title: 'Title for this particular fundevent',
+      description: "Description of the ongoing event that users will read to know what it's about",
+      value: 10000,
+      target:12000,
+      location:'Abuja',
+      days:'19',
+      totaldonations:3220244503,
+  
+    },
+    /*
     {
       organizerimg:[accountimg2,accountimg3],
       category:'Music',
