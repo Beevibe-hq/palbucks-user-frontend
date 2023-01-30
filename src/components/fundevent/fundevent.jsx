@@ -19,9 +19,10 @@ function Fundevent(props){
     })
 
 
-    /* This will navigate each event to its particular detailed page with its id or second method of rendering between 
-    homebody and Detailedevent of each eventpage */
-    const navigate  = useNavigate()
+    /* This will navigate each event to its particular detailed page with its own id*/
+    /*  or second method of rendering between homebody and Detailedevent of each eventpage */
+    //const navigate  = useNavigate() currently unused
+
     function detailedevent(){
         //navigate(`/detailed/${props.id}`)
         dispatch(sethomeorevent(`event${props.id}`))

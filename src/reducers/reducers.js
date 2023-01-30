@@ -29,6 +29,7 @@ const managehomeorevent = (state = 'home', action) =>{
     }
 }
 
+//This store the fundevents data immediately on render and supplies the rest of the pages from here
 const managehomebodydata = (state = [], action) =>{
     switch(action.type){
         case 'sethomebodydata':

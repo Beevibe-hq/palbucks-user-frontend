@@ -22,7 +22,7 @@ import { sethomebodydata } from '../../actions/actions'
 
 function Homebody(){
 
-  //stores all the events data in redux so it can be accessed anywhere
+  //stores all the events data in redux store so it can be accessed anywhere
   const dispatch = useDispatch()
   dispatch(sethomebodydata(data))
 
@@ -58,6 +58,9 @@ function Homebody(){
             <div className = 'eventparent w-full'>
                 
                 {
+                  /* Note here the id being passed as prop is the key of the array, when coming from the backend we can 
+                     request for an id in each of the objects,
+                  */
                     data.map((item,i)=>{
                         return(
                           <Fundevent category = {item.category} placeholder = {item.placeholder} accountimages = {item.organizerimg}

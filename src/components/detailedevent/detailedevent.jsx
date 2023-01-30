@@ -6,11 +6,16 @@ import date from "../../images/date.svg"
 function Detailedevent(props){
 
     const dispatch = useDispatch()
+
+    /*
+     This selects homebodydata from redux store so as to get the complete details of the selected funding event.
+     When tje fundevent is clicked, an id is passed from the
+     */
     const homebodydata = useSelector(state => state.managehomebodydata)
 
     let propdetails = props.details
-    let eventid = propdetails.charAt(propdetails.length-1)
-    let eventdetails  = homebodydata[eventid]
+    let eventid = propdetails.charAt(propdetails.length-1) //This cuts out the id of the selected fundevent from the props
+    let eventdetails  = homebodydata[eventid] // Uses the above id to select the clicked event's details from redux store
 
     //console.log(eventdetails)
     
@@ -50,23 +55,29 @@ function Detailedevent(props){
                     </div>
                 </div>
 
-                <div className= {`bg-white w-full md:w-[350px] px-5 py-7 h-fit rounded-xl shadow-[0px_0px_32px_rgba(0_0_0_0.04)] `} >
+                <div className="w-full md:w-[300px] lg:w-[350px]">
+                    <div className= {`bg-white mb-5 md:mt-4 px-5 py-7 h-fit rounded-xl shadow-[0px_0px_32px_rgba(0_0_0_0.04)] `} >
                     
-                    <p className= 'text-[14px] font-bold mb-[5px]'>{eventdetails.value ? eventdetails.value.toLocaleString() : '23,543'} USDT raised
-                    <span className='font-semibold text-[#bba7a7] float-right' > {eventdetails.target ? eventdetails.target.toLocaleString() : '150,000'} USDT target</span>
-                    </p>
+                        <p className= 'text-[14px] font-bold mb-[5px]'>{eventdetails.value ? eventdetails.value.toLocaleString() : '23,543'} USDT raised
+                        <span className='font-semibold text-[#bba7a7] float-right' > {eventdetails.target ? eventdetails.target.toLocaleString() : '150,000'} USDT target</span>
+                        </p>
+                        <progress value={eventdetails.value ? eventdetails.value : '23543'} max={eventdetails.target ? eventdetails.target : '150000'}
+                        className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2 phones:mb-4 xphones:mb-5 md:mb-[5px]' />
+                        <p className = {`text-[#C5C5C5] font-medium text-sm mb-9 `} >{totaldonations} donations so far </p>
+                        <button className = {`text-white mb-5 bg-[#2CA9F2] px-7 py-3 rounded-[20px] items-center mx-auto block`} >
+                            Fund now
+                        </button>
+                        <p className = "text-center font-bold text-lg " >Connected,
+                        <span className=  "text-[#2CA9F2] cursor-pointer" > disconnect your wallet</span>
+                        </p>
+                    
+                    </div>
 
-                    <progress value={eventdetails.value ? eventdetails.value : '23543'} max={eventdetails.target ? eventdetails.target : '150000'}  
-                    className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2 phones:mb-4 xphones:mb-5 md:mb-[5px]' />
-
-                    <p className = {`text-[#C5C5C5] font-medium text-sm mb-9 `} >{totaldonations} donations so far </p>
-
-                    <button className = {`text-white  bg-[#2CA9F2] px-7 py-3 rounded-[20px] items-center mx-auto block`} >
-                        Fund now
-                    </button>
-
-                                        
+                    <p className = "text-center font-bold text-base text-[#C5C5C5] " >Don't have a USDT wallet? 
+                    <span className="text-[#2CA9F2] cursor-pointer "> fund using card payment</span>
+                    </p>                    
                 </div>
+
             </div>
 
         </div>
