@@ -5,6 +5,10 @@ import date from "../../images/date.svg"
 import share from "../../images/share.svg"
 import likeicon from "../../images/likeicon.svg"
 import locateicon from "../../images/locateicon.svg"
+import user9 from "../../images/user9.svg"
+import user8 from "../../images/user8.svg"
+import user7 from "../../images/user7.svg"
+import blackdot from "../../images/blackdot.svg"
 import Campaignorganizers from "../campaignorganizers/campaignorganizers"
 
 function Detailedevent(props){
@@ -81,7 +85,7 @@ function Detailedevent(props){
             <div className="w-full flex flex-col md:flex-row gap-3 md:gap-10 mb-8 ">
                 
                 <div className =" relative w-full md:w-[60%] " >
-                    <img src={eventdetails.placeholder} alt="Fund event image" className = {` w-full h-[250px] md:h-[350px] rounded-xl `} />
+                    <img src={eventdetails.placeholder} alt="Fund event" className = {` w-full h-[250px] md:h-[350px] rounded-xl `} />
                     <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-4 rounded-lg py-1 items-center'>
                         <img src={eventdetails.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
                         <span className = 'text-base font-medium ' >{eventdetails.category}</span>
@@ -115,7 +119,7 @@ function Detailedevent(props){
 
             <div className = "w-full md:w-[60%]  pb-10 " >
 
-                <hr className = " border-[1px] border-[#888888] mb-8 " />
+                <hr className = " border-[1px] border-[#888888] mb-8" />
                 
                 <button className = "bg-[#2CA9F2] flex text-white gap-2 py-[7px] px-3 rounded-lg mb-8 font-semibold text-base " >
                     <img src={share} alt="share icon" />
@@ -147,7 +151,23 @@ function Detailedevent(props){
 
                 <Campaignorganizers organizerdetails = {organizerdetails}  />
 
-
+                <h3 className="mt-14 mb-7 text-lg font-bold " >105 comments</h3>
+                
+                <div className=" flex flex-col gap-8">
+                    {
+                        commentdata.map((item,i) =>{
+                            return(
+                                <Comment key={i} image={item.img} name={item.name} time={item.time} comment={item.comment} />
+                            )
+                            
+                        })
+                    }
+                </div>
+                
+                <button className={`bg-[#FFFFFF] py-3 px-5 block mx-auto mt-9 border-[1px] border-[#C5C5C5]
+                 rounded-lg shadow-[0px_0px_32px_rgba(0_0_0_0.04)] font-medium text-lg `} >
+                    Show more
+                </button>
 
             </div>
 
@@ -157,18 +177,58 @@ function Detailedevent(props){
 
 export default Detailedevent
 
-/* let data = [
+
+
+//This is the component for each comment
+function Comment(props){
+
+    return(
+        <div className="flex items-start gap-4  " >
+            <img src={props.image} alt="user 7 profile" className="w-[60px]" />
+            <div className="flex-col gap-3 ">
+                <div className="flex gap-2 items-center ">
+                    <h3 className="font-bold text-lg " >{props.name}</h3>
+                    <img src={blackdot} alt="black dot" className="w-2" />
+                    <p>{props.time}</p>
+                </div>
+                <p>{props.comment}</p>
+            </div>
+        </div>        
+    )
+}
+
+
+
+//Comments data carrying the necessary detail in each comment
+let commentdata = [
     {
-      organizerimg:[userimg2],
-      category:'Environment',
-      categoryimg: environmentimg,
-      placeholder: eventimg,
-      organizeraccounts:['Username001'],
-      //title: 'Title for this particular fundevent',
-      //description: "Description of the ongoing event that users will read to know what it's about",
-      value: 10000,
-      target:12000,
-      location:'Cyprus',
-      days:'30'
-    }
-] */
+        img:user7,
+        name:'Amanda susan',
+        time:'10m ago',
+        comment:`This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
+        Users are allowed to read the complete reason why this use is requesting for money from people.
+        Why other users read this, if it is totally convincing enough then this user reading it can fund
+        this project. If not he will move elsewhere to search for where to put their money. This can go on and
+        on and on till its stops.`
+    },
+    {
+        img:user8,
+        name:'Andrey Santos',
+        time:'15h ago',
+        comment:`This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
+        Users are allowed to read the complete reason why this use is requesting for money from people.
+        Why other users read this, if it is totally convincing enough then this user reading it can fund
+        this project. If not he will move elsewhere to search for where to put their money. This can go on and
+        on and on till its stops.`
+    },
+    {
+        img:user9,
+        name:'Alisha Goldberg',
+        time:'1d ago',
+        comment:`This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
+        Users are allowed to read the complete reason why this use is requesting for money from people.
+        Why other users read this, if it is totally convincing enough then this user reading it can fund
+        this project. If not he will move elsewhere to search for where to put their money. This can go on and
+        on and on till its stops.`
+    },
+]
