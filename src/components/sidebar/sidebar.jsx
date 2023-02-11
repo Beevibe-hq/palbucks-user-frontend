@@ -45,7 +45,7 @@ function Sidebar(){
     return(
         <div className = {` ${ isMobile ? sidebaropen ? 'left-0' : '-left-full' : 'left-0' }  md:block w-[80%] minitablet:w-[320px]
          md:w-[250px] lg:w-[280px] xl:w-[320px] h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0 px-[25px] 
-         py-16 md:py-[35px] bg-white flex-shrink-0 transition-all duration-1000 ease-in-out `} >
+         py-16 md:py-[35px] bg-white flex-shrink-0 transition-all duration-500 ease-in-out `} >
             
             <div className = 'mb-[60px] md:mb-[40px]'>
                 

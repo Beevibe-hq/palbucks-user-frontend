@@ -69,7 +69,7 @@ function Detailedevent(props){
     return(
         <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full'>
             
-            <img src={backarrow} alt="back arrow" className = {`w-8 mb-8 cursor-pointer`} 
+            <img src={backarrow} alt="back arrow" className = {`w-8 mb-[34px] cursor-pointer`} 
             onClick = { 
                 () => {
                     dispatch(sethomeorevent('home'))
@@ -77,7 +77,7 @@ function Detailedevent(props){
             }
             />
             
-            <div className="bg-[#636363] mb-9 flex gap-2 px-4 w-56 h-9 rounded-2xl justify-center items-center   text-white ">
+            <div className="bg-[#636363] mb-[30px] flex gap-2 px-[20px] py-[8px] w-fit rounded-2xl justify-center items-center   text-white ">
                 <img src={date} alt="calendar icon" className = "w-4" />
                 <span>{`${eventdetails.days} days remaining`}</span>
             </div>

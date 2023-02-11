@@ -31,7 +31,7 @@ function Fundevent(props){
 
     return(
         <div className = {`w-full sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px]
-         lglaptops:max-w-[310px] h-[430px] min-w-[200px] cursor-pointer inline-block mx-auto my-[35px]`}
+         lglaptops:max-w-[310px] md:h-[430px] min-w-[200px] cursor-pointer inline-block mx-auto my-[35px]`}
 
          onClick = {detailedevent}
         >
@@ -42,7 +42,7 @@ function Fundevent(props){
                     {
                         props.accountimages.map((item,i)=>{
                             return(
-                                <img src = {item} alt = 'Organizer profile picture' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[50px] phones:h-[50px]' key = {i} />                                
+                                <img src = {item} alt = 'Organizer profile' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[50px] phones:h-[50px]' key = {i} />                                
                             )
                         })
                     }
@@ -72,30 +72,30 @@ function Fundevent(props){
             </div>
 
             <div className = 'relative w-full rounded-t-[15px]'>
-                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event image" className = ' rounded-t-2xl w-full phones:h-[175px] xphones:h-[200px] md:h-[180px]' />
+                <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event" className = ' rounded-t-2xl w-full phones:h-[175px] xphones:h-[200px] md:h-[180px]' />
                 
-                <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-2 rounded-lg py-[0px] items-center'>
+                <div className = 'absolute top-4 left-5 bg-white flex gap-1 px-[10px] rounded-lg py-[5px] items-center'>
                     <img src={props.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
                     <span className = 'text-sm' >{props.category}</span>
                 </div>
             </div>
             
-            <div className = 'bg-white pt-2 phones:pt-3 xphones:pt-[17px] rounded-b-[20px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] mb-3 h-[170px] phones:h-[178px] xphones:h-[198px] md:h-[205.5px] relative shadow-[0px_0px_35.2294px_rgba(0,0,0,0.04)] '>
+            <div className = 'bg-white pt-2 phones:pt-3 xphones:pt-[17px] rounded-b-[20px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] mb-6 h-fit md:h-[205.5px] relative shadow-[0px_0px_35.2294px_rgba(0,0,0,0.04)] '>
                 <div className = 'mb-3 phones:mb-5 xphones:mb-6 mx-auto'>
-                    <h5 className = "font-bold text-base phones:text-[18px] leading-6 mb-[5px] phones:mb-[8px] xphones:mb-[11px] md:mb-2 " >
+                    <h5 className = "font-bold text-base phones:text-[18px] leading-6 mb-[5px] phones:mb-[8px] xphones:mb-[11px] md:mb-2 line-clamp-2 " >
                         {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
                     </h5>
-                    <p className='text-sm phones:text-[16px] md:text-sm mt-0'>
+                    <p className='text-sm phones:text-[16px] md:text-[15px] mt-0 line-clamp-3 '>
                         {
                             isMobile ? 'Click to know more about this campaign': props.description ? 
                             props.description : 
-                            "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read thir...."
+                            "This a a complete description for the crowdfunding to aid others fund this particular crowdfunding. Users are allowed to read theories and project outcomes."
                         }
                     </p>
                 </div>
 
-                <div className = 'absolute w-[93.5%] mx-auto bottom-2 phones:bottom-3 md:bottom-2'>
-                    <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2 phones:mb-4 xphones:mb-5 md:mb-[5px]' />
+                <div className = 'md:absolute w-full md:w-[93.5%] mx-auto  md:bottom-2'>
+                    <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  className='progressbar w-full h-[8px] appearance-none rounded-[5px] mb-2 phones:mb-4 xphones:mb-5 md:mb-[5px]' />
                     
                     <p className= 'text-[13px] font-bold mb-[5px]'>{props.value ? props.value.toLocaleString() : '23,543'} USDT raised
                     <span className='font-normal text-[#bba7a7] float-right' > {props.target ? props.target.toLocaleString() : '150,000'} USDT target</span>

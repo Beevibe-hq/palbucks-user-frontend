@@ -33,7 +33,7 @@ function Homebody(){
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 
-            <div className = 'flex fold:gap-4 phones:gap-6 mb-4 md:mb-6 font-semibold text-base md:text-lg'>
+            <div className = 'flex fold:gap-4 phones:gap-4 mb-4 md:mb-6 font-semibold text-base md:text-lg'>
                 <button className = 'w-[82px] md:w-[102px] bg-[#D8D8D8] h-[35px] md:h-[42px] py-1 px-3 rounded-3xl '>
                     Others
                 </button>
