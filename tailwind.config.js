@@ -13,14 +13,19 @@ module.exports = {
         'phones':'350px',
         'xphones':'400px',
         'minitablet':'550px',
-        'smlaptops':'1100px',
+        'brkpoint':'940px',       
+        ...screens,
+        'smlaptops':'1150px',
         'mdlaptops':'1230px',
-        'lglaptops':'1280px',
-        ...screens
+        'lglaptops':'1300px',
+        
       },
       extend:{
         fontFamily:{
           'inter':['inter']
+        },
+        screens:{
+          'endmobile':'940px'
         }
       }
   },

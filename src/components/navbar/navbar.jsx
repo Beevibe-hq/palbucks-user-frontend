@@ -22,11 +22,11 @@ function Navbar(){
 
     return(
         <div className = {`py-[10px] px-2 phones:px-5  md:px-10 h-[90px] md:h-[100px] fixed top-0 right-0
-         left-0 md:left-[250px] lg:left-[280px] xl:left-[320px] z-20 bg-[#F9F9F9] shadow-[0px_0px_16px_rgba(0,0,0,0.04)]
+         left-0 brkpoint:left-[250px] lg:left-[280px] xl:left-[320px] z-20 bg-[#F9F9F9] shadow-[0px_0px_16px_rgba(0,0,0,0.04)]
         flex items-center justify-between xphones:justify-between`} >
             
             <div className = 'flex gap-[15px] max-w-[72%] phones:max-w-[75%] xphones:max-w-fit '>
-                <img src={menuicon} alt="menu icon" className = 'block md:hidden w-[20px] phones:w-[25px]'
+                <img src={menuicon} alt="menu icon" className = 'block brkpoint:hidden w-[20px] phones:w-[25px]'
                     onClick = {managesidebar} />
                 <Searchbar />
             </div>

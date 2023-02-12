@@ -36,20 +36,20 @@ function Sidebar(){
 
     //a react package for responsiveness
     const isMobile = useMediaQuery({
-        query: '(max-width: 767px)'
+        query: '(max-width: 940px)'
     })
 
 
 
     
     return(
-        <div className = {` ${ isMobile ? sidebaropen ? 'left-0' : '-left-full' : 'left-0' }  md:block w-[80%] minitablet:w-[320px]
-         md:w-[250px] lg:w-[280px] xl:w-[320px] h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0 px-[25px] 
+        <div className = {` ${ isMobile ? sidebaropen ? 'left-0' : '-left-full' : 'left-0' }  md:block w-[80%] minitablet:w-[60%]
+         brkpoint:w-[250px] lg:w-[280px] xl:w-[320px] h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0 px-[25px] 
          py-16 md:py-[35px] bg-white flex-shrink-0 transition-all duration-500 ease-in-out `} >
             
             <div className = 'mb-[60px] md:mb-[40px]'>
                 
-                <div className = {`absolute md:relative  md:float-none flex md:mx-auto gap-4 items-center justify-center mb-5 `} > 
+                <div className = {`absolute brkpoint:relative  brkpoint:float-none flex brkpoint:mx-auto gap-4 items-center justify-center mb-5 `} > 
                     <img src={applogo} alt="Palbucks logo" className = 'cursor-pointer w-5 md:w-6 ' />
                     <h1 className = "font-bold text-[#2CA9F2] text-xl md:text-2xl leading-6 tracking-widest" >Palbucks</h1>
                 </div>

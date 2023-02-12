@@ -13,7 +13,7 @@ function Settings(){
 
     const sidebaropen = useSelector(state => state.sidebarstate)
     const isMobile = useMediaQuery({
-        query: '(max-width: 767px)'
+        query: '(max-width: 940px)'
     })
     
     useEffect(()=>{
@@ -23,7 +23,7 @@ function Settings(){
     return(
         <div className=' bg-[#F9F9F9] min-h-full' >
             <Sidebar />
-            <div className =  {`md:ml-[250px] lg:ml-[280px] xl:ml-[320px] ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
+            <div className =  {`brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px] ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />   
                 <Settingsbody />
                 
