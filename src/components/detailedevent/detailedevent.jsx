@@ -74,9 +74,9 @@ function Detailedevent(props){
       let totaldonations = formatnumber(eventdetails.totaldonations);
 
     return(
-        <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full'>
+        <div className = 'fold:px-1 phones:px-3 md:px-6 lg:px-10 pt-6 md:pt-8 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full'>
             
-            <img src={backarrow} alt="back arrow" className = {`w-8 mb-[34px] cursor-pointer`} 
+            <img src={backarrow} alt="back arrow" className = {`w-8 mb-5 md:mb-[34px] cursor-pointer`} 
             onClick = { 
                 () => {
                     dispatch(sethomeorevent('home'))
@@ -84,41 +84,41 @@ function Detailedevent(props){
             }
             />
             
-            <div className="bg-[#636363] mb-[30px] flex gap-2 px-[20px] py-[8px] w-fit rounded-2xl justify-center items-center   text-white ">
+            <div className="bg-[#636363] mb-3 md:mb-[30px] flex gap-2 px-4 md:px-5 py-2 w-fit rounded-2xl justify-center items-center text-white ">
                 <img src={date} alt="calendar icon" className = "w-4" />
-                <span>{`${eventdetails.days} days remaining`}</span>
+                <span className="font-semibold text-sm md:text-base " >{`${eventdetails.days} days remaining`}</span>
             </div>
             
-            <div className="w-full flex flex-col md:flex-row gap-3 md:gap-10 mb-8 ">
+            <div className="w-full flex flex-col md:flex-row gap-2 md:gap-10 mb-8 ">
                 
                 <div className =" relative w-full md:w-[60%] shrink-0 " >
-                    <img src={eventdetails.placeholder} alt="Fund event" className = {` w-full h-[250px] md:h-[350px] rounded-xl `} />
-                    <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-4 rounded-lg py-1 items-center'>
+                    <img src={eventdetails.placeholder} alt="Fund event" className = {` w-full h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
+                    <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
                         <img src={eventdetails.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
-                        <span className = 'text-base font-medium ' >{eventdetails.category}</span>
+                        <span className = 'text-sm md:text-base font-medium ' >{eventdetails.category}</span>
                     </div>
                 </div>
 
-                <div className="w-full md:w-[300px] lg:w-[350px]">
-                    <div className= {`bg-white mb-5 md:mt-4 px-5 py-7 h-fit rounded-xl shadow-[0px_0px_32px_rgba(0_0_0_0.04)] `} >
+                <div className="w-full md:w-[330px] lg:w-[360px]">
+                    <div className= {`bg-white mb-5 md:mt-4 px-4 md:px-5 py-7 h-fit rounded-[5px] md:rounded-xl shadow-[0px_0px_32px_rgba(0_0_0_0.04)] `} >
                     
                         <p className= 'text-[14px] font-bold mb-[5px]'>{eventdetails.value ? eventdetails.value.toLocaleString() : '23,543'} USDT raised
                         <span className='font-semibold text-[#bba7a7] float-right' > {eventdetails.target ? eventdetails.target.toLocaleString() : '150,000'} USDT target</span>
                         </p>
                         <progress value={eventdetails.value ? eventdetails.value : '23543'} max={eventdetails.target ? eventdetails.target : '150000'}
-                        className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2 phones:mb-4 xphones:mb-5 md:mb-[5px]' />
+                        className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-[5px]' />
                         <p className = {`text-[#C5C5C5] font-medium text-sm mb-9 `} >{totaldonations} donations so far </p>
-                        <button className = {`text-white mb-5 bg-[#2CA9F2] px-7 py-3 rounded-[20px] items-center mx-auto block`} >
+                        <button className = {`font-bold text-white mb-5 bg-[#2CA9F2] px-6 md:px-7 py-3 rounded-[14px] md:rounded-[20px] items-center mx-auto block`} >
                             Fund now
                         </button>
-                        <p className = "text-center font-bold text-lg " >Connected,
-                        <span className=  "text-[#2CA9F2] cursor-pointer" > disconnect your wallet</span>
+                        <p className = "text-center font-medium text-lg " >Connected,
+                        <span className=  "text-[#2CA9F2] cursor-pointer font-bold" > disconnect your wallet</span>
                         </p>
                     
                     </div>
 
-                    <p className = "text-center font-bold text-base text-[#C5C5C5] " >Don't have a USDT wallet? 
-                    <span className="text-[#2CA9F2] cursor-pointer "> fund using card payment</span>
+                    <p className = "text-center font-medium text-[15px] md:text-base text-[#C5C5C5] " >Don't have a USDT wallet? 
+                    <span className="text-[#2CA9F2] cursor-pointer font-bold "> fund using card payment</span>
                     </p>                    
                 </div>
 
@@ -126,24 +126,24 @@ function Detailedevent(props){
 
             <div className = "w-full md:w-[60%]  pb-10 " >
 
-                <hr className = " border-[1px] border-[#888888] mb-8" />
+                <hr className = "hidden md:block border-[1px] border-[#888888] mb-8" />
                 
-                <button className = "bg-[#2CA9F2] flex text-white gap-2 py-[7px] px-3 rounded-lg mb-8 font-semibold text-base " >
-                    <img src={share} alt="share icon" />
+                <button className = "bg-[#2CA9F2] flex text-white gap-2 py-[7px] px-3 w-full sm:w-fit rounded-lg md:rounded-xl mb-8 font-bold md:font-semibold text-base md:text-lg justify-center md:justify-start items-center " >
+                    <img src={share} alt="share icon" className="w-[15px] sm:w-[20px]" />
                     <span>Share campaign</span>
                 </button>
 
-                <h1 className = "font-bold text-[22px] mb-3 " >
+                <h1 className = "font-bold text-[22px] mb-2 md:mb-4 leading-7 " >
                     {eventdetails.title? eventdetails.title : 'This is the title of the main user’s crowdfunding'}
                 </h1>
-                <p className = "font-normal mb-5 " >This a  complete description for the crowdfunding to aid others fund this particular crowdfunding. 
+                <p className = "font-medium md:font-normal mb-7 md:mb-5 md:text-lg " >This a  complete description for the crowdfunding to aid others fund this particular crowdfunding. 
                     Users are allowed to read the complete reason why this use is requesting for money from people. 
                     Why other users read this, if it is totally convincing enough then this user reading it can fund this project.
                      If not he will move elsewhere to search for where to put their money. This can go on and on and on till its stops.
                 </p>
 
                 
-                <div className='flex gap-[20px] justify-start mb-10 '> 
+                <div className='flex gap-[20px] justify-start mb-7 md:mb-10 '> 
                     <button className = "flex items-center justify-center gap-[8px] h-[28px] bg-white rounded-[9px] w-[82px] py-[5px] px-2 text-base text-[#525252] font-semibold " >
                         <img src={likeicon} alt = 'like icon' className = "w-[16px]" />
                         <span>Like</span>
@@ -154,11 +154,11 @@ function Detailedevent(props){
                     </button>
                 </div>
 
-                <hr className = " border-[1px] border-[#888888] mb-8 " />
+                <hr className = "-mx-3 sm:mx-0  border-[1px] border-[#dcdbdb] mb-3 md:mb-8 " />
 
                 <Campaignorganizers organizerdetails = {organizerdetails}  />
 
-                <h3 className="mt-14 mb-7 text-lg font-bold " >105 comments</h3>
+                <h3 className="mt-10 md:mt-14 mb-6 md:mb-7 text-lg font-bold " >105 comments</h3>
                 
                 <div className=" flex flex-col gap-8">
                     {
