@@ -39,11 +39,23 @@ const managehomebodydata = (state = [], action) =>{
     }
 }
 
+
+//Set the position of homebody before rerendering so it can return there after viewing detailed event.
+const homescrollposition = (state = 0, action) => {
+    switch (action.type) {
+      case "SET_SCROLL_POSITION":
+        return action.payload
+      default:
+        return state;
+    }
+};
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
     managehomeorevent,
-    managehomebodydata
+    managehomebodydata,
+    homescrollposition
 })
 
 export default allreducers;

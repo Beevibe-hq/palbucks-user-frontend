@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { setlinkcolor } from "../../actions/actions";
 import Detailedevent from "../../components/detailedevent/detailedevent";
 import Homebody from "../../components/homebody/homebody";
 import Navbar from "../../components/navbar/navbar";
@@ -8,6 +9,7 @@ import Sidebar from "../../components/sidebar/sidebar";
 
 function Home(){
 
+    const dispatch = useDispatch()
 
     //This chooses if to render homebody or a particular fundevent's detailed page
     //const [homeorevent, sethomeorevent] = useState('home')
@@ -17,6 +19,10 @@ function Home(){
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
     })
+
+    useEffect(()=>{
+        dispatch(setlinkcolor('home'))
+    }, [])
 
     return(
         <div className=' bg-[#F9F9F9] min-h-full relative' >

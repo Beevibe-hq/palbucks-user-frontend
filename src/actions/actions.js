@@ -1,4 +1,4 @@
-import { data } from "autoprefixer"
+
 
 export const opensidebar = () =>{
 
@@ -14,6 +14,7 @@ export const closesidebar = () =>{
     }
 }
 
+
 export const setlinkcolor = (data) =>{
 
     return{
@@ -22,6 +23,7 @@ export const setlinkcolor = (data) =>{
     }
 }
 
+//Action to render between homebody or detailedevent in home
 export const sethomeorevent = (data) =>{
 
     return{
@@ -30,6 +32,7 @@ export const sethomeorevent = (data) =>{
     }
 }
 
+//Action to set all data that will be displayed on homepage. This data should come from backend.
 export const sethomebodydata = (data) =>{
 
     return {
@@ -37,3 +40,11 @@ export const sethomebodydata = (data) =>{
         payload:data
     }
 }
+
+
+// Define an action to update the scroll position
+export const setScrollPosition = (scrollPosition) => ({
+    type: "SET_SCROLL_POSITION",
+    payload: scrollPosition,
+  });
+  
