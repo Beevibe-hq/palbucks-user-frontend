@@ -29,7 +29,7 @@ function Homebody(){
     return(
         <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full'>
             <div className = 'fold:mb-5 phones:mb-6 md:mb-12'>
-                <h1 className = 'font-bold fold:text-2xl phones:text-2xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
+                <h1 className = 'font-bold fold:text-xl phones:text-2xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 
@@ -55,7 +55,7 @@ function Homebody(){
                 </button>
             </div>
 
-            <div className = 'eventparent w-full'>
+            <div className = 'eventparent w-full py-[35px]'>
                 
                 {
                   /* Note here the id being passed as prop is the key of the array, when coming from the backend we can 
@@ -123,8 +123,8 @@ let data = [
       organizeraccounts:['Username003'],
       title: 'Title for this particular fundevent',
       //description: "Description of the ongoing event that users will read to know what it's about",
-      value: 372550,
-      target:800000,
+      value: 37255010,
+      target:80030000,
       location:'Texas',
       days:'10',
       totaldonations:2040323,
