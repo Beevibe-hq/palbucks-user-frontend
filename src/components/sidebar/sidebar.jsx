@@ -14,7 +14,7 @@ import activesettingsicon from '../../images/settings1.svg'
 import logouticon from '../../images/logout.svg'
 
 import Navelements from '../navelements/navelements'
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { closesidebar, opensidebar, setlinkcolor } from '../../actions/actions'
 
@@ -38,8 +38,6 @@ function Sidebar(){
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
     })
-
-
 
     
     return(

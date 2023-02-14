@@ -10,8 +10,15 @@ import user8 from "../../images/user8.svg"
 import user7 from "../../images/user7.svg"
 import blackdot from "../../images/blackdot.svg"
 import Campaignorganizers from "../campaignorganizers/campaignorganizers"
+import { useEffect } from "react"
 
 function Detailedevent(props){
+
+
+    //To scroll page to the top on mount of component
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
 
     const dispatch = useDispatch()
 
@@ -84,7 +91,7 @@ function Detailedevent(props){
             
             <div className="w-full flex flex-col md:flex-row gap-3 md:gap-10 mb-8 ">
                 
-                <div className =" relative w-full md:w-[60%] " >
+                <div className =" relative w-full md:w-[60%] shrink-0 " >
                     <img src={eventdetails.placeholder} alt="Fund event" className = {` w-full h-[250px] md:h-[350px] rounded-xl `} />
                     <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-4 rounded-lg py-1 items-center'>
                         <img src={eventdetails.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />

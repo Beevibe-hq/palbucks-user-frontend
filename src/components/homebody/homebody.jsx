@@ -17,14 +17,43 @@ import medicalimg from '../../images/medical label.svg'
 import animalimg from '../../images/animal label.svg'
 
 import Fundevent from '../fundevent/fundevent'
-import { useDispatch } from 'react-redux'
-import { sethomebodydata } from '../../actions/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { sethomebodydata, setScrollPosition } from '../../actions/actions'
+import { useEffect, useRef, useState } from 'react'
 
 function Homebody(){
 
   //stores all the events data in redux store so it can be accessed anywhere
   const dispatch = useDispatch()
-  dispatch(sethomebodydata(data))
+  //Read the scroll position from redux store when the page loads.
+  const scrollposition = useSelector(state => state.homescrollposition)
+
+  const lastScrollPositionRef = useRef(null);
+  
+  
+  useEffect(()=>{
+    dispatch(sethomebodydata(data))
+
+    window.scrollTo(0, scrollposition) //scroll to the page's previous position
+
+
+    //event listens for scrolls and stores it in lastpositionref
+    const handleScroll = () => {
+      lastScrollPositionRef.current = window.scrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+
+      
+    return () =>{
+      
+      //dispatch the last scroll position and remove the listener before unmounting
+      window.removeEventListener("scroll", handleScroll);
+      if (lastScrollPositionRef.current !== null) {
+        dispatch(setScrollPosition(lastScrollPositionRef.current));
+      }
+        }
+  }, [])
+
 
     return(
         <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full'>
