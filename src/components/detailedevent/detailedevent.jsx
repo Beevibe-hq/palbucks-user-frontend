@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { sethomeorevent } from "../../actions/actions"
+import { sethomebodydata, sethomeorevent } from "../../actions/actions"
 import backarrow from "../../images/backarrow.svg"
 import date from "../../images/date.svg"
 import share from "../../images/share.svg"
@@ -10,7 +10,8 @@ import user8 from "../../images/user8.svg"
 import user7 from "../../images/user7.svg"
 import blackdot from "../../images/blackdot.svg"
 import Campaignorganizers from "../campaignorganizers/campaignorganizers"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import Likeicon from "../../images/likeicon"
 
 function Detailedevent(props){
 
@@ -69,9 +70,26 @@ function Detailedevent(props){
         if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "M";
         if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
         if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
-      };
+    };
       
-      let totaldonations = formatnumber(eventdetails.totaldonations);
+    let totaldonations = formatnumber(eventdetails.totaldonations);
+
+    const [liked,setliked] = useState(eventdetails.liked)
+    
+    const managelikes = () =>{
+        console.log(homebodydata[eventid].liked)
+
+        let currentstatus = homebodydata[eventid].liked
+        
+        homebodydata[eventid].liked = !currentstatus
+        
+        dispatch(sethomebodydata(homebodydata))
+        
+
+        console.log(homebodydata[eventid].liked)
+
+        setliked(!liked)
+    }   
 
     return(
         <div className = 'fold:px-1 phones:px-3 md:px-6 lg:px-10 pt-6 md:pt-8 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full'>
@@ -144,9 +162,11 @@ function Detailedevent(props){
 
                 
                 <div className='flex gap-[20px] justify-start mb-7 md:mb-10 '> 
-                    <button className = "flex items-center justify-center gap-[8px] h-[28px] bg-white rounded-[9px] w-[82px] py-[5px] px-2 text-base text-[#525252] font-semibold " >
-                        <img src={likeicon} alt = 'like icon' className = "w-[16px]" />
-                        <span>Like</span>
+                    <button className = "flex items-center justify-center gap-[8px] font-sans h-[28px] bg-white rounded-[9px] w-[82px] py-[5px] px-2 text-base text-[#525252] font-semibold " 
+                    onClick={managelikes}>
+                        {/* <img src={likeicon} alt = 'like icon' className = "w-[16px]" /> */}
+                        <Likeicon liked = {eventdetails.liked} />
+                        <span>{eventdetails.liked ? 'Liked' : 'Like'}</span>
                     </button>
                     <button className = "flex items-center justify-center gap-[3px] h-[28px] bg-white rounded-[9px] p-3 text-base font-semibold " >
                         <img src = {locateicon} alt = 'location icon' className = "w-[16px]" />

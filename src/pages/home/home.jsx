@@ -15,6 +15,7 @@ function Home(){
     //const [homeorevent, sethomeorevent] = useState('home')
     const homeorevent = useSelector(state => state.managehomeorevent)
     const sidebaropen = useSelector(state => state.sidebarstate)
+    const sidebarslid = useSelector(state => state.sidebarslid)
 
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
@@ -27,7 +28,8 @@ function Home(){
     return(
         <div className=' bg-[#F9F9F9] min-h-full relative' >
             <Sidebar />
-            <div className = {`brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px] ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
+            <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } 
+            `} >
                 <Navbar />
                 { homeorevent == 'home' ? <Homebody /> : <Detailedevent details = {homeorevent} /> }
             </div>

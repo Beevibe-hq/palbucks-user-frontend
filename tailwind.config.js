@@ -24,6 +24,9 @@ module.exports = {
         fontFamily:{
           'inter':['inter']
         },
+        transitionProperty:{
+          'width':'width'
+        },
         screens:{
           'endmobile':'940px'
         }

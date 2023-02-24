@@ -5,13 +5,18 @@ import environmentimg from '../../images/environment label.svg'
 import likeicon from '../../images/likeicon.svg'
 import locateicon from '../../images/locateicon.svg'
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { sethomeorevent } from "../../actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { sethomebodydata, sethomeorevent } from "../../actions/actions";
+import Likeicon from "../../images/likeicon";
+import { useState } from "react";
 
 
 function Fundevent(props){
 
     const dispatch = useDispatch()
+    const homebodydata = useSelector(state => state.managehomebodydata)
+
+    const [liked, setliked] = useState(props.liked)
 
     //a react package for responsiveness
     const isMobile = useMediaQuery({
@@ -29,9 +34,23 @@ function Fundevent(props){
 
     }
 
+    const managelikes = () =>{
+        console.log(homebodydata[props.id].liked)
+
+        let currentstatus = homebodydata[props.id].liked
+        
+        homebodydata[props.id].liked = !currentstatus
+        
+        dispatch(sethomebodydata(homebodydata))
+
+        console.log(homebodydata[props.id].liked)
+
+        setliked(!liked)
+    }
+
     return(
         <div className = {`w-full sm:max-w-[380px] md:max-w-[360px] smlaptops:max-w-[360px] mdlaptops:max-w-[380px]
-         lglaptops:max-w-[360px]  min-w-[200px] cursor-pointer inline-block mx-auto`
+         lglaptops:max-w-[360px]  min-w-[200px] cursor-pointer inline-block `
          /* `sm:max-w-[290px] md:max-w-[320px] smlaptops:max-w-[310px] mdlaptops:max-w-[285px]
          lglaptops:max-w-[310px] mx-auto ` */ }
 
@@ -104,9 +123,11 @@ function Fundevent(props){
             </div>
 
             <div className='flex gap-[20px] justify-end'> 
-                <button className = "flex items-center justify-center gap-[8px] h-[28px] bg-white rounded-[9px] w-[82px] py-[5px] px-2 text-base text-[#525252] font-semibold " >
-                    <img src={likeicon} alt = 'like icon' className = "w-[16px]" />
-                    <span>Like</span>
+                <button className = "flex items-center justify-center gap-[8px] h-[28px] bg-white rounded-[9px] w-[82px] px-2 text-base text-[#525252] font-semibold "
+                onClick={managelikes} >
+                    {/* <img src={Likeicon} alt = 'like icon' className = "w-[16px]" /> */}
+                    <Likeicon liked = {liked} />
+                    <span>{liked ? 'Liked' : 'Like'}</span>
                 </button>
                 <button className = "flex items-center justify-center gap-[3px] h-[28px] bg-white rounded-[9px] p-3 text-base font-semibold " >
                     <img src = {locateicon} alt = 'location icon' className = "w-[16px]" />

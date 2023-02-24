@@ -11,6 +11,7 @@ function Settings(){
     const dispatch = useDispatch()
     //const activepage = useSelector(state => state.managelinkcolor)
 
+    const sidebarslid = useSelector(state => state.sidebarslid)
     const sidebaropen = useSelector(state => state.sidebarstate)
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
@@ -23,7 +24,7 @@ function Settings(){
     return(
         <div className=' bg-[#F9F9F9] min-h-full' >
             <Sidebar />
-            <div className =  {`brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px] ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
+            <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />   
                 <Settingsbody />
                 

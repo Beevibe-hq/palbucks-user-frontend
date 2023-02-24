@@ -14,6 +14,21 @@ export const closesidebar = () =>{
     }
 }
 
+export const reducesidebar = () =>{
+
+    return {
+        type : 'reduce sidebar'
+    }
+}
+
+export const increasesidebar = () =>{
+
+    return {
+        type : 'increase sidebar'
+    }
+}
+
+
 
 export const setlinkcolor = (data) =>{
 
