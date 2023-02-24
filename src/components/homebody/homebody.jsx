@@ -27,12 +27,13 @@ function Homebody(){
   const dispatch = useDispatch()
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
+  const homebodydata = useSelector(state => state.managehomebodydata)
 
   const lastScrollPositionRef = useRef(null);
   
   
   useEffect(()=>{
-    dispatch(sethomebodydata(data))
+    //dispatch(sethomebodydata(data)) this is already done in app.js
 
     window.scrollTo(0, scrollposition) //scroll to the page's previous position
 
@@ -56,7 +57,7 @@ function Homebody(){
 
 
     return(
-        <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full'>
+        <div className = 'fold:px-2 phones:px-6 md:px-6 lg:px-10 pt-8 pb-16 md:pb-20 md:pt-14 mt-[90px] md:mt-[100px] w-full h-full '>
             <div className = 'fold:mb-5 phones:mb-6 md:mb-12'>
                 <h1 className = 'font-bold fold:text-xl phones:text-2xl md:text-4xl mb-[10px]' >Crowdfunding is better when done together.</h1>
                 <p className = 'hidden md:block font-normal text-xl' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
@@ -90,12 +91,12 @@ function Homebody(){
                   /* Note here the id being passed as prop is the key of the array, when coming from the backend we can 
                      request for an id in each of the objects,
                   */
-                    data.map((item,i)=>{
+                    homebodydata.map((item,i)=>{
                         return(
                           <Fundevent category = {item.category} placeholder = {item.placeholder} accountimages = {item.organizerimg}
                           organizeraccounts = {item.organizeraccounts} title = {item.title} description = {item.description}  
                           value = {item.value} target = {item.target} categoryimg = {item.categoryimg} 
-                          location = {item.location} key = {i} eventimg = {item.placeholder} id = {i} />
+                          location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {i} />
                         )
                     })
                 }
@@ -126,8 +127,8 @@ let data = [
       target:12000,
       location:'Cyprus',
       days:'30',
-      totaldonations:20403
-  
+      totaldonations:20403,
+      liked:true,
     },
     {
       organizerimg:[userimg3, userimg4],
@@ -142,7 +143,7 @@ let data = [
       location:'Singapore',
       days:'49',
       totaldonations:20403,
-  
+      liked:false,
     },
     {
       organizerimg:[userimg3],
@@ -157,7 +158,7 @@ let data = [
       location:'Texas',
       days:'10',
       totaldonations:2040323,
-  
+      liked:true,
     },
     {
       organizerimg:[userimg2, userimg3, userimg4],
@@ -172,7 +173,7 @@ let data = [
       location:'Abuja',
       days:'19',
       totaldonations:12420403,
-  
+      liked:false,
     },
     {
       organizerimg:[userimg2, userimg3, userimg4],
@@ -187,7 +188,7 @@ let data = [
       location:'Abuja',
       days:'19',
       totaldonations:327820403,
-  
+      liked:true
     },
     {
       organizerimg:[userimg2, userimg3, userimg4],
@@ -202,7 +203,7 @@ let data = [
       location:'Abuja',
       days:'19',
       totaldonations:204032332,
-  
+      liked:false
     },
     {
       organizerimg:[userimg2, userimg3, userimg4],
@@ -217,7 +218,7 @@ let data = [
       location:'Abuja',
       days:'19',
       totaldonations:3220244503,
-  
+      liked:true
     },
     /*
     {

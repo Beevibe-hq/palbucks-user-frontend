@@ -11,6 +11,17 @@ const sidebarstate = (state = false , action) =>{
     }
 }
 
+const sidebarslid = (state = false , action) =>{
+    switch(action.type){
+        case 'increase sidebar':
+            return true
+        case 'reduce sidebar':
+            return false
+        default:
+            return state
+    }
+}
+
 const managelinkcolor = (state = 'home' , action) =>{
     switch(action.type){
         case 'set link color':
@@ -55,7 +66,8 @@ const allreducers = combineReducers({
     managelinkcolor,
     managehomeorevent,
     managehomebodydata,
-    homescrollposition
+    homescrollposition,
+    sidebarslid
 })
 
 export default allreducers;
