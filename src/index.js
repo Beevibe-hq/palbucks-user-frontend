@@ -6,17 +6,41 @@ import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
 import allreducers from './reducers/reducers';
-import { createStore } from 'redux';
+import { createStore,compose } from 'redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { PersistGate } from 'redux-persist/integration/react';
+
+/* const store = createStore(allreducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) */
 
 
-const store = createStore(allreducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+//store.js
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, allreducers);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    
     <Provider store = {store}>      
-      <App />      
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
@@ -25,3 +49,7 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+
+

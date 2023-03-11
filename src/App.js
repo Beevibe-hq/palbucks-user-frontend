@@ -43,7 +43,7 @@ function App() {
         <Routes>
           
           <Route path='/' element = { <Home /> } />
-          <Route path='/detailed' element = { <Detailedevent /> } />
+          <Route path='/detailed/:id' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />
 
         </Routes>
@@ -145,7 +145,7 @@ let data = [
     location:'Abuja',
     days:'19',
     totaldonations:204032332,
-    liked:false
+    liked:true
   },
   {
     organizerimg:[userimg2, userimg3, userimg4],
