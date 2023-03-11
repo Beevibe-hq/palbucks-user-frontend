@@ -31,7 +31,8 @@ function Home(){
             <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } 
             `} >
                 <Navbar />
-                { homeorevent == 'home' ? <Homebody /> : <Detailedevent details = {homeorevent} /> }
+                {/* { homeorevent == 'home' ? <Homebody /> : <Detailedevent details = {homeorevent} /> } */}
+                <Homebody />
             </div>
         </div>
     )
