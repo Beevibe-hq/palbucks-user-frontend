@@ -1,4 +1,4 @@
-import notificationsicon from '../../images/notifications.svg'
+import notificationsicon from '../../images/notifications2.svg'
 import userimg from '../../images/user.png'
 import moreicons from '../../images/more icon.svg'
 import applogo from "../../images/applogo.svg";
@@ -35,11 +35,13 @@ function Navbar(){
             </div>
 
             <div className = 'flex items-center gap-3 xphones:gap-[15px] md:gap-4 lg:gap-8'>
-                <img src={notificationsicon} alt="notifications icon" className = 'hidden md:block w-[23px]' />
-                <img src={userimg} alt="user avatar" className='w-[28px] phones:w-[35px] md:w-[40px]' />
-                <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
-                <h2 className = 'hidden md:block text-lg'>Daniel Aliba</h2>
-                <img src={moreicons} alt="More icons" className = 'hidden md:block w-[30px]' />
+                <img src={notificationsicon} alt="notifications icon" className = 'hidden md:block w-[21px]' />
+                <div className=" flex gap-2 items-center">
+                    <img src={userimg} alt="user avatar" className='w-[28px] phones:w-[35px] md:w-[40px]' />
+                    <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
+                    <h2 className = 'hidden md:block text-lg font-black font-merriweather'>Daniel Aliba</h2>
+                </div>
+                <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] ' />
             </div>
         </div>
     )

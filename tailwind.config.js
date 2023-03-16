@@ -22,7 +22,7 @@ module.exports = {
       },
       extend:{
         fontFamily:{
-          'inter':['inter']
+          'merriweather': ['Merriweather', 'serif'],
         },
         transitionProperty:{
           'width':'width'
