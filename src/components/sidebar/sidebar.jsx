@@ -69,7 +69,7 @@ function Sidebar(){
                 
             </div>
 
-            <nav className={` ${sidebarslid ? '':'' } w-full py-10 flex flex-col gap-0 font-merriweather `}>                
+            <nav className={` ${sidebarslid ? '':'' } w-full brkpoint:mt-[50px] brkpoint:py-10 flex flex-col gap-0 font-merriweather `}>                
                 
                 <NavLink to = '/'
                     className={` ${activepage == 'home' ? 'text-[#FFFFFF] font-black bg-[#37BCF7] ' : 'text-[#525252] font-medium'} } `}
@@ -120,7 +120,7 @@ function Sidebar(){
                     <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'settings' ? settingsicon : settingsicon2 } alt="settings crowdfund icon" className = 'w-[20px]' />
-                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Settings</h2>
+                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Settings & Privacy</h2>
                         </div>
                         <img src={activepage == 'settings' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
 
@@ -129,9 +129,9 @@ function Sidebar(){
 
             </nav>
 
-            <div className = 'absolute bottom-[5%] left-[10px] md:left-5 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-medium cursor-pointer'>
+            <div className = 'absolute bottom-[5%] left-[10px] md:left-5 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-normal cursor-pointer'>
                 <img src={logouticon} alt="Logout icon" className="w-[24px]" />
-                <h3 className={` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } `} >Logout</h3>
+                <h3 className={` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } font-merriweather `} >Logout</h3>
             </div>
             
         </div>

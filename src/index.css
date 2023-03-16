@@ -33,7 +33,7 @@ code {
   
    .eventparent{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap:30px;
     row-gap: 50px;
     
@@ -42,8 +42,8 @@ code {
   
   @media screen and (max-width: 1280px) {
     .eventparent{
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap:30px;      
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:20px;      
       row-gap:40px;
     }
   }
@@ -127,18 +127,18 @@ code {
       border: none;
     }
     progress::-moz-progress-bar { 
-      background-color: #2CA9F2;
+      background-color: #37BCF7;
       border-radius: 5px;    
     }
 
     /* Chrome and safari */
     progress.progressbar::-webkit-progress-value { 
-      background: #2CA9F2;
+      background: #37BCF7;
       border-radius: 5px;
       border: 0;
     }
     progress.progressbar::-webkit-progress-bar { 
-      background-color: #c4e4f7;    
+      background-color: #D8D8D8;    
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
     }
@@ -146,7 +146,7 @@ code {
     /* IE10 / Edge */
     progress {
     color: #2CA9F2;
-    background-color:#c4e4f7;
+    background-color:#D8D8D8;
     }
 
 }
