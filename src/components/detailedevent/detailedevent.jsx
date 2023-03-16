@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { sethomebodydata, sethomeorevent } from "../../actions/actions"
+import { sethomebodydata, sethomeorevent, setlinkcolor } from "../../actions/actions"
 import backarrow from "../../images/backarrow.svg"
 import date from "../../images/date.svg"
 import share from "../../images/share.svg"
@@ -82,6 +82,7 @@ function Detailedevent(props){
             //To scroll page to the top on mount of component
             window.scrollTo(0,0)
             setliked(eventdetails.liked)
+            //dispatch(setlinkcolor('home'))
     },[])
 
 
