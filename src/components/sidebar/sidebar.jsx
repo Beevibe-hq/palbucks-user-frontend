@@ -85,16 +85,16 @@ function Sidebar(){
                     </div>
                 </NavLink>
             
-                <NavLink to = '/organizecrowdfund'
-                    className={` ${activepage == 'organizecrowdfund' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'text-[#525252] font-medium'} } `}
-                    onClick = { () => { dispatch(setlinkcolor('organizecrowdfund')) } }                   
+                <NavLink to = '/organisecrowdfund'
+                    className={` ${activepage == 'organisecrowdfund' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'text-[#525252] font-medium'} } `}
+                    onClick = { () => { dispatch(setlinkcolor('organisecrowdfund')) } }                   
                  >                       
                     <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
-                            <img src={ activepage == 'organizecrowdfund' ? crowdfundicon : crowdfundicon2 } alt="organize crowdfund icon" className = 'w-[20px]' />
+                            <img src={ activepage == 'organisecrowdfund' ? crowdfundicon : crowdfundicon2 } alt="organise crowdfund icon" className = 'w-[20px]' />
                             <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Organise Crowdfund</h2>
                         </div>
-                        <img src={activepage == 'organizecrowdfund' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
+                        <img src={activepage == 'organisecrowdfund' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
 
                     </div>
                 </NavLink>
