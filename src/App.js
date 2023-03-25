@@ -26,6 +26,7 @@ import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { sethomebodydata } from './actions/actions'
+import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 
 function App() {
 
@@ -45,7 +46,7 @@ function App() {
           <Route path='/' element = { <Home /> } />
           <Route path='/detailed/:id' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />
-
+          <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />
         </Routes>
       </div>
     </BrowserRouter>

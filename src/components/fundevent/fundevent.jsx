@@ -67,7 +67,7 @@ function Fundevent(props){
                         }
                     </div>
                     <div className="flex flex-col relative max-w-[100%] truncate">
-                        <h3 className = "font-black text-[15px] tracking-[0.06px] truncate">
+                        <h3 className = "font-black text-[14px] tracking-[0.06px] truncate">
                             {
                                 props.organizeraccounts.map((item,i,arr)=>{
                 
@@ -90,8 +90,8 @@ function Fundevent(props){
                 <div className = 'relative w-full rounded-t-[10px]'>
                     <img src={props.eventimg? props.eventimg:eventimg} alt="Fund event" className = ' rounded-t-[10px] w-full phones:h-[175px] xphones:h-[150px] md:h-[135px]' />
                 
-                    <div className = 'absolute top-4 left-5 bg-white flex gap-[5px] px-[10px] rounded-lg py-[5px]'>
-                        <img src={props.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
+                    <div className = 'absolute top-4 left-5 bg-white flex gap-[5px] px-[8px] rounded-lg py-[4px]'>
+                        <img src={props.categoryimg} alt="Event category icon" className = 'w-[15px] h-[15px] ' />
                         <span className = 'text-sm font-black' >{props.category}</span>
                     </div>
                 </div>
