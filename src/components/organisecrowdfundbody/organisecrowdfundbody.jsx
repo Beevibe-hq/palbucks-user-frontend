@@ -119,7 +119,7 @@ function Organisecrowdfundbody(){
                         <span className="text-lg leading-[22px] text-[#2CA9F2] font-black " >What is USDT?</span>
                         <div className="flex gap-2 items-center">
                             <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >Limited to 1500 characters</p>
+                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >100 - 9999999 USDT</p>
                         </div>
                     </div>
                 </div>
