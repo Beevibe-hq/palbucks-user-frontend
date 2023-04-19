@@ -89,7 +89,7 @@ function Organisecrowdfundbody(){
 
 
                         <label htmlFor="description" className=" block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " > Description* </label>
-                        <textarea name="description" id="description" rows="10" className={`w-full p-5 outline-none border-[1px] border-[#8E8E93] `} 
+                        <textarea name="description" id="description" rows="10" className={` mb-5 w-full p-5 outline-none border-[1px] border-[#8E8E93] `} 
                         placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." >
                         </textarea>
 
