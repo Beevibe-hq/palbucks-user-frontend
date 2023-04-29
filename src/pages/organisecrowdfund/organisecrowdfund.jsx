@@ -19,6 +19,7 @@ function Organisecrowdfund(){
     
     useEffect(()=>{
         dispatch(setlinkcolor('organisecrowdfund'))
+        window.scrollTo(0,0)
     },[])
 
     return(
