@@ -61,13 +61,26 @@ const homescrollposition = (state = 0, action) => {
     }
 };
 
+//set profilepage active for animations and effects to take place
+const onprofilepage = (state = false, action) =>{
+    switch(action.type){
+        case "set profilepage active":
+            return true
+        case "set profilepage inactive":
+            return false
+        default:
+            return state;
+    }
+}
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
     managehomeorevent,
     managehomebodydata,
     homescrollposition,
-    sidebarslid
+    sidebarslid,
+    onprofilepage
 })
 
 export default allreducers;

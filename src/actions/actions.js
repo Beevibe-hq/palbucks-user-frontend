@@ -56,6 +56,23 @@ export const sethomebodydata = (data) =>{
     }
 }
 
+//Action to set profilepage active
+export const setprofilepageactive = () => {
+
+    return{
+        type: 'set profilepage active'
+    }
+}
+
+//Action to set profilepage inactive
+export const setprofilepageinactive = () => {
+
+    return{
+        type: 'set profilepage inactive'
+    }
+}
+
+
 
 // Define an action to update the scroll position
 export const setScrollPosition = (scrollPosition) => ({

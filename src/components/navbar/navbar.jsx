@@ -6,10 +6,14 @@ import menuicon from "../../images/Hamburger Menu.svg"
 
 import Searchbar from "../searchbar/searchbar";
 import { useDispatch, useSelector } from 'react-redux';
-import { opensidebar } from '../../actions/actions';
+import { opensidebar, setprofilepageactive, setprofilepageinactive } from '../../actions/actions';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 
 function Navbar(){
+
+    const onprofilepage = useSelector(state => state.onprofilepage)
 
     const sidebaropen = useSelector(state => state.sidebarstate)
     const dispatch = useDispatch()
@@ -21,6 +25,29 @@ function Navbar(){
             dispatch(opensidebar())
         }
     }
+
+    const navigate = useNavigate()
+
+    const profilepage = () => {
+        navigate('/profilepage')        
+        dispatch(setprofilepageactive())
+    }
+
+    /* useEffect(()=>{
+
+        const handlebeforeunload = (e) =>{
+            e.preventDefault()
+            e.returnValue = '';
+            dispatch(setprofilepageinactive())
+        }
+        
+        //this ensures the function runs before the page is left
+        window.addEventListener('beforeunload', handlebeforeunload)
+
+        return () =>{
+            window.removeEventListener('beforeunload', handlebeforeunload)
+        }
+    },[]) */
 
     return(
         <div className = {`py-[10px] px-2 phones:px-5  md:px-10 h-[90px] md:h-[100px] fixed top-0 right-0
@@ -37,7 +64,9 @@ function Navbar(){
             <div className = 'flex items-center gap-3 xphones:gap-[15px] md:gap-4 lg:gap-8'>
                 <img src={notificationsicon} alt="notifications icon" className = 'hidden md:block w-[21px]' />
                 <div className=" flex gap-2 items-center">
-                    <img src={userimg} alt="user avatar" className='w-[28px] phones:w-[35px] md:w-[40px]' />
+                    <img src={userimg}
+                    onClick = {profilepage}
+                    alt="user avatar" className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} />
                     <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
                     <h2 className = 'hidden md:block text-lg font-black font-merriweather'>Daniel Aliba</h2>
                 </div>
