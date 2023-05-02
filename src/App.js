@@ -28,6 +28,7 @@ import { useEffect } from 'react'
 import { sethomebodydata } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Profilepage from './components/profilepage/profilepage'
+import Wallet from './pages/wallet/wallet'
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
           <Route path= '/settings' element = { <Settings />} />
           <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />
           <Route path='/profilepage' element  = {<Profilepage />} />
+          <Route path='/wallet' element = {<Wallet/>} />
         </Routes>
       </div>
     </BrowserRouter>
