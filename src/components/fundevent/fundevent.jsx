@@ -101,11 +101,9 @@ function Fundevent(props){
                     <div className="flex justify-between items-center mb-[15px] ">
                             <h3 className="text-[#8E8E93] text-base leading-5" >{props.location.toUpperCase()}</h3>
                         
-                                <button onClick={managelikes} >
-                                    <Likeicon liked = {liked} />
-                                </button>
-                                
-
+                            <button onClick={managelikes} >
+                                <Likeicon liked = {liked} />
+                            </button>                                
                     </div>
 
                     <div className = 'mb-3 phones:mb-5 xphones:mb-6 brkpoint:mb-5 mx-auto'>

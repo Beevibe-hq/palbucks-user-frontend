@@ -6,14 +6,16 @@ import menuicon from "../../images/Hamburger Menu.svg"
 
 import Searchbar from "../searchbar/searchbar";
 import { useDispatch, useSelector } from 'react-redux';
-import { opensidebar, setprofilepageactive, setprofilepageinactive } from '../../actions/actions';
+import { opensidebar, setnotificationspageactive, setprofilepageactive, setprofilepageinactive } from '../../actions/actions';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Notificationsicon from '../../images/notificationsicon';
 
 
 function Navbar(){
 
     const onprofilepage = useSelector(state => state.onprofilepage)
+    const onnotificationspage = useSelector(state => state.onnotificationspage)
 
     const sidebaropen = useSelector(state => state.sidebarstate)
     const dispatch = useDispatch()
@@ -32,6 +34,11 @@ function Navbar(){
         navigate('/profilepage')        
         dispatch(setprofilepageactive())
     }
+
+     const notificationspage = () => {
+        navigate('/notificationspage')
+        dispatch(setnotificationspageactive())
+     }
 
     /* useEffect(()=>{
 
@@ -62,7 +69,10 @@ function Navbar(){
             </div>
 
             <div className = 'flex items-center gap-3 xphones:gap-[15px] md:gap-4 lg:gap-8'>
-                <img src={notificationsicon} alt="notifications icon" className = 'hidden md:block w-[21px]' />
+                {/* <img src={notificationsicon} alt="notifications icon" className = ' cursor-pointer hidden md:block w-[21px]' 
+                onClick={notificationspage}
+                /> */}
+                <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false }  />
                 <div className=" flex gap-2 items-center">
                     <img src={userimg}
                     onClick = {profilepage}
