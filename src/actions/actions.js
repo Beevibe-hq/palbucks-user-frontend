@@ -72,7 +72,21 @@ export const setprofilepageinactive = () => {
     }
 }
 
+//Action to set notificationspage active
+export const setnotificationspageactive = () => {
 
+    return{
+        type: 'set notificationspage active'
+    }
+}
+
+//Action to set notificationspage inactive
+export const setnotificationspageinactive = () => {
+
+    return{
+        type: 'set notificationspage inactive'
+    }
+}
 
 // Define an action to update the scroll position
 export const setScrollPosition = (scrollPosition) => ({

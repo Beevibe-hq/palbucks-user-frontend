@@ -73,6 +73,18 @@ const onprofilepage = (state = false, action) =>{
     }
 }
 
+//set notificationspage active for animations and effects to take place
+const onnotificationspage = (state = false, action) =>{
+    switch(action.type){
+        case "set notificationspage active":
+            return true
+        case "set notificationspage inactive":
+            return false
+        default:
+            return state;
+    }
+}
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
@@ -80,7 +92,8 @@ const allreducers = combineReducers({
     managehomebodydata,
     homescrollposition,
     sidebarslid,
-    onprofilepage
+    onprofilepage,
+    onnotificationspage
 })
 
 export default allreducers;
