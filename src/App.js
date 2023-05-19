@@ -30,6 +30,10 @@ import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Profilepage from './components/profilepage/profilepage'
 import Wallet from './pages/wallet/wallet'
 import Notificationspage from './pages/notificationspage/notificationspage'
+import Helpcenter from './pages/helpcenter/helpcenter'
+import Howitworks from './pages/howitworks/howitworks'
+import Termsofuse from './pages/termsofuse/termsofuse'
+import Privacypolicy from './pages/privacypolicy/privacypolicy'
 
 function App() {
 
@@ -53,6 +57,10 @@ function App() {
           <Route path='/profilepage' element  = {<Profilepage />} />
           <Route path='/wallet' element = {<Wallet/>} />
           <Route path='/notificationspage' element = { <Notificationspage />} />
+          <Route path='/helpcenter' element = { <Helpcenter /> } />
+          <Route path='/howitworks' element = { <Howitworks /> } />
+          <Route path = '/termsofuse' element = { <Termsofuse /> } />
+          <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
         </Routes>
       </div>
     </BrowserRouter>

@@ -12,6 +12,7 @@ import instagramicon from "../../images/instagramicon.svg"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setprofilepageactive, setprofilepageinactive } from "../../actions/actions";
+import Twittericon from "../../images/twittericon";
 
 function Profilepage(){
 
@@ -77,7 +78,7 @@ function Profilepage(){
                         </div>
                         <div className="flex py-[30px] px-14 2xl:px-20 justify-around " >
                             <div className="flex items-center gap-4 bg-[#F9F9F9] py-[15px] px-[31px] rounded-[10px] " >
-                                <img src={twittericon} alt="" />
+                                <Twittericon color = 'blue' />
                                 <h4 className="text-[22px]" >Twitter</h4>
                             </div>
                             <div className="flex items-center gap-4 bg-[#F9F9F9] py-[15px] px-[31px] rounded-[10px]" >
