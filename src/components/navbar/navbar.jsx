@@ -128,10 +128,12 @@ function Navbar(){
                         </li>
                     </Link>
 
-                    <li  className='flex justify-between w-full bg-white cursor-pointer py-[15px] pl-[15px] pr-[22px] hover:bg-[#37BCF71A] mb-[10px] '>
-                        <span className='text-[17px] leading-4'>Community guidelines</span>
-                        <img src={arrowicon} alt="" className='w-[7px] h-[15px]' />
-                    </li>
+                    <Link to= '/communityguidelines' >
+                        <li  className='flex justify-between w-full bg-white cursor-pointer py-[15px] pl-[15px] pr-[22px] hover:bg-[#37BCF71A] mb-[10px] '>
+                            <span className='text-[17px] leading-4'>Community guidelines</span>
+                            <img src={arrowicon} alt="" className='w-[7px] h-[15px]' />
+                        </li>
+                    </Link>
 
                     <hr className='border-t-[1px] border-[#D8D8D8] w-full mb-5 '/>
 

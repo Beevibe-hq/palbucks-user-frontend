@@ -40,6 +40,17 @@ const managehomeorevent = (state = 'home', action) =>{
     }
 }
 
+const homepagedisplay = (state = 'others', action) => {
+    switch(action.type){
+        case 'setothers':
+            return 'others'
+        case 'setforyou':
+            return 'foryou'
+        default:
+            return state
+    }
+}
+
 //This store the fundevents data immediately on render and supplies the rest of the pages from here
 const managehomebodydata = (state = [], action) =>{
     switch(action.type){
@@ -89,6 +100,7 @@ const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
     managehomeorevent,
+    homepagedisplay,
     managehomebodydata,
     homescrollposition,
     sidebarslid,

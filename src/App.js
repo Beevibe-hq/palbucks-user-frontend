@@ -34,6 +34,7 @@ import Helpcenter from './pages/helpcenter/helpcenter'
 import Howitworks from './pages/howitworks/howitworks'
 import Termsofuse from './pages/termsofuse/termsofuse'
 import Privacypolicy from './pages/privacypolicy/privacypolicy'
+import CommunityGuidelines from './pages/communityguidelines/communityguidelines'
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
           <Route path='/howitworks' element = { <Howitworks /> } />
           <Route path = '/termsofuse' element = { <Termsofuse /> } />
           <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
+          <Route path='/communityguidelines' element = { <CommunityGuidelines/> } />
         </Routes>
       </div>
     </BrowserRouter>
