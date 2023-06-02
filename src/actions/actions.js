@@ -38,12 +38,25 @@ export const setlinkcolor = (data) =>{
     }
 }
 
+
 //Action to render between homebody or detailedevent in home
 export const sethomeorevent = (data) =>{
 
     return{
         type: 'sethomeorevent',
         payload:data
+    }
+}
+
+export const setothers = () =>{
+    return{
+        type:'setothers'
+    }
+}
+
+export const setforyou = () =>{
+    return{
+        type:'setforyou'
     }
 }
 
