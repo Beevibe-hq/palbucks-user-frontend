@@ -169,11 +169,11 @@ function Homebody(){
                           <Emptycampaign /> :
                           foryoudata.map((item,i) =>(
                             item.campaignstatus == 'active' ? 
-                            <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft}/>
+                            <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft} key = {i} />
                             : item.campaignstatus == 'ended' ? 
-                            <Endedcampaign img = {item.img} title = {item.title} /> 
+                            <Endedcampaign img = {item.img} title = {item.title} key = {i} /> 
                             : item.campaignstatus == 'draft' ? 
-                            <Draftcampaign /> 
+                            <Draftcampaign key = {i} /> 
                             : null
                           ))
                           
@@ -191,7 +191,7 @@ function Homebody(){
                             <Emptycampaign title = 'You have no active campaign to show here' /> 
                             :
                             foryoudata.filter(item => item.campaignstatus == 'active').map((item,i) =>(
-                            <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft}/>
+                            <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft} key = {i} />
                           )) 
                           
                           
@@ -210,7 +210,7 @@ function Homebody(){
                           foryoudata.filter(item => item.campaignstatus == 'ended').length == 0 ? 
                           <Emptycampaign /> : 
                           foryoudata.filter(item => item.campaignstatus == 'ended').map((item,i) =>(
-                            <Endedcampaign img = {item.img} title = {item.title} />
+                            <Endedcampaign img = {item.img} title = {item.title} key = {i} />
                           ))
                         }
                       </div>
@@ -225,7 +225,7 @@ function Homebody(){
                           foryoudata.filter(item => item.campaignstatus == 'draft').length == 0 ? 
                           <Emptycampaign title = 'Your draft box is empty' /> :
                           foryoudata.filter(item => item.campaignstatus == 'draft').map((item,i) =>(
-                            <Draftcampaign />
+                            <Draftcampaign key = {i} />
                           ))
                         }
 

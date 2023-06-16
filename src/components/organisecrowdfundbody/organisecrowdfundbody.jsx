@@ -8,6 +8,8 @@ import { useState } from "react";
 
 function Organisecrowdfundbody(){
 
+    const [formdata, setformdata] = useState({})
+
     const [managetoggles, setmanagetoggles] = useState({
         crowdfundingdetails:true,
         amountdetails:true,
@@ -38,8 +40,17 @@ function Organisecrowdfundbody(){
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
                     <div className="p-7 flex flex-col items-center " >
-                        <div className="bg-[#F9F9F9] w-[837px] h-[240px] flex justify-center items-center mb-5 " >
-                            <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
+                        <div className={` ${formdata.pic ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
+                            <label htmlFor="campaignimage" className={` ${formdata.pic ? 'hidden' : 'block'} cursor-pointer`} >
+                                <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
+                            </label>
+                            <input type="file" name="campaignimage" id="campaignimage" className="hidden" 
+                            accept="image/png, image/jpeg, image/jpg, image/svg+xml"
+                            onChange={ (event) => {
+                                setformdata((prevformdata)=> ({...prevformdata, pic:URL.createObjectURL(event.target.files[0]) }) )
+                            } }                            
+                            />
+                            <img src={formdata.pic} alt="" className={` ${formdata.pic? 'w-[442px] h-[240px]' : 'hidden' }`}  />
                         </div>
                         <div className="flex gap-3 items-center py-1 " >
                             <img src={infoicon} alt="info icon" />
