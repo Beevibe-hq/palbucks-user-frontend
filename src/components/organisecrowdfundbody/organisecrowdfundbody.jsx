@@ -5,10 +5,15 @@ import arrowdown2 from "../../images/arrowdown2.svg"
 import plusicon from "../../images/plusicon.svg"
 import removeicon from "../../images/removeicon.svg"
 import { useState } from "react";
+import CropImage from "../cropimage/cropimage";
 
 function Organisecrowdfundbody(){
 
-    const [formdata, setformdata] = useState({})
+    const [formdata, setformdata] = useState({
+        pic:null,
+        title:'',
+        description:''
+    })
 
     const [managetoggles, setmanagetoggles] = useState({
         crowdfundingdetails:true,
@@ -40,7 +45,7 @@ function Organisecrowdfundbody(){
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
                     <div className="p-7 flex flex-col items-center " >
-                        <div className={` ${formdata.pic ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
+                        {/* <div className={` ${formdata.pic ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
                             <label htmlFor="campaignimage" className={` ${formdata.pic ? 'hidden' : 'block'} cursor-pointer`} >
                                 <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
                             </label>
@@ -51,7 +56,8 @@ function Organisecrowdfundbody(){
                             } }                            
                             />
                             <img src={formdata.pic} alt="" className={` ${formdata.pic? 'w-[442px] h-[240px]' : 'hidden' }`}  />
-                        </div>
+                        </div> */}
+                        <CropImage />
                         <div className="flex gap-3 items-center py-1 " >
                             <img src={infoicon} alt="info icon" />
                             <p className="text-[#8E8E93] text-base " >Click icon to upload campaign image</p>
