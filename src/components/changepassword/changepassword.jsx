@@ -4,7 +4,7 @@ import arrowup from "../../images/arrowup.svg"
 
 function Changepassword(){
 
-    const [openpassword, setopenpassword] = useState(false)
+    const [openpassword, setopenpassword] = useState(true)
 
     const managepasswordbody = () =>{
 

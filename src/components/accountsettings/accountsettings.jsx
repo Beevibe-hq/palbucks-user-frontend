@@ -13,8 +13,7 @@ function Accountsettings(props){
                 <p className = "font-medium leading-6 text-base " >Update your account information such as your username, phone number, email address and country at any time.</p>
             </div>
 
-            <div className = "w-full flex flex-col gap-11 mb-20" >
-                <Changeusername />
+            <div className = "w-full flex flex-col gap-11 mb-20" >                
                 <Changeusername />        
                 <Changemail />
                 <Changecountry />                          

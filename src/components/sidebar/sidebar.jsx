@@ -32,7 +32,7 @@ function Sidebar(){
     const dispatch  = useDispatch()
 
     const activepage = useSelector(state => state.managelinkcolor)
-
+    
     //This manages the whole sidebar state both for mobile and collapsed sidebar on desktop
     const managesidebar = () =>{        
         if(isMobile){
@@ -71,8 +71,8 @@ function Sidebar(){
 
             <nav className={` ${sidebarslid ? '':'' } w-full brkpoint:mt-[50px] brkpoint:py-10 flex flex-col gap-0 font-merriweather `}>                
                 
-                <NavLink to = '/'
-                    className={` ${activepage == 'home' ? 'text-[#FFFFFF] font-black bg-[#37BCF7] ' : 'text-[#525252] font-medium'} } `}
+                <NavLink to = '/home'
+                    className={` ${activepage == 'home' ? 'text-[#FFFFFF] font-black bg-[#37BCF7] ' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
                     onClick = { () => { dispatch(setlinkcolor('home')) } }                   
                  >                       
                     <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
@@ -86,7 +86,7 @@ function Sidebar(){
                 </NavLink>
             
                 <NavLink to = '/organisecrowdfund'
-                    className={` ${activepage == 'organisecrowdfund' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'text-[#525252] font-medium'} } `}
+                    className={` ${activepage == 'organisecrowdfund' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
                     onClick = { () => { dispatch(setlinkcolor('organisecrowdfund')) } }                   
                  >                       
                     <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
@@ -100,7 +100,7 @@ function Sidebar(){
                 </NavLink>
 
                 <NavLink to = '/wallet'
-                    className={` ${activepage == 'wallet' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'text-[#525252] font-medium'} } `}
+                    className={` ${activepage == 'wallet' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
                     onClick = { () => { dispatch(setlinkcolor('wallet')) } }                   
                  >                       
                     <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
@@ -114,7 +114,7 @@ function Sidebar(){
                 </NavLink>
                 
                 <NavLink to = '/settings'
-                    className={` ${activepage == 'settings' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'text-[#525252] font-medium'} } `}
+                    className={` ${activepage == 'settings' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
                     onClick = { () => { dispatch(setlinkcolor('settings')) } }                   
                  >                       
                     <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">

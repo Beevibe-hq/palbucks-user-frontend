@@ -5,7 +5,7 @@ import arrowup from "../../images/arrowup.svg"
 
 function Changecountry(){
 
-    const [opencountry, setopencountry] = useState(false)
+    const [opencountry, setopencountry] = useState(true)
 
     const managecountry = () =>{
 

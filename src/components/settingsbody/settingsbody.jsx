@@ -39,7 +39,7 @@ function Settingsbody(){
 
             <div className = "w-full">
                 {
-                    activesettingspage == 'accounts' ? 
+                    activesettingspage === 'accounts' ? 
                     <Accountsettings />  :
                     <Privacysettings />   
                 }

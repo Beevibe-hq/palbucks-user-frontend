@@ -48,7 +48,7 @@ const Demo = ({ classes, formdata, setformdata }) => {
         croppedAreaPixels,
         rotation
       )
-      console.log('donee', { croppedImage })
+      //console.log('donee', { croppedImage })
       setCroppedImage(croppedImage)
       
       //convert the imageurl to a file
@@ -179,8 +179,8 @@ const Demo = ({ classes, formdata, setformdata }) => {
           </div>
           {
             croppedImage ? (
-              <div className="w-[600px] mx-auto my-5 ">
-                <img src={croppedImage} alt="Cropped" className='mx-auto' />
+              <div className="w-[550px] mx-auto my-5 ">
+                <img src={croppedImage} alt="Cropped" className='mx-auto w-full ' />
               </div>
             ):(
               null

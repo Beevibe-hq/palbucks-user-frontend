@@ -5,7 +5,7 @@ import arrowup from "../../images/arrowup.svg"
 
 function Changemail(){
 
-    const [openemail, setopenemail] = useState(false)
+    const [openemail, setopenemail] = useState(true)
 
     const managemailname = () =>{
 

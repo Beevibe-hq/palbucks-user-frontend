@@ -1,0 +1,11 @@
+<svg width="110" height="43" viewBox="0 0 110 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Scroll indicator">
+<path id="Rectangle 503" d="M85.1973 9.29724C85.1973 10.1571 84.6699 10.9289 83.8688 11.2414L66.2587 18.1102C65.7691 18.3011 65.2254 18.3004 64.7364 18.108L47.2882 11.2436C46.4901 10.9296 45.9653 10.1593 45.9653 9.30169V2.96486C45.9653 1.81236 46.8996 0.878061 48.0521 0.878061L83.1105 0.878061C84.263 0.878061 85.1973 1.81236 85.1973 2.96487V9.29724Z" fill="black"/>
+<g id="Frame 858">
+<circle id="Ellipse 2750" cx="20.5478" cy="34.1835" r="8.76458" fill="black"/>
+<circle id="Ellipse 2751" cx="43.3349" cy="34.1835" r="8.76458" fill="black"/>
+<circle id="Ellipse 2752" cx="66.124" cy="34.1835" r="7.88812" fill="black" stroke="black" stroke-width="1.75292"/>
+<circle id="Ellipse 2753" cx="88.9111" cy="34.1835" r="7.88812" stroke="black" stroke-width="1.75292"/>
+</g>
+</g>
+</svg>

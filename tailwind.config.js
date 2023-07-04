@@ -23,13 +23,19 @@ module.exports = {
       extend:{
         fontFamily:{
           'merriweather': ['Merriweather', 'serif'],
+          'arial':['Arial','sans-serif']
         },
         transitionProperty:{
           'width':'width'
         },
         screens:{
           'endmobile':'940px'
-        }
+        },
+        transitionDuration:{
+          'slow': '500ms',
+          'normal': '1000ms',
+          'fast': '300ms',
+        },
       }
   },
   plugins: [

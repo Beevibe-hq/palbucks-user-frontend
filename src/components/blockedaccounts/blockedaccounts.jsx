@@ -20,7 +20,7 @@ import userimg11 from "../../images/user11.svg"
 
 function Blockedaccounts(){
 
-    const [openblockedaccounts, setopenblockedaccounts] = useState('close')
+    const [openblockedaccounts, setopenblockedaccounts] = useState('open')
 
     const manageblockedaccounts = () =>{
 
@@ -33,13 +33,12 @@ function Blockedaccounts(){
 
     return(
         <div className = " w-[90%] lg:w-[80] xl:w-[78%] bg-white " >
-            <div className = "flex justify-between items-center py-5 px-7" >
+            <div className = "flex justify-between items-center py-5 px-7 cursor-pointer " onClick = {manageblockedaccounts} >
                 <h3 className = "text-lg font-bold flex gap-2 " >
                     <img src={blockicon} alt="block icon" />
                     <span>Blocked accounts</span>
                 </h3>
-                <img src={openblockedaccounts == 'open' ? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "
-                    onClick = {manageblockedaccounts}  />
+                <img src={openblockedaccounts == 'open' ? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "/>
             </div>
 
             <hr className = " border-[1px] border-[#C4C4C4] " />

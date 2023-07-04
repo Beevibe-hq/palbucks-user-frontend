@@ -35,6 +35,8 @@ import Howitworks from './pages/howitworks/howitworks'
 import Termsofuse from './pages/termsofuse/termsofuse'
 import Privacypolicy from './pages/privacypolicy/privacypolicy'
 import CommunityGuidelines from './pages/communityguidelines/communityguidelines'
+import LandingPage from './pages/landingpage/landingpage'
+import Signinpage from './pages/signin/signin'
 
 function App() {
 
@@ -50,8 +52,9 @@ function App() {
     <BrowserRouter>
       <div className="h-screen">        
         <Routes>
-          
-          <Route path='/' element = { <Home /> } />
+          <Route path='/' element = {<LandingPage />} />
+          <Route path='/' element = { <Signinpage/> } />
+          <Route path='/home' element = { <Home /> } />
           <Route path='/detailed/:id' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />
           <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />

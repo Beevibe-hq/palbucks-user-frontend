@@ -33,10 +33,12 @@ function Organisecrowdfundbody(){
 
 
     const [formdata, setformdata] = useState({
-        pic:null,        
-        date_posted:today.toISOString(),
-        amt_raised:"",
-        user_name:""
+        //pic:null,        
+        //date_posted:today.toISOString(),
+        date_posted:"2019-08-24T14:15:22Z",
+        end_date: "2019-08-24T14:15:22Z",
+        amt_raised:"1000",
+        user_name:"Obu"
     })
 
     const handleInputChange = (event)=>{
@@ -56,18 +58,69 @@ function Organisecrowdfundbody(){
         }
     }
 
-    const startcrowdfund = async() =>{
-        
-        const body = formdata
-        
-        const request = await fetch('https://palbucks.ew.r.appspot.com/funding/api/',{
-            method : 'POST',
-            body,            
-        })
+    const startCrowdfund = async () => {
+        /* const formData = new FormData();
+      
+        // Iterate over the properties of the formdata object
+        for (const [key, value] of Object.entries(formdata)) {
+          formData.append(key, value);
+        }
+       */
+        /* console.log(formdata)
 
-        const data =  await request.json()
-        console.log(data)
-    }
+        const requestOptions = {
+          method: 'POST',
+          body: JSON.stringify(formdata),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+      
+        try {
+          const response = await fetch(
+            'https://0f6c-129-18-199-2.ngrok-free.app/funding/api/',
+            requestOptions
+          );
+      
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+      
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        } */
+
+        const formData = new FormData();
+        formData.append('pic', formdata.pic);
+        formData.append('title', "test title from frontend ")
+        formData.append('target_price', 45.3);
+        formData.append('end_date', "2023-07-17T14:15:22Z")
+
+        /* for (const [key, value] of Object.entries(formdata)) {
+            formData.append(key, value);
+        } */
+
+        // Send the image using Fetch API
+        fetch(' https://palbucks.ew.r.appspot.com/funding/api/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3ODc1MDI4LCJpYXQiOjE2ODc4NzM4MjgsImp0aSI6ImM2OTI4ZTU5YTIwNzQ3ODQ4OGUyYmQ1MDQ3ZjI4MmU1IiwidXNlcl9pZCI6ImNvbm5lbGwifQ.TOg3aWy0rsJ7HknM70yUY4VHoqh-Tc1eMptLNFDXYB4"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Image uploaded:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        
+
+      };
+      
 
     const [managetoggles, setmanagetoggles] = useState({
         crowdfundingdetails:true,
@@ -305,7 +358,7 @@ function Organisecrowdfundbody(){
                 </div>
 
                 <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 h-[48px] rounded-[10px] text-white font-bold text-[18px] block  " 
-                    onClick={startcrowdfund}
+                    onClick={startCrowdfund}
                 >
                     All done, begin your crowdfund
                 </button>

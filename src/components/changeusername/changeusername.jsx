@@ -5,7 +5,7 @@ import arrowup from "../../images/arrowup.svg"
 
 function Changeusername(){
 
-    const [openusername, setopenusername] = useState('close')
+    const [openusername, setopenusername] = useState('open')
 
     const manageusername = () =>{
 
