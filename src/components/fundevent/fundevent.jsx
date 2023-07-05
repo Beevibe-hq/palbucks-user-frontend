@@ -96,7 +96,8 @@ function Fundevent(props){
                     </div>
                 </div>
                 
-                <div className = 'bg-white pt-2 phones:pt-3 xphones:pt-[17px] brkpoint:py-3 rounded-b-[10px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] h-fit md:h-[205.5px] relative shadow-[0px_0px_35.2294px_rgba(0,0,0,0.04)] '>
+                <div className = {`bg-white pt-2 phones:pt-3 xphones:pt-[17px] brkpoint:py-3 rounded-b-[10px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] h-fit md:h-[205.5px] 
+                    relative shadow-[0px_0px_35.2294px_rgba(0,0,0,0.04)] hover:bg-[#033F591A] hover:border-[0.1px] hover:border-[#D2D2D4]  `}>
 
                     <div className="flex justify-between items-center mb-[15px] ">
                             <h3 className="text-[#8E8E93] text-base leading-5" >{props.location.toUpperCase()}</h3>

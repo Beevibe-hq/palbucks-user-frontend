@@ -126,7 +126,7 @@ code {
       appearance: none;    
       border: none;
     }
-    progress::-moz-progress-bar { 
+    progress.progressbar::-moz-progress-bar { 
       background-color: #37BCF7;
       border-radius: 5px;    
     }
@@ -148,5 +148,42 @@ code {
     color: #2CA9F2;
     background-color:#D8D8D8;
     }
+
+
+
+    /* Style progress bar across different browsers */
+    /* Firefox */
+    progress[value] {
+      -moz-appearance: none;
+      appearance: none;
+      border: none;
+    }
+
+    progress.landingpageprogressbar::-moz-progress-bar {
+      background-color: #35FAA0; /* Update to greenish color */
+      border-radius: 15px;
+    }
+
+    /* Chrome and Safari */
+    progress.landingpageprogressbar::-webkit-progress-value {
+      background: #35FAA0; /* Update to greenish color */
+      border-radius: 15px;
+      border: 0;
+    }
+
+    progress.landingpageprogressbar::-webkit-progress-bar {
+      background-color: #D8D8D8;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    /* IE10 / Edge */
+    progress.landingpageprogressbar {
+      color: #35FAA0; /* Update to greenish color */
+      background-color: #D8D8D8;
+    }
+
+
+    
 
 }

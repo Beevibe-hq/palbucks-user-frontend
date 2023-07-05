@@ -5,7 +5,7 @@ import arrowup from "../../images/arrowup.svg"
 
 function Changeusername(){
 
-    const [openusername, setopenusername] = useState('close')
+    const [openusername, setopenusername] = useState('open')
 
     const manageusername = () =>{
 
@@ -18,10 +18,9 @@ function Changeusername(){
 
     return(
         <div className = " w-[90%] lg:w-[80] xl:w-[75%] bg-white " >
-                    <div className = "flex justify-between items-center py-5 px-7" >
+                    <div className = "flex justify-between items-center py-5 px-7 cursor-pointer " onClick = {manageusername} >
                         <h3 className = "text-lg font-bold" >Username</h3>
-                        <img src={openusername == 'open' ? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "
-                            onClick = {manageusername}  />
+                        <img src={openusername == 'open' ? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "/>
                     </div>
 
                     <hr className = " border-[1px] border-[#C4C4C4] " />

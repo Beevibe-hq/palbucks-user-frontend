@@ -4,9 +4,123 @@ import arrowdown from "../../images/arrowdown.svg"
 import arrowdown2 from "../../images/arrowdown2.svg"
 import plusicon from "../../images/plusicon.svg"
 import removeicon from "../../images/removeicon.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CropImage from "../cropping/cropimage/cropimage";
+import { urltoFile } from "../cropping/cropimage/cropimage";
 
 function Organisecrowdfundbody(){
+
+    //Date formatting to prevent past date selection and limit to max period of 90 days
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 90);
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        let month = (date.getMonth() + 1).toString();
+        let day = date.getDate().toString();
+
+        if (month.length === 1) {
+            month = '0' + month;
+        }
+        if (day.length === 1) {
+            day = '0' + day;
+        }
+
+        return `${year}-${month}-${day}`;
+    };
+    const maxDateFormatted = formatDate(maxDate);
+
+
+    const [formdata, setformdata] = useState({
+        //pic:null,        
+        //date_posted:today.toISOString(),
+        date_posted:"2019-08-24T14:15:22Z",
+        end_date: "2019-08-24T14:15:22Z",
+        amt_raised:"1000",
+        user_name:"Obu"
+    })
+
+    const handleInputChange = (event)=>{
+        if(event.target.name === 'end_date'){
+            const formattedDate = new Date(event.target.value).toISOString()
+            
+            setformdata((prevdata)=> ({
+                ...prevdata,
+                [event.target.name]:formattedDate
+            }) )    
+
+        }else{
+            setformdata((prevdata)=> ({
+                ...prevdata,
+                [event.target.name]:event.target.value
+            }) )
+        }
+    }
+
+    const startCrowdfund = async () => {
+        /* const formData = new FormData();
+      
+        // Iterate over the properties of the formdata object
+        for (const [key, value] of Object.entries(formdata)) {
+          formData.append(key, value);
+        }
+       */
+        /* console.log(formdata)
+
+        const requestOptions = {
+          method: 'POST',
+          body: JSON.stringify(formdata),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+      
+        try {
+          const response = await fetch(
+            'https://0f6c-129-18-199-2.ngrok-free.app/funding/api/',
+            requestOptions
+          );
+      
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+      
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        } */
+
+        const formData = new FormData();
+        formData.append('pic', formdata.pic);
+        formData.append('title', "test title from frontend ")
+        formData.append('target_price', 45.3);
+        formData.append('end_date', "2023-07-17T14:15:22Z")
+
+        /* for (const [key, value] of Object.entries(formdata)) {
+            formData.append(key, value);
+        } */
+
+        // Send the image using Fetch API
+        fetch(' https://palbucks.ew.r.appspot.com/funding/api/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3ODc1MDI4LCJpYXQiOjE2ODc4NzM4MjgsImp0aSI6ImM2OTI4ZTU5YTIwNzQ3ODQ4OGUyYmQ1MDQ3ZjI4MmU1IiwidXNlcl9pZCI6ImNvbm5lbGwifQ.TOg3aWy0rsJ7HknM70yUY4VHoqh-Tc1eMptLNFDXYB4"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Image uploaded:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        
+
+      };
+      
 
     const [managetoggles, setmanagetoggles] = useState({
         crowdfundingdetails:true,
@@ -24,6 +138,33 @@ function Organisecrowdfundbody(){
         setmanagetoggles({...managetoggles, [currentevent]:!currenttogglevalue })
         console.log(managetoggles)
     }
+
+    /* const displayImage = (file) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imgDataUrl = e.target.result;
+          setformdata((previousData) => ({
+            ...previousData,
+            pic: imgDataUrl,
+          }));          
+        };
+        reader.readAsDataURL(file);
+    };
+        
+    
+    useEffect(() => {
+        console.log('formdata:', formdata);
+        if (formdata.pic) {
+          console.log('pic:', formdata.pic);
+          const file = urltoFile(formdata.pic, 'cropped_image.png', 'image/png');    
+          console.log('file:', file);
+          displayImage(formdata.pic);
+          
+        }        
+      }, [formdata]);
+     */  
+      
+
     
     return(
         
@@ -37,11 +178,21 @@ function Organisecrowdfundbody(){
                     <div className="text-center py-6 border-b-2 border-[#e5e2e2] ">
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
-                    <div className="p-7 flex flex-col items-center " >
-                        <div className="bg-[#F9F9F9] w-[837px] h-[240px] flex justify-center items-center mb-5 " >
-                            <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
-                        </div>
-                        <div className="flex gap-3 items-center py-1 " >
+                    <div className="p-7 flex flex-col items-center relative " >
+                        {/* <div className={` ${formdata.pic ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
+                            <label htmlFor="campaignimage" className={` ${formdata.pic ? 'hidden' : 'block'} cursor-pointer`} >
+                                <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
+                            </label>
+                            <input type="file" name="campaignimage" id="campaignimage" className="hidden" 
+                            accept="image/png, image/jpeg, image/jpg, image/svg+xml"
+                            onChange={ (event) => {
+                                setformdata((prevformdata)=> ({...prevformdata, pic:URL.createObjectURL(event.target.files[0]) }) )
+                            } }                            
+                            />
+                            <img src={formdata.pic} alt="" className={` ${formdata.pic? 'w-[442px] h-[240px]' : 'hidden' }`}  />
+                        </div> */}
+                        <CropImage formdata = {formdata} setformdata = {setformdata}  />
+                        <div className={` ${ formdata.pic ? 'hidden' : 'flex' } gap-3 items-center py-1 `} >
                             <img src={infoicon} alt="info icon" />
                             <p className="text-[#8E8E93] text-base " >Click icon to upload campaign image</p>
                         </div>
@@ -57,7 +208,9 @@ function Organisecrowdfundbody(){
                     <div className={` ${managetoggles.crowdfundingdetails? 'block' : 'hidden' } p-[30px] bg-[#FFFFFF]`} >
                         <label htmlFor="title" className="text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Title*</label>
                         <input type="text" id="title" name="title" className={`py-[10px] px-5 mb-5 w-full h-[56px] border-[1px] bg-white border-[#8E8E93] rounded-[4px] 
-                        hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]  `} placeholder="What is the title of your crowdfund?" />
+                        hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]  `} placeholder="What is the title of your crowdfund?"                         
+                        onChange={handleInputChange}
+                        />
                         
                         <div className="flex gap-2 items-center mb-[53px] ">
                             <img src={infoicon} alt="info icon" />
@@ -76,11 +229,18 @@ function Organisecrowdfundbody(){
                             <option value="education">Education</option>
                         </select> */}
                         <div className="relative inline-block w-64 mb-[53px] ">
-                            <select className="block cursor-pointer appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                <option disabled selected>Placeholder Title</option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                            <select className={`block cursor-pointer appearance-none w-full bg-white border border-gray-400 
+                            hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none 
+                            focus:shadow-outline`}
+                            name = "tags"
+                            onChange={handleInputChange}
+                            defaultValue = "placeholder"
+                            >
+                                <option disabled value="placeholder">Placeholder Title</option>
+                                <option value="Environment" >Environment</option>
+                                <option value="Medical" >Medical</option>
+                                <option value="Sports" >Sports</option>
+                                <option value= "Family"  >Family</option>
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg className="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M6 8l4 4 4-4z"/></svg>
@@ -90,7 +250,10 @@ function Organisecrowdfundbody(){
 
                         <label htmlFor="description" className=" block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " > Description* </label>
                         <textarea name="description" id="description" rows="10" className={` mb-5 w-full p-5 outline-none border-[1px] border-[#8E8E93] `} 
-                        placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." >
+                            placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." 
+                            onChange={handleInputChange}
+                            maxLength= "1500"
+                        >
                         </textarea>
 
                         <div className="flex gap-2 items-center">
@@ -106,16 +269,24 @@ function Organisecrowdfundbody(){
                         <img src={infoicon2} alt="info icon" className="w-6 h-6"  />
                         <h3 className="text-[18px] leading-[20px] tracking-[0.5px] font-black" >At the end of your crowdfund, you will get 98% of total raised.</h3>
                     </div>
+                    
                     <div id="amountdetails" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
                     onClick={managetoggleclick} >
                         <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Enter amount details</h3>
                         <img src={managetoggles.amountdetails ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
                     </div>
+                    
                     <div className={` ${managetoggles.amountdetails? 'block' : 'hidden' } p-[30px] `} >
-                        <label htmlFor="amount" className="block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Target amount*</label>
+                        <label htmlFor="target_price" className="block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Target amount*</label>
+                        
                         <input type="number" className={`h-[56px] w-4/6 rounded px-5 py-[10px] outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
                         border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5  `} min='100' max='9999999' maxLength="6"
-                          placeholder="How much do you want to raise(amount is in USDT)?"  />
+                        placeholder="How much do you want to raise(amount is in USDT)?"  
+                        onChange={handleInputChange}
+                        id = "target_price"
+                        name="target_price"
+                        />
+
                         <span className="text-lg leading-[22px] text-[#2CA9F2] font-black " >What is USDT?</span>
                         <div className="flex gap-2 items-center">
                             <img src={infoicon} alt="info icon" />
@@ -169,8 +340,16 @@ function Organisecrowdfundbody(){
                         <img src={managetoggles.enddate ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
                     </div>
                     <div className={` ${managetoggles.enddate? 'block' : 'hidden' } p-[30px]`} >
-                        <input type="date" name="enddate" id="enddate" className={`h-[56px] w-[393px] rounded  px-5 py-[10px] outline-[#37BCF7] outline-2 
-                        focus:caret-[#37BCF7] border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5  `} />
+                        <input
+                            type="date"
+                            name="end_date"
+                            id="end_date"
+                            className={`h-[56px] w-[393px] rounded px-5 py-[10px] outline-[#37BCF7] outline-2 
+                            focus:caret-[#37BCF7] border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5`}
+                            min={formatDate(today)}
+                            max={maxDateFormatted}
+                            onChange = {handleInputChange}
+                        />
                         <div className="flex gap-2 items-center">
                             <img src={infoicon} alt="info icon" />
                             <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >Maximum period for a campaign is 90days</p>
@@ -178,7 +357,9 @@ function Organisecrowdfundbody(){
                     </div>
                 </div>
 
-                <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 h-[48px] rounded-[10px] text-white font-bold text-[18px] block  " >
+                <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 h-[48px] rounded-[10px] text-white font-bold text-[18px] block  " 
+                    onClick={startCrowdfund}
+                >
                     All done, begin your crowdfund
                 </button>
                 <button className="text-[#37BCF7] mx-auto px-5  w-1/2 h-[48px] rounded-[10px] hover:bg-white font-bold text-[18px] block " >Not now, save for later</button>
