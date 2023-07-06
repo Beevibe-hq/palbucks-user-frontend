@@ -1,5 +1,11 @@
 import applogo from "../../images/appLogo.svg"
 import palbucks from "../../images/palbucks2.svg"
+import googleicon from "../../images/authpages/googleicon.svg"
+import twittericon from "../../images/twittericon.svg"
+import facebookicon from "../../images/authpages/facebookicon.svg"
+import bgradient from "../../images/authpages/bgradient.svg"
+import bgradient2 from "../../images/bgradient1.svg"
+
 
 import { Link } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
@@ -24,21 +30,74 @@ const Signup = () => {
 
       </header>
 
+        <div className ="w-[400px] h-[800px] absolute -z-10 -right-[0px] -top-[160px] ">
+            <img src={bgradient} alt="" className="w-full" />            
+        </div>
+        
+        <div className ="w-[200px] h-[800px] absolute -z-10 -left-[0px] top-[360px] ">
+            <img src={bgradient2} alt="" className="w-full" />            
+        </div>
+
+        {/* <div className ="w-[600px] h-screen absolute -z-10 left-0 top-[380px] ">
+            <img src={bgradient} alt="" className="w-full " />
+            <img src={bgradient} alt="" className="w-full relative -top-[350px] " />
+            <img src={bgradient} alt="" className="w-full relative -top-[1000px] " />
+        </div> */}
+    
       <main className="pt-[70px] pb-10 mt-[103px] " >
         <h2 className=" mb-[59px] text-center text-[48px] font-black leading-[73px] tracking-[0.069px] " >
             Sign up
         </h2>
 
         <form action="" className=" block mx-auto w-fit  " >
-            <div className="flex flex-col ">
-                <input type="email" name="email" id="email" placeholder="Email"
-                    className= "mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000] text-[#888888] text-lg   "
-                />
-                <input type="password" name="password" id="password" placeholder="Password"
-                    className= "mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000] text-[#888888] text-lg "
-                />
+            <div className="mb-[56px] flex flex-col ">
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="Email"
+                    className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
+                    outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
+                />                
                 <PasswordInput />
+                <button className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " >
+                    Sign up with email
+                </button>
             </div>
+            <p className=" mb-[32px] text-center text-2xl " > or signup using </p>
+            <div className="flex flex-col gap-[36px] items-center mb-[37px] ">
+                <button 
+                    className= {` w-[600px] h-[80px] py-5 px-7 flex gap-7 items-center justify-center border-[3px] border-black
+                        rounded-[8.5px] `} 
+                >
+                    <img src={googleicon} alt="Google icon"  className=" w-[50px] " />
+                    <span className="text-3xl font-bold  " >
+                        Sign up with Google
+                    </span>
+                </button>
+                <button 
+                    className= {` w-[600px] h-[80px] py-5 px-7 flex gap-7 items-center justify-center border-[3px] border-black
+                        rounded-[8.5px] `} 
+                >
+                    <img src={facebookicon} alt="Facebook icon"  className=" w-[50px] " />
+                    <span className="text-3xl font-bold  " >
+                        Sign up with Facebook
+                    </span>
+                </button>
+                <button 
+                    className= {` w-[600px] h-[80px] py-5 px-7 flex gap-7 items-center justify-center border-[3px] border-black
+                        rounded-[8.5px] `} 
+                >
+                    <img src={twittericon} alt="Twitter icon"  className=" w-[50px] " />
+                    <span className="text-3xl font-bold  " >
+                        Sign up with Twitter
+                    </span>
+                </button>
+
+            </div>
+            <p className="w-[580px] mx-auto text-lg text-center tracking-[0.552px] " >
+                By signing up, you agree to our <Link to={'/termsofuse'} className = 'font-bold' >Terms of Service </Link> and <Link to={'/privacypolicy'} className = 'font-bold' >Privacy Policy</Link>
+            </p>
         </form>
 
       </main>
