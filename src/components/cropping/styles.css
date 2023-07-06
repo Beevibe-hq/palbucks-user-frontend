@@ -1,0 +1,42 @@
+/* styles.css */
+
+.cropContainer {
+    position: relative;
+    width: 550px;
+    height: 400px;
+    background: #333;
+    margin-inline: auto;
+  }
+  
+  .cropButton {
+    flex-shrink: 0;
+    background: #37BCF7;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .controls {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-inline: auto;
+  }
+  
+  .sliderContainer {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+  
+  .sliderLabel {
+    min-width: fit-content;
+  }
+  
+  .slider {
+    width: 50px;
+    padding: 22px 0;
+    margin-left: 16px;
+  }
+  
