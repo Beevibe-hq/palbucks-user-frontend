@@ -92,7 +92,7 @@ function LandingPage(){
 
     return(
         <div className="font-merriweather" >
-            <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 z-10 " >
+            <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
                 <div className="flex items-center gap-[18.2px] ">
                     <img src={palbuckslogo} alt="Palbucks logo" className="w-[33.4px] h-[33.4px]" />
                     {/* <span className="" >Palbucks</span> */}
