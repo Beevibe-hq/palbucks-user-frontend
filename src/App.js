@@ -37,6 +37,7 @@ import Privacypolicy from './pages/privacypolicy/privacypolicy'
 import CommunityGuidelines from './pages/communityguidelines/communityguidelines'
 import LandingPage from './pages/landingpage/landingpage'
 import Signinpage from './pages/signin/signin'
+import Signuppage from './pages/signup/signup'
 
 function App() {
 
@@ -53,7 +54,8 @@ function App() {
       <div className="h-screen">        
         <Routes>
           <Route path='/' element = {<LandingPage />} />
-          <Route path='/' element = { <Signinpage/> } />
+          <Route path='/signin' element = { <Signinpage/> } />
+          <Route path='/signup' element = { <Signuppage /> } />
           <Route path='/home' element = { <Home /> } />
           <Route path='/detailed/:id' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />

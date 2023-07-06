@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Signinpage = () => {
+const Signin = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Signinpage = () => {
   )
 }
 
-export default Signinpage
+export default Signin
