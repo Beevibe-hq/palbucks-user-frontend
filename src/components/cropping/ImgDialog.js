@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import AppBar from '@material-ui/core/AppBar'
@@ -87,3 +87,4 @@ class ImgDialog extends React.Component {
 }
 
 export default withStyles(styles)(ImgDialog)
+ */
