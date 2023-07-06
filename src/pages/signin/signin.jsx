@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 
 const Signinpage = () => {
   return (
@@ -61,3 +61,4 @@ const Signup = () => {
 }
 
 export{ Signup}
+ */
