@@ -5,7 +5,7 @@ import '../styles.css'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import ReactSlider from 'react-slider'
+/* import ReactSlider from 'react-slider' */
 
 import { getOrientation } from 'get-orientation/browser';
 //import ImgDialog from '../ImgDialog';
