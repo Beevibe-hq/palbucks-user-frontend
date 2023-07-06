@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
 
 import showpasswordicon from "../../images/authpages/showpasswordicon.svg"
 
@@ -17,21 +16,23 @@ const PasswordInput = () => {
     setShowPassword(!showPassword);
   };
 
-  return (
-    <div className="relative w-fit ">
-      <input
-        type={showPassword ? 'text' : 'password'}
-        value={password}
-        onChange={handlePasswordChange}
-        placeholder="Password"
-        className= "mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000] text-[#888888] text-lg "
-      />
-      <img src={showpasswordicon} 
-          alt="toggle password icon" 
-          className='absolute top-8 right-5'
+  return (    
+      <div className="relative">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={handlePasswordChange}
+          placeholder="Password"
+          className={`w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
+           outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
+        />
+        <span
           onClick={togglePasswordVisibility}
-       />
-    </div>
+          className="absolute top-[50%] right-4 transform -translate-y-1/2 cursor-pointer"
+        >
+          <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+        </span>
+      </div>    
   );
 };
 
