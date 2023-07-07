@@ -38,6 +38,8 @@ import CommunityGuidelines from './pages/communityguidelines/communityguidelines
 import LandingPage from './pages/landingpage/landingpage'
 import Signinpage from './pages/signin/signin'
 import Signuppage from './pages/signup/signup'
+import Otppage from './pages/otppage/otppage'
+import Completesignup from './pages/completeSignup/completesignup'
 
 function App() {
 
@@ -56,6 +58,8 @@ function App() {
           <Route path='/' element = {<LandingPage />} />
           <Route path='/signin' element = { <Signinpage/> } />
           <Route path='/signup' element = { <Signuppage /> } />
+          <Route path='/otppage' element = { <Otppage /> } />
+          <Route path='/completesignup' element = { <Completesignup /> } />          
           <Route path='/home' element = { <Home /> } />
           <Route path='/detailed/:id' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />

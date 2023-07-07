@@ -5,14 +5,18 @@ import twittericon from "../../images/twittericon.svg"
 import facebookicon from "../../images/authpages/facebookicon.svg"
 import bgradient from "../../images/authpages/bgradient.svg"
 import bgradient2 from "../../images/bgradient1.svg"
+import bgradient3 from "../../images/authpages/bgradient2.svg"
 
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 
 const Signup = () => {
+
+    const navigate = useNavigate()
+
   return (
-    <div className="font-merriweather" >
+    <div className="font-merriweather relative" >
       <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
         <div className=" flex gap-[18px] items-center " >
             <img src={applogo} alt="Palbucks logo" className="w-[33.4px]" />
@@ -30,12 +34,13 @@ const Signup = () => {
 
       </header>
 
-        <div className ="w-[400px] h-[800px] absolute -z-10 -right-[0px] -top-[160px] ">
+        <div className ="w-[400px] h-[800px] absolute -z-10 -right-[0px] -top-[200px] ">
             <img src={bgradient} alt="" className="w-full" />            
         </div>
         
-        <div className ="w-[200px] h-[800px] absolute -z-10 -left-[0px] top-[360px] ">
-            <img src={bgradient2} alt="" className="w-full" />            
+        <div className ="w-[400px] h-[200px] absolute -z-10 -left-[0px] bottom-[900px] ">
+            <img src={bgradient3} alt="" className="w-full" />            
+            {/* <img src={bgradient3} alt="" className="w-full relative -top-[0px] " /> */}
         </div>
 
         {/* <div className ="w-[600px] h-screen absolute -z-10 left-0 top-[380px] ">
@@ -60,7 +65,14 @@ const Signup = () => {
                     outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
                 />                
                 <PasswordInput />
-                <button className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " >
+                <button 
+                    className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
+                    onClick={ (e) => {
+                        e.preventDefault()
+                        navigate('/otppage')
+                    } }
+                    
+                >
                     Sign up with email
                 </button>
             </div>
