@@ -3,13 +3,17 @@ import palbucks from "../../images/palbucks2.svg"
 import googleicon from "../../images/authpages/googleicon.svg"
 import twittericon from "../../images/twittericon.svg"
 import facebookicon from "../../images/authpages/facebookicon.svg"
+import bgradient from "../../images/authpages/bgradient.svg"
+import bgradient2 from "../../images/bgradient1.svg"
+import bgradient3 from "../../images/authpages/bgradient2.svg"
+
 
 import { Link } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 
 const Signin = () => {
   return (
-    <div className="font-merriweather" >
+    <div className="font-merriweather relative" >
       <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
         <div className=" flex gap-[18px] items-center " >
             <img src={applogo} alt="Palbucks logo" className="w-[33.4px]" />
@@ -26,6 +30,15 @@ const Signin = () => {
         </div>
 
       </header>
+
+        <div className ="w-[400px] h-[800px] absolute -z-10 -right-[0px] -top-[200px] ">
+            <img src={bgradient} alt="" className="w-full" />            
+        </div>
+        
+        <div className ="w-[400px] h-[200px] absolute -z-10 -left-[0px] bottom-[900px] ">
+            <img src={bgradient3} alt="" className="w-full" />            
+            {/* <img src={bgradient3} alt="" className="w-full relative -top-[0px] " /> */}
+        </div>
 
       <main className="pt-[70px] pb-10 mt-[103px] " >
         <h2 className=" mb-[59px] text-center text-[48px] font-black leading-[73px] tracking-[0.069px] " >
