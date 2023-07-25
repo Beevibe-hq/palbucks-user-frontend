@@ -115,3 +115,21 @@ export const setSignupInfo = (data) => {
             payload:data
     }
 }
+
+// set authenticated state
+export const setIsAuthenticated = (data) => {
+
+    return{
+        type:'setisauthenticated',
+        payload:data
+    }
+}
+
+// set loading state
+export const setLogoutLoading = (data) => {
+
+    return{
+        type:'setlogoutloading',
+        payload:data
+    }
+}

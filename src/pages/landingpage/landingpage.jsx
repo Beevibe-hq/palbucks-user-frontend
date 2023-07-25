@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useRef, useState, useEffect } from "react"
 
 import palbuckslogo from "../../images/landingpagelogo.svg"
@@ -40,8 +40,12 @@ import copyrighticon from "../../images/landingpage/copyright.svg"
 
 import Landingcampaign from "../../components/landingcampaign/landingcampaign"
 import Landingnotification from "../../components/landingnotification/landingnotification"
+import { useSelector } from "react-redux"
 
 function LandingPage(){
+
+    const navigate = useNavigate()
+    const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated)
 
     const containerRef = useRef(null);
 
@@ -81,6 +85,10 @@ function LandingPage(){
             isAtRightEnd: false
         });
     };
+
+    useEffect(() => {
+        isAuthenticated ? navigate('/home') : navigate('/')        
+    },[])
 
     /* useEffect(() => {
         const container = containerRef.current;
