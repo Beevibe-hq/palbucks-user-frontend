@@ -11,8 +11,8 @@ const PrivateRoute = () => {
     useEffect(()=>{
 
         const checkAuthentication = async() => {
-            //const access_token = localStorage.getItem('access_token')            
-            const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3ODc1MDI4LCJpYXQiOjE2ODc4NzM4MjgsImp0aSI6ImM2OTI4ZTU5YTIwNzQ3ODQ4OGUyYmQ1MDQ3ZjI4MmU1IiwidXNlcl9pZCI6ImNvbm5lbGwifQ.TOg3aWy0rsJ7HknM70yUY4VHoqh-Tc1eMptLNFDXYB4'
+            const access_token = localStorage.getItem('access_token')            
+            //const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3ODc1MDI4LCJpYXQiOjE2ODc4NzM4MjgsImp0aSI6ImM2OTI4ZTU5YTIwNzQ3ODQ4OGUyYmQ1MDQ3ZjI4MmU1IiwidXNlcl9pZCI6ImNvbm5lbGwifQ.TOg3aWy0rsJ7HknM70yUY4VHoqh-Tc1eMptLNFDXYB4'
 
             //check if the token is still valid here if not set it to false so as to restart login
             if(access_token){
