@@ -10,15 +10,66 @@ import checker3 from "../../images/authpages/checker3.svg"
 
 
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 import OtpInput from 'react-otp-input';
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 
 const Completesignup = () => {
 
-    const [personalInfo, setPersonalInfo] = useState({})
+    const navigate = useNavigate()
+
+    const signupInfo = useSelector( state => state.signupInfo)
+    const [personalInfo, setPersonalInfo] = useState({
+        gender:1,
+        phone:'293',
+        bio:'Humble man',
+        password2:signupInfo.password1,                
+    })
+
+    const handleInputChange = (e) => {
+        setPersonalInfo(prevInfo => ({...prevInfo, [e.target.name]: e.target.value }) )
+    }
+
+    const finishSignup = async (e) => {
+        try {
+            const updatedSignupInfo = { ...signupInfo, ...personalInfo };
+            console.log(updatedSignupInfo)
+      
+            const signupRequest = await fetch('https://palbucks-api.onrender.com/users/api/register/', {
+            method: 'POST',
+            body: JSON.stringify(updatedSignupInfo),
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type as JSON
+            },
+            });
+      
+            const response = await signupRequest.json();
+
+            if(signupRequest.ok){
+                const {access_token, refresh_token, user} = response
+
+                if(access_token && refresh_token && user){
+                    localStorage.setItem('access_token',access_token)
+                    localStorage.setItem('refresh_token',refresh_token);
+                    localStorage.setItem('userInfo',JSON.stringify(user))                    
+                }
+                navigate('/home')
+            }
+
+            console.log(response);
+        } catch (error) {
+            console.error('Error occurred during signup:', error);
+            // Handle the error gracefully (e.g., show an error message to the user)
+        }
+    };
+      
+
+    /* useEffect(()=>{
+        console.log(signupInfo)
+    }) */
 
   return (
     <div className="font-merriweather relative" >
@@ -65,32 +116,34 @@ const Completesignup = () => {
                 <div className="flex flex-wrap gap-[50px] px-[50px] py-[47px] border-t-[6px] border-[#F9F9F9] items-center ">
                     <div className="flex flex-col items-start gap-5">
                         <label 
-                            htmlFor="firstName"
+                            htmlFor="first_name"
                             className="text-[20px] font-bold "
                             >
                             First name
                         </label>
                         <input 
                             type="text" 
-                            name="firstName" 
-                            id="firstName" 
+                            name="first_name" 
+                            id="first_name" 
                             placeholder="Enter your first name"
+                            onChange={handleInputChange}
                             className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
                                 focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
                         />
                     </div>
                     <div className="flex flex-col items-start gap-5">
                         <label 
-                            htmlFor="lastName"
+                            htmlFor="last_name"
                             className="text-[20px] font-bold "
                             >
                             Last name
                         </label>
                         <input 
                             type="text" 
-                            name="lastName" 
-                            id="lastName" 
+                            name="last_name" 
+                            id="last_name" 
                             placeholder="Enter your last name"
+                            onChange={handleInputChange}
                             className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
                                 focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
                         />
@@ -106,7 +159,8 @@ const Completesignup = () => {
                         <input                             
                             type = "date"
                             name="dateOfBirth" 
-                            id="dateOfBirth"                             
+                            id="dateOfBirth"
+                            onChange={handleInputChange}                    
                             className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
                                 focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
                         />
@@ -122,9 +176,10 @@ const Completesignup = () => {
                         <div className="relative">
                             <input
                                 type = "text"
-                                name="userName"
-                                id="userName"
+                                name="username"
+                                id="username"
                                 placeholder="Enter your username"
+                                onChange={handleInputChange}
                                 className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
                                     focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
                             />
@@ -141,7 +196,11 @@ const Completesignup = () => {
                 </div>
             </div>
             
-            <button className="mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " >
+            <button 
+                className="mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
+                font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block "
+                 onClick  = {finishSignup}
+                >
                 Finish signup
             </button>            
 

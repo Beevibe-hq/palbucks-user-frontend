@@ -66,60 +66,59 @@ function Organisecrowdfundbody(){
           formData.append(key, value);
         }
        */
-        /* console.log(formdata)
-
-        const requestOptions = {
-          method: 'POST',
-          body: JSON.stringify(formdata),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-      
-        try {
-          const response = await fetch(
-            'https://0f6c-129-18-199-2.ngrok-free.app/funding/api/',
-            requestOptions
-          );
-      
-          if (!response.ok) {
-            throw new Error('Request failed');
-          }
-      
-          const data = await response.json();
-          console.log(data);
-        } catch (error) {
-          console.error(error);
-        } */
-
+        
+        console.log('starting')
+        console.log(formdata.pic)
         const formData = new FormData();
         formData.append('pic', formdata.pic);
         formData.append('title', "test title from frontend ")
         formData.append('target_price', 45.3);
-        formData.append('end_date', "2023-07-17T14:15:22Z")
+        formData.append('end_date', "2023-07-28T14:15:22Z")
+        formData.append('user_name','test username')        
 
         /* for (const [key, value] of Object.entries(formdata)) {
             formData.append(key, value);
         } */
 
+        const access_token = localStorage.getItem('access_token')
+
         // Send the image using Fetch API
-        fetch(' https://palbucks.ew.r.appspot.com/funding/api/', {
+        /* fetch('https://palbucks-api.onrender.com/funding/api/', {
             method: 'POST',
             body: formData,
             headers: {
-            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3ODc1MDI4LCJpYXQiOjE2ODc4NzM4MjgsImp0aSI6ImM2OTI4ZTU5YTIwNzQ3ODQ4OGUyYmQ1MDQ3ZjI4MmU1IiwidXNlcl9pZCI6ImNvbm5lbGwifQ.TOg3aWy0rsJ7HknM70yUY4VHoqh-Tc1eMptLNFDXYB4"
+                Authorization: `Bearer ${access_token}`,
+                //"Content-Type": "multipart/form-data"
+            }
+            })
+            .then(response => {
+                console.log("Response Status:", response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response Data:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+        });
+ */
+        const sendCrowdfund = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+            method:'POST',
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${access_token}`,
+                //"Content-Type": "multipart/form-data"
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Image uploaded:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        
+        const resp = await sendCrowdfund.json();
+        console.log(resp)
+        
         
 
-      };
+        
+
+    };
       
 
     const [managetoggles, setmanagetoggles] = useState({

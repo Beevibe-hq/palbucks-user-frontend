@@ -4,7 +4,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import showpasswordicon from "../../images/authpages/showpasswordicon.svg"
 
-const PasswordInput = () => {
+const PasswordInput = (props) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -15,13 +15,22 @@ const PasswordInput = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  
+  const handleChange = (e) => {
+    handlePasswordChange(e);
+    if (props.onChange) {
+      props.onChange(e);
+    }
+  };
+  
 
   return (    
       <div className="relative">
         <input
           type={showPassword ? 'text' : 'password'}
           value={password}
-          onChange={handlePasswordChange}
+          name = "password1"
+          onChange = {handleChange}
           placeholder="Password"
           className={`w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
            outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}

@@ -96,6 +96,15 @@ const onnotificationspage = (state = false, action) =>{
     }
 }
 
+const signupInfo = (state = {}, action) => {
+    switch(action.type){
+        case "updateSignupInfo":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
@@ -105,7 +114,8 @@ const allreducers = combineReducers({
     homescrollposition,
     sidebarslid,
     onprofilepage,
-    onnotificationspage
+    onnotificationspage,
+    signupInfo,
 })
 
 export default allreducers;

@@ -8,10 +8,56 @@ import bgradient2 from "../../images/bgradient1.svg"
 import bgradient3 from "../../images/authpages/bgradient2.svg"
 
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
+import { useState } from "react"
 
 const Signin = () => {
+
+    const navigate = useNavigate()
+    const [signinInfo, setSigninInfo] = useState({})
+
+    const handleInputChange = (e) => {
+        setSigninInfo(prevInfo => ({...prevInfo, [e.target.name]:e.target.value}))
+    }
+    const handlePasswordChange = (e) => {
+        setSigninInfo(prevInfo => ({...prevInfo, password: e.target.value}))
+    }
+
+    const handleSignin = async (e) => {
+        e.preventDefault()
+        try {
+            
+            console.log(signinInfo)
+      
+            const signinRequest = await fetch('https://palbucks-api.onrender.com/users/api/login/', {
+            method: 'POST',
+            body: JSON.stringify(signinInfo),
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type as JSON
+            },
+            });
+      
+            const response = await signinRequest.json();
+
+            if(signinRequest.ok){
+                const {access_token, refresh_token, user} = response
+
+                if(access_token && refresh_token && user){
+                    localStorage.setItem('access_token',access_token)
+                    localStorage.setItem('refresh_token',refresh_token);
+                    localStorage.setItem('userInfo',JSON.stringify(user))                    
+                }
+                navigate('/home')
+            }
+
+            console.log(response);
+        } catch (error) {
+            console.error('Error occurred during signin:', error);
+            // Handle the error gracefully (e.g., show an error message to the user)
+        }
+    };
+
   return (
     <div className="font-merriweather relative" >
       <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
@@ -52,11 +98,16 @@ const Signin = () => {
                     name="email" 
                     id="email" 
                     placeholder="Email"
+                    onChange={handleInputChange}
                     className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
                     outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
                 />                
-                <PasswordInput />
-                <button className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " >
+                <PasswordInput onChange = {handlePasswordChange} />
+                <button 
+                    className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] 
+                    font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
+                    onClick={handleSignin}
+                    >
                     Sign in with email
                 </button>
             </div>

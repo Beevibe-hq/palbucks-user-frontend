@@ -10,9 +10,37 @@ import bgradient3 from "../../images/authpages/bgradient2.svg"
 
 import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { setSignupInfo } from "../../actions/actions"
 
 const Signup = () => {
 
+    const signupInfo = useSelector((state) => state.signupInfo)
+    
+    const [accountInfo,setAccountInfo] = useState({})
+
+    const handleInputChange = (e) => {
+        setAccountInfo( prevState => ({...prevState, [e.target.name]: e.target.value }) )
+    }
+
+    const handleSignup = (e) => {
+        e.preventDefault()    
+        navigate('/otppage')
+        
+        const updatedSignupInfo = {...signupInfo, ...accountInfo}
+        dispatch(setSignupInfo(updatedSignupInfo))
+    }
+
+    /* useEffect(()=>{
+        console.log(signupInfo)
+    }) */
+
+    /* useEffect(()=>{
+        console.log(accountInfo)
+    },[accountInfo]) */
+
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
   return (
@@ -61,16 +89,15 @@ const Signup = () => {
                     name="email" 
                     id="email" 
                     placeholder="Email"
+                    onChange={handleInputChange}
                     className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
                     outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
                 />                
-                <PasswordInput />
+                <PasswordInput onChange={handleInputChange} accountInfo={accountInfo} setAccountInfo={setAccountInfo} />
+
                 <button 
                     className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
-                    onClick={ (e) => {
-                        e.preventDefault()
-                        navigate('/otppage')
-                    } }
+                    onClick={ handleSignup }
                     
                 >
                     Sign up with email

@@ -15,8 +15,8 @@ import medicalimg from './images/medical label.svg'
 import animalimg from './images/animal label.svg'
 
 
-import { BrowserRouter } from "react-router-dom";
-import { Routes, Route } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+//import { Routes, Route } from "react-router";
 
 
 import Sidebar from "./components/sidebar/sidebar";
@@ -40,13 +40,31 @@ import Signinpage from './pages/signin/signin'
 import Signuppage from './pages/signup/signup'
 import Otppage from './pages/otppage/otppage'
 import Completesignup from './pages/completeSignup/completesignup'
+import PrivateRoute from './components/privateroute/privateroute'
 
 function App() {
 
   const dispatch = useDispatch()
   
   useEffect( ()=>{
+   
+   const getCrowdfunds = async() => {    
+        const access_token = localStorage.getItem('access_token')
 
+        // Send the image using Fetch API
+        try{
+          const crowdfunds = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+            headers:{
+              Authorization:`Bearer ${access_token}`,
+            }
+          }).json()
+          console.log(crowdfunds)
+        }
+        catch(error){
+          console.error(error)
+        }        
+  }
+    
    dispatch(sethomebodydata(data))
   }, [])
 
@@ -60,7 +78,12 @@ function App() {
           <Route path='/signup' element = { <Signuppage /> } />
           <Route path='/otppage' element = { <Otppage /> } />
           <Route path='/completesignup' element = { <Completesignup /> } />          
-          <Route path='/home' element = { <Home /> } />
+
+          <Route exact path='/home' element = { <PrivateRoute element = {<Home />} />} >
+            <Route path='/home' element={<Home />} />
+          </Route>
+
+          {/* <PrivateRoute path='/home' component={<Home />} /> */}
           <Route path='/detailed/:id' element = { <Detailedevent /> } />
           <Route path= '/settings' element = { <Settings />} />
           <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />
