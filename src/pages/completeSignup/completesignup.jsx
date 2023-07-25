@@ -11,14 +11,14 @@ import checker3 from "../../images/authpages/checker3.svg"
 
 
 import { Link, useNavigate } from "react-router-dom"
-
-
 import OtpInput from 'react-otp-input';
 import { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { checkAuthentication } from "../../auth/checkauthentication"
 
 const Completesignup = () => {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const signupInfo = useSelector( state => state.signupInfo)
@@ -56,6 +56,10 @@ const Completesignup = () => {
                     localStorage.setItem('refresh_token',refresh_token);
                     localStorage.setItem('userInfo',JSON.stringify(user))                    
                 }
+
+                // Call checkauthentication to dispatch the actions
+                await checkAuthentication(dispatch)
+
                 navigate('/home')
             }
 

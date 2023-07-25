@@ -21,11 +21,14 @@ import arrowwhite from '../../images/arrowwhite.svg'
 import Navelements from '../navelements/navelements'
 import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { closesidebar, increasesidebar, opensidebar, reducesidebar, setlinkcolor } from '../../actions/actions'
+import { closesidebar, increasesidebar, opensidebar, reducesidebar, setIsAuthenticated, setlinkcolor, setLogoutLoading } from '../../actions/actions'
+import { checkAuthentication } from '../../auth/checkauthentication'
 
 function Sidebar(){
 
     const navigate = useNavigate()
+
+    const logoutLoading = useSelector(state=> state.authReducer.isLoading)
 
     //const [sidebarslid, setsidebarslid] = useState(true)
     const sidebarslid = useSelector(state => state.sidebarslid)
@@ -51,37 +54,47 @@ function Sidebar(){
     })
 
     const handleLogout = async () => {
+        dispatch(setLogoutLoading(true))
+        console.log('starting Log out')
         try {
-          const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
-            method: 'POST',
-            /* body:JSON.stringify({
-              "refresh":'ds'
-            }),
-            headers: {
-              'Content-Type': 'application/json', 
-            }, */
-          });
+            const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
+                method: 'POST',
+                /* body:JSON.stringify({
+                    "refresh":'ds'
+                }),
+                headers: {
+                    'Content-Type': 'application/json', 
+                }, */
+            });
       
-          const logoutResponse = await logout.json();
-          console.log(logoutResponse);
-      
-          if (logout.ok) {
-            // Clear all data from localStorage
-            localStorage.clear();
-            navigate('/signin');
-          } else {
-            console.error('Logout failed');
-          }
+            const logoutResponse = await logout.json();
+            console.log(logoutResponse);
+        
+            if (logout.ok) {
+                // Clear all data from localStorage
+                localStorage.clear();
+                
+                dispatch(setLogoutLoading(false))
+                
+                // check authentication again to logout everything
+                await checkAuthentication(dispatch)
+                //dispatch(setIsAuthenticated(false))
+
+                navigate('/signin');
+                
+            } else {
+                console.error('Logout failed');
+            }
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
+    };
       
     
     return(
         <div className = {` ${ isMobile ? sidebaropen ? 'left-0 w-[80%] minitablet:w-[60%] ' : '-left-full' : sidebarslid ? 'w-[100px] flex flex-col items-center' : `md:block w-[90%] minitablet:w-[60%]
-        brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]` }  h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0  py-16 md:py-[35px]
-        bg-white flex-shrink-0 transition-all duration-500 ease-in-out `} >
+            brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]` }  h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0  py-16 md:py-[35px]
+            bg-white flex-shrink-0 transition-all duration-500 ease-in-out `} >
             
             <div className = 'mb-[60px] lg:mb-0'>
                 

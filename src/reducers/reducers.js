@@ -105,6 +105,23 @@ const signupInfo = (state = {}, action) => {
     }
 }
 
+const authReducer = (state = { isAuthenticated:false , isLoading:false }, action) => {
+    switch(action.type){
+        case "setisauthenticated":
+            return{
+                ...state,
+                isAuthenticated:action.payload
+            }
+        case "setlogoutloading":
+            return{
+                ...state,
+                isLoading:action.payload
+            }
+        default:
+            return state;
+    }
+}
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
@@ -116,6 +133,7 @@ const allreducers = combineReducers({
     onprofilepage,
     onnotificationspage,
     signupInfo,
+    authReducer,
 })
 
 export default allreducers;

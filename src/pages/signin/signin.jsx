@@ -11,11 +11,15 @@ import bgradient3 from "../../images/authpages/bgradient2.svg"
 import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { checkAuthentication } from "../../auth/checkauthentication"
+import { setLogoutLoading } from "../../actions/actions"
 
 const Signin = () => {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [signinInfo, setSigninInfo] = useState({})
+    const [signinInfo, setSigninInfo] = useState({})    
 
     const handleInputChange = (e) => {
         setSigninInfo(prevInfo => ({...prevInfo, [e.target.name]:e.target.value}))
@@ -24,7 +28,8 @@ const Signin = () => {
         setSigninInfo(prevInfo => ({...prevInfo, password: e.target.value}))
     }
 
-    const handleSignin = async (e) => {
+    const handleSignin = async (e) => {        
+        dispatch(setLogoutLoading(true))
         e.preventDefault()
         try {
             
@@ -41,21 +46,28 @@ const Signin = () => {
             const response = await signinRequest.json();
 
             if(signinRequest.ok){
-                const {access_token, refresh_token, user} = response
+                const {access_token, refresh_token, user} =  response
 
                 if(access_token && refresh_token && user){
                     localStorage.setItem('access_token',access_token)
                     localStorage.setItem('refresh_token',refresh_token);
                     localStorage.setItem('userInfo',JSON.stringify(user))                    
                 }
+
+                // Call checkauthentication to dispatch the actions
+                await checkAuthentication(dispatch)                
+                dispatch(setLogoutLoading(false))
+
                 navigate('/home')
             }
-
+            
             console.log(response);
         } catch (error) {
             console.error('Error occurred during signin:', error);
             // Handle the error gracefully (e.g., show an error message to the user)
         }
+
+        dispatch(setLogoutLoading(false))
     };
 
   return (
