@@ -107,3 +107,11 @@ export const setScrollPosition = (scrollPosition) => ({
     payload: scrollPosition,
   });
   
+ 
+// Update sign up info in preparation for sign up
+export const setSignupInfo = (data) => {
+    return {        
+            type: 'updateSignupInfo',
+            payload:data
+    }
+}

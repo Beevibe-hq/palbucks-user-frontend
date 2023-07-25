@@ -107,7 +107,7 @@ function Detailedevent(props){
                         onClick = {
                             () => {
                                 //dispatch(sethomeorevent('home'))
-                                navigate('/')
+                                navigate(-1)
                             }
                         }
                         />

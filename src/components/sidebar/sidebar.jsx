@@ -1,4 +1,4 @@
-import { Link,NavLink } from 'react-router-dom'
+import { Link,NavLink, useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
 import palbuckslogo from '../../images/palbucks logo22.png'
@@ -25,6 +25,8 @@ import { closesidebar, increasesidebar, opensidebar, reducesidebar, setlinkcolor
 
 function Sidebar(){
 
+    const navigate = useNavigate()
+
     //const [sidebarslid, setsidebarslid] = useState(true)
     const sidebarslid = useSelector(state => state.sidebarslid)
     
@@ -48,6 +50,33 @@ function Sidebar(){
         query: '(max-width: 940px)'
     })
 
+    const handleLogout = async () => {
+        try {
+          const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
+            method: 'POST',
+            /* body:JSON.stringify({
+              "refresh":'ds'
+            }),
+            headers: {
+              'Content-Type': 'application/json', 
+            }, */
+          });
+      
+          const logoutResponse = await logout.json();
+          console.log(logoutResponse);
+      
+          if (logout.ok) {
+            // Clear all data from localStorage
+            localStorage.clear();
+            navigate('/signin');
+          } else {
+            console.error('Logout failed');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
     
     return(
         <div className = {` ${ isMobile ? sidebaropen ? 'left-0 w-[80%] minitablet:w-[60%] ' : '-left-full' : sidebarslid ? 'w-[100px] flex flex-col items-center' : `md:block w-[90%] minitablet:w-[60%]
@@ -129,7 +158,10 @@ function Sidebar(){
 
             </nav>
 
-            <div className = 'absolute bottom-[5%] left-[10px] md:left-5 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-normal cursor-pointer'>
+            <div 
+                className = 'absolute bottom-[5%] left-[10px] md:left-5 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-normal cursor-pointer'
+                onClick={handleLogout}
+            >
                 <img src={logouticon} alt="Logout icon" className="w-[24px]" />
                 <h3 className={` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } font-merriweather `} >Logout</h3>
             </div>
