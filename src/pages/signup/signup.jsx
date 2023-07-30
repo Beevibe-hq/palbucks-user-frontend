@@ -13,35 +13,61 @@ import PasswordInput from "../../components/password/password"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setSignupInfo } from "../../actions/actions"
+import emailPasswordValidation from "../../auth/inputValidation"
 
 const Signup = () => {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const signupInfo = useSelector((state) => state.signupInfo)
     
-    const [accountInfo,setAccountInfo] = useState({})
+    const [accountInfo,setAccountInfo] = useState({
+        email:signupInfo.email,
+        password:signupInfo.password
+    })
+    
+    const [validateInput, setValidateInput] = useState({
+        email: '',
+        password: '',
+        passwordtest: {
+            testStage:'preRun' ,
+            upperCase: false, 
+            lowerCase: false, 
+            number: false, 
+            specialCharacter: false, 
+            length: 0 
+        }
+    });
 
     const handleInputChange = (e) => {
         setAccountInfo( prevState => ({...prevState, [e.target.name]: e.target.value }) )
     }
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
+                
         e.preventDefault()    
-        navigate('/otppage')
         
-        const updatedSignupInfo = {...signupInfo, ...accountInfo}
-        dispatch(setSignupInfo(updatedSignupInfo))
+        // Input validations
+        emailPasswordValidation(setValidateInput,accountInfo.email,accountInfo.password)
+        .then((validationMessage)=> {
+            if(validationMessage.email == 'correct' && validationMessage.password == 'Strong password' ){                
+                // Dispatch the sign up info to redux store
+                const updatedSignupInfo = {...signupInfo, ...accountInfo}
+                dispatch(setSignupInfo(updatedSignupInfo))        
+
+                navigate('/otppage')
+            }
+        })
+
+        /* Note: Include an api call above to check if the email has been registered before(if it has: set validateInput.email to Email is already registered),
+         and to initiate the otp getting process */
     }
 
     /* useEffect(()=>{
-        console.log(signupInfo)
-    }) */
-
-    /* useEffect(()=>{
-        console.log(accountInfo)
-    },[accountInfo]) */
-
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+        console.log(validateInput.passwordtest.testStage)
+    },[validateInput.passwordtest.testStage]) */
+        
 
   return (
     <div className="font-merriweather relative" >
@@ -89,11 +115,25 @@ const Signup = () => {
                     name="email" 
                     id="email" 
                     placeholder="Email"
+                    value = {accountInfo.email}
+                    required
                     onChange={handleInputChange}
-                    className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
-                    outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
-                />                
-                <PasswordInput onChange={handleInputChange} accountInfo={accountInfo} setAccountInfo={setAccountInfo} />
+                    className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] text-[#888888] text-lg bg-[#F9F9F9] border-[3px] 
+                    ${validateInput.email && validateInput.email !== 'correct' ? 
+                    'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
+                    'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
+                    outline-[3px] focus:caret-[#37BCF7] `}
+                /> 
+                {
+                    validateInput.email && validateInput.email !== 'correct' ? (
+                        <p className="-mt-[23px] mb-[43px] text-[#FD6150] text-2xl font-merriweather">
+                            {validateInput.email}
+                        </p>
+                    ) : null
+                }
+
+                               
+                <PasswordInput onChange={handleInputChange} accountInfo={accountInfo} setAccountInfo={setAccountInfo} setValidateInput = {setValidateInput} validateInput = {validateInput} />
 
                 <button 
                     className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 

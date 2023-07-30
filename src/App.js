@@ -1,8 +1,8 @@
 import userimg2 from './images/user2.svg'
 import userimg3 from './images/user3.svg'
 import userimg4 from './images/user4.svg'
-import userimg5 from './images/user5.svg'
-import userimg6 from './images/user6.svg'
+//import userimg5 from './images/user5.svg'
+//import userimg6 from './images/user6.svg'
 import eventimg from "./images/eventimg.png";
 import eventimg2 from "./images/eventimg2.png";
 import eventimg3 from "./images/eventimg3.png";
@@ -24,7 +24,7 @@ import Settings from "./pages/settings/settings";
 import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { sethomebodydata, setIsAuthenticated, setIsLoading } from './actions/actions'
+import { sethomebodydata } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Profilepage from './components/profilepage/profilepage'
 import Wallet from './pages/wallet/wallet'
@@ -78,7 +78,7 @@ function App() {
    // Refresh the access token every 15 minutes
    const tokenRefreshInterval = setInterval(()=>{
       refreshToken(dispatch)
-      alert('refresh')
+      //alert('refresh')
    }, 15 * 60 * 1000 )
 
    return () => {
