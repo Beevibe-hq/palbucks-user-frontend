@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import allreducers from './reducers/reducers';
 import { createStore,compose } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web

@@ -21,6 +21,20 @@ const Signin = () => {
     const navigate = useNavigate()
     const [signinInfo, setSigninInfo] = useState({})    
 
+    const [validateInput, setValidateInput] = useState({
+        email: '',
+        password: '',
+        passwordtest: {
+            testStage:'preRun' ,
+            upperCase: false, 
+            lowerCase: false, 
+            number: false, 
+            specialCharacter: false, 
+            length: 0 
+        }
+    });
+
+
     const handleInputChange = (e) => {
         setSigninInfo(prevInfo => ({...prevInfo, [e.target.name]:e.target.value}))
     }
@@ -114,7 +128,7 @@ const Signin = () => {
                     className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
                     outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
                 />                
-                <PasswordInput onChange = {handlePasswordChange} />
+                <PasswordInput onChange = {handlePasswordChange} validateInput = {validateInput} setValidateInput = {setValidateInput} />
                 <button 
                     className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] 
                     font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 

@@ -23,10 +23,15 @@ const Completesignup = () => {
 
     const signupInfo = useSelector( state => state.signupInfo)
     const [personalInfo, setPersonalInfo] = useState({
+        first_name:'',
+        last_name:'',
+        dateOfBirth:'',
+        username:'',
         gender:1,
         phone:'293',
         bio:'Humble man',
-        password2:signupInfo.password1,                
+        password1:signupInfo.password,
+        password2:signupInfo.password,                
     })
 
     const handleInputChange = (e) => {

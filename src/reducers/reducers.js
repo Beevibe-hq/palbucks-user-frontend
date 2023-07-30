@@ -96,7 +96,7 @@ const onnotificationspage = (state = false, action) =>{
     }
 }
 
-const signupInfo = (state = {}, action) => {
+const signupInfo = (state = {email:'',password:''}, action) => {
     switch(action.type){
         case "updateSignupInfo":
             return action.payload
