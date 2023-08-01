@@ -108,14 +108,16 @@ function App() {
               <Route path='/home' element={<Home />} />
             </Route>
 
-            {/* <PrivateRoute path='/home' component={<Home />} /> */}
+            
             <Route path='/detailed/:id' element = { <Detailedevent /> } />
             <Route path= '/settings' element = { <Settings />} />
             <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />
             <Route path='/profilepage' element  = {<Profilepage />} />
             <Route path='/wallet' element = {<Wallet/>} />
             <Route path='/notificationspage' element = { <Notificationspage />} />
-            <Route path='/helpcenter' element = { <Helpcenter /> } />
+            <Route exact path='/helpcenter' element = { <PrivateRoute element = { <Helpcenter />} />} >
+              <Route path='/helpcenter' element = { <Helpcenter /> } />
+            </Route>
             <Route path='/howitworks' element = { <Howitworks /> } />
             <Route path = '/termsofuse' element = { <Termsofuse /> } />
             <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
@@ -136,12 +138,12 @@ let data = [
     organizerimg:[userimg2],
     category:'Environment',
     categoryimg: environmentimg,
-    placeholder: eventimg,
+    crowdfundImage: eventimg,
     organizeraccounts:['Franca'],
     title: 'This is the title of the main user’s crowdfunding kcmsdij isnd ',
     //description: "Description of the ongoing event that users will read to know what it's about",
-    value: 10000,
-    target:12000,
+    amt_raised: 10000,
+    target_price:12000,
     location:'Cyprus',
     days:'30',
     totaldonations:20403,
@@ -152,11 +154,11 @@ let data = [
     category:'Refugee',
     categoryimg: animalimg,
     organizeraccounts:['Franca','Hikim'],
-    placeholder: eventimg2,
+    crowdfundImage: eventimg2,
     title: 'Research on the construction of an automatic street light with motion and light sensors',
     //description: "Description of the ongoing event that users will read to know what it's about",
-    //value: 10000,
-    //target:12000,
+    //amt_raised: 10000,
+    //target_price:12000,
     location:'Singapore',
     days:'49',
     totaldonations:20403,
@@ -166,12 +168,12 @@ let data = [
     organizerimg:[userimg3],
     category:'Medical',
     categoryimg:medicalimg,    
-    placeholder: eventimg3,
+    crowdfundImage: eventimg3,
     organizeraccounts:['Franca'],
     title: 'Title for this particular fundevent',
     //description: "Description of the ongoing event that users will read to know what it's about",
-    value: 37255010,
-    target:80030000,
+    amt_raised: 37255010,
+    target_price:80030000,
     location:'Texas',
     days:'10',
     totaldonations:2040323,
@@ -180,43 +182,45 @@ let data = [
   {
     organizerimg:[userimg2, userimg3, userimg4],
     category:'Donate',
-    placeholder: eventimg2,
+    crowdfundImage: eventimg2,
     categoryimg:medicalimg,  
     organizeraccounts:['Franca','Hikim','Mane'],
     title: 'Title for this particular fundevent',
     description: "Description of the ongoing event that users will read to know what it's about",
-    value: 10000,
-    target:12000,
+    amt_raised: 10000,
+    target_price:12000,
     location:'Abuja',
     days:'19',
     totaldonations:12420403,
     liked:false,
   },
+  
   {
     organizerimg:[userimg2, userimg3, userimg4],
     category:'Family',
-    placeholder: eventimg4,
+    crowdfundImage: eventimg4,
     categoryimg:medicalimg,  
     organizeraccounts:['Haaland','Franca','Hikim'],
     title: 'Support Chelsea football club to pay off their transfer fees that mudryk and lukaku accumulated',
     description: "Description of the ongoing event that users will read to know what it's about",
-    value: 10000,
-    target:12000,
+    amt_raised: 10000,
+    target_price:12000,
     location:'Abuja',
     days:'19',
     totaldonations:327820403,
     liked:true
   },
+  /*
   {
     organizerimg:[userimg2, userimg3, userimg4],
     category:'Faith',
-    placeholder: eventimg5,
+    crowdfundImage: eventimg5,
     categoryimg:medicalimg,  
     organizeraccounts:['Username001','Username002','Username003'],
     title: 'Title for this particular fundevent',
     description: "Description of the ongoing event that users will read to know what it's about",
-    value: 10000,
-    target:12000,
+    amt_raised: 10000,
+    target_price:12000,
     location:'Abuja',
     days:'19',
     totaldonations:204032332,
@@ -225,28 +229,28 @@ let data = [
   {
     organizerimg:[userimg2, userimg3, userimg4],
     category:'Environment',
-    placeholder: eventimg6,
+    crowdfundImage: eventimg6,
     categoryimg:medicalimg,  
     organizeraccounts:['Username001','Username002','Username003'],
     title: 'This is the title of the main user’s crowdfunding',
     description: "Description of the ongoing event that users will read to know what it's about",
-    value: 10000,
-    target:12000,
+    amt_raised: 10000,
+    target_price:12000,
     location:'Abuja',
     days:'19',
     totaldonations:3220244503,
     liked:true
   },
-  /*
+  
   {
     organizerimg:[accountimg2,accountimg3],
     category:'Music',
-    placeholder: eventimg3,
+    crowdfundImage: eventimg3,
     organizeraccounts:['Username001'],
     //title: 'Title for this particular fundevent',
     //description: "Description of the ongoing event that users will read to know what it's about",
-    //value: 10000,
-    //target:12000
+    //amt_raised: 10000,
+    //target_price:12000
 
   },
   {
@@ -254,8 +258,8 @@ let data = [
     organizeraccounts:['Username001'],
     //title: 'Title for this particular fundevent',
     //description: "Description of the ongoing event that users will read to know what it's about",
-    value: 760000,
-    target:1200000
+    amt_raised: 760000,
+    target_price:1200000
 
   }, */
 ]

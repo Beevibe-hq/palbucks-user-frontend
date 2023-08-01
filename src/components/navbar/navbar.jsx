@@ -16,6 +16,8 @@ import { Link } from 'react-router-dom';
 
 function Navbar(){
 
+    const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
     const [moreiconsactive , setmoreiconsactive] = useState(false)
 
     const onprofilepage = useSelector(state => state.onprofilepage)
@@ -90,7 +92,7 @@ function Navbar(){
                     onClick = {profilepage}
                     alt="user avatar" className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} />
                     <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
-                    <h2 className = 'hidden md:block text-lg font-black font-merriweather'>Daniel Aliba</h2>
+                    <h2 className = 'hidden md:block text-lg font-black font-merriweather'>{userInfo.username}</h2>
                 </div>
                 {/* <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] cursor-pointer'  /> */}
                 <Moreicons active = {moreiconsactive} onClick = {handlemoreicons} />

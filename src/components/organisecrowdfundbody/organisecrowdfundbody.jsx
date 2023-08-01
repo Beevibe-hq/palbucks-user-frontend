@@ -7,8 +7,12 @@ import removeicon from "../../images/removeicon.svg"
 import { useEffect, useState } from "react";
 import CropImage from "../cropping/cropimage/cropimage";
 import { urltoFile } from "../cropping/cropimage/cropimage";
+import { useDispatch } from "react-redux";
+import { addCrowdfundEvent } from "../../actions/actions";
 
 function Organisecrowdfundbody(){
+
+    const dispatch = useDispatch()
 
     //Date formatting to prevent past date selection and limit to max period of 90 days
     const today = new Date();
@@ -33,21 +37,27 @@ function Organisecrowdfundbody(){
 
 
     const [formdata, setformdata] = useState({
-        //pic:null,        
-        //date_posted:today.toISOString(),
-        date_posted:"2019-08-24T14:15:22Z",
-        end_date: "2019-08-24T14:15:22Z",
-        amt_raised:"1000",
-        user_name:"Obu"
+        pic:null,        
+        date_posted:today.toISOString(),        
+        end_date: "2019-08-24T14:15:22Z",        
+        user_name:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).username : 'Jane Doe',
+        title:'',
+        description:'',
+        start_date:today.toISOString(),
+        target_price:0,
+        amt_raised:0,
+        tags:'',
+        location:'',
+        co_organisers:'',
     })
 
     const handleInputChange = (event)=>{
         if(event.target.name === 'end_date'){
             const formattedDate = new Date(event.target.value).toISOString()
-            
+            console.log(formattedDate)
             setformdata((prevdata)=> ({
                 ...prevdata,
-                [event.target.name]:formattedDate
+                end_date:formattedDate
             }) )    
 
         }else{
@@ -59,49 +69,16 @@ function Organisecrowdfundbody(){
     }
 
     const startCrowdfund = async () => {
-        /* const formData = new FormData();
-      
-        // Iterate over the properties of the formdata object
-        for (const [key, value] of Object.entries(formdata)) {
-          formData.append(key, value);
-        }
-       */
         
         console.log('starting')
-        console.log(formdata.pic)
         const formData = new FormData();
-        formData.append('pic', formdata.pic);
-        formData.append('title', "test title from frontend ")
-        formData.append('target_price', 45.3);
-        formData.append('end_date', "2023-07-28T14:15:22Z")
-        formData.append('user_name','test username')        
-
-        /* for (const [key, value] of Object.entries(formdata)) {
+        // Iterate over the properties of the formdata object
+        for (const [key, value] of Object.entries(formdata)) {
             formData.append(key, value);
-        } */
-
+        }
+        
         const access_token = localStorage.getItem('access_token')
 
-        // Send the image using Fetch API
-        /* fetch('https://palbucks-api.onrender.com/funding/api/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                Authorization: `Bearer ${access_token}`,
-                //"Content-Type": "multipart/form-data"
-            }
-            })
-            .then(response => {
-                console.log("Response Status:", response.status);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Response Data:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-        });
- */
         const sendCrowdfund = await fetch('https://palbucks-api.onrender.com/funding/api/',{
             method:'POST',
             body: formData,
@@ -113,11 +90,27 @@ function Organisecrowdfundbody(){
         
         const resp = await sendCrowdfund.json();
         console.log(resp)
-        
-        
 
+        if(sendCrowdfund.ok){
+            console.log('success')
+            dispatch(addCrowdfundEvent({
+                id:resp.id,
+                title:resp.title,
+                description:resp.description,
+                target_price:resp.target_price,
+                amt_raised:resp.amt_raised,
+                category:resp.tags,
+                end_date:resp.end_date,
+                crowdfundImagep:resp.pic,
+                start_date:resp.start_date,
+                user_name:resp.user_name,
+                organizeraccounts:[resp.user_name],
+                date_posted:resp.date_posted,
+                deleted:resp.deleted,
+            }))
+        }
         
-
+        
     };
       
 
@@ -138,32 +131,7 @@ function Organisecrowdfundbody(){
         console.log(managetoggles)
     }
 
-    /* const displayImage = (file) => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const imgDataUrl = e.target.result;
-          setformdata((previousData) => ({
-            ...previousData,
-            pic: imgDataUrl,
-          }));          
-        };
-        reader.readAsDataURL(file);
-    };
-        
-    
-    useEffect(() => {
-        console.log('formdata:', formdata);
-        if (formdata.pic) {
-          console.log('pic:', formdata.pic);
-          const file = urltoFile(formdata.pic, 'cropped_image.png', 'image/png');    
-          console.log('file:', file);
-          displayImage(formdata.pic);
-          
-        }        
-      }, [formdata]);
-     */  
       
-
     
     return(
         
@@ -171,7 +139,7 @@ function Organisecrowdfundbody(){
             <h1 className="font-black text-4xl leading-7 tracking-[0.35px] mb-5 " >Setup your crowdfunding campaign</h1>
             <p className="text-lg tracking-[0.8px] mb-14 " >Organising your campaign take less than 2 minutes</p>
 
-            <div className="w-[960px]">
+            <div className="2xl:max-w-[960px] 4xl:max-w-[1000px] ">
                 
                 <div className=" bg-white rounded-[4px] mb-[59px] " >
                     <div className="text-center py-6 border-b-2 border-[#e5e2e2] ">
@@ -206,9 +174,13 @@ function Organisecrowdfundbody(){
                     </div>
                     <div className={` ${managetoggles.crowdfundingdetails? 'block' : 'hidden' } p-[30px] bg-[#FFFFFF]`} >
                         <label htmlFor="title" className="text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Title*</label>
-                        <input type="text" id="title" name="title" className={`py-[10px] px-5 mb-5 w-full h-[56px] border-[1px] bg-white border-[#8E8E93] rounded-[4px] 
-                        hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]  `} placeholder="What is the title of your crowdfund?"                         
-                        onChange={handleInputChange}
+                        <input 
+                            type="text" 
+                            id="title"
+                            name="title" 
+                            className={`py-[10px] px-5 mb-5 w-full h-[56px] border-[1px] bg-white border-[#8E8E93] rounded-[4px] 
+                            hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]  `} placeholder="What is the title of your crowdfund?"                         
+                            onChange={handleInputChange}
                         />
                         
                         <div className="flex gap-2 items-center mb-[53px] ">
@@ -228,12 +200,14 @@ function Organisecrowdfundbody(){
                             <option value="education">Education</option>
                         </select> */}
                         <div className="relative inline-block w-64 mb-[53px] ">
-                            <select className={`block cursor-pointer appearance-none w-full bg-white border border-gray-400 
-                            hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none 
-                            focus:shadow-outline`}
-                            name = "tags"
-                            onChange={handleInputChange}
-                            defaultValue = "placeholder"
+                            <select 
+                                className={`block cursor-pointer appearance-none w-full bg-white border border-gray-400 
+                                hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none 
+                                focus:shadow-outline`}
+                                id="category"
+                                name = "tags"
+                                onChange={handleInputChange}
+                                defaultValue = "placeholder"
                             >
                                 <option disabled value="placeholder">Placeholder Title</option>
                                 <option value="Environment" >Environment</option>
@@ -248,7 +222,11 @@ function Organisecrowdfundbody(){
 
 
                         <label htmlFor="description" className=" block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " > Description* </label>
-                        <textarea name="description" id="description" rows="10" className={` mb-5 w-full p-5 outline-none border-[1px] border-[#8E8E93] `} 
+                        <textarea 
+                            name="description" 
+                            id="description" 
+                            rows="10" 
+                            className={` mb-5 w-full p-5 outline-none border-[1px] border-[#8E8E93] `} 
                             placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." 
                             onChange={handleInputChange}
                             maxLength= "1500"
@@ -278,12 +256,14 @@ function Organisecrowdfundbody(){
                     <div className={` ${managetoggles.amountdetails? 'block' : 'hidden' } p-[30px] `} >
                         <label htmlFor="target_price" className="block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Target amount*</label>
                         
-                        <input type="number" className={`h-[56px] w-4/6 rounded px-5 py-[10px] outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
-                        border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5  `} min='100' max='9999999' maxLength="6"
-                        placeholder="How much do you want to raise(amount is in USDT)?"  
-                        onChange={handleInputChange}
-                        id = "target_price"
-                        name="target_price"
+                        <input 
+                            type="number"  
+                            className={`h-[56px] w-4/6 rounded px-5 py-[10px] outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
+                            border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5  `} min='100' max='9999999' maxLength="6"
+                            placeholder="How much do you want to raise(amount is in USDT)?"  
+                            onChange={handleInputChange}
+                            id = "target_price"
+                            name="target_price"
                         />
 
                         <span className="text-lg leading-[22px] text-[#2CA9F2] font-black " >What is USDT?</span>
@@ -310,8 +290,6 @@ function Organisecrowdfundbody(){
                             <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >A maximum of three(3) users can be added</p>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div className="bg-white mb-[59px] " >
