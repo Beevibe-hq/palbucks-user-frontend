@@ -23,7 +23,7 @@ function Detailedevent(props){
      This selects homebodydata from redux store so as to get the complete details of the selected funding event.
      When the fundevent is clicked, an id is passed from the url params to select particular event.
      */
-    let homebodydata = useSelector(state => state.managehomebodydata)
+    let homebodydata = useSelector(state => state.crowdfundEvents)
 
     const dispatch = useDispatch()
     const params = useParams()
@@ -51,7 +51,7 @@ function Detailedevent(props){
             
             let organizer = {
                 name:eventdetails.organizeraccounts[i],
-                image:eventdetails.organizerimg[i]
+                image:eventdetails.org ? eventdetails.organizerimg[i] : null
             }
             organizerdetails.push(organizer)
         }        
@@ -92,6 +92,12 @@ function Detailedevent(props){
         query: '(max-width: 940px)'
     })
 
+    const end_date = new Date(eventdetails.end_date);
+    const today = new Date();
+    
+    // Calculate difference in milliseconds between the two dates and convert to days
+    const daysLeft = Math.ceil((end_date - today) / (1000 * 60 * 60 * 24));
+
     /* if(typeof eventdetails == 'undefined' ){
         return <div>Loading ... </div>
     }else{ */
@@ -114,13 +120,13 @@ function Detailedevent(props){
                 
                         <div className="bg-[#636363] mb-3 md:mb-[30px] flex gap-2 px-4 md:px-5 py-2 w-fit rounded-2xl justify-center items-center text-white ">
                             <img src={date} alt="calendar icon" className = "w-4" />
-                            <span className="font-semibold text-sm md:text-base " >{`${eventdetails.days} days remaining`}</span>
+                            <span className="font-semibold text-sm md:text-base " >{`${eventdetails.end_date ? daysLeft : eventdetails.days } days remaining`}</span>
                         </div>
                 
                         <div className="w-full flex flex-col md:flex-row gap-2 md:gap-10 mb-8 ">
                 
                             <div className =" relative w-full md:w-[60%] shrink-0 " >
-                                <img src={eventdetails.placeholder} alt="Fund event" className = {` w-full h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
+                                <img src={eventdetails.crowdfundImage} alt="Fund event" className = {` w-full h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
                                 <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
                                     <img src={eventdetails.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
                                     <span className = 'text-sm md:text-base font-medium ' >{eventdetails.category}</span>
@@ -129,10 +135,10 @@ function Detailedevent(props){
                             <div className="w-full md:w-[330px] lg:w-[360px]">
                                 <div className= {`bg-white mb-5 md:mt-4 px-4 md:px-5 py-7 h-fit rounded-[5px] md:rounded-xl shadow-[0px_0px_32px_rgba(0_0_0_0.04)] `} >
                 
-                                    <p className= 'text-[14px] font-bold mb-[5px]'>{eventdetails.value ? eventdetails.value.toLocaleString() : '23,543'} USDT raised
-                                    <span className='font-semibold text-[#bba7a7] float-right' > {eventdetails.target ? eventdetails.target.toLocaleString() : '150,000'} USDT target</span>
+                                    <p className= 'text-[14px] font-bold mb-[5px]'>{eventdetails.amt_raised ? eventdetails.amt_raised.toLocaleString() : '23,543'} USDT raised
+                                    <span className='font-semibold text-[#bba7a7] float-right' > {eventdetails.target_price ? eventdetails.target_price.toLocaleString() : '150,000'} USDT target</span>
                                     </p>
-                                    <progress value={eventdetails.value ? eventdetails.value : '23543'} max={eventdetails.target ? eventdetails.target : '150000'}
+                                    <progress value={eventdetails.amt_raised ? eventdetails.amt_raised : '23543'} max={eventdetails.target ? eventdetails.target : '150000'}
                                     className='progressbar w-full h-[5px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-[5px]' />
                                     <p className = {`text-[#C5C5C5] font-medium text-sm mb-9 `} >{totaldonations} donations so far </p>
                                     <button className = {`font-bold text-white mb-5 bg-[#2CA9F2] px-6 md:px-7 py-3 rounded-[14px] md:rounded-[20px] items-center mx-auto block`} >

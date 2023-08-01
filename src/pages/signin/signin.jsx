@@ -10,17 +10,20 @@ import bgradient3 from "../../images/authpages/bgradient2.svg"
 
 import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { checkAuthentication } from "../../auth/checkauthentication"
 import { setLogoutLoading } from "../../actions/actions"
+import emailPasswordValidation from "../../auth/inputValidation"
+import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 
 const Signin = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [signinInfo, setSigninInfo] = useState({})    
-
+    const [signinInfo, setSigninInfo] = useState({})  
+    
+    const [isLoginLoading, setIsLoginLoading] = useState(false)
     const [validateInput, setValidateInput] = useState({
         email: '',
         password: '',
@@ -42,46 +45,63 @@ const Signin = () => {
         setSigninInfo(prevInfo => ({...prevInfo, password: e.target.value}))
     }
 
+
     const handleSignin = async (e) => {        
-        dispatch(setLogoutLoading(true))
+        //dispatch(setLogoutLoading(true))
+        setIsLoginLoading(true)
         e.preventDefault()
-        try {
+        await emailPasswordValidation(setValidateInput,signinInfo.email,signinInfo.password)
+        .then(async validationMessage => {
+            if(validationMessage.email == 'correct' && validationMessage.password == 'Strong password' ){
+                console.log(validationMessage)
+                try {
             
-            console.log(signinInfo)
-      
-            const signinRequest = await fetch('https://palbucks-api.onrender.com/users/api/login/', {
-            method: 'POST',
-            body: JSON.stringify(signinInfo),
-            headers: {
-                'Content-Type': 'application/json', // Specify the content type as JSON
-            },
-            });
-      
-            const response = await signinRequest.json();
-
-            if(signinRequest.ok){
-                const {access_token, refresh_token, user} =  response
-
-                if(access_token && refresh_token && user){
-                    localStorage.setItem('access_token',access_token)
-                    localStorage.setItem('refresh_token',refresh_token);
-                    localStorage.setItem('userInfo',JSON.stringify(user))                    
+                    console.log(signinInfo)
+              
+                    const signinRequest = await fetch('https://palbucks-api.onrender.com/users/api/login/', {
+                    method: 'POST',
+                    body: JSON.stringify(signinInfo),
+                    headers: {
+                        'Content-Type': 'application/json', // Specify the content type as JSON
+                    },
+                    });
+              
+                    const response = await signinRequest.json();
+        
+                    if(signinRequest.ok){
+                        const {access_token, refresh_token, user} =  response
+        
+                        if(access_token && refresh_token && user){
+                            localStorage.setItem('access_token',access_token)
+                            localStorage.setItem('refresh_token',refresh_token);
+                            localStorage.setItem('userInfo',JSON.stringify(user))                    
+                        }
+        
+                        // Call checkauthentication to dispatch the actions
+                        await checkAuthentication(dispatch)                
+                        dispatch(setLogoutLoading(false))
+        
+                        navigate('/home')
+                    }else if(response.non_field_errors[0] == 'Unable to log in with provided credentials.'){
+                        setValidateInput(prevState => ({
+                            ...prevState,                             
+                            password: 'Password or email is incorrect'
+                        }))
+                    }else{
+                        console.log(response)
+                    }
+                    
+                    console.log(response);
+                } catch (error) {
+                    console.error('Error occurred during signin:', error);
+                    // Handle the error gracefully (e.g., show an error message to the user)
                 }
+            }            
+        })
+        
 
-                // Call checkauthentication to dispatch the actions
-                await checkAuthentication(dispatch)                
-                dispatch(setLogoutLoading(false))
-
-                navigate('/home')
-            }
-            
-            console.log(response);
-        } catch (error) {
-            console.error('Error occurred during signin:', error);
-            // Handle the error gracefully (e.g., show an error message to the user)
-        }
-
-        dispatch(setLogoutLoading(false))
+        //dispatch(setLogoutLoading(false))
+        setIsLoginLoading(false)
     };
 
   return (
@@ -123,18 +143,34 @@ const Signin = () => {
                     type="email" 
                     name="email" 
                     id="email" 
-                    placeholder="Email"
+                    placeholder="Email"                    
+                    required
                     onChange={handleInputChange}
-                    className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] bg-[#F9F9F9] border-[3px] border-[#000000]
-                    outline-[3px] outline-[#37BCF7] focus:border-[#37BCF7] focus:text-[#37BCF7] text-[#888888] text-lg`}
-                />                
+                    className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] text-[#888888] text-lg bg-[#F9F9F9] border-[3px] 
+                    ${validateInput.email && validateInput.email !== 'correct' ? 
+                    'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
+                    'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
+                    outline-[3px] focus:caret-[#37BCF7] `}
+                /> 
+                {
+                    validateInput.email && validateInput.email !== 'correct' ? (
+                        <p className="-mt-[23px] mb-[43px] text-[#FD6150] text-2xl font-merriweather">
+                            {validateInput.email}
+                        </p>
+                    ) : null
+                }
                 <PasswordInput onChange = {handlePasswordChange} validateInput = {validateInput} setValidateInput = {setValidateInput} />
                 <button 
-                    className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] 
-                    font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
+                    className="min-w-[228px] mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] 
+                    font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto flex items-center justify-center  " 
                     onClick={handleSignin}
                     >
-                    Sign in with email
+                    <div className={` ${isLoginLoading ? 'block' : 'hidden' } `}>
+                        <Loadingspinner width = '28px' height = '28px' />
+                    </div>
+                    <span className={` ${isLoginLoading ? 'hidden' : 'block' } `}>
+                        Sign in with email
+                    </span>
                 </button>
             </div>
             <p className=" mb-[32px] text-center text-2xl " > or signin using </p>

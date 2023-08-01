@@ -11,15 +11,19 @@ import checker3 from "../../images/authpages/checker3.svg"
 
 
 import { Link, useNavigate } from "react-router-dom"
-import OtpInput from 'react-otp-input';
+
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { checkAuthentication } from "../../auth/checkauthentication"
+import { setLogoutLoading } from "../../actions/actions"
+import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 
 const Completesignup = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [isLoginLoading, setIsLoginLoading] = useState(false)
 
     const signupInfo = useSelector( state => state.signupInfo)
     const [personalInfo, setPersonalInfo] = useState({
@@ -34,11 +38,17 @@ const Completesignup = () => {
         password2:signupInfo.password,                
     })
 
+    const [responseDetail,setResponseDetail] = useState({
+        username: '',
+    })
+
     const handleInputChange = (e) => {
         setPersonalInfo(prevInfo => ({...prevInfo, [e.target.name]: e.target.value }) )
     }
 
     const finishSignup = async (e) => {
+        //dispatch(setLogoutLoading(true))
+        setIsLoginLoading(true)
         try {
             const updatedSignupInfo = { ...signupInfo, ...personalInfo };
             console.log(updatedSignupInfo)
@@ -66,6 +76,8 @@ const Completesignup = () => {
                 await checkAuthentication(dispatch)
 
                 navigate('/home')
+            }else if(response.username[0] == 'A user with that username already exists.'){
+                setResponseDetail(prevInfo => ({...prevInfo, username: 'Username already exists'}))
             }
 
             console.log(response);
@@ -73,12 +85,10 @@ const Completesignup = () => {
             console.error('Error occurred during signup:', error);
             // Handle the error gracefully (e.g., show an error message to the user)
         }
+        //dispatch(setLogoutLoading(false))
+        setIsLoginLoading(false)
     };
       
-
-    /* useEffect(()=>{
-        console.log(signupInfo)
-    }) */
 
   return (
     <div className="font-merriweather relative" >
@@ -137,7 +147,7 @@ const Completesignup = () => {
                             placeholder="Enter your first name"
                             onChange={handleInputChange}
                             className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
-                                focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
+                                focus:border-[#37BCF7] focus:border-[2px] focus:caret-[#37BCF7] text-lg   `}
                         />
                     </div>
                     <div className="flex flex-col items-start gap-5">
@@ -154,7 +164,7 @@ const Completesignup = () => {
                             placeholder="Enter your last name"
                             onChange={handleInputChange}
                             className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
-                                focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
+                                focus:border-[#37BCF7] focus:border-[2px] focus:caret-[#37BCF7] text-lg   `}
                         />
                     </div>
 
@@ -182,22 +192,35 @@ const Completesignup = () => {
                             >
                             What should we call you?
                         </label>
-                        <div className="relative">
-                            <input
-                                type = "text"
-                                name="username"
-                                id="username"
-                                placeholder="Enter your username"
-                                onChange={handleInputChange}
-                                className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
-                                    focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
-                            />
+                        <div className="">
+                            <div className="relative mb-[10px]">
+                                <input
+                                    type = "text"
+                                    name="username"
+                                    id="username"
+                                    placeholder="Enter a username"
+                                    onChange={handleInputChange}
+                                    className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] bg-[#F9F9F9] outline-none focus:border-[2px] text-lg
+                                        ${responseDetail.username == 'Username already exists' ?
+                                        'border-[#FD6150] border-[3px] focus:border-[#FD6150] focus:caret-[#FD6150] ' :
+                                        'border-black focus:border-[#37BCF7]' }
+                                     `}
+                                />
+                                {
+                                    (
+                                        <img src= { responseDetail.username == 'Username already exists' ? checker2 : checker}
+                                            alt="checker"
+                                            className="w-[13px] absolute top-[50%] right-4 transform -translate-y-1/2 cursor-pointer"
+                                        />
+                                    )
+                                }
+                            </div>
                             {
-                                (
-                                    <img src= {checker} alt="checker"
-                                        className="w-[13px] absolute top-[50%] right-4 transform -translate-y-1/2 cursor-pointer"
-                                    />
-                                )
+                                responseDetail.username == 'Username already exists' ? (
+                                    <p className="text-[#FD6150] text-lg font-merriweather">
+                                        {responseDetail.username}
+                                    </p>
+                                ) : null
                             }
                         </div>
                     </div>
@@ -206,11 +229,17 @@ const Completesignup = () => {
             </div>
             
             <button 
-                className="mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
-                font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block "
-                 onClick  = {finishSignup}
+                className={`xl:min-w-[288px] mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
+                font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto flex items-center justify-center ]                                 
+                `}
+                 onClick  = {finishSignup}                 
                 >
-                Finish signup
+                <div className={` ${isLoginLoading ? 'block' : 'hidden' } `}>
+                    <Loadingspinner width = '28px' height = '28px' />
+                </div>
+                <span className={` ${isLoginLoading ? 'hidden' : 'block' } `}>
+                    Finish signup
+                </span>
             </button>            
 
         </main>

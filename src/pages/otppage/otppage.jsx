@@ -120,11 +120,11 @@ const Otppage = () => {
                                 fontSize: "24px",
                                 fontWeight: "700",
                                 background: "#F9F9F9",
-                                color:"#37BCF7"                              
+                                caretColor:"#37BCF7"                                                              
                             }}
                             focusStyle={{
-                            border: '2px solid #37BCF7',
-                            outline: 'none',
+                                border: '2px solid #37BCF7',
+                                outline: 'none',
                             }}
                         />
 

@@ -23,8 +23,8 @@ const Signup = () => {
     const signupInfo = useSelector((state) => state.signupInfo)
     
     const [accountInfo,setAccountInfo] = useState({
-        email:signupInfo.email,
-        password:signupInfo.password
+        email:'',
+        password:''
     })
     
     const [validateInput, setValidateInput] = useState({
@@ -50,8 +50,9 @@ const Signup = () => {
         
         // Input validations
         emailPasswordValidation(setValidateInput,accountInfo.email,accountInfo.password)
-        .then((validationMessage)=> {
+        .then((validationMessage)=> {            
             if(validationMessage.email == 'correct' && validationMessage.password == 'Strong password' ){                
+                console.log(validationMessage)
                 // Dispatch the sign up info to redux store
                 const updatedSignupInfo = {...signupInfo, ...accountInfo}
                 dispatch(setSignupInfo(updatedSignupInfo))        
@@ -114,8 +115,7 @@ const Signup = () => {
                     type="email" 
                     name="email" 
                     id="email" 
-                    placeholder="Email"
-                    value = {accountInfo.email}
+                    placeholder="Email"                    
                     required
                     onChange={handleInputChange}
                     className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] text-[#888888] text-lg bg-[#F9F9F9] border-[3px] 

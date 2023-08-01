@@ -52,10 +52,12 @@ const homepagedisplay = (state = 'others', action) => {
 }
 
 //This store the fundevents data immediately on render and supplies the rest of the pages from here
-const managehomebodydata = (state = [], action) =>{
+const crowdfundEvents = (state = [], action) =>{
     switch(action.type){
         case 'sethomebodydata':
             return action.payload
+        case 'addCrowdfundEvent':
+            return [...state,action.payload]
         default:
             return state
     }
@@ -127,7 +129,7 @@ const allreducers = combineReducers({
     managelinkcolor,
     managehomeorevent,
     homepagedisplay,
-    managehomebodydata,
+    crowdfundEvents,
     homescrollposition,
     sidebarslid,
     onprofilepage,

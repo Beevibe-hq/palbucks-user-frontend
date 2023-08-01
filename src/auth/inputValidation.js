@@ -3,11 +3,12 @@
 const emailPasswordValidation = async(setValidateInput,email, password) => {
 
     const validationMessages = {
-
     }
 
+    console.log(email)
+
     // Validate email
-    if (!email) {
+    if (email == '') {
         setValidateInput((prevState) => ({ ...prevState, email: 'Please enter your email address ' }));
         validationMessages.email = 'please put your email'
     }else if (!isValidEmail(email)) {
@@ -16,6 +17,7 @@ const emailPasswordValidation = async(setValidateInput,email, password) => {
     }else {
         setValidateInput((prevState) => ({ ...prevState, email: 'correct' }));
         validationMessages.email = 'correct'
+        
     }
   
 
@@ -58,7 +60,8 @@ const checkPasswordStrength = (password) => {
     
     // Using regex to check for uppercase, lowercase, numbers, and special characters
     // You can also check the length separately
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&\\(){}[\]:;<>,.?/~#'_"+\-=|\\^$]{8,}$/;
+    //const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]*$/;
     const passwordStrength = {
       upperCase: /[A-Z]/.test(password),
       lowerCase: /[a-z]/.test(password),
@@ -70,7 +73,8 @@ const checkPasswordStrength = (password) => {
     if (passwordRegex.test(password)) {
       passwordStrength.message = 'Strong password';      
     } else {
-      passwordStrength.message = 'Password strength is too weak';     
+      passwordStrength.message = 'Password strength is too weak';
+      //alert('too weak')     
     }
 
     return passwordStrength;
@@ -84,8 +88,20 @@ const checkPasswordStrength = (password) => {
 // Validate password while being input
 export const passwordVerification = (setValidateInput,password) => {
     
-    
-    if(password !== '' ){
+    if(password == ''){
+        setValidateInput((prevState) => ({
+             ...prevState, 
+            password: '',
+            passwordtest: {
+                testStage:'preRun' ,
+                upperCase: false,
+                lowerCase: false,
+                number: false,
+                specialCharacter: false,
+                length: 0
+            }
+        }));
+    }else {
         const passwordStrength = checkPasswordStrength(password);
         setValidateInput((prevState) => ({ 
                 ...prevState, 
@@ -99,6 +115,6 @@ export const passwordVerification = (setValidateInput,password) => {
                     length: passwordStrength.length
                 }
             }
-        ));        
+        ));               
     }    
 }

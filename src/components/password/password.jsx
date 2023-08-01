@@ -36,8 +36,8 @@ const PasswordInput = (props) => {
   // Start validating the password strength as soon as the password is initially changed
   useEffect(()=> {
     //alert('password validation currently inefficient')
-    passwordVerification(setValidateInput,password)
-  },[password])
+    passwordVerification(setValidateInput,password)    
+  },[password,setValidateInput])
 
   return (    
       <div className="">

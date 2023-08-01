@@ -48,6 +48,13 @@ export const sethomeorevent = (data) =>{
     }
 }
 
+export const addCrowdfundEvent = (data) =>{
+    return{
+        type:'addCrowdfundEvent',
+        payload:data
+    }
+}
+
 export const setothers = () =>{
     return{
         type:'setothers'

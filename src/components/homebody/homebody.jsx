@@ -20,7 +20,7 @@ function Homebody(){
   
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
-  const homebodydata = useSelector(state => state.managehomebodydata)
+  const crowdfundEvents = useSelector(state => state.crowdfundEvents)
 
   const lastScrollPositionRef = useRef(null);
   
@@ -104,11 +104,11 @@ function Homebody(){
                         /* Note here the id being passed as prop is the key of the array, when coming from the backend we can
                           request for an id in each of the objects,
                         */
-                          homebodydata.map((item,i)=>{
+                          crowdfundEvents.map((item,i)=>{
                               return(
-                                <Fundevent category = {item.category} placeholder = {item.placeholder} accountimages = {item.organizerimg}
+                                <Fundevent category = {item.category} crowdfundImage = {item.crowdfundImage} accountimages = {item.organizerimg}
                                 organizeraccounts = {item.organizeraccounts} title = {item.title} description = {item.description}
-                                value = {item.value} target = {item.target} categoryimg = {item.categoryimg}
+                                amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
                                 location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {i} />
                               )
                           })

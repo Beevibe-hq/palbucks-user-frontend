@@ -54,6 +54,14 @@ function LandingPage(){
         isAtRightEnd: false,
     });
 
+    const animateOnHover = (e) => {
+        const element = e.target
+        element.classList.add('animate__animated', 'animate__pulse')
+        setTimeout(() => {
+            element.classList.remove('animate__animated', 'animate__pulse')
+        }, 1000)
+    }
+
     /* const handleScroll = () => {
         const container = containerRef.current;
         setScrollState({
@@ -209,7 +217,7 @@ function LandingPage(){
                     Featured Crowdfunding Campaign
                 </h3>
 
-                <div className="ml-[5%] 2xl:ml-[8%] flex gap-[43px] mb-[45px] overflow-x-auto pr-20 " ref={containerRef} style={{ overflowX: 'hidden' }}>
+                <div className={` ${scrollState.isAtRightEnd ? 'ml-[0] 2xl:ml-[0]' : 'ml-[5%] 2xl:ml-[8%]' }  flex gap-[43px] mb-[35px] overflow-x-auto pr-20 `} ref={containerRef} style={{ overflowX: 'hidden' }}>
                     {/* Campaign items */}
                     <Landingcampaign image={landingcampaignimg3} value="23543" target="100000" />
                     <Landingcampaign image={landingcampaignimg} value="1034" target="1500" />
@@ -234,9 +242,13 @@ function LandingPage(){
                         You can receive crypto donations for your campaigns from <br/> your family and friends. We believe that location should not be a <br />barrier when it comes to raising funds for a cause
                     </p>
                     
-                    <div className="mx-auto mb-[300px] block w-fit ">
-                       {/*  <Landingnotification /> */}
-                        <div className='mb-[72px] w-[800px] h-[200px] bg-[#F9F9F9] -rotate-[5deg] rounded-[15px] py-[23px] px-[31px] ' >
+                    <div className={`mx-auto mb-[300px] block w-fit 
+                            `
+                        }>
+                        {/* <Landingnotification /> */}
+                        <div className={`mb-[72px] w-[800px] h-[200px] bg-[#F9F9F9] -rotate-[5deg] rounded-[15px] py-[23px] px-[31px]
+                                
+                            `} >
                             <img src={like} alt="like icon" className="w-[54px] absolute -top-7 -left-7 " />
                             <img src={joint} alt="joint icon" className="w-[45px] h-[60px] absolute -top-10  -right-5 "  />
                             <div className="flex gap-5">
@@ -249,7 +261,9 @@ function LandingPage(){
                             </div>
                         </div>
 
-                        <div className='mb-[72px] w-[800px] h-[200px] bg-[#F9F9F9] rotate-[5deg] rounded-[15px] py-[23px] px-[31px] ' >
+                        <div className={`mb-[72px] w-[800px] h-[200px] bg-[#F9F9F9] rotate-[5deg] rounded-[15px] py-[23px] px-[31px] 
+                            
+                        `} >
                             <img src={joint2} alt="like icon" className="w-[45px] h-[60px] absolute -top-7 -left-2 " />
                             <img src={like2} alt="joint icon" className="w-[60px] absolute -top-7 -right-7"  />
                             <div className="flex gap-5">
