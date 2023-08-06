@@ -24,10 +24,13 @@ import { urltoFile } from "../cropping/cropimage/cropimage";
 import { useDispatch } from "react-redux";
 import { addCrowdfundEvent } from "../../actions/actions";
 import SearchCoOrganiser from "../searchCoOrganiser/searchCoOrganiser";
+import { useNavigate } from "react-router-dom";
 
 function Organisecrowdfundbody(){
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate()
 
     //Date formatting to prevent past date selection and limit to max period of 90 days
     const today = new Date();
@@ -130,6 +133,7 @@ function Organisecrowdfundbody(){
                 deleted:resp.deleted,
             })) */
             dispatch(addCrowdfundEvent(resp))
+            navigate('/home')
         }
         
         
