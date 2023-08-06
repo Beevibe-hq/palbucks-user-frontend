@@ -7,6 +7,7 @@ import arrowicon from "../../images/arrowright2.svg"
 import Notificationsicon from '../../images/notificationsicon';
 import Moreicons from '../../images/moreicons';
 import Searchbar from "../searchbar/searchbar";
+import profilePlaceholder from "../../images/profileplaceholder.svg"
 
 import { useDispatch, useSelector } from 'react-redux';
 import { opensidebar, setnotificationspageactive, setprofilepageactive, setprofilepageinactive } from '../../actions/actions';
@@ -88,11 +89,11 @@ function Navbar(){
                 /> */}
                 <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false }  />
                 <div className=" flex gap-2 items-center">
-                    <img src={userimg}
+                    <img src={userInfo.dp ? userInfo.dp : profilePlaceholder}
                     onClick = {profilepage}
                     alt="user avatar" className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} />
                     <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
-                    <h2 className = 'hidden md:block text-lg font-black font-merriweather'>{userInfo.username}</h2>
+                    <h2 className = 'hidden md:block text-lg font-black font-merriweather'>{userInfo.first_name} {userInfo.last_name}</h2>
                 </div>
                 {/* <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] cursor-pointer'  /> */}
                 <Moreicons active = {moreiconsactive} onClick = {handlemoreicons} />

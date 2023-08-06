@@ -1,7 +1,8 @@
 
 import { setIsAuthenticated, setLogoutLoading } from "../actions/actions"
 
-
+// Base url for the api requests
+export const baseUrl = 'https://palbucks-api.onrender.com'
 
 export const checkAuthentication = async(dispatch) => {
     

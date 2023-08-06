@@ -55,6 +55,13 @@ export const addCrowdfundEvent = (data) =>{
     }
 }
 
+export const loadCrowdfundEvents = (data) =>{
+    return{
+        type:'loadCrowdfundEvents',
+        payload:data
+    }
+}
+
 export const setothers = () =>{
     return{
         type:'setothers'
@@ -123,6 +130,14 @@ export const setSignupInfo = (data) => {
     }
 }
 
+export const addOtp = (data) => {
+    console.log('addOtp action dispatched with otp:', data);
+    return{
+        type:'addOtp',
+        payload:data
+    }
+}
+
 // set authenticated state
 export const setIsAuthenticated = (data) => {
 
@@ -137,6 +152,15 @@ export const setLogoutLoading = (data) => {
 
     return{
         type:'setlogoutloading',
+        payload:data
+    }
+}
+
+// Set otp verified state
+export const setOtpVerified = (data) => {
+
+    return{
+        type:'setotpverified',
         payload:data
     }
 }

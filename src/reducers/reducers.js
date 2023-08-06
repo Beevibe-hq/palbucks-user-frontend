@@ -58,6 +58,8 @@ const crowdfundEvents = (state = [], action) =>{
             return action.payload
         case 'addCrowdfundEvent':
             return [...state,action.payload]
+        case 'loadCrowdfundEvents':
+            return /* state.concat(action.payload) */ action.payload
         default:
             return state
     }
@@ -98,10 +100,15 @@ const onnotificationspage = (state = false, action) =>{
     }
 }
 
-const signupInfo = (state = {email:'',password:''}, action) => {
+const signupInfo = (state = {email:'',password:'',otp:''}, action) => {
     switch(action.type){
         case "updateSignupInfo":
             return action.payload
+        case "addOtp":
+            return {
+                ...state,
+                otp:action.payload
+            }
         default:
             return state;
     }
@@ -124,6 +131,16 @@ const authReducer = (state = { isAuthenticated:false , isLoading:false }, action
     }
 }
 
+const otpVerified = (state = false, action) => {
+    switch(action.type){
+        case "setotpverified":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
+
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
     managelinkcolor,
@@ -136,6 +153,7 @@ const allreducers = combineReducers({
     onnotificationspage,
     signupInfo,
     authReducer,
+    otpVerified
 })
 
 export default allreducers;

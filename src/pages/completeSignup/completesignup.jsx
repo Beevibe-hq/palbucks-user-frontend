@@ -34,8 +34,7 @@ const Completesignup = () => {
         gender:1,
         phone:'293',
         bio:'Humble man',
-        password1:signupInfo.password,
-        password2:signupInfo.password,                
+        email:signupInfo.email,        
     })
 
     const [responseDetail,setResponseDetail] = useState({
@@ -53,7 +52,7 @@ const Completesignup = () => {
             const updatedSignupInfo = { ...signupInfo, ...personalInfo };
             console.log(updatedSignupInfo)
       
-            const signupRequest = await fetch('https://palbucks-api.onrender.com/users/api/register/', {
+            const signupRequest = await fetch('https://palbucks-api.onrender.com/users/api/complete-signup/', {
             method: 'POST',
             body: JSON.stringify(updatedSignupInfo),
             headers: {
@@ -62,7 +61,8 @@ const Completesignup = () => {
             });
       
             const response = await signupRequest.json();
-
+            console.log(response)
+            //console.log('made request')
             if(signupRequest.ok){
                 const {access_token, refresh_token, user} = response
 
@@ -72,11 +72,13 @@ const Completesignup = () => {
                     localStorage.setItem('userInfo',JSON.stringify(user))                    
                 }
 
+                console.log('request worked')
+
                 // Call checkauthentication to dispatch the actions
                 await checkAuthentication(dispatch)
 
                 navigate('/home')
-            }else if(response.username[0] == 'A user with that username already exists.'){
+            }else if(response.username && response.username[0] == 'A user with that username already exists.'){
                 setResponseDetail(prevInfo => ({...prevInfo, username: 'Username already exists'}))
             }
 

@@ -53,7 +53,7 @@ const Demo = ({ formdata, setformdata }) => {
       const convertedImage = await urltoFile(croppedImage, 'image.jpg');
       setformdata((previousdata) => ({
         ...previousdata,
-        pic: convertedImage,
+        banner: convertedImage,
       }));
     } catch (e) {
       console.error(e);
