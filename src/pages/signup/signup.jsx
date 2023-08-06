@@ -12,8 +12,9 @@ import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { setSignupInfo } from "../../actions/actions"
+import { addOtp, setSignupInfo } from "../../actions/actions"
 import emailPasswordValidation from "../../auth/inputValidation"
+import { baseUrl } from "../../auth/checkauthentication"
 
 const Signup = () => {
 
@@ -21,7 +22,7 @@ const Signup = () => {
     const navigate = useNavigate()
 
     const signupInfo = useSelector((state) => state.signupInfo)
-    
+    const verified = useSelector((state) => state.otpVerified)
     const [accountInfo,setAccountInfo] = useState({
         email:'',
         password:''
@@ -45,7 +46,7 @@ const Signup = () => {
     }
 
     const handleSignup = async (e) => {
-                
+        console.log(verified)
         e.preventDefault()    
         
         // Input validations
@@ -53,11 +54,48 @@ const Signup = () => {
         .then((validationMessage)=> {            
             if(validationMessage.email == 'correct' && validationMessage.password == 'Strong password' ){                
                 console.log(validationMessage)
+                
                 // Dispatch the sign up info to redux store
-                const updatedSignupInfo = {...signupInfo, ...accountInfo}
-                dispatch(setSignupInfo(updatedSignupInfo))        
+                /* const updatedSignupInfo = {...signupInfo, ...accountInfo}
+                dispatch(setSignupInfo(updatedSignupInfo))         */
 
-                navigate('/otppage')
+                // Make an api call to send the email and password to the backend
+                const registerUser = async () => {
+                    const response  = await fetch(`${baseUrl}/users/api/register/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: accountInfo.email,
+                            password: accountInfo.password
+                        })
+                    })
+                    const data = await response.json()
+                    return data
+                }
+                registerUser()
+                .then(async(data) => {
+                    console.log(data)
+                    if(data.status == true){
+                        
+                        console.log(data.otp)
+                        
+                        // Dispatch the sign up info to redux store                        
+                        const updatedSignupInfo = {email: accountInfo.email, password: accountInfo.password, otp: data.otp}
+                        dispatch(setSignupInfo(updatedSignupInfo))
+                        dispatch(addOtp(data.otp))                        
+
+                        // Navigate to otp page
+                        navigate(`/otppage`)        
+                    }else{
+                        // Display error message
+                        setValidateInput(prevState => ({...prevState, email: data.message}))
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })                
             }
         })
 

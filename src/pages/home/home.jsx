@@ -6,6 +6,7 @@ import Detailedevent from "../../components/detailedevent/detailedevent";
 import Homebody from "../../components/homebody/homebody";
 import Navbar from "../../components/navbar/navbar";
 import Sidebar from "../../components/sidebar/sidebar";
+import { loadCrowdfundEvents } from "../../actions/actions";
 
 function Home(){
 
@@ -23,6 +24,34 @@ function Home(){
 
     useEffect(()=>{
         dispatch(setlinkcolor('home'))
+
+        // Get crowdfund details
+        const getCrowdfunds = async() => {    
+            const access_token = localStorage.getItem('access_token')
+
+            // Send the image using Fetch API
+            try{
+            const response = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+                headers:{
+                    Authorization:`Bearer ${access_token}`,
+                }
+            })
+            
+            const crowdfunds = await response.json()
+            if(response.ok){                
+                console.log(crowdfunds)
+                dispatch(loadCrowdfundEvents(crowdfunds))
+            }else{
+                console.error(crowdfunds)
+            }
+            }            
+            catch(error){
+                console.error(error)
+            }        
+        }
+
+        getCrowdfunds()
+
     }, [])
 
     return(

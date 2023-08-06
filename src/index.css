@@ -30,6 +30,16 @@ code {
 
 
 @layer components{
+
+  .select.noAppearance {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none; /* This is important to hide the background arrow */
+    padding-right: 1rem; /* To add some spacing on the right side */
+    border: none;
+  }
+
   
    .eventparent{
     display:grid;

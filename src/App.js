@@ -10,9 +10,9 @@ import eventimg4 from "./images/eventimg4.jpg";
 import eventimg5 from "./images/eventimg5.jpg";
 import eventimg6 from "./images/eventimg7.jpg";
 
-import environmentimg from './images/environment label.svg'
-import medicalimg from './images/medical label.svg'
-import animalimg from './images/animal label.svg'
+import environmentimg from './images/categoryImages/environment label.svg'
+import medicalimg from './images/categoryImages/medical label.svg'
+import animalimg from './images/categoryImages/animal label.svg'
 
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -24,7 +24,7 @@ import Settings from "./pages/settings/settings";
 import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { sethomebodydata } from './actions/actions'
+import { loadCrowdfundEvents, sethomebodydata } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Profilepage from './components/profilepage/profilepage'
 import Wallet from './pages/wallet/wallet'
@@ -53,27 +53,10 @@ function App() {
   useEffect( ()=>{
    
     checkAuthentication(dispatch)
-    
-    // Get crowdfund details
-    const getCrowdfunds = async() => {    
-          const access_token = localStorage.getItem('access_token')
-
-          // Send the image using Fetch API
-          try{
-            const crowdfunds = await fetch('https://palbucks-api.onrender.com/funding/api/',{
-              headers:{
-                Authorization:`Bearer ${access_token}`,
-              }
-            }).json()
-            console.log(crowdfunds)
-          }
-          catch(error){
-            console.error(error)
-          }        
-    }
-    
+        
+        
    //Store crowdfund details in Redux store 
-   dispatch(sethomebodydata(data))
+   // dispatch(sethomebodydata(data))
 
    // Refresh the access token every 15 minutes
    const tokenRefreshInterval = setInterval(()=>{
@@ -136,9 +119,9 @@ export default App;
 let data = [
   {
     organizerimg:[userimg2],
-    category:'Environment',
+    tags:'Environment',
     categoryimg: environmentimg,
-    crowdfundImage: eventimg,
+    pic: eventimg,
     organizeraccounts:['Franca'],
     title: 'This is the title of the main user’s crowdfunding kcmsdij isnd ',
     //description: "Description of the ongoing event that users will read to know what it's about",
@@ -151,7 +134,7 @@ let data = [
   },
   {
     organizerimg:[userimg3, userimg4],
-    category:'Refugee',
+    tags:'Refugee',
     categoryimg: animalimg,
     organizeraccounts:['Franca','Hikim'],
     crowdfundImage: eventimg2,
@@ -166,7 +149,7 @@ let data = [
   },
   {
     organizerimg:[userimg3],
-    category:'Medical',
+    tags:'Medical',
     categoryimg:medicalimg,    
     crowdfundImage: eventimg3,
     organizeraccounts:['Franca'],
@@ -181,7 +164,7 @@ let data = [
   },
   {
     organizerimg:[userimg2, userimg3, userimg4],
-    category:'Donate',
+    tags:'Donate',
     crowdfundImage: eventimg2,
     categoryimg:medicalimg,  
     organizeraccounts:['Franca','Hikim','Mane'],
@@ -194,7 +177,7 @@ let data = [
     totaldonations:12420403,
     liked:false,
   },
-  
+  /*
   {
     organizerimg:[userimg2, userimg3, userimg4],
     category:'Family',
@@ -210,7 +193,7 @@ let data = [
     totaldonations:327820403,
     liked:true
   },
-  /*
+  
   {
     organizerimg:[userimg2, userimg3, userimg4],
     category:'Faith',

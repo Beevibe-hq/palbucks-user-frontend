@@ -18,14 +18,13 @@ function Campaignorganizers(props){
     }
 
     return(
-        <div className = "w-full bg-white" >
+        <div className = "w-full bg-white cursor-pointer " onClick = {manageorganizers} >
             <div className = "flex justify-between items-center py-5 px-7" >
             <h3 className = "text-lg font-bold flex gap-2 " >
                 <img src={organizersimg} alt="organizer icon" />
                 <span>Campaign organiser(s)</span>
             </h3>
-                <img src={openorganizers? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "
-                    onClick = {manageorganizers}  />
+                <img src={openorganizers? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "  />
             </div>
 
             <hr className = " border-[1px] border-[#C4C4C4] " />

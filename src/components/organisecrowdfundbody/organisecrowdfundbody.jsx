@@ -4,11 +4,26 @@ import arrowdown from "../../images/arrowdown.svg"
 import arrowdown2 from "../../images/arrowdown2.svg"
 import plusicon from "../../images/plusicon.svg"
 import removeicon from "../../images/removeicon.svg"
+import animalLabel from "../../images/categoryImages/animal label.svg"
+import businessLabel from "../../images/categoryImages/Business label.svg"
+import charityLabel from "../../images/categoryImages/charity label.svg"
+import communityLabel from "../../images/categoryImages/Community label.svg"
+import environmentLabel from "../../images/categoryImages/environment label.svg"
+import faithLabel from "../../images/categoryImages/Faith label.svg"
+import familyLabel from "../../images/categoryImages/Family label.svg"
+import footballLabel from "../../images/categoryImages/Football icon.svg"
+import medicalLabel from "../../images/categoryImages/medical label.svg"
+import othersLabel from "../../images/categoryImages/Others icon.svg"
+import travelLabel from "../../images/categoryImages/travel label.svg"
+import wishLabel from "../../images/categoryImages/Wish label.svg"
+
+
 import { useEffect, useState } from "react";
 import CropImage from "../cropping/cropimage/cropimage";
 import { urltoFile } from "../cropping/cropimage/cropimage";
 import { useDispatch } from "react-redux";
 import { addCrowdfundEvent } from "../../actions/actions";
+import SearchCoOrganiser from "../searchCoOrganiser/searchCoOrganiser";
 
 function Organisecrowdfundbody(){
 
@@ -35,12 +50,18 @@ function Organisecrowdfundbody(){
     };
     const maxDateFormatted = formatDate(maxDate);
 
-
+    const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
     const [formdata, setformdata] = useState({
-        pic:null,        
+        banner:null,        
         date_posted:today.toISOString(),        
         end_date: "2019-08-24T14:15:22Z",        
-        user_name:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).username : 'Jane Doe',
+        //user_name:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).username : 'Jane Doe',
+        organiser:{
+            pk:userInfo.pk,
+            first_name:userInfo.first_name,
+            last_name:userInfo.last_name,
+            email:userInfo.email,
+        },
         title:'',
         description:'',
         start_date:today.toISOString(),
@@ -48,7 +69,7 @@ function Organisecrowdfundbody(){
         amt_raised:0,
         tags:'',
         location:'',
-        co_organisers:'',
+        co_organisers:[],
     })
 
     const handleInputChange = (event)=>{
@@ -93,21 +114,22 @@ function Organisecrowdfundbody(){
 
         if(sendCrowdfund.ok){
             console.log('success')
-            dispatch(addCrowdfundEvent({
+            /* dispatch(addCrowdfundEvent({
                 id:resp.id,
                 title:resp.title,
                 description:resp.description,
                 target_price:resp.target_price,
                 amt_raised:resp.amt_raised,
-                category:resp.tags,
+                tags:resp.tags,
                 end_date:resp.end_date,
-                crowdfundImagep:resp.pic,
+                banner:resp.banner,
                 start_date:resp.start_date,
                 user_name:resp.user_name,
                 organizeraccounts:[resp.user_name],
                 date_posted:resp.date_posted,
                 deleted:resp.deleted,
-            }))
+            })) */
+            dispatch(addCrowdfundEvent(resp))
         }
         
         
@@ -146,20 +168,20 @@ function Organisecrowdfundbody(){
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
                     <div className="p-7 flex flex-col items-center relative " >
-                        {/* <div className={` ${formdata.pic ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
-                            <label htmlFor="campaignimage" className={` ${formdata.pic ? 'hidden' : 'block'} cursor-pointer`} >
+                        {/* <div className={` ${formdata.banner ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
+                            <label htmlFor="campaignimage" className={` ${formdata.banner ? 'hidden' : 'block'} cursor-pointer`} >
                                 <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
                             </label>
                             <input type="file" name="campaignimage" id="campaignimage" className="hidden" 
                             accept="image/png, image/jpeg, image/jpg, image/svg+xml"
                             onChange={ (event) => {
-                                setformdata((prevformdata)=> ({...prevformdata, pic:URL.createObjectURL(event.target.files[0]) }) )
+                                setformdata((prevformdata)=> ({...prevformdata, banner:URL.createObjectURL(event.target.files[0]) }) )
                             } }                            
                             />
-                            <img src={formdata.pic} alt="" className={` ${formdata.pic? 'w-[442px] h-[240px]' : 'hidden' }`}  />
+                            <img src={formdata.banner} alt="" className={` ${formdata.banner? 'w-[442px] h-[240px]' : 'hidden' }`}  />
                         </div> */}
                         <CropImage formdata = {formdata} setformdata = {setformdata}  />
-                        <div className={` ${ formdata.pic ? 'hidden' : 'flex' } gap-3 items-center py-1 `} >
+                        <div className={` ${ formdata.banner ? 'hidden' : 'flex' } gap-3 items-center py-1 `} >
                             <img src={infoicon} alt="info icon" />
                             <p className="text-[#8E8E93] text-base " >Click icon to upload campaign image</p>
                         </div>
@@ -189,16 +211,7 @@ function Organisecrowdfundbody(){
                         </div>
 
                         <label htmlFor="category" className=" block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " > Category* </label>
-                        {/* <select name="category" id="category" className={`h-[56px] w-[470px] mb-[53px] py-[10px] px-[20px]
-                         border-[#D8D8D8] border-[1px] bg-[#F9F9F9] outline-[#37BCF7] rounded-[4px] text-[#888888] cursor-pointer `}  >
-                            <option value="">
-                                <p>Select your category</p>
-                                <img src={arrowdown2} alt="" className="w-5" />
-                            </option>
-                            <option value="food">Food</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="education">Education</option>
-                        </select> */}
+                        
                         <div className="relative inline-block w-64 mb-[53px] ">
                             <select 
                                 className={`block cursor-pointer appearance-none w-full bg-white border border-gray-400 
@@ -209,11 +222,19 @@ function Organisecrowdfundbody(){
                                 onChange={handleInputChange}
                                 defaultValue = "placeholder"
                             >
-                                <option disabled value="placeholder">Placeholder Title</option>
-                                <option value="Environment" >Environment</option>
-                                <option value="Medical" >Medical</option>
-                                <option value="Sports" >Sports</option>
-                                <option value= "Family"  >Family</option>
+                                <option disabled value="placeholder">Select your category</option>
+                                <option value="environment" >
+                                    Environment
+                                    {/* <img src={environmentLabel} alt="environment label" /> */}
+                                </option>
+                                <option value="medical" >
+                                    Medical
+                                    {/* <img src={medicalLabel} alt="medical label" /> */}
+                                </option>
+                                <option value="sports" >Sports</option>
+                                <option value= "family"  >Family</option>
+                                <option value= "family"  >Travel</option>
+                                <option value="business" >Business</option>
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg className="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M6 8l4 4 4-4z"/></svg>
@@ -282,7 +303,7 @@ function Organisecrowdfundbody(){
                     </div>
                     <div className={` ${managetoggles.co_organisers? 'block' : 'hidden' } p-[30px]`} >
                         <button className="flex justify-between mb-5 rounded-r-[24px] rounded-l-lg  py-1 px-4 items-center h-14 w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
-                            <span>Added co-organiser</span>
+                            <span>Add co-organiser</span>
                             <img src={plusicon} alt="plus icon" />
                         </button>
                         <div className="flex gap-2 items-center">
@@ -291,6 +312,8 @@ function Organisecrowdfundbody(){
                         </div>
                     </div>
                 </div>
+
+                {/* <SearchCoOrganiser /> */}
 
                 <div className="bg-white mb-[59px] " >
                     <div id="location" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
@@ -348,3 +371,5 @@ function Organisecrowdfundbody(){
 }
 
 export default Organisecrowdfundbody;
+
+

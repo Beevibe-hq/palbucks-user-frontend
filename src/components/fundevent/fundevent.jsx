@@ -1,17 +1,19 @@
 import { useMediaQuery } from "react-responsive";
 
 import eventimg from "../../images/eventimg.png";
-import environmentimg from '../../images/environment label.svg'
+import environmentimg from '../../images/categoryImages/environment label.svg'
 import likeicon from '../../images/likeicon.svg'
 import locateicon from '../../images/locateicon.svg'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sethomebodydata, sethomeorevent } from "../../actions/actions";
 import Likeicon from "../../images/likeicon";
+
 import { useState } from "react";
 
 //Fallbacks for the props
 import userimg from '../../images/user2.svg'
+import profileImgPlaceholder from "../../images/profileplaceholder.svg"
 
 
 
@@ -63,17 +65,18 @@ function Fundevent(props){
                 
                     <div className="flex shrink-0 -space-x-6">
                         {
-                            props.accountimages && props.accountimages.map((item,i)=>{
+                            props.accountimages ? props.accountimages.map((item,i)=>{
                                 return(
                                     <img src = {item} alt = 'Organizer profile' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' key = {i} />
                                 )
-                            })
+                            })  :
+                            <img src={profileImgPlaceholder} alt = 'Organizer profile' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' />
                         }
                     </div>
                     <div className="flex flex-col relative max-w-[100%] truncate">
                         <h3 className = "font-black text-[14px] tracking-[0.06px] truncate">
                             {
-                                props.organizeraccounts && props.organizeraccounts.map((item,i,arr)=>{
+                                props.organizeraccounts ? props.organizeraccounts.map((item,i,arr)=>{
                 
                                     return(
                                         /* i === arr.length - 1 ? (item) :
@@ -85,7 +88,8 @@ function Fundevent(props){
                                         arr.length > 2 && i > 1 ? arr.length -1 + ' others' :
                                         ''
                                     )
-                                })
+                                }) :
+                                props.organiser.first_name
                             }
                         </h3>
                         <p className = "text-[14px]">is organizing ...</p>

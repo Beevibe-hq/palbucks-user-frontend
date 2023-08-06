@@ -14,12 +14,44 @@ import PasswordInput from "../../components/password/password"
 //import OtpInput from "../../components/otpinput/otpinput"
 import OtpInput from 'react-otp-input';
 import { useEffect, useState } from "react"
+import { baseUrl } from "../../auth/checkauthentication"
+import { useSelector, useDispatch } from "react-redux"
+import { setOtpVerified } from "../../actions/actions"
 
 const Otppage = () => {
+
+    const signupInfo = useSelector((state) => state.signupInfo)
     
     const navigate = useNavigate()
-    const [otp, setOtp] = useState('')
-    const [verified ,setVerified] = useState(false)
+    const [otp, setOtp] = useState()
+    let verified = useSelector((state) => state.otpVerified)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        console.log(verified)
+    }, [])
+
+    const handleOtpVerification = async() => {
+        console.log(signupInfo.otp)
+        const response = await fetch (`${baseUrl}/users/api/verify-email/` , 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    otp: signupInfo.otp,
+                    email: signupInfo.email
+                })
+            }
+        )
+        const data = await response.json()
+        console.log(data)
+        if(data.status == true){            
+            dispatch(setOtpVerified(true))
+            alert('Email verified successfully')            
+        }
+    }
 
   return (
     <div className="font-merriweather relative" >
@@ -71,8 +103,7 @@ const Otppage = () => {
                     <button 
                         className="mt-[65px] mb-[29px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
                         onClick={ () => 
-                            {                                   
-                                setVerified(!verified)
+                            {                                                                                                   
                                 navigate('/completesignup')
                             } 
                         }
@@ -82,68 +113,68 @@ const Otppage = () => {
                 </main>
             ) : (
                 <main className="pt-[120px] pb-10 mt-[103px] " >
-                <div className="mb-[49px] flex items-center justify-center w-fit mx-auto gap-[25px] cursor-pointer " 
-                onClick={ () => navigate('/signup') }
-                >
-                    <img src={backarrow} alt="Back arrow" className="w-[36px]" />
-                    <span className=" text-[30px] font-bold " >Entered a wrong email? Change email</span>
-                </div>
-
-                <div className="bg-white w-[750px] mx-auto flex flex-col gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded-[10px] ">                
-                    <div className=" pt-[41px] pb-[21px] px-[20px] ">
-                        <h3 className="text-[35px] font-black leading-[39px] text-center " >
-                            Verify your email
-                        </h3>
-                    </div>
-                    <div className="flex flex-col gap-[45px] px-6 py-[50px] border-t-[5px] border-[#F9F9F9] items-center ">
-                        <p className="text-[30px] font-bold leading-[39px] text-center " >Enter the 6 digit code</p>
-                        <p className="text-[24px] text-center ">
-                            A 6-digit verification code has been sent to example@beevibe.com
-                        </p>
-                        <OtpInput
-                            value= {otp}
-                            onChange = {setOtp}
-                            numInputs = {6}
-                            renderInput = {(props) => <input {...props} /> }
-                            inputType = {"number"}
-                            renderSeparator = {<span style={{ width: "15px" }}></span>}
-                            inputStyle = {{
-                                marginBottom:"",
-                                width: "84px",
-                                //marginInline:'10px',
-                                height: "84px",
-                                border: "1px solid #000",
-                                borderRadius: "5.3px",
-                                padding: "13px 20px",
-                                outline: "none",
-                                textAlign: "center",
-                                fontSize: "24px",
-                                fontWeight: "700",
-                                background: "#F9F9F9",
-                                caretColor:"#37BCF7"                                                              
-                            }}
-                            focusStyle={{
-                                border: '2px solid #37BCF7',
-                                outline: 'none',
-                            }}
-                        />
-
-                        <p className=" text-center text-2xl " >
-                            Your code will be active for 10 minutes
-                        </p>                    
-                    </div>
-                </div>
-                
-                <button 
-                    className="mt-[65px] mb-[29px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
-                    onClick={ () => setVerified(!verified) }
+                    <div className="mb-[49px] flex items-center justify-center w-fit mx-auto gap-[25px] cursor-pointer " 
+                    onClick={ () => navigate('/signup') }
                     >
-                    Confirm your email
-                </button>
+                        <img src={backarrow} alt="Back arrow" className="w-[36px]" />
+                        <span className=" text-[30px] font-bold " >Entered a wrong email? Change email</span>
+                    </div>
 
-                <p className="w-[630px] mx-auto text-lg text-center tracking-[0.552px] " >
-                    By signing up, you agree to our <Link to={'/termsofuse'} className = 'font-bold' >Terms of Service </Link> and <Link to={'/privacypolicy'} className = 'font-bold' >Privacy Policy</Link>
-                </p>
+                    <div className="bg-white w-[750px] mx-auto flex flex-col gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded-[10px] ">                
+                        <div className=" pt-[41px] pb-[21px] px-[20px] ">
+                            <h3 className="text-[35px] font-black leading-[39px] text-center " >
+                                Verify your email
+                            </h3>
+                        </div>
+                        <div className="flex flex-col gap-[45px] px-6 py-[50px] border-t-[5px] border-[#F9F9F9] items-center ">
+                            <p className="text-[30px] font-bold leading-[39px] text-center " >Enter the 6 digit code</p>
+                            <p className="text-[24px] text-center ">
+                                A 6-digit verification code has been sent to example@beevibe.com
+                            </p>
+                            <OtpInput
+                                value= {otp}
+                                onChange = {setOtp}
+                                numInputs = {6}
+                                renderInput = {(props) => <input {...props} /> }
+                                inputType = {"number"}
+                                renderSeparator = {<span style={{ width: "15px" }}></span>}
+                                inputStyle = {{
+                                    marginBottom:"",
+                                    width: "84px",
+                                    //marginInline:'10px',
+                                    height: "84px",
+                                    border: "1px solid #000",
+                                    borderRadius: "5.3px",
+                                    padding: "13px 20px",
+                                    outline: "none",
+                                    textAlign: "center",
+                                    fontSize: "24px",
+                                    fontWeight: "700",
+                                    background: "#F9F9F9",
+                                    caretColor:"#37BCF7"                                                              
+                                }}
+                                focusStyle={{
+                                    border: '2px solid #37BCF7',
+                                    outline: 'none',
+                                }}
+                            />
+
+                            <p className=" text-center text-2xl " >
+                                Your code will be active for 10 minutes
+                            </p>                    
+                        </div>
+                    </div>
+                    
+                    <button 
+                        className="mt-[65px] mb-[29px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
+                        onClick={ handleOtpVerification }
+                        >
+                        Confirm your email
+                    </button>
+
+                    <p className="w-[630px] mx-auto text-lg text-center tracking-[0.552px] " >
+                        By signing up, you agree to our <Link to={'/termsofuse'} className = 'font-bold' >Terms of Service </Link> and <Link to={'/privacypolicy'} className = 'font-bold' >Privacy Policy</Link>
+                    </p>
 
                 </main>
             )

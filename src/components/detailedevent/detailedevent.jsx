@@ -8,6 +8,8 @@ import locateicon from "../../images/locateicon.svg"
 import user9 from "../../images/user9.svg"
 import user8 from "../../images/user8.svg"
 import user7 from "../../images/user7.svg"
+import environmentLabel from "../../images/categoryImages/environment label.svg"
+import profileImgPlaceholder from "../../images/profileplaceholder.svg"
 import blackdot from "../../images/blackdot.svg"
 import Campaignorganizers from "../campaignorganizers/campaignorganizers"
 import { useEffect, useState } from "react"
@@ -47,14 +49,22 @@ function Detailedevent(props){
         ] */
         
         //Puts organizerdetails in the above structure so it can be accessed easily in campaignorganizers component
-        for(let i = 0; i<eventdetails.organizeraccounts.length; i++ ){
+        if(eventdetails.organizeraccounts){
+            for(let i = 0; i<eventdetails.organizeraccounts.length; i++ ){
             
+                let organizer = {
+                    name:eventdetails.organizeraccounts[i],
+                    image:eventdetails.org ? eventdetails.organizerimg[i] : null
+                }
+                organizerdetails.push(organizer)
+            }
+        }else{
             let organizer = {
-                name:eventdetails.organizeraccounts[i],
-                image:eventdetails.org ? eventdetails.organizerimg[i] : null
+                name:eventdetails.user_name,
+                image: eventdetails.user_img ? eventdetails.user_img : profileImgPlaceholder 
             }
             organizerdetails.push(organizer)
-        }        
+        }
     }    
     
     //This converts the total number of people donated from normal numbers to formatted for space
@@ -126,10 +136,10 @@ function Detailedevent(props){
                         <div className="w-full flex flex-col md:flex-row gap-2 md:gap-10 mb-8 ">
                 
                             <div className =" relative w-full md:w-[60%] shrink-0 " >
-                                <img src={eventdetails.crowdfundImage} alt="Fund event" className = {` w-full h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
+                                <img src={eventdetails.banner} alt="Fund event" className = {` w-full h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
                                 <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
-                                    <img src={eventdetails.categoryimg} alt="Event category icon" className = 'w-[17px] h-[17px] ' />
-                                    <span className = 'text-sm md:text-base font-medium ' >{eventdetails.category}</span>
+                                    <img src={eventdetails.categoryimg ? eventdetails.categoryimg : environmentLabel } alt="Event category icon" className = 'w-[17px] h-[17px] ' />
+                                    <span className = 'text-sm md:text-base font-medium ' >{eventdetails.tags}</span>
                                 </div>
                             </div>
                             <div className="w-full md:w-[330px] lg:w-[360px]">
@@ -155,35 +165,43 @@ function Detailedevent(props){
                             </div>
                         </div>
                         <div className = "w-full md:w-[60%]  pb-10 " >
-                            <hr className = "hidden md:block border-[1px] border-[#888888] mb-8" />
+                            
                 
-                            <button className = "bg-[#2CA9F2] flex text-white gap-2 py-[7px] px-3 w-full sm:w-fit rounded-lg md:rounded-xl mb-8 font-bold md:font-semibold text-base md:text-lg justify-center md:justify-start items-center " >
-                                <img src={share} alt="share icon" className="w-[15px] sm:w-[20px]" />
-                                <span>Share campaign</span>
-                            </button>
+                            <div className="flex gap-5 md:gap-10 ">
+                                <button className = "bg-[#2CA9F2] flex flex-1 text-white gap-2 py-[7px] px-3 w-full sm:w-fit rounded-lg md:rounded-xl mb-8 font-bold md:font-semibold text-base md:text-lg justify-center items-center " >
+                                    <img src={share} alt="share icon" className="w-[15px] sm:w-[20px]" />
+                                    <span>Share Campaign</span>
+                                </button>
+                                <button className = "flex items-center flex-1 justify-center gap-[8px] border-[2px] border-black rounded-[10px] font-sans w-full py-[7px] max-h-[40px] px-4 text-base text-[#000000] font-semibold "
+                                    onClick={managelikes}>
+                                    {/* <img src={likeicon} alt = 'like icon' className = "w-[16px]" /> */}
+                                    <Likeicon liked = {eventdetails.liked} />
+                                    <span>{liked ? 'Liked Campaign' : 'Like Campaign '}</span>
+                                </button>
+                            </div>
+
+                            <hr className = "-mx-3 sm:mx-0  border-[1px] border-[#dcdbdb] mb-3 md:mb-7 " />
+
                             <h1 className = "font-bold text-[22px] mb-2 md:mb-4 leading-7 " >
                                 {eventdetails.title? eventdetails.title : 'This is the title of the main user’s crowdfunding'}
                             </h1>
-                            <p className = "font-medium md:font-normal mb-7 md:mb-5 md:text-lg " >This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
-                                Users are allowed to read the complete reason why this use is requesting for money from people.
-                                Why other users read this, if it is totally convincing enough then this user reading it can fund this project.
-                                If not he will move elsewhere to search for where to put their money. This can go on and on and on till its stops.
+                            <p className = "font-medium md:font-normal mb-7 md:mb-5 md:text-lg " >
+                                {
+                                    eventdetails.description ? eventdetails.description :
+                                    `This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
+                                    Users are allowed to read the complete reason why this use is requesting for money from people.
+                                    Why other users read this, if it is totally convincing enough then this user reading it can fund this project.
+                                    If not he will move elsewhere to search for where to put their money. This can go on and on and on till its stops.`
+                                }
                             </p>
                 
-                            <div className='flex gap-[20px] justify-start mb-7 md:mb-10 '>
-                                <button className = "flex items-center justify-center gap-[8px] font-sans h-[28px] bg-white rounded-[9px] w-[82px] py-[5px] px-2 text-base text-[#525252] font-semibold "
-                                onClick={managelikes}>
-                                    {/* <img src={likeicon} alt = 'like icon' className = "w-[16px]" /> */}
-                                    <Likeicon liked = {eventdetails.liked} />
-                                    <span>{liked ? 'Liked' : 'Like'}</span>
-                                </button>
-                                <button className = "flex items-center justify-center gap-[3px] h-[28px] bg-white rounded-[9px] p-3 text-base font-semibold " >
-                                    <img src = {locateicon} alt = 'location icon' className = "w-[16px]" />
-                                    <span>{eventdetails.location}</span>
-                                </button>
-                            </div>
+                            <button className = "mb-4 flex items-center justify-center gap-[3px] h-[28px] rounded-[9px] p-3 text-base font-semibold " >
+                                <img src = {locateicon} alt = 'location icon' className = "w-[16px]" />
+                                <span>{eventdetails.location ? eventdetails.location : 'NIGERIA' }</span>
+                            </button>
+
                             <hr className = "-mx-3 sm:mx-0  border-[1px] border-[#dcdbdb] mb-3 md:mb-8 " />
-                            <Campaignorganizers organizerdetails = {organizerdetails}  />
+                            <Campaignorganizers organizerdetails = {organizerdetails} organiser = {eventdetails.organiser.fist_name}  />
                             <h3 className="mt-10 md:mt-14 mb-6 md:mb-7 text-lg font-bold " >105 comments</h3>
                 
                             <div className=" flex flex-col gap-8">
