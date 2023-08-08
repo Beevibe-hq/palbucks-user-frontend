@@ -15,11 +15,14 @@ import { useEffect, useState } from "react"
 import { addOtp, setSignupInfo } from "../../actions/actions"
 import emailPasswordValidation from "../../auth/inputValidation"
 import { baseUrl } from "../../auth/checkauthentication"
+import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 
 const Signup = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const signupInfo = useSelector((state) => state.signupInfo)
     const verified = useSelector((state) => state.otpVerified)
@@ -46,6 +49,7 @@ const Signup = () => {
     }
 
     const handleSignup = async (e) => {
+        setIsLoading(true)
         console.log(verified)
         e.preventDefault()    
         
@@ -98,6 +102,8 @@ const Signup = () => {
                 })                
             }
         })
+
+        setIsLoading(false)
 
         /* Note: Include an api call above to check if the email has been registered before(if it has: set validateInput.email to Email is already registered),
          and to initiate the otp getting process */
@@ -178,7 +184,12 @@ const Signup = () => {
                     onClick={ handleSignup }
                     
                 >
-                    Sign up with email
+                    <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                        <Loadingspinner width = '28px' height = '28px' />
+                    </div>
+                    <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                        Sign up with email
+                    </span>                    
                 </button>
             </div>
             <p className=" mb-[32px] text-center text-2xl " > or signup using </p>

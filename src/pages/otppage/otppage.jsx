@@ -17,6 +17,7 @@ import { useEffect, useState } from "react"
 import { baseUrl } from "../../auth/checkauthentication"
 import { useSelector, useDispatch } from "react-redux"
 import { setOtpVerified } from "../../actions/actions"
+import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 
 const Otppage = () => {
 
@@ -27,11 +28,14 @@ const Otppage = () => {
     let verified = useSelector((state) => state.otpVerified)
     const dispatch = useDispatch()
 
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
         console.log(verified)
     }, [])
 
     const handleOtpVerification = async() => {
+        setIsLoading(true)
         console.log(signupInfo.otp)
         const response = await fetch (`${baseUrl}/users/api/verify-email/` , 
             {
@@ -51,6 +55,10 @@ const Otppage = () => {
             dispatch(setOtpVerified(true))
             alert('Email verified successfully')            
         }
+        else{
+            alert('Email verification failed')
+        }
+        setIsLoading(false)
     }
 
   return (
@@ -169,7 +177,12 @@ const Otppage = () => {
                         className="mt-[65px] mb-[29px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
                         onClick={ handleOtpVerification }
                         >
-                        Confirm your email
+                            <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                                <Loadingspinner width = '28px' height = '28px' />
+                            </div>
+                            <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                                Confirm your email
+                            </span>                        
                     </button>
 
                     <p className="w-[630px] mx-auto text-lg text-center tracking-[0.552px] " >

@@ -29,6 +29,9 @@ export function urltoFile(url, filename, mimeType) {
 }
 
 const Demo = ({ formdata, setformdata }) => {
+
+  const [fileName, setFileName] = useState(null)
+  
   const [imageSrc, setImageSrc] = React.useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -49,8 +52,10 @@ const Demo = ({ formdata, setformdata }) => {
       );
       setCroppedImage(croppedImage);
 
-      // Convert the image URL to a file
-      const convertedImage = await urltoFile(croppedImage, 'image.jpg');
+      // Convert the image URL to a file   
+      console.log(fileName)   
+      const convertedImage = await urltoFile(croppedImage, fileName);
+      //const convertedImage2 = await urltoFile(croppedImage, 'image.jpg');
       setformdata((previousdata) => ({
         ...previousdata,
         banner: convertedImage,
@@ -63,6 +68,7 @@ const Demo = ({ formdata, setformdata }) => {
   const onFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+      setFileName(file.name)
       let imageDataUrl = await readFile(file);
   
       try {
@@ -76,7 +82,7 @@ const Demo = ({ formdata, setformdata }) => {
         console.warn('Failed to detect the orientation');
       }
   
-      setImageSrc(imageDataUrl);
+      setImageSrc(imageDataUrl);      
     }
   };
   
