@@ -6,7 +6,7 @@ import profileImage3 from "../../images/user3.svg"
 import profileImage4 from "../../images/user4.svg"
 import addIcon from "../../images/organiseCrowdfund/addIcon.svg"
 
-function SearchCoOrganiser(props){
+function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganiser}){
 
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
@@ -25,49 +25,61 @@ function SearchCoOrganiser(props){
                     user.first_name.toLowerCase().includes(searchValue.toLowerCase()) || user.last_name.toLowerCase().includes(searchValue.toLowerCase())
                     )
                 )
-            console.log(results)
+            //console.log(results)
             setSearchResults(results)
     }, [searchValue])
 
     
     return(
-        <div className={`mb-10 w-[681px] min-h-[352px] h-fit py-10 px-11 bg-white rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] `} >
-            <div className="flex gap-11 items-center justify-center ">
-                <input
-                    type="search"
-                    className="w-[80%] xphones:w-[80%] md:w-[320px] brkpoint:w-[300px] h-[30px] phones:h-[40px] lg:w-[345px] xl:w-[480px] xl:h-[44px]
-                        text-base pl-10 md:pl-12 lg:pl-14 text-[#7A7575] bg-[#F9F9F9] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(48%)]
-                        bg-no-repeat rounded-3xl shadow-[0px_0px_16px_rgba(0,0,0,0.04)] md:shadow-none font-merriweather font-normal outline-2 outline-[#37BCF7]
-                        focus:caret-[#2CA9F2] "
-                    placeholder= {isMobile ? 'Search':'Search for Co-organiser(s)'}
-                    onChange={handleSearch}
-                />
-                <button className="text-[#37BCF7] text-2xl font-bold " >
-                    Cancel
-                </button>
-            </div>
-
-            <div className={` ${searchValue == '' ? 'flex items-center justify-center h-full text-[#8E8E93] text-center text-2xl' : 'hidden'} `} >
-                Search for co-organisers and add them to your campaign
-            </div>
-
-            <div className={`${searchValue == '' ? 'hidden' :'h-full pt-7 flex flex-col' } `} >
-                <p className="text-[#8E8E93] text-lg text-center mb-8 " >
-                    Selected {selected} of {searchResults.length}
-                </p>
-                <div className="mb-10 flex flex-col gap-10 " >
-                    {
-                        searchResults.map((user,i) => (
-                            <Coorganiser first_name={user.first_name} last_name={user.last_name} dp={user.dp} key = {i} />
-                        ))
-                    }
+        <div className={`fixed z-50 inset-0 overflow-y-auto ${displaySearchCoOrganiser ? 'block' : 'hidden'}`}>
+            <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+                <div className="fixed inset-0 transition-opacity" aria-hidden="true" >
+                    <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
-                <p className="text-lg text-center" >
-                    Users you invite will have to accept your invitation before they can appear on your campaign
-                </p>
+                <div className="inline-block align-bottom bg-gray-200 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
+                    
+                        <div className={`w-[681px] min-h-[300px] h-fit py-10 px-9 bg-white rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] `} >
+                            <div className="flex gap-11 items-center justify-center ">
+                                <input
+                                    type="search"
+                                    className="w-[80%] xphones:w-[80%] md:w-[320px] brkpoint:w-[300px] h-[30px] phones:h-[40px] lg:w-[345px] xl:w-[480px] xl:h-[44px]
+                                        text-base pl-10 md:pl-12 lg:pl-14 text-[#7A7575] bg-[#F9F9F9] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(48%)]
+                                        bg-no-repeat rounded-3xl shadow-[0px_0px_16px_rgba(0,0,0,0.04)] md:shadow-none font-merriweather font-normal outline-2 outline-[#37BCF7]
+                                        focus:caret-[#2CA9F2] "
+                                    placeholder= {isMobile ? 'Search':'Search for Co-organiser(s)'}
+                                    onChange={handleSearch}
+                                />
+                                <button className="text-[#37BCF7] text-2xl font-bold " onClick={
+                                    () => {
+                                        setdisplaySearchCoOrganiser(false)
+                                    }
 
+                                } >
+                                    Cancel
+                                </button>
+                            </div>
+                            <div className={` ${searchValue == '' ? 'flex items-center justify-center h-[300px] text-[#8E8E93] text-center text-2xl' : 'hidden'} `} >
+                                Search for co-organisers and add them to your campaign
+                            </div>
+                            <div className={`${searchValue == '' ? 'hidden' :'h-full pt-7 flex flex-col' } `} >
+                                <p className="text-[#8E8E93] text-lg text-center mb-8 " >
+                                    Selected {selected} of {searchResults.length}
+                                </p>
+                                <div className="mb-10 flex flex-col gap-10 max-h-[350px] overflow-auto p-4 " >
+                                    {
+                                        searchResults.map((user,i) => (
+                                            <Coorganiser first_name={user.first_name} last_name={user.last_name} dp={user.dp} key = {i} />
+                                        ))
+                                    }
+                                </div>
+                                <p className="text-lg text-center" >
+                                    Users you invite will have to accept your invitation before they can appear on your campaign
+                                </p>
+                            </div>
+                        </div>
+                    
+                </div>
             </div>
-
         </div>
     )
 }

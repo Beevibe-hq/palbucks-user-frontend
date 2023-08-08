@@ -25,12 +25,16 @@ import { useDispatch } from "react-redux";
 import { addCrowdfundEvent } from "../../actions/actions";
 import SearchCoOrganiser from "../searchCoOrganiser/searchCoOrganiser";
 import { useNavigate } from "react-router-dom";
+import Loadingspinner from "../loadingspinner/loadingSpinner";
 
 function Organisecrowdfundbody(){
 
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(false)
+    const [displaySearchCoOrganiser, setdisplaySearchCoOrganiser] = useState(false)
 
     //Date formatting to prevent past date selection and limit to max period of 90 days
     const today = new Date();
@@ -93,7 +97,7 @@ function Organisecrowdfundbody(){
     }
 
     const startCrowdfund = async () => {
-        
+        setIsLoading(true)
         console.log('starting')
         const formData = new FormData();
         // Iterate over the properties of the formdata object
@@ -136,7 +140,7 @@ function Organisecrowdfundbody(){
             navigate('/home')
         }
         
-        
+        setIsLoading(false)
     };
       
 
@@ -306,7 +310,11 @@ function Organisecrowdfundbody(){
                         <img src={managetoggles.co_organisers ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
                     </div>
                     <div className={` ${managetoggles.co_organisers? 'block' : 'hidden' } p-[30px]`} >
-                        <button className="flex justify-between mb-5 rounded-r-[24px] rounded-l-lg  py-1 px-4 items-center h-14 w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
+                        <button className="flex justify-between mb-5 rounded-r-[24px] rounded-l-lg  py-1 px-4 items-center h-14 w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]"
+                         onClick={() => {
+                            setdisplaySearchCoOrganiser(true)
+                         }}
+                         >
                             <span>Add co-organiser</span>
                             <img src={plusicon} alt="plus icon" />
                         </button>
@@ -317,7 +325,7 @@ function Organisecrowdfundbody(){
                     </div>
                 </div>
 
-                {/* <SearchCoOrganiser /> */}
+                <SearchCoOrganiser displaySearchCoOrganiser = {displaySearchCoOrganiser} setdisplaySearchCoOrganiser = {setdisplaySearchCoOrganiser} />
 
                 <div className="bg-white mb-[59px] " >
                     <div id="location" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
@@ -364,7 +372,12 @@ function Organisecrowdfundbody(){
                 <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 h-[48px] rounded-[10px] text-white font-bold text-[18px] block  " 
                     onClick={startCrowdfund}
                 >
-                    All done, begin your crowdfund
+                    <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                        <Loadingspinner width = '28px' height = '28px' />
+                    </div>
+                    <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                        All done, begin your crowdfund
+                    </span>
                 </button>
                 <button className="text-[#37BCF7] mx-auto px-5  w-1/2 h-[48px] rounded-[10px] hover:bg-white font-bold text-[18px] block " >Not now, save for later</button>
 
