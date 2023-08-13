@@ -18,11 +18,12 @@ import profileImgPlaceholder from "../../images/profileplaceholder.svg"
 
 
 function Fundevent(props){
-
+    
+    const access_token = localStorage.getItem('access_token')
     const dispatch = useDispatch()
     const homebodydata = useSelector(state => state.managehomebodydata)
 
-    const [liked, setliked] = useState(props.liked)
+    const [liked, setliked] = useState(false)
 
     //a react package for responsiveness
     const isMobile = useMediaQuery({
@@ -41,16 +42,47 @@ function Fundevent(props){
 
     }
 
-    const managelikes = (event) =>{
+    const managelikes = async(event) =>{
+         
+        //prevent the parent div's onclick from trigerring        
+        event.stopPropagation();
 
-        event.stopPropagation(); //prevent the parent div's onclick from trigerring        
-        
-        let currentstatus = homebodydata[props.id].liked
+        /* 
+        let currentStatus = homebodydata[props.id].liked
         homebodydata[props.id].liked = !currentstatus
         
-        dispatch(sethomebodydata(homebodydata))
+        dispatch(sethomebodydata(homebodydata)) */
         //console.log(homebodydata[props.id].liked)
 
+        /* const likeCrowdfund = await fetch(`https://palbucks-api.onrender.com/funding/api/${props.id}/like/`,{
+            method:'POST',
+            body:JSON.stringify({status:1}),
+            headers:{
+                Authorization: `Bearer ${access_token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const unlikeCrowdfund = await fetch(`https://palbucks-api.onrender.com/funding/api/${props.id}/like/`,{
+            method:'POST',
+            body:JSON.stringify({status:0}),
+            headers:{
+                Authorization: `Bearer ${access_token}`,
+                'Content-Type': 'application/json'
+            }
+        }) */
+
+        /* const response = await likeCrowdfund.json()
+        console.log(response)
+        if(likeCrowdfund.status == 200){
+            //alert('Crowdfund liked successfully')
+            setliked(true)
+        }else if(response.data == 'You cannot like the same funding more than once'){
+            const resp = await unlikeCrowdfund.json()
+            console.log(resp)
+        }else{
+            alert('Crowdfund like failed')
+        } */
         setliked(!liked)
     }
 

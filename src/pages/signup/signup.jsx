@@ -50,18 +50,16 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         setIsLoading(true)
-        console.log(verified)
-        e.preventDefault()    
-        
+        //console.log(verified)
+        e.preventDefault()
+        console.log(isLoading)
+        //alert(isLoading)
         // Input validations
-        emailPasswordValidation(setValidateInput,accountInfo.email,accountInfo.password)
-        .then((validationMessage)=> {            
+        await emailPasswordValidation(setValidateInput,accountInfo.email,accountInfo.password)
+        .then(async(validationMessage)=> {            
             if(validationMessage.email == 'correct' && validationMessage.password == 'Strong password' ){                
-                console.log(validationMessage)
+                console.log(validationMessage)                
                 
-                // Dispatch the sign up info to redux store
-                /* const updatedSignupInfo = {...signupInfo, ...accountInfo}
-                dispatch(setSignupInfo(updatedSignupInfo))         */
 
                 // Make an api call to send the email and password to the backend
                 const registerUser = async () => {
@@ -78,7 +76,7 @@ const Signup = () => {
                     const data = await response.json()
                     return data
                 }
-                registerUser()
+                await registerUser()
                 .then(async(data) => {
                     console.log(data)
                     if(data.status == true){
@@ -92,14 +90,15 @@ const Signup = () => {
 
                         // Navigate to otp page
                         navigate(`/otppage`)        
-                    }else{
-                        // Display error message
-                        setValidateInput(prevState => ({...prevState, email: data.message}))
+                    }
+                    else{
+                        // Display error message                        
+                        setValidateInput(prevState => ({...prevState, email: data.email[0]}))
                     }
                 })
                 .catch((err) => {
                     console.log(err)
-                })                
+                })         
             }
         })
 
@@ -180,7 +179,7 @@ const Signup = () => {
                 <PasswordInput onChange={handleInputChange} accountInfo={accountInfo} setAccountInfo={setAccountInfo} setValidateInput = {setValidateInput} validateInput = {validateInput} />
 
                 <button 
-                    className="mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
+                    className="mt-[70px] min-w-[228px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
                     onClick={ handleSignup }
                     
                 >

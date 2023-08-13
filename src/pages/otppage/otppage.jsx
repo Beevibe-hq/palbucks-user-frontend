@@ -174,7 +174,7 @@ const Otppage = () => {
                     </div>
                     
                     <button 
-                        className="mt-[65px] mb-[29px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
+                        className="mt-[65px] min-w-[228px] mb-[29px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto block " 
                         onClick={ handleOtpVerification }
                         >
                             <div className={` ${isLoading ? 'block' : 'hidden' } `}>
