@@ -90,6 +90,11 @@ const Completesignup = () => {
         //dispatch(setLogoutLoading(false))
         setIsLoginLoading(false)
     };
+
+     // Calculate the max date (18 years ago)
+     const maxDate = new Date();
+     maxDate.setFullYear(maxDate.getFullYear() - 18);
+     const maxDateStr = maxDate.toISOString().split("T")[0];
       
 
   return (
@@ -184,6 +189,7 @@ const Completesignup = () => {
                             onChange={handleInputChange}                    
                             className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
                                 focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
+                            max={maxDateStr} // Set the max attribute to the calculated max date
                         />
                     </div>
 
@@ -231,7 +237,7 @@ const Completesignup = () => {
             </div>
             
             <button 
-                className={`xl:min-w-[288px] mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
+                className={`xl:min-w-[288px] min-w-[228px] mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
                 font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto flex items-center justify-center ]                                 
                 `}
                  onClick  = {finishSignup}                 

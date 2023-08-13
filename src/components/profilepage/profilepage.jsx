@@ -221,6 +221,8 @@ const EditProfile = ({goback}) => {
             localStorage.setItem('userInfo', JSON.stringify(response))
             userInfo = JSON.parse(localStorage.getItem('userInfo'))
             setIsLoading(false)
+            // Reload the page and reset user data
+            window.location.reload(true)
         }else{
             alert('An error occured while updating your profile')
             setIsLoading(false)

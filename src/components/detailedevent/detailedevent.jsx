@@ -83,13 +83,13 @@ function Detailedevent(props){
     arrangeorganizerdetails()
     let totaldonations = formatnumber(eventdetails.totaldonations);
 
-    const [liked,setliked] = useState('')
+    const [liked,setliked] = useState(false)
     const managelikes = () =>{
-        let currentstatus = homebodydata[eventid].liked
+        /* let currentstatus = homebodydata[eventid].liked
         homebodydata[eventid].liked = !currentstatus
-        dispatch(sethomebodydata(homebodydata))
+        dispatch(sethomebodydata(homebodydata)) */
         setliked(!liked)
-        console.log(eventdetails.liked)
+        /* console.log(eventdetails.liked) */
     }
     
     useEffect(()=>{
@@ -162,7 +162,7 @@ function Detailedevent(props){
                                             onClick={managelikes}
                                         >
                                             {/* <img src={likeicon} alt = 'like icon' className = "w-[16px]" /> */}
-                                            <Likeicon liked = {eventdetails.liked} color = 'black' />
+                                            <Likeicon liked = {liked} color = {liked ? '':'black'} />
                                             <span>{liked ? 'Liked Campaign' : 'Like Campaign '}</span>
                                         </button>
 
