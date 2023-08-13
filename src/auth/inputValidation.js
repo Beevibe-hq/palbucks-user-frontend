@@ -1,12 +1,13 @@
 
 
-const emailPasswordValidation = async(setValidateInput,email, password) => {
+const emailPasswordValidation = async(setValidateInput,email, password, ignorePasswordVerifier) => {
 
     const validationMessages = {
     }
 
     console.log(email)
 
+    
     // Validate email
     if (email == '') {
         setValidateInput((prevState) => ({ ...prevState, email: 'Please enter your email address ' }));
@@ -19,31 +20,33 @@ const emailPasswordValidation = async(setValidateInput,email, password) => {
         validationMessages.email = 'correct'
         
     }
-  
-
-    // Validate password
-    if(!password) {
-        setValidateInput((prevState) => ({ ...prevState, password: 'Please enter your password' }));
-        validationMessages.password = 'Please enter your password'
-    }else {
-        const passwordStrength = checkPasswordStrength(password);
-        validationMessages.password = passwordStrength.message
-        setValidateInput((prevState) => ({ 
-                ...prevState, 
-                password: passwordStrength.message,
-                passwordtest: {
-                    testStage:'postRun' ,
-                    upperCase: passwordStrength.upperCase,
-                    lowerCase: passwordStrength.lowerCase,
-                    number: passwordStrength.number,
-                    specialCharacter: passwordStrength.specialCharacter,
-                    length: passwordStrength.length
-                }
-            }
-        ));        
-    }  
     
-    return validationMessages
+    console.log('got here')
+    if(!ignorePasswordVerifier){
+        //console.log('got here too')
+        // Validate password
+        if(!password) {
+            setValidateInput((prevState) => ({ ...prevState, password: 'Please enter your password' }));
+            validationMessages.password = 'Please enter your password'
+        }else {
+            const passwordStrength = checkPasswordStrength(password);
+            validationMessages.password = passwordStrength.message
+            setValidateInput((prevState) => ({ 
+                    ...prevState, 
+                    password: passwordStrength.message,
+                    passwordtest: {
+                        testStage:'postRun' ,
+                        upperCase: passwordStrength.upperCase,
+                        lowerCase: passwordStrength.lowerCase,
+                        number: passwordStrength.number,
+                        specialCharacter: passwordStrength.specialCharacter,
+                        length: passwordStrength.length
+                    }
+                }
+            ));        
+        }  
+    }
+        return validationMessages    
 }
 
 
@@ -86,35 +89,37 @@ const checkPasswordStrength = (password) => {
 
 
 // Validate password while being input
-export const passwordVerification = (setValidateInput,password) => {
+export const passwordVerification = (setValidateInput,password, ignorePasswordVerifier) => {
     
-    if(password == ''){
-        setValidateInput((prevState) => ({
-             ...prevState, 
-            password: '',
-            passwordtest: {
-                testStage:'preRun' ,
-                upperCase: false,
-                lowerCase: false,
-                number: false,
-                specialCharacter: false,
-                length: 0
-            }
-        }));
-    }else {
-        const passwordStrength = checkPasswordStrength(password);
-        setValidateInput((prevState) => ({ 
+    if(!ignorePasswordVerifier){
+        if(password == ''){
+            setValidateInput((prevState) => ({
                 ...prevState, 
-                password: passwordStrength.message,
+                password: '',
                 passwordtest: {
-                    testStage:'postRun' ,
-                    upperCase: passwordStrength.upperCase,
-                    lowerCase: passwordStrength.lowerCase,
-                    number: passwordStrength.number,
-                    specialCharacter: passwordStrength.specialCharacter,
-                    length: passwordStrength.length
+                    testStage:'preRun' ,
+                    upperCase: false,
+                    lowerCase: false,
+                    number: false,
+                    specialCharacter: false,
+                    length: 0
                 }
-            }
-        ));               
-    }    
+            }));
+        }else {
+            const passwordStrength = checkPasswordStrength(password);
+            setValidateInput((prevState) => ({ 
+                    ...prevState, 
+                    password: passwordStrength.message,
+                    passwordtest: {
+                        testStage:'postRun' ,
+                        upperCase: passwordStrength.upperCase,
+                        lowerCase: passwordStrength.lowerCase,
+                        number: passwordStrength.number,
+                        specialCharacter: passwordStrength.specialCharacter,
+                        length: passwordStrength.length
+                    }
+                }
+            ));               
+        } 
+    }   
 }

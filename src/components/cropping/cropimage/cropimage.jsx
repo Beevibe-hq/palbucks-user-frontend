@@ -66,6 +66,15 @@ const Demo = ({ formdata, setformdata }) => {
   }, [imageSrc, croppedAreaPixels, rotation]);
 
   const onFileChange = async (e) => {
+
+    // Clear the previous image data
+    setImageSrc(null);
+    setCroppedImage(null);
+    setformdata((previousdata) => ({
+      ...previousdata,
+      banner: null,
+    }));
+
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setFileName(file.name)
@@ -91,21 +100,44 @@ const Demo = ({ formdata, setformdata }) => {
     <div className="">
       {imageSrc ? (
         <React.Fragment>
-          <div className={ `cropContainer` }>
+          {croppedImage ? (
+            <div className="w-[550px] mx-auto mt-5 ">
+              <label htmlFor="campaignimage">
+                <img src={croppedImage} alt="Cropped" className="mx-auto w-full border-[2px] border-[#37BCF7] cursor-pointer" />
+              </label>
+            </div>
+          ) :(
+            <div className={ `cropContainer` }>
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                rotation={rotation}
+                zoom={zoom}
+                aspect={6 / 3}              
+                onCropChange={setCrop}
+                onRotationChange={setRotation}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
+              />
+            </div>
+          
+          )
+          }
+          {/* <div className={ `cropContainer` }>
             <Cropper
               image={imageSrc}
               crop={crop}
               rotation={rotation}
               zoom={zoom}
-              aspect={6 / 3}
+              aspect={6 / 3}              
               onCropChange={setCrop}
               onRotationChange={setRotation}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
             />
-          </div>
+          </div> */}
           <div className={`controls`}>
-            <div className="flex flex-col sm:flex-row gap-2 justify-between ">
+            <div className={` ${croppedImage ? 'hidden' : 'mb-2 flex flex-col sm:flex-row gap-2 justify-between' } `}>
               <div className={`sliderContainer`}>
                   <label className={`sliderLabel`}>
                     Zoom
@@ -137,37 +169,44 @@ const Demo = ({ formdata, setformdata }) => {
                 
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-[70px]">
-              <button
-                className="bg-[#37BCF7] px-4 py-2 text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-blue-900"
-                onClick={showCroppedImage}
-              >
-                Show Result
-              </button>
+            <div /* className="flex flex-col sm:flex-row items-center gap-[70px]" */ className={`flex items-center justify-center`} >
+              {croppedImage ? null: 
+                  <button
+                    className="bg-[#37BCF7] w-3/4 px-4 py-2 text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-[#0baef4]"
+                    onClick={showCroppedImage}
+                  >
+                    Apply
+                  </button>
+              }
 
-              <div className="">
-                <label htmlFor="campaignimage" className={`cursor-pointer bg-[#37BCF7] px-4 py-[10px] text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-blue-900`}>
+              <div className="hidden">
+                <label htmlFor="campaignimage" className={`cursor-pointer bg-[#37BCF7] px-4 py-[10px] text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-[#0baef4]`}>
                   <span className="">Change Image</span>
                 </label>
                 <input type="file" onChange={onFileChange} accept="image/*" className="hidden" id="campaignimage" />
               </div>
 
-              <button
+              {/* <button
                 onClick={() => {
                   setImageSrc(null);
                   setCroppedImage(null);
+                  setformdata((previousdata) => ({
+                    ...previousdata,
+                    banner: null,
+                  }));
                 }}
-                className="bg-[#37BCF7] px-4 py-2 text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-blue-900"
+                className="bg-[#37BCF7] px-4 py-2 text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-[#0baef4]"
               >
                 Remove Image
-              </button>
+              </button> */}
             </div>
           </div>
-          {croppedImage ? (
+          {/* {croppedImage ? (
             <div className="w-[550px] mx-auto my-5 ">
               <img src={croppedImage} alt="Cropped" className="mx-auto w-full " />
             </div>
-          ) : null}
+          ) : null
+          } */}
         </React.Fragment>
       ) : (
         <div className={`w-[837px] h-[240px] flex justify-center items-center mb-5`}>
@@ -185,7 +224,7 @@ const Demo = ({ formdata, setformdata }) => {
 
 
 
-function readFile(file) {
+export function readFile(file) {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => resolve(reader.result), false);

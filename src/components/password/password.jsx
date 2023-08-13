@@ -36,7 +36,7 @@ const PasswordInput = (props) => {
   // Start validating the password strength as soon as the password is initially changed
   useEffect(()=> {
     //alert('password validation currently inefficient')
-    passwordVerification(setValidateInput,password)    
+    passwordVerification(setValidateInput,password,props.ignorePasswordVerifier? props.ignorePasswordVerifier : false)    
   },[password,setValidateInput])
 
   return (    
@@ -74,7 +74,7 @@ const PasswordInput = (props) => {
           }
 
         
-        <div className=' font-merriweather flex flex-col gap-[15px] bg-[#F9F9F9] py-[10px] px-[15px] rounded-md ' >            
+        <div className={` ${props.ignorePasswordVerifier ? 'hidden' : 'flex'} font-merriweather flex-col gap-[15px] bg-[#F9F9F9] py-[10px] px-[15px] rounded-md `} >            
             <p className='text-lg font-bold '>
               Your password must have:
             </p>

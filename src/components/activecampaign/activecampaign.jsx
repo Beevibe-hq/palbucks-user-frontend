@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom"
 
 function Activecampaign(props){
+
+    const navigate  = useNavigate()
 
     return(
         <div className="" >
@@ -13,14 +16,19 @@ function Activecampaign(props){
                 </div>
 
                 <div className="flex gap-[25px]" >
-                    <img src={props.img} alt="user crowdfund img" className="w-[80px] h-[70px] rounded " />
+                    <img src={props.img} alt="user crowdfund img" className="w-[80px] h-[70px] rounded object-cover " />
                     <div className="flex flex-col w-[85%]" >
                         <h5 className="text-[18px] font-black leading-5 mb-2 " >{props.title}</h5>
                         <p className=" text-[#525252]  " >{props.daysleft} days left </p>
                     </div>                    
                 </div>
                 
-                <button className="bg-[#37BCF7] text-white ml-auto rounded-[10px] py-[5px] px-[15px] max-h-[50px] font-black" >
+                <button className="bg-[#37BCF7] text-white ml-auto rounded-[10px] py-[5px] px-[15px] max-h-[50px] font-black"
+                
+                onClick={()=>{
+                    navigate(`/detailed/${props.id}`)
+                }}
+                 >
                     View Campaign
                 </button>
             </div>

@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar(){
 
+    // Current problem with this is that when the user changes details on another browser, the details wont be updated on this browser
     const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
 
     const [moreiconsactive , setmoreiconsactive] = useState(false)

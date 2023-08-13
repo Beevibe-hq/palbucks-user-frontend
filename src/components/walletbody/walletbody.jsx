@@ -6,6 +6,7 @@ import user10 from "../../images/user10.svg"
 
 import Activity from "../activity/activity"
 import Transactions from "../transactions/transactions"
+import Activities from "../activities/activities"
 
 function Walletbody(){
 
@@ -25,7 +26,7 @@ function Walletbody(){
                 <section className=" flex-[2] w-2/3" >
                     <h2 className=" text-[22px] font-black " >Account Balance and Information </h2>
                     <div className="flex lg:gap-7 justify-between pt-[35px] mb-12 " >
-                        <div className="flex items-center justify-center lg:gap-4 2xl:min-w-[330px] bg-white py-[25px] px-[30px] rounded-[10px] shadow-[0px_0px_16px_rgba(0,0,0,0.04)] " >
+                        <div className="flex items-center justify-center lg:gap-4 2xl:min-w-[350px] bg-white py-[25px] 2xl:py-[30px] px-[30px] rounded-[10px] shadow-[0px_0px_16px_rgba(0,0,0,0.04)] " >
                             <img src={usdtlogo} alt="USDT logo" className="w-[68px] h-[64px] "  />
                             <section className="flex flex-col gap-3" >
                                 <h4 className=" text-[18px] text-[#525252]" >Wallet Balance</h4>
@@ -33,7 +34,7 @@ function Walletbody(){
                                 <h4 className="text-[16px] leading-5 text-[#37BCF7] font-black" >+23356 USDT </h4>
                             </section>
                         </div>
-                        <div className="flex items-center justify-center lg:gap-4 2xl:min-w-[330px]  bg-white py-6 px-7 rounded-[10px] shadow-[0px_0px_16px_rgba(0,0,0,0.04)] " >
+                        <div className="flex items-center justify-center lg:gap-4 2xl:min-w-[350px]  bg-white py-6 2xl:py-[30px] px-7 rounded-[10px] shadow-[0px_0px_16px_rgba(0,0,0,0.04)] " >
                             <img src={usdtlogo} alt="USDT logo" className="w-[68px] h-[64px] "  />
                             <section className="flex flex-col gap-3" >
                                 <button className="flex bg-[#F9F9F9] text-[12px] py-1 pl-2 pr-4 items-center gap-6 rounded-l-lg rounded-r-3xl " >
@@ -46,11 +47,11 @@ function Walletbody(){
                         </div>
                     </div>
                     <button className={`text-[16px] text-white leading-5 font-black py-[10px] px-[15px] bg-[#37BCF7] mx-auto
-                     block w-[67%] h-[40px] rounded-[10px] mb-[12px]  `} >
+                     block w-[67%] max-w-[403px] h-[40px] rounded-[10px] mb-[12px]  `} >
                         Withdraw Funds
                     </button>
-                    <button className={`text-[16px] text-[#37BCF7] leading-5 font-black py-[10px] px-[15px] mx-auto
-                     block w-[67%] h-[40px] rounded-[10px] mb-[70px] `} >
+                    <button className={`text-[16px] text-[#37BCF7] hover:bg-white leading-5 font-black py-[10px] px-[15px] mx-auto
+                     block w-[67%] max-w-[403px] h-[40px] rounded-[10px] mb-[70px] `} >
                         Fund Wallet
                     </button>
 
@@ -108,7 +109,7 @@ function Walletbody(){
 
                 </section>
                 
-                <section className="flex-1 w-1/3 2xl:min-w-[370px] lg:max-w-[370px] bg-white h-fit " >
+                {/* <section className="flex-1 w-1/3 2xl:min-w-[370px] lg:max-w-[370px] bg-white h-fit " >
                     <div className="py-[35px] px-[23px] border-b-[0.5px] border-[#D8D8D8] " >
                         <h3 className="text-[22px] font-black mb-3 " >Activites</h3>
                         <p className="text-[16px]" >See  your donation activites for your campaign. </p>
@@ -118,7 +119,8 @@ function Walletbody(){
                         <Activity userdp = {user8} />
                         <Activity userdp = {user10} />
                     </div>
-                </section>
+                </section> */}
+                <Activities user10 = {user10} user12 = {user12} user8 = {user8} header = {'wallet'} />
 
             </div>
         </div>

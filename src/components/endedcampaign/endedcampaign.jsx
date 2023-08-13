@@ -1,8 +1,10 @@
 
+import { useNavigate } from "react-router-dom"
 import deleteicon from "../../images/deleteicon.svg"
 
 function Endedcampaign(props){
 
+    const navigate = useNavigate()
     return(
         <div className="" >
             <div className="flex items-center gap-2 w-fit mb-[15px] " >
@@ -27,7 +29,11 @@ function Endedcampaign(props){
                         <img src={deleteicon} alt="delete img" className="w-[20px] h-[24px]" />
                         <span className="text-[#E61B00] font-black" >Delete</span>
                     </button>
-                    <button className="bg-[#37BCF7] text-white  rounded-[10px] py-[5px] px-[15px] font-black" >
+                    <button className="bg-[#37BCF7] text-white  rounded-[10px] py-[5px] px-[15px] font-black"
+                     onClick={()=>{
+                        navigate(`/detailed/${props.id}`)
+                    }}
+                     >
                         View Campaign
                     </button>
 

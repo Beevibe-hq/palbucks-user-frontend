@@ -36,7 +36,7 @@ function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganise
                 <div className="fixed inset-0 transition-opacity" aria-hidden="true" >
                     <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
-                <div className="inline-block align-bottom bg-gray-200 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
+                <div className="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
                     
                         <div className={`w-[681px] min-h-[300px] h-fit py-10 px-9 bg-white rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] `} >
                             <div className="flex gap-11 items-center justify-center ">

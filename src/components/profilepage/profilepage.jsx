@@ -9,7 +9,7 @@ import locateicon from "../../images/locateicon2.svg"
 import twittericon from "../../images/twittericon.svg"
 import facebookicon from "../../images/facebookicon.svg"
 import instagramicon from "../../images/instagramicon.svg"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setprofilepageactive, setprofilepageinactive } from "../../actions/actions";
 import Twittericon from "../../images/twittericon";
@@ -19,6 +19,14 @@ import removeicon from "../../images/removeicon.svg"
 import arrowup from "../../images/arrowup.svg"
 import arrowdown from "../../images/arrowdown.svg"
 import facebookIcon from "../../images/facebookicon.svg"
+import profilePlaceholder from "../../images/profileplaceholder.svg"
+
+import Cropper from "react-easy-crop";
+import { readFile } from "../cropping/cropimage/cropimage";
+import { urltoFile } from "../cropping/cropimage/cropimage";
+import { getCroppedImg } from "../cropping/canvasUtils";
+import { baseUrl } from "../../auth/checkauthentication";
+import Loadingspinner from "../loadingspinner/loadingSpinner";
 
 function Profilepage(){
 
@@ -66,6 +74,8 @@ export default Profilepage;
 
 const DisplayProfile = ({goback, setDisplay}) => {
 
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
     return(
         <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[19px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
                     
@@ -74,8 +84,12 @@ const DisplayProfile = ({goback, setDisplay}) => {
             <p className=" text-[18px] mb-8 " >Change your profile photo, cover photo, bio and more</p>
 
             <div className="bg-white p-5 w-full relative mb-[70px] " >
-                <img src={campaignimage} alt="campaign" className=" rounded w-full " />
-                <img src={useravatar} alt="user avatar" className="relative bottom-12 left-2 max-w-full w-[9%] rounded-full inline-block z-10 " />
+                <img src={userInfo.background_image ? userInfo.background_image : campaignimage} alt="campaign" className=" rounded w-full max-h-[250px] 2xl:max-h-[300px] " />
+                <img 
+                    src={userInfo.dp ? userInfo.dp : profilePlaceholder}
+                    alt="user avatar" 
+                    className="relative bottom-12 left-2 max-w-full w-[9%] rounded-full inline-block z-10 " 
+                />
                 <button 
                     className="mb-4 text-[16px] font-black text-white bg-[#37BCF7] py-[5px] px-[15px] rounded-[10px] 
                     float-right relative top-5" 
@@ -84,19 +98,27 @@ const DisplayProfile = ({goback, setDisplay}) => {
                     Edit profile                
                 </button>
 
-                <h1 className=" font-black text-[24px]" >Daniel Alba</h1>
-                <p className="text-[#8E8E93] mb-4 text-[18px] " >
-                    @therealdanielalba
+                <h1 className=" font-black text-[24px]" >
+                    {userInfo.first_name ? userInfo.first_name + ' ' + userInfo.last_name : 'Daniel Alba'}
+                </h1>
+                <p className="text-[#8E8E93] mb-5 text-[18px] flex items-center " >
+                    @{
+                        userInfo.username? userInfo.username :'@therealdanielalba'
+                    }
                     
-                    <div className="w-[2px] mx-[10px] h-4 bg-[#8E8E93] inline-block"></div>
+                    <span className="w-[2px] mx-[10px] h-4 bg-[#8E8E93] inline-block"></span>
 
-                        <img src= {locateicon} alt="" className="inline-block w-[15px] relative bottom-[2px] "/>
+                    <img src= {locateicon} alt="" className="inline-block w-[15px] relative bottom-[2px] "/>
                     
-                    <span>{' USA'}</span>
+                    <span>
+                        {userInfo.location ? userInfo.location : 'Lagos, Nigeria'}
+                    </span>
                 </p>
-                <p className="text-[18px] 2xl:text-[20px]" >
-                    Hi there! i am Daniel and i work with WHO to make the world a better place. 
-                    I am here basically to raise more funds for the development of the next hybrid child. #HYBRIDCHILDREN
+                <p className="text-[18px]" >
+                    {
+                        userInfo.bio ? userInfo.bio :`Hi there! i am Daniel and i work with WHO to make the world a better place. 
+                        I am here basically to raise more funds for the development of the next hybrid child. #HYBRIDCHILDREN`
+                    }
                 </p>
             </div>
             <div className="bg-white w-[80%] mx-auto rounded " >
@@ -127,21 +149,84 @@ const DisplayProfile = ({goback, setDisplay}) => {
 const EditProfile = ({goback}) => {
 
     let userInfo = JSON.parse(localStorage.getItem('userInfo'))
-
     const [managetoggles, setmanagetoggles] = useState({
-        fullname:false,
-        bio:false,
-        location:false,
-        socialLinks:false,
+        fullname:true,
+        bio:true,
+        location:true,
+        socialLinks:true,
     })
 
     const managetoggleclick = (e) =>{
-        const currentevent = e.target.id
-        
-        let currenttogglevalue = managetoggles[currentevent]
-        
-        setmanagetoggles({...managetoggles, [currentevent]:!currenttogglevalue })
-        console.log(managetoggles)
+        const currentevent = e.target.id        
+        let currenttogglevalue = managetoggles[currentevent]        
+        setmanagetoggles({...managetoggles, [currentevent]:!currenttogglevalue })        
+    }
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [userImages, setUserImages] = useState({
+        dp:userInfo.dp ? userInfo.dp : profilePlaceholder,
+        background_image:userInfo.background_image ? userInfo.background_image : campaignimage
+    })
+
+    // Store profile data to update in state
+    const [profileData, setProfileData] = useState({})
+
+    const [imageforCrop, setImageforCrop] = useState(null)
+
+    const handleImageUpload = (e) =>{
+        const {name, value} = e.target
+        setUserImages({...userImages, [name]:URL.createObjectURL(e.target.files[0])})        
+        setProfileData({...profileData, [name]:e.target.files[0]})
+        if(name== 'dp' ){
+            setImageforCrop(e.target.files[0])
+        }
+    }
+
+    let handleInputChange = (e) =>{
+        const {name, value} = e.target
+        if(name === 'fullName'){
+            let fullName = value.split(' ')
+            let firstName = fullName[0]
+            let lastName = fullName[1] ? fullName[1] : ''
+            setProfileData({...profileData, first_name:firstName, last_name:lastName})            
+            return
+        }
+        setProfileData({...profileData, [name]:value})        
+    }
+
+    const handleProfileUpdate = async() =>{        
+        setIsLoading(true)
+        console.log(profileData)
+        const access_token = localStorage.getItem('access_token')
+        console.log(access_token)
+        const formData = new FormData()
+        // Iterate over the properties of the profileData object and append to formData
+        for (const [key, value] of Object.entries(profileData)) {
+            formData.append(key, value);
+        }
+
+        const updateProfile = await fetch(`https://palbucks-api.onrender.com/users/api/profile/`,{
+            method:'PATCH',
+            headers:{
+                Authorization: `Bearer ${access_token}`
+            },
+            body:formData
+        })
+
+        const response = await updateProfile.json()
+        console.log(response)
+
+        if(updateProfile.status === 200){
+            localStorage.setItem('userInfo', JSON.stringify(response))
+            userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            setIsLoading(false)
+        }else{
+            alert('An error occured while updating your profile')
+            setIsLoading(false)
+        }
+
+        setIsLoading(false)
     }
 
     return(
@@ -153,16 +238,39 @@ const EditProfile = ({goback}) => {
                 Change your profile photo, cover photo, bio and more
             </p>
 
+            {   imageforCrop !== null &&
+                <CropProfileImage 
+                    image = {imageforCrop} 
+                    profileData = {profileData} 
+                    setProfileData = {setProfileData} 
+                    userImages = {userImages}
+                    setUserImages = {setUserImages}
+                    setImageforCrop = {setImageforCrop}
+                />
+            }
+
             <div className="w-full relative mb-[70px]">
                 
                 <div className="relative">
-                    <img src={campaignimage} alt="campaign" className="rounded w-full" />
-                    <img src={uploadIcon} alt="upload icon" className="absolute inset-0 w-[35px] lg:w-[41px] m-auto cursor-pointer " />
+                    <img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[250px] 2xl:max-h-[300px] " />
+                    <label htmlFor="background_image">
+                        <img
+                            src={uploadIcon}
+                            alt="upload icon"
+                            className="absolute inset-0 w-[35px] lg:w-[41px] m-auto cursor-pointer "
+                        />
+                    </label>
+                    <input type="file" accept="image/*" name="background_image" id="background_image" className="hidden" onChange={handleImageUpload} />
                 </div>
                 <div className="absolute bottom-0 left-10 transform translate-x-[-10%] translate-y-[30%]">
                     <div className="relative w-[60px] lg:w-[120px] h-[60px] lg:h-[120px] mx-auto cursor-pointer ">
-                        <img src={useravatar} alt="user avatar" className="w-full h-full rounded-full" />
-                        <img src={uploadIcon} alt="upload icon" className="absolute inset-0 w-[24px] lg:w-[35px] m-auto" />
+                        <img src={userImages.dp} alt="user avatar" className="w-full h-full rounded-full" />
+                        <div className="w-fit">
+                            <label htmlFor="dp" className="cursor-pointer" >
+                                <img src={uploadIcon} alt="upload icon" className="absolute inset-0 w-[24px] lg:w-[35px] m-auto" />                                
+                            </label>
+                            <input type="file" name="dp" id="dp" className="hidden" onChange={handleImageUpload} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,12 +290,15 @@ const EditProfile = ({goback}) => {
                 </div>
                 <div className={` ${managetoggles.fullname? 'block' : 'hidden' } p-[30px]`} >
                     <input 
+                        id="fullName"
+                        name="fullName"
                         type="text" 
                         defaultValue={
                             userInfo.first_name ? 
                             userInfo.first_name + ' ' + userInfo.last_name:
                             'Daniel Alba'
                         }
+                        onChange = {handleInputChange}
                         className = {`w-[70%] max-w-[894px] h-[56px] rounded-[4px] border-[1px] border-[#D8D8D8] 
                         py-2 px-5 outline-0  `} 
                     />
@@ -202,7 +313,12 @@ const EditProfile = ({goback}) => {
                     <img src={managetoggles.bio ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
                 </div>
                 <div className={` ${managetoggles.bio? 'block' : 'hidden' } p-[30px]`} >
-                    <textarea                        
+                    <textarea
+                        type="text"
+                        name="bio"
+                        onChange={
+                            handleInputChange
+                        }                        
                         defaultValue={
                             userInfo.bio ? 
                             userInfo.bio:
@@ -243,6 +359,16 @@ const EditProfile = ({goback}) => {
                             <span className="text-xl font-bold " >Facebook Link</span>
                         </label>
                         <input
+                            type="url"
+                            name="facebook"
+                            defaultValue={
+                                userInfo.social_links.facebook ?
+                                userInfo.social_links.facebook :
+                                '' 
+                            }
+                            onChange={
+                                handleInputChange
+                            }
                             placeholder="Enter your facebook links here"
                             className = {`w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
                             py-2 px-5 outline-0  `}
@@ -254,6 +380,16 @@ const EditProfile = ({goback}) => {
                             <span className="text-xl font-bold " >Twitter Link</span>
                         </label>
                         <input
+                            type="url"
+                            name="twitter"
+                            defaultValue={
+                                userInfo.social_links.twitter ?
+                                userInfo.social_links.twitter :
+                                ''
+                            }
+                            onChange={
+                                handleInputChange
+                            }
                             placeholder="Enter your twitter links here"
                             className = {`w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
                             py-2 px-5 outline-0  `}
@@ -265,6 +401,16 @@ const EditProfile = ({goback}) => {
                             <span className="text-xl font-bold " >Instagram Link</span>
                         </label>
                         <input
+                            type="url"
+                            name="instagram"
+                            onChange={
+                                handleInputChange
+                            }
+                            defaultValue={
+                                userInfo.social_links.instagram ?
+                                userInfo.social_links.instagram :
+                                ''
+                            }                            
                             placeholder="Enter your instagram links here"
                             className = {`w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
                             py-2 px-5 outline-0  `}
@@ -273,8 +419,16 @@ const EditProfile = ({goback}) => {
                 </div>
             </div>
 
-            <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 max-w-[400px] md:max-w-[460px] h-[48px] rounded-[10px] text-white font-bold text-[18px] block  " >
-                save profile changes
+            <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 max-w-[400px] md:max-w-[460px] h-[48px] rounded-[10px] text-white font-bold text-[18px] block " 
+                onClick = {handleProfileUpdate}
+            >
+                {/* {isLoading ? <Loadingspinner /> : 'Save profile changes'} */}
+                <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                        <Loadingspinner width = '28px' height = '28px' />
+                </div>
+                <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                    Save profile changes
+                </span>
             </button>
             <button className="text-[#37BCF7] mx-auto px-5  w-1/2 max-w-[400px] xl:max-w-[460px] h-[48px] rounded-[10px] hover:bg-white font-bold text-[18px] block " >
                 cancel changes
@@ -285,4 +439,91 @@ const EditProfile = ({goback}) => {
         </div>
     )
 }
+
+
+
+export const CropProfileImage = ({image, setImageforCrop , userImages, setUserImages, profileData, setProfileData}) => {
+
+    let [profileImageUrl,setProfileImageUrl] = useState(null)
+    const [fileName, setFileName] = useState(null)
+
+    
+    //Easy crop package code
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)    
+
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels)
+    }, [])
+
+    const showCroppedImage = useCallback(async () => {        
+        try {
+          const croppedImage = await getCroppedImg(
+            profileImageUrl,
+            croppedAreaPixels,            
+          );
+          
+          setUserImages((previousdata) => ({
+            ...previousdata,
+            dp: croppedImage,
+            }));            
+    
+          // Convert the image URL to a file for the server          
+          const convertedImage = await urltoFile(croppedImage, fileName);
+          
+          // store the image file in the profileData state
+          setProfileData((previousdata) => ({
+            ...previousdata,
+            dp: convertedImage,
+          }));
+          
+
+        } catch (e) {
+          console.error(e);
+        }
+    }, [profileImageUrl, croppedAreaPixels]);
+    
+    
+
+    useEffect(()=>{
+        async function readImage(){
+            setFileName(image.name)
+            let ImageUrl = await readFile(image)
+            setProfileImageUrl(ImageUrl)
+            //console.log(profileImageUrl)   
+        }
+        readImage()
+    },[])
+
+    return (
+        <div className="fixed z-50 inset-0 overflow-y-auto">
+            <div className="flex flex-col gap-5 items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+                <div className="fixed inset-0 bg-gray-500 opacity-75"></div>
+                <div className="w-[550px] h-[400px] inline-block align-bottom bg-gray-900 rounded-lg overflow-hidden shadow-xl transform transition-all relative">
+                    <Cropper
+                        image={profileImageUrl}
+                        crop={crop}
+                        aspect={1}
+                        cropShape="round"
+                        onCropChange={setCrop}
+                        onCropComplete={onCropComplete}
+                        zoom={1} // Set a fixed zoom level to maintain the same circular cropping area
+                        restrictPosition={false}
+                    />
+                    <button
+                        className="bg-[#37BCF7] px-8 py-2 text-white font-semibold absolute bottom-4 left-4 shadow-md rounded hover:bg-[#0baef4]"
+                        onClick={() => {
+                            showCroppedImage();
+                            setImageforCrop(null)                            
+                        }}
+                    >
+                        Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+    
+}
+
 

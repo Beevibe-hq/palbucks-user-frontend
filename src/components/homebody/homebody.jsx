@@ -15,13 +15,15 @@ import Emptycampaign from '../emptycampaign/emptycampaign'
 
 function Homebody(){
 
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
   //stores all the events data in redux store so it can be accessed anywhere
   const dispatch = useDispatch()
   
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
   const crowdfundEvents = useSelector(state => state.crowdfundEvents)
-
+  const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.first_name == userInfo.first_name))
   const lastScrollPositionRef = useRef(null);
   
   //sets state for the homepage's display
@@ -31,6 +33,27 @@ function Homebody(){
   //sets state for the foryou page's display
   const [forYouView, setforYouView] = useState('all')
 
+  
+  const checkCampaignStatus = (date) => {
+    const today = new Date()
+    const campaignEndDate = new Date(date)
+    const timeDifference = campaignEndDate.getTime() - today.getTime()
+    const daysDifference = timeDifference / (1000 * 3600 * 24)
+    
+    // Calculate difference in milliseconds between the two dates and convert to days
+    const daysLeft = Math.ceil((campaignEndDate - today) / (1000 * 60 * 60 * 24));
+        
+    if (daysDifference < 0) {
+      return {
+        campaignStatus :'ended',
+      }
+    } else if (daysDifference > 0) {
+      return {
+        campaignStatus :'active',
+        daysLeft
+      }
+    }
+  }
   
   useEffect(()=>{  
     window.scrollTo(0, scrollposition) //scroll to the page's previous position
@@ -109,7 +132,7 @@ function Homebody(){
                                 <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
                                 organizeraccounts = {item.organizeraccounts} organiser = {item.organiser} title = {item.title} description = {item.description}
                                 amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
-                                location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {i}
+                                location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
                                 organizer = {item.user_name}
                                 />
                               )
@@ -165,8 +188,10 @@ function Homebody(){
                       forYouView == 'all' ? 
                       <div>
                         <h2 className='font-black text-[24px] mb-[10px]' >All Campaigns</h2>
-                        <p className='text-[18px] mb-7' >This is a list of all your campaigns, including active, ended and draft campaigns.</p>
-                        {
+                        <p className='text-[18px] mb-7' >
+                          This is a list of all your campaigns, including active, ended and draft campaigns.
+                        </p>
+                        {/* {
                           foryoudata.length == 0 ? 
                           <Emptycampaign /> :
                           foryoudata.map((item,i) =>(
@@ -179,6 +204,27 @@ function Homebody(){
                             : null
                           ))
                           
+                        } */}
+                        {
+                          personalEvents.length === 0 ? 
+                            <Emptycampaign /> :                          
+                          personalEvents.map((item,i) =>(
+                            checkCampaignStatus(item.end_date).campaignStatus === 'ended' ? 
+                              (
+                                <Endedcampaign img = {item.banner} id = {item.id} title = {item.title} key = {item.id} />
+                              )
+                            :checkCampaignStatus(item.end_date).campaignStatus === 'active' ? 
+                              (
+                                <Activecampaign img = {item.banner} id = {item.id} title = {item.title} daysleft = {checkCampaignStatus(item.end_date).daysLeft} key = {item.id} />
+                              )
+                            :checkCampaignStatus(item.end_date).campaignStatus === 'draft' ?
+                              (
+                                <Draftcampaign key = {item.id} />
+                              )
+                            : null
+                            
+                          ))
+
                         }
                       </div> 
                       
@@ -188,15 +234,20 @@ function Homebody(){
                       <div className='pr-[40px]' >
                         <h2 className='font-black text-[24px] mb-[10px]' >Active Campaign</h2>
                         <p className='text-[18px] mb-7 ' >Make edits and also view your dashboard for your active campaign</p>
-                        {
+                        {/* {
                             foryoudata.filter(item => item.campaignstatus == 'active').length == 0 ? 
                             <Emptycampaign title = 'You have no active campaign to show here' /> 
                             :
                             foryoudata.filter(item => item.campaignstatus == 'active').map((item,i) =>(
                             <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft} key = {i} />
-                          )) 
-                          
-                          
+                          ))                                                                               
+                        } */}
+                        {
+                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').length == 0 ?
+                            <Emptycampaign title = 'You have no active campaign to show here' /> :
+                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').map((item,i) =>(
+                            <Activecampaign img = {item.banner} id = {item.id} title = {item.title} daysleft = {checkCampaignStatus(item.end_date).daysLeft} key = {item.id} />
+                          ))
                         }
 
                       </div>
@@ -208,11 +259,18 @@ function Homebody(){
                         <h2 className='font-black text-[24px] mb-[10px]' >Ended Campaign</h2>
                         <p className='text-[18px] mb-7 ' >These are your campaigns that you ended or has completed its 
                         time frame. They will automatically be deleted after 30 days.</p>
-                        {
+                        {/* {
                           foryoudata.filter(item => item.campaignstatus == 'ended').length == 0 ? 
                           <Emptycampaign /> : 
                           foryoudata.filter(item => item.campaignstatus == 'ended').map((item,i) =>(
                             <Endedcampaign img = {item.img} title = {item.title} key = {i} />
+                          ))
+                        } */}
+                        {
+                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').length == 0 ?
+                            <Emptycampaign /> :
+                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').map((item,i) =>(
+                            <Endedcampaign img = {item.banner} id = {item.id} title = {item.title} key = {item.id} />
                           ))
                         }
                       </div>

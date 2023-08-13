@@ -38,7 +38,7 @@ function Mutedaccounts(){
 
             <hr className = " border-[1px] border-[#C4C4C4] " />
                             
-            <div className ={` ${openmutedaccounts == 'open' ? 'flex' : 'hidden'} px-7 py-6 mb-3 gap-8 flex-wrap items-center `} >                
+            <div className ={` ${openmutedaccounts == 'open' ? 'flex h-[150px] overflow-auto ' : 'hidden'} px-7 py-6 mb-3 gap-8 flex-wrap items-center `} >                
                 {
                     mutedusersdata.map((item,i) =>{
                         return(

@@ -71,6 +71,9 @@ function Sidebar(){
             console.log(logoutResponse);
         
             if (logout.ok) {
+
+                navigate('/signin');
+
                 // Clear all data from localStorage
                 localStorage.clear();
                 
@@ -80,7 +83,7 @@ function Sidebar(){
                 await checkAuthentication(dispatch)
                 //dispatch(setIsAuthenticated(false))
 
-                navigate('/signin');
+                
                 
             } else {
                 console.error('Logout failed');
