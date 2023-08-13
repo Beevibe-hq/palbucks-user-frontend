@@ -52,6 +52,7 @@ function App() {
 
   useEffect( ()=>{
    
+    // Probably also reget user details whenever this is run to update the user details in the redux store
     checkAuthentication(dispatch)
         
         
@@ -94,7 +95,11 @@ function App() {
             
             <Route path='/detailed/:id' element = { <Detailedevent /> } />
             <Route path= '/settings' element = { <Settings />} />
-            <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />
+
+            <Route path='/organisecrowdfund' element = { <PrivateRoute element = { <Home /> } /> } >
+              <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />              
+            </Route>
+
             <Route path='/profilepage' element  = {<Profilepage />} />
             <Route path='/wallet' element = {<Wallet/>} />
             <Route path='/notificationspage' element = { <Notificationspage />} />

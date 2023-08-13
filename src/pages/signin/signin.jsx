@@ -49,11 +49,11 @@ const Signin = () => {
     const handleSignin = async (e) => {        
         //dispatch(setLogoutLoading(true))
         setIsLoginLoading(true)
-        e.preventDefault()
-        await emailPasswordValidation(setValidateInput,signinInfo.email,signinInfo.password)
+        e.preventDefault()        
+        await emailPasswordValidation(setValidateInput,signinInfo.email,signinInfo.password,true)
         .then(async validationMessage => {
-            if(validationMessage.email == 'correct' && validationMessage.password == 'Strong password' ){
-                console.log(validationMessage)
+            console.log(validationMessage)
+            if(validationMessage.email == 'correct'){                
                 try {
             
                     console.log(signinInfo)
@@ -112,7 +112,7 @@ const Signin = () => {
             <img src= {palbucks} alt="palbucks" className=" w-[138px] h-[24px] "  />
         </div>
 
-        <div className="flex items-center gap-[35px] " >
+        <div className="flex items-center gap-[35px]" >
             <Link to = '/signin' className="text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
                 <span>Don’t have an account yet?</span>
             </Link>
@@ -159,7 +159,7 @@ const Signin = () => {
                         </p>
                     ) : null
                 }
-                <PasswordInput onChange = {handlePasswordChange} validateInput = {validateInput} setValidateInput = {setValidateInput} />
+                <PasswordInput ignorePasswordVerifier = {true} onChange = {handlePasswordChange} validateInput = {validateInput} setValidateInput = {setValidateInput} />
                 <button 
                     className="min-w-[228px] mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] 
                     font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto flex items-center justify-center  " 

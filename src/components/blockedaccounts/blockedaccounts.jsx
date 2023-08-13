@@ -43,7 +43,7 @@ function Blockedaccounts(){
 
             <hr className = " border-[1px] border-[#C4C4C4] " />
                             
-            <div className ={` ${openblockedaccounts == 'open' ? 'flex' : 'hidden'} px-7 py-6 mb-3 gap-8 flex-wrap items-center `} >                
+            <div className ={` ${openblockedaccounts == 'open' ? 'flex h-[300px] overflow-auto ' : 'hidden'} px-7 py-6 mb-3 gap-8 flex-wrap items-center `} >                
                 {
                     blockedusersdata.map((item,i) =>{
                         return(

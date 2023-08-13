@@ -67,10 +67,10 @@ function Fundevent(props){
                         {
                             props.accountimages ? props.accountimages.map((item,i)=>{
                                 return(
-                                    <img src = {item} alt = 'Organizer profile' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' key = {i} />
+                                    <img src = {item} alt = 'Organizer profile' className='rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' key = {i} />
                                 )
                             })  :
-                            <img src={profileImgPlaceholder} alt = 'Organizer profile' className=' fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' />
+                            <img src={props.organiser.dp !== null ? props.organiser.dp :profileImgPlaceholder} alt = 'Organizer profile' className=' rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' />
                         }
                     </div>
                     <div className="flex flex-col relative max-w-[100%] truncate">

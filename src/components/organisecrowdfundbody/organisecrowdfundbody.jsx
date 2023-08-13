@@ -1,4 +1,5 @@
 import { infoicon, infoicon2, uploadicon } from "../../images";
+import uploadSuccessIcon from "../../images/organiseCrowdfund/Information icon.png"
 import arrowup from "../../images/arrowup.svg"
 import arrowdown from "../../images/arrowdown.svg"
 import arrowdown2 from "../../images/arrowdown2.svg"
@@ -68,6 +69,7 @@ function Organisecrowdfundbody(){
             first_name:userInfo.first_name,
             last_name:userInfo.last_name,
             email:userInfo.email,
+            username:userInfo.username
         },
         title:'',
         description:'',
@@ -189,9 +191,14 @@ function Organisecrowdfundbody(){
                             <img src={formdata.banner} alt="" className={` ${formdata.banner? 'w-[442px] h-[240px]' : 'hidden' }`}  />
                         </div> */}
                         <CropImage formdata = {formdata} setformdata = {setformdata}  />
-                        <div className={` ${ formdata.banner ? 'hidden' : 'flex' } gap-3 items-center py-1 `} >
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base " >Click icon to upload campaign image</p>
+                        <div className={` ${ formdata.banner ? 'flex' : 'flex' } gap-3 items-center py-1 `} >
+                            <img src={formdata.banner ? uploadSuccessIcon:infoicon} alt="info icon" />
+                            <p className={` ${formdata.banner ? 'text-[#37BCF7]':'text-[#8E8E93]'} text-base`} >
+                                {
+                                    formdata.banner ? 'Image uploaded successfully':'Click icon to upload campaign image' 
+                                }
+                                {/* Recommended size is 837px by 240px */}
+                            </p>
                         </div>
                     </div>
                 </div>
