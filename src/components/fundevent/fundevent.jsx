@@ -6,7 +6,7 @@ import likeicon from '../../images/likeicon.svg'
 import locateicon from '../../images/locateicon.svg'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sethomebodydata, sethomeorevent } from "../../actions/actions";
+import { editEventData, sethomebodydata, sethomeorevent } from "../../actions/actions";
 import Likeicon from "../../images/likeicon";
 
 import { useState } from "react";
@@ -23,7 +23,7 @@ function Fundevent(props){
     const dispatch = useDispatch()
     const homebodydata = useSelector(state => state.managehomebodydata)
 
-    const [liked, setliked] = useState(false)
+    const [liked, setliked] = useState(props.is_liked)
 
     //a react package for responsiveness
     const isMobile = useMediaQuery({
@@ -39,51 +39,57 @@ function Fundevent(props){
     function detailedevent(){
         navigate(`/detailed/${props.id}`)
         //dispatch(sethomeorevent(`event${props.id}`))
-
     }
 
-    const managelikes = async(event) =>{
-         
+    async function managelikes(event) {
         //prevent the parent div's onclick from trigerring        
         event.stopPropagation();
 
-        /* 
-        let currentStatus = homebodydata[props.id].liked
-        homebodydata[props.id].liked = !currentstatus
-        
-        dispatch(sethomebodydata(homebodydata)) */
-        //console.log(homebodydata[props.id].liked)
+        const likeOrUnlikeCrowdfund = async (status) => {
+            const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${props.id}/like/`, {
+                method: 'POST',
+                body: JSON.stringify({ status: status }),
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response;
+        };
 
-        /* const likeCrowdfund = await fetch(`https://palbucks-api.onrender.com/funding/api/${props.id}/like/`,{
-            method:'POST',
-            body:JSON.stringify({status:1}),
-            headers:{
-                Authorization: `Bearer ${access_token}`,
-                'Content-Type': 'application/json'
+        if (liked) {
+            const response = await likeOrUnlikeCrowdfund(0)
+            console.log(await response.json());
+            if (response.status == 200) {
+                //alert('Crowdfund liked successfully')
+                setliked(false);
+                dispatch(editEventData({
+                    id: props.id,
+                    is_liked: false
+                })
+                );
+            } else {
+                alert('Crowdfund like failed');
             }
-        })
-
-        const unlikeCrowdfund = await fetch(`https://palbucks-api.onrender.com/funding/api/${props.id}/like/`,{
-            method:'POST',
-            body:JSON.stringify({status:0}),
-            headers:{
-                Authorization: `Bearer ${access_token}`,
-                'Content-Type': 'application/json'
+        } else {
+            const response = await likeOrUnlikeCrowdfund(1)
+            console.log(await response.json());
+            if (response.status == 200) {
+                //alert('Crowdfund liked successfully')
+                setliked(true);
+                dispatch(editEventData({
+                    id: props.id,
+                    is_liked: true
+                })
+                );
+            } else if (response.data == 'You cannot like the same funding more than once') {
+                const resp = await likeOrUnlikeCrowdfund(0);
+                console.log(resp);
+            } else {
+                alert('Crowdfund like failed');
             }
-        }) */
-
-        /* const response = await likeCrowdfund.json()
-        console.log(response)
-        if(likeCrowdfund.status == 200){
-            //alert('Crowdfund liked successfully')
-            setliked(true)
-        }else if(response.data == 'You cannot like the same funding more than once'){
-            const resp = await unlikeCrowdfund.json()
-            console.log(resp)
-        }else{
-            alert('Crowdfund like failed')
-        } */
-        setliked(!liked)
+        }
+        //setliked(!liked)
     }
 
     return(
@@ -99,7 +105,7 @@ function Fundevent(props){
                         {
                             props.accountimages ? props.accountimages.map((item,i)=>{
                                 return(
-                                    <img src = {item} alt = 'Organizer profile' className='rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' key = {i} />
+                                    <img src = {item} alt = 'profile img' className='rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' key = {i} />
                                 )
                             })  :
                             <img src={props.organiser.dp !== null ? props.organiser.dp :profileImgPlaceholder} alt = 'Organizer profile' className=' rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' />

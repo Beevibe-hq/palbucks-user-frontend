@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { sethomebodydata, sethomeorevent, setlinkcolor } from "../../actions/actions"
+import { sethomebodydata, sethomeorevent, setlinkcolor, editEventData } from "../../actions/actions"
 import backarrow from "../../images/backarrow.svg"
 import date from "../../images/date.svg"
 import share from "../../images/share.svg"
@@ -15,12 +15,15 @@ import Campaignorganizers from "../campaignorganizers/campaignorganizers"
 import { useEffect, useState } from "react"
 import Likeicon from "../../images/likeicon"
 import editIcon from "../../images/crowdfunds/editIcon.svg"
+import commentIcon from "../../images/crowdfunds/commentIcon.svg"
+
 
 import Navbar from "../navbar/navbar"
 import { useMediaQuery } from "react-responsive"
 import Sidebar from "../sidebar/sidebar"
 import { useNavigate, useParams } from "react-router-dom"
 import Activities from "../activities/activities"
+import CommentModal from "../commentModal/commentModal"
 
 function Detailedevent(props){
     
@@ -35,6 +38,7 @@ function Detailedevent(props){
     const params = useParams()
     const navigate = useNavigate()
 
+    //This selects the particular event from the homebodydata array
     let eventid = params.id
     let eventdetails = homebodydata.filter(item => item.id == eventid)[0]
     
@@ -81,25 +85,96 @@ function Detailedevent(props){
     };
       
     arrangeorganizerdetails()
+
     let totaldonations = formatnumber(eventdetails.totaldonations);
 
-    const [liked,setliked] = useState(false)
-    const managelikes = () =>{
-        /* let currentstatus = homebodydata[eventid].liked
-        homebodydata[eventid].liked = !currentstatus
-        dispatch(sethomebodydata(homebodydata)) */
-        setliked(!liked)
-        /* console.log(eventdetails.liked) */
+    //This manages the like button
+    const [liked,setliked] = useState(eventdetails.is_liked)
+    const access_token = localStorage.getItem('access_token')
+    const managelikes = async(event) =>{         
+        //prevent the parent div's onclick from trigerring        
+        event.stopPropagation();
+        
+        const likeOrUnlikeCrowdfund = async(status) => {
+            const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${eventid}/like/`,{
+                method:'POST',
+                body:JSON.stringify({status:status}),
+                headers:{
+                    Authorization: `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            return response
+        }
+
+        if(liked){
+            const response = await likeOrUnlikeCrowdfund(0)
+            //console.log(await response.json())
+            if(response.status == 200){
+                //alert('Crowdfund liked successfully')
+                setliked(false)
+                dispatch(editEventData({
+                    id:eventid,
+                    is_liked: false
+                })
+            )
+            }else{
+                alert('Crowdfund like failed')
+            }
+        }else{
+            const response = await likeOrUnlikeCrowdfund(1)
+            //console.log(await response.json())
+            if(response.status == 200){
+                //alert('Crowdfund liked successfully')
+                setliked(true)
+                dispatch(editEventData({
+                    id:eventid,
+                    is_liked: true
+                })
+            )
+            }else if(response.data == 'You cannot like the same funding more than once'){
+                const resp = await likeOrUnlikeCrowdfund(0)
+                console.log(resp)
+            }else{
+                alert('Crowdfund like failed')
+            }
+        }        
+        //setliked(!liked)
     }
     
-    useEffect(()=>{
-            //To scroll page to the top on mount of component
+    useEffect(()=>{            
             window.scrollTo(0,0)
-            setliked(eventdetails.liked)
-            //dispatch(setlinkcolor('home'))
-            console.log(eventdetails)
+            setliked(eventdetails.is_liked)
+                        
+            //Fetch the comments for this event from the backend
+            const getComments = async() => {
+                const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${eventid}/comments/`,{
+                    headers:{
+                        Authorization: `Bearer ${access_token}`
+                    }
+                })
+                const data = await response.json()
+                
+                if(response.ok){
+                    // Sort data in descending order of timestamp before storing
+                    data.sort((a,b) => {
+                        return new Date(b.timestamp) - new Date(a.timestamp)
+                    })
+                    setCommentData(data)
+                }else{
+                    alert('Failed to get comments')
+                }
+            }
+            getComments()
     },[])
 
+    //Comment data
+    const [commentData, setCommentData] = useState([])
+
+    // Update number of comments to display when comments change
+    useEffect(()=>{
+        setCommentsNumber(Math.ceil(commentData.length/2 < 3 ? 3 : commentData.length/2))
+    },[commentData])
 
     const sidebaropen = useSelector(state => state.sidebarstate)
     const sidebarslid = useSelector(state => state.sidebarslid)
@@ -110,10 +185,16 @@ function Detailedevent(props){
     const end_date = new Date(eventdetails.end_date);
     const today = new Date();
     
+
     // Calculate difference in milliseconds between the two dates and convert to days
     const daysLeft = Math.ceil((end_date - today) / (1000 * 60 * 60 * 24));
+    
+    // Determines number of comments to show
+    const [commentsNumber, setCommentsNumber] = useState(Math.ceil(commentData.length/2))
 
-    const [commentsNumber, setCommentsNumber] = useState(Math.ceil(commentdata.length/2))
+    // Display comment or update modal
+    const [displayCommentModal, setDisplayCommentModal] = useState(false)
+    
 
         return(
             <div className=' bg-[#F9F9F9] min-h-full relative ' >
@@ -170,7 +251,7 @@ function Detailedevent(props){
                                             className = {` ${eventdetails.organiser.first_name == userInfo.first_name ? 
                                             'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-[#37BCF7] rounded-[10px] w-full py-[10px] max-h-[40px] px-4 text-base text-[#37BCF7] font-black ' 
                                             : 'hidden' } `}
-                                            onClick={managelikes}>                                            
+                                            >                                            
                                             <img src={editIcon} alt="Edit icon" className="w-5" />
                                             <span>Edit Campaign</span>
                                         </button>
@@ -194,19 +275,41 @@ function Detailedevent(props){
                                     </button>
                                     <hr className = "-mx-3 sm:mx-0  border-[1px] border-[#dcdbdb] mb-3 md:mb-8 " />
                                     <Campaignorganizers organizerdetails = {organizerdetails} organiser = {eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage = {eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder}  />
-                                    <h3 className="mt-10 md:mt-14 mb-6 md:mb-7 text-lg font-bold " >Comments (105)</h3>
+                                    <button className="mt-10 flex items-center justify-center gap-2 py-[5px] px-8 rounded-[20px] bg-[#FFFFFF]
+                                        border-[2px] border-[#37BCF7] shadow-[0px_0px_15.786517143249512px_0px_rgba(0,0,0,0.04)]
+                                        " 
+                                        onClick={
+                                            () => {
+                                                setDisplayCommentModal(true)
+                                            }
+                                        }
+                                        >
+                                        <img 
+                                            src={commentIcon} 
+                                            alt="comment icon" 
+                                            className="w-4 h-4 "    
+                                        />
+                                        <span className=" text-base " >
+                                            Write a comment
+                                        </span>
+                                    </button>
+                                    <CommentModal displayCommentModal={displayCommentModal} setDisplayCommentModal = {setDisplayCommentModal} eventid = {eventid} setCommentData = {setCommentData} />
+
+                                    <h3 className="mt-6 mb-6 md:mb-7 text-lg font-bold " >
+                                        Comments (105)
+                                    </h3>
                                     <div className=" flex flex-col gap-8">
                                         {
-                                            commentdata.slice(0,commentsNumber).map((item,i) =>{
+                                            commentData.slice(0,commentsNumber).map((item,i) =>{
                                                 return(
-                                                    <Comment key={i} image={item.img} name={item.name} time={item.time} comment={item.comment} />
+                                                    <Comment key={i} image={item.user.dp ? item.user.dp : profileImgPlaceholder} name={item.user.first_name} time={item.timestamp} comment={item.comment} />
                                                 )
                                             })
                                         }
                                     </div>
-                                    <button className={`bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
+                                    <button className={ ` ${commentData.length == 0 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
                                     rounded-[10px] font-black text-base tracking-[0.06px] `} 
-                                    onClick = {()=>setCommentsNumber(commentdata.length)}
+                                    onClick = {()=>setCommentsNumber(commentData.length)}
                                     >
                                         See more
                                     </button>
@@ -231,15 +334,55 @@ export default Detailedevent
 
 //This is the component for each comment
 function Comment(props){
+    
+    //  Calculate time difference between now and the time the comment was made
+    const timeDifference = (timestamp) => {
+        const now = new Date();
+        const commentTime = new Date(timestamp);
+        const difference = now - commentTime;
+        const seconds = Math.floor(difference / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const weeks = Math.floor(days / 7);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(days / 365);
+
+        if (years > 0) {
+            return `${years} years ago`;
+        }
+        if (months > 0) {
+            return `${months} months ago`;
+        }
+        if (weeks > 0) {
+            return `${weeks} weeks ago`;
+        }        
+        if (days > 0) {
+            return `${days} days ago`;
+        }
+        if (hours > 0) {
+            return `${hours} hours ago`;
+        }
+        if (minutes > 0) {
+            return `${minutes} mins ago`;
+        }
+        if (seconds > 0) {
+            return `${seconds} secs ago`;
+        }
+
+        return "Just now";    
+    }
 
     return(
         <div className="flex items-start gap-4  " >
-            <img src={props.image} alt="user 7 profile" className="w-[60px]" />
-            <div className="flex flex-col gap-4 ">
+            <img src={props.image} alt="user 7 profile" className="w-[60px] rounded-full " />
+            <div className="flex flex-col gap-3 ">
                 <div className="flex flex-col gap-1 ">
                     <h3 className="font-black text-lg leading-4 " >{props.name}</h3>                    
                     <p>
-                        {props.time}
+                        {
+                            timeDifference(props.time)
+                        }
                     </p>
                 </div>
                 <p>{props.comment}</p>
@@ -251,7 +394,7 @@ function Comment(props){
 
 
 //Comments data carrying the necessary detail in each comment
-let commentdata = [
+/* let commentdata = [
     {
         img:user7,
         name:'Amanda',
@@ -286,4 +429,4 @@ let commentdata = [
         The only places that are actually looking good are those areas where the rich stay in. 
         Good job dude. `
     }
-]
+] */

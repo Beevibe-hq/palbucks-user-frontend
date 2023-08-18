@@ -133,7 +133,7 @@ function Homebody(){
                                 organizeraccounts = {item.organizeraccounts} organiser = {item.organiser} title = {item.title} description = {item.description}
                                 amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
                                 location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
-                                organizer = {item.user_name}
+                                organizer = {item.user_name} is_liked = {item.is_liked}
                                 />
                               )
                           })

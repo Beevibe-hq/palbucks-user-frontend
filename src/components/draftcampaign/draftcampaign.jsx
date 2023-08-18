@@ -15,7 +15,7 @@ function Draftcampaign(props){
                 </div>
 
                 <div className="flex gap-[25px]" >
-                    <img src={props.img ? props.img : smalluploadicon} alt="user crowdfund img" className="w-[80px] h-[70px] rounded " />
+                    <img src={props.img ? props.img : smalluploadicon} alt="user crowdfund img" className="w-[80px] h-[70px] rounded object-cover " />
                     <div className="flex flex-col w-[85%]" >
                         <h5 className="text-[18px] font-black leading-5 mb-2 " >{props.title ? props.title : 'Campaign title has not being added yet ' }</h5>
                         <p className=" text-[#525252]  " >Pending</p>

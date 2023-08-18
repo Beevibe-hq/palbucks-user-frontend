@@ -164,3 +164,11 @@ export const setOtpVerified = (data) => {
         payload:data
     }
 }
+
+export const editEventData = (data) => {
+    
+    return{
+        type:'editEventData',
+        payload:data
+    }
+}
