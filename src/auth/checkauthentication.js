@@ -50,7 +50,8 @@ export const checkAuthentication = async(dispatch) => {
                         if(newToken.ok){
                             localStorage.setItem('access_token',refreshData.access)
                             //setIsAuthenticated(true)
-                            dispatch(setIsAuthenticated(true))                            
+                            dispatch(setIsAuthenticated(true))    
+                            console.log('Token updated /refreshed successfully')                        
                         }else{
                             return {
                                 detail:'Token is invalid or expired',

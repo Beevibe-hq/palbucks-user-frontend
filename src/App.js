@@ -15,16 +15,14 @@ import medicalimg from './images/categoryImages/medical label.svg'
 import animalimg from './images/categoryImages/animal label.svg'
 
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-
+import { BrowserRouter, Route, Routes, useNavigate, useHistory } from "react-router-dom";
 
 import Home from "./pages/home/home";
 import Settings from "./pages/settings/settings";
 import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { loadCrowdfundEvents, sethomebodydata } from './actions/actions'
+import { loadCrowdfundEvents, sethomebodydata, setIsAuthenticated } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Profilepage from './components/profilepage/profilepage'
 import Wallet from './pages/wallet/wallet'
@@ -44,24 +42,36 @@ import { checkAuthentication } from './auth/checkauthentication'
 import { refreshToken } from './auth/refreshToken'
 import Loadingspinner from './components/loadingspinner/loadingSpinner'
 
+
 function App() {
     
     const dispatch = useDispatch();
     //const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated)
-    const logoutLoading = useSelector(state => state.authReducer.isLoading)
+    const logoutLoading = useSelector(state => state.authReducer.isLoading)    
+    const navigate = useNavigate()
 
   useEffect( ()=>{
    
     // Probably also reget user details whenever this is run to update the user details in the redux store
-    checkAuthentication(dispatch)
-        
+    const verifyToken = async() => {
+      const response = await checkAuthentication(dispatch)      
+      if(response && response.code === 'token_not_valid'){
+        refreshToken(dispatch,navigate)       
+        console.log('logging out')
+        /* dispatch(setIsAuthenticated(false))                
+        localStorage.clear()
+        navigate('/signin') */
+      }      
+    }
+    
+    verifyToken()
         
    //Store crowdfund details in Redux store 
    // dispatch(sethomebodydata(data))
 
    // Refresh the access token every 15 minutes
    const tokenRefreshInterval = setInterval(()=>{
-      refreshToken(dispatch)
+      refreshToken(dispatch,navigate)
       //alert('refresh')
    }, 15 * 60 * 1000 )
 
@@ -78,8 +88,7 @@ function App() {
       </div>
     )
   }else{
-    return (    
-      <BrowserRouter>
+    return (          
         <div className="h-screen">        
           <Routes>
             <Route path='/' element = {<LandingPage />} />
@@ -111,8 +120,7 @@ function App() {
             <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
             <Route path='/communityguidelines' element = { <CommunityGuidelines/> } />
           </Routes>
-        </div>
-      </BrowserRouter>
+        </div>      
     );
   }
 }

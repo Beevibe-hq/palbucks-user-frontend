@@ -17,7 +17,7 @@ function Endedcampaign(props){
                 </div>
 
                 <div className="flex gap-[25px]" >
-                    <img src={props.img} alt="user crowdfund img" className="w-[80px] h-[70px] rounded " />
+                    <img src={props.img} alt="user crowdfund img" className="w-[80px] h-[70px] object-cover rounded " />
                     <div className="flex flex-col lg:w-[70%] xl:w-[75%] " >
                         <h5 className="text-[18px] font-black leading-5 mb-2 " >{props.title}</h5>
                         <p className=" text-[#525252]  " >Campaign has ended</p>

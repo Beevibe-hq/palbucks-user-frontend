@@ -67,7 +67,7 @@ const Signin = () => {
                     });
               
                     const response = await signinRequest.json();
-        
+                    console.log(response)
                     if(signinRequest.ok){
                         const {access_token, refresh_token, user} =  response
         
@@ -81,7 +81,7 @@ const Signin = () => {
                         await checkAuthentication(dispatch)                
                         dispatch(setLogoutLoading(false))
         
-                        navigate('/home')
+                        navigate('/home', {replace:true})
                     }else if(response.non_field_errors[0] == 'Unable to log in with provided credentials.'){
                         setValidateInput(prevState => ({
                             ...prevState,                             

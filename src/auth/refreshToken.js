@@ -1,7 +1,7 @@
 import { setIsAuthenticated } from "../actions/actions";
 
 // Function to refresh the access token
-export const refreshToken = async (dispatch) => {
+export const refreshToken = async (dispatch,navigate) => {
     const refresh_token = localStorage.getItem('refresh_token');
 
     if (refresh_token) {
@@ -23,9 +23,12 @@ export const refreshToken = async (dispatch) => {
                 localStorage.setItem('access_token', refreshData.access);
                 console.log('Token updated successfully')
                 dispatch(setIsAuthenticated(true))
+                return 'success'
             }else{
+                console.log('Token refresh failed')
                 // If the refresh token is invalid or expired
                 dispatch(setIsAuthenticated(false))
+                navigate('/signin')
             }
         } catch (error) {
                 console.error(error);

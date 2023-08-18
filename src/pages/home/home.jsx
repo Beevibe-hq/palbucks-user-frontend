@@ -7,11 +7,13 @@ import Homebody from "../../components/homebody/homebody";
 import Navbar from "../../components/navbar/navbar";
 import Sidebar from "../../components/sidebar/sidebar";
 import { loadCrowdfundEvents } from "../../actions/actions";
+import { useNavigate } from "react-router-dom";
+import {refreshToken} from "../../auth/refreshToken"
 
 function Home(){
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     //This chooses if to render homebody or a particular fundevent's detailed page
     //const [homeorevent, sethomeorevent] = useState('home')
     const homeorevent = useSelector(state => state.managehomeorevent)
@@ -43,6 +45,16 @@ function Home(){
                 dispatch(loadCrowdfundEvents(crowdfunds))
             }else{
                 console.error(crowdfunds)
+                /* if(crowdfunds.code == 'token_not_valid'){                    
+                    // Attempt to refresh token first before redirecting
+                    const response = await refreshToken(dispatch, navigate)
+                    if (response == 'success'){
+                        window.location.reload(true)
+                    }else{
+                        navigate('/signin')
+                        localStorage.clear()
+                    }
+                } */
             }
             }            
             catch(error){
