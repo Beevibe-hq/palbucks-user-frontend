@@ -17,37 +17,67 @@ function Changepassword(){
 
     return(
         <div>
-                <h3 className = "text-xl font-bold mb-8 " >Change Your Password</h3>
+                <h3 className = "text-base md:text-xl font-bold mb-7 md:mb-8 " >Change Your Password</h3>
 
-                <div className = " w-[90%] lg:w-[80] xl:w-[75%] bg-white " >
-                    <div className = "flex justify-between items-center py-5 px-7 cursor-pointer " onClick = {managepasswordbody} >
-                        <h3 className = "text-lg font-bold" >Password </h3>
-                        <img src={openpassword? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "/>
+                <div className = " rounded-[5px] w-full md:w-[90%] lg:w-[80%] xl:w-[75%] bg-white " >
+                    <div className = "flex justify-between items-center p-[15px] md:py-5 md:px-7 cursor-pointer " onClick = {managepasswordbody} >
+                        <h3 className = "text-sm md:text-lg font-bold" >
+                            Password 
+                        </h3>
+                        <img 
+                            src={arrowup} alt="down arrow" 
+                            className = {` ${openpassword ? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px]`}
+                        />
                     </div>
 
                     <hr className = " border-[1px] border-[#C4C4C4] " />
 
-                    <div className = {` ${openpassword ? 'block' : 'hidden' } w-full py-6 px-7 `} >
+                    <div className = {` ${openpassword ? 'block' : 'hidden' } w-full py-3 md:py-6 px-[15px] md:px-7 `} >
                                                 
-                            <h4 className = "font-semibold text-base mb-4" >Current password</h4>
-                            <div className = "flex gap-4 items-center mb-9 ">
-                                <input type="text" id="currentpassword" placeholder = "What is your current password?" className = "w-[370px] h-[46px] border-[0.5px] border-[#DDDDDD] py-2 px-5 outline-0 " />
-                                <label htmlFor="currentpassword" className = "text-[#2CA9F2] font-semibold text-base " >Forgot password?</label>
+                            <h4 className = "font-bold text-sm md:text-base mb-[10px] md:mb-4" >Current password</h4>
+                            <div className = "flex flex-col md:flex-row gap-[10px] md:gap-4 md:items-center mb-5 md:mb-9 ">
+                                <input 
+                                    type="text" 
+                                    id="currentpassword" 
+                                    placeholder = "What is your current password?" 
+                                    className = {`w-full md:w-[370px] h-[46px] border-[0.5px] border-[#DDDDDD] 
+                                    py-2 px-[10px] md:px-5 outline-0 text-sm md:text-base rounded `}
+                                 />
+                                <label 
+                                    htmlFor="currentpassword" 
+                                    className = "text-[#2CA9F2] font-bold text-sm md:text-base cursor-pointer " >
+                                        Forgot password?
+                                </label>
                             </div>
                         
-                            <div className = 'flex w-full mb-8 ' >
-                                <section className = "w-full mr-6" >
-                                    <h4 className = "font-semibold text-base mb-4" >New password</h4>
-                                    <input type="text" id="newpassword" placeholder = "What is your new password?" className = "w-[100%] h-[46px] border-[0.5px] border-[#DDDDDD] py-2 px-5 outline-0 " />
+                            <div className = 'flex flex-col md:flex-row gap-5 w-full mb-5 md:mb-8 ' >
+                                <section className = "w-full" >
+                                    <h4 className = "font-bold text-sm md:text-base mb-[10px] md:mb-4" >New password</h4>
+                                    <input 
+                                        type="text" 
+                                        id="newpassword" 
+                                        placeholder = "What is your new password?" 
+                                        className = {`w-[100%] h-[46px] border-[0.5px] border-[#DDDDDD] 
+                                        py-2 px-[10px] md:px-5 rounded text-sm md:text-base outline-0 `} 
+                                    />
                                 </section>
 
                                 <section className = "w-full" >
-                                    <h4 className = "font-semibold text-base mb-4" >Confirm new password</h4>
-                                    <input type="text" id="newpassword" placeholder = "Repeat your new password?" className = "w-[100%] h-[46px] border-[0.5px] border-[#DDDDDD] py-2 px-5 outline-0 " />
+                                    <h4 className = "font-bold text-sm md:text-base mb-[10px] md:mb-4" >Confirm new password</h4>
+                                    <input 
+                                        type="text" 
+                                        id="newpassword" 
+                                        placeholder = "Repeat your new password?" 
+                                        className = {`w-[100%] h-[46px] border-[0.5px] border-[#DDDDDD] 
+                                        py-2 px-[10px] md:px-5 rounded text-sm md:text-base outline-0 `}     
+                                    />
                                 </section>
                             </div>
 
-                            <button className = " bg-[#2CA9F2] border-[2px] border-[#2CA9F2] py-2 px-4 rounded-[10px] text-white font-semibold text-base leading-5 " >
+                            <button 
+                                className = {`bg-[#2CA9F2] min-w-[102px] md:min-w-[160px] w-fit hover:bg-blue-500 h-[42px] text-white rounded-[5px] md:rounded-[12px] px-[11px] md:px-[15px] py-1 md:py-[5px] 
+                                font-black text-sm md:text-lg leading-7 `} 
+                            >
                                 Change password
                             </button>
 

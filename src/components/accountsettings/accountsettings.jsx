@@ -8,12 +8,16 @@ function Accountsettings(props){
     return(
         <div className ="w-full" >
 
-            <div className = "mb-11">
-                <h2 className=" font-bold text-xl leading-7 mb-2" >Account information</h2>
-                <p className = "font-medium leading-6 text-base " >Update your account information such as your username, phone number, email address and country at any time.</p>
+            <div className = "mb-7 md:mb-11">
+                <h2 className=" font-black text-base md:text-xl leading-7 mb-2" >
+                    Account information
+                </h2>
+                <p className = "md:font-medium text-sm md:text-base " >
+                    Update your account information such as your username, phone number, email address and country.
+                </p>
             </div>
 
-            <div className = "w-full flex flex-col gap-11 mb-20" >                
+            <div className = "w-full flex flex-col gap-8 md:gap-11 mb-[50px] md:mb-20" >                
                 <Changeusername />        
                 <Changemail />
                 <Changecountry />                          

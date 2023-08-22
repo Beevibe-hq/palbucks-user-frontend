@@ -27,11 +27,15 @@ import { addCrowdfundEvent } from "../../actions/actions";
 import SearchCoOrganiser from "../searchCoOrganiser/searchCoOrganiser";
 import { useNavigate } from "react-router-dom";
 import Loadingspinner from "../loadingspinner/loadingSpinner";
+import { useMediaQuery } from "react-responsive";
 
 function Organisecrowdfundbody(){
 
-    const dispatch = useDispatch()
+    const isMobile = useMediaQuery({
+        query:'(max-width: 768px)'   
+    })
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -156,28 +160,29 @@ function Organisecrowdfundbody(){
 
     const managetoggleclick = (e) =>{
         const currentevent = e.target.id
-        
+        console.log(currentevent)
         let currenttogglevalue = managetoggles[currentevent]
-        
+        console.log(e.target.id)
         setmanagetoggles({...managetoggles, [currentevent]:!currenttogglevalue })
-        console.log(managetoggles)
+        //console.log(managetoggles)
     }
 
       
     
     return(
         
-        <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-8 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
-            <h1 className="font-black text-4xl leading-7 tracking-[0.35px] mb-5 " >Setup your crowdfunding campaign</h1>
-            <p className="text-lg tracking-[0.8px] mb-14 " >Organising your campaign take less than 2 minutes</p>
+        <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-merriweather '>
+            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-8 md:mb-[15px]' >
+                Setup your crowdfunding campaign
+            </h1>
+            <p className="hidden md:block text-lg tracking-[0.8px] mb-14 " >Organising your campaign take less than 2 minutes</p>
 
-            <div className="2xl:max-w-[960px] 4xl:max-w-[1000px] ">
-                
+            <div className="max-w-full 2xl:max-w-[960px] 4xl:max-w-[1000px] ">                
                 <div className=" bg-white rounded-[4px] mb-[59px] " >
-                    <div className="text-center py-6 border-b-2 border-[#e5e2e2] ">
+                    <div className="text-center py-3 md:py-6 border-b-2 border-[#e5e2e2] ">
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
-                    <div className="p-7 flex flex-col items-center relative " >
+                    <div className="p-3 md:p-7 flex flex-col items-center relative " >
                         {/* <div className={` ${formdata.banner ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
                             <label htmlFor="campaignimage" className={` ${formdata.banner ? 'hidden' : 'block'} cursor-pointer`} >
                                 <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
@@ -191,9 +196,9 @@ function Organisecrowdfundbody(){
                             <img src={formdata.banner} alt="" className={` ${formdata.banner? 'w-[442px] h-[240px]' : 'hidden' }`}  />
                         </div> */}
                         <CropImage formdata = {formdata} setformdata = {setformdata}  />
-                        <div className={` ${ formdata.banner ? 'flex' : 'flex' } gap-3 items-center py-1 `} >
+                        <div className={` ${ formdata.banner ? '' : 'mt-4 md:mt-5' } flex gap-3 items-center py-1 `} >
                             <img src={formdata.banner ? uploadSuccessIcon:infoicon} alt="info icon" />
-                            <p className={` ${formdata.banner ? 'text-[#37BCF7]':'text-[#8E8E93]'} text-base`} >
+                            <p className={` ${formdata.banner ? 'text-[#37BCF7]':'text-[#8E8E93]'} text-sm md:text-base`} >
                                 {
                                     formdata.banner ? 'Image uploaded successfully':'Click icon to upload campaign image' 
                                 }
@@ -203,35 +208,48 @@ function Organisecrowdfundbody(){
                     </div>
                 </div>
                 
-                <div className="bg-[#FFFFFF] rounded-t-[4px] rounded-b-[10px] mb-[59px] " >
-                    <div  id="crowdfundingdetails" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
-                    onClick={managetoggleclick} >
-                        <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Enter crowdfunding details</h3>
-                        <img src={managetoggles.crowdfundingdetails ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                <div className="bg-[#FFFFFF] rounded-t-[4px] rounded-b-[10px] mb-6 md:mb-[59px] " >
+                    <div  
+                        id="crowdfundingdetails" 
+                        className=" p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                        onClick={managetoggleclick} 
+                    >
+                        <h3 className="text-base md:text-[22px] md:leading-[22px] tracking-[0.5px] font-black pointer-events-none " >Enter crowdfunding details</h3>                        
+                        <img 
+                            src={arrowup} 
+                            alt="down arrow" 
+                            className = {` ${managetoggles.crowdfundingdetails? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                        />
                     </div>
-                    <div className={` ${managetoggles.crowdfundingdetails? 'block' : 'hidden' } p-[30px] bg-[#FFFFFF]`} >
-                        <label htmlFor="title" className="text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Title*</label>
+                    <div className={` ${managetoggles.crowdfundingdetails? 'block' : 'hidden' } p-3 md:p-[30px] bg-[#FFFFFF]`} >
+                        <label htmlFor="title" className="block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4 " >
+                            Title*
+                        </label>
                         <input 
                             type="text" 
                             id="title"
                             name="title" 
-                            className={`py-[10px] px-5 mb-5 w-full h-[56px] border-[1px] bg-white border-[#8E8E93] rounded-[4px] 
-                            hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]  `} placeholder="What is the title of your crowdfund?"                         
+                            className={`px-[10px] md:px-5 py-3 mb-3 md:mb-5 w-full md:h-[56px] border-[1px] bg-white border-[#8E8E93] rounded-[4px] 
+                            hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] 
+                            outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]
+                            text-sm md:text-base      `} 
+                            placeholder="What is the title of your crowdfund?"                         
                             onChange={handleInputChange}
                         />
                         
-                        <div className="flex gap-2 items-center mb-[53px] ">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >Limited to 50 characters</p>
+                        <div className="flex gap-2 items-center mb-5 md:mb-[53px] ">
+                            <img src={infoicon} alt="info icon" className="w-[15px] md:w-[20px] " />
+                            <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >Limited to 50 characters</p>
                         </div>
 
-                        <label htmlFor="category" className=" block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " > Category* </label>
-                        
-                        <div className="relative inline-block w-64 mb-[53px] ">
+                        <label htmlFor="category" className=" block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4  " > 
+                            Category* 
+                        </label>                        
+                        <div className="relative inline-block w-full md:w-64 mb-5 md:mb-[53px] ">
                             <select 
                                 className={`block cursor-pointer appearance-none w-full bg-white border border-gray-400 
                                 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none 
-                                focus:shadow-outline`}
+                                focus:shadow-outline text-sm md:text-base `}
                                 id="category"
                                 name = "tags"
                                 onChange={handleInputChange}
@@ -257,126 +275,181 @@ function Organisecrowdfundbody(){
                         </div>
 
 
-                        <label htmlFor="description" className=" block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " > Description* </label>
+                        <label htmlFor="description" className="block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4  " > 
+                            Description* 
+                        </label>
                         <textarea 
                             name="description" 
                             id="description" 
                             rows="10" 
-                            className={` mb-5 w-full p-5 outline-none border-[1px] border-[#8E8E93] `} 
+                            className={` mb-[10px] md:mb-5 w-full p-[10px] md:p-5 text-sm md:text-base outline-none border-[1px] border-[#8E8E93] `} 
                             placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." 
                             onChange={handleInputChange}
                             maxLength= "1500"
                         >
                         </textarea>
 
-                        <div className="flex gap-2 items-center">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >Limited to 1500 characters</p>
+                        <div className="flex gap-2 items-center mb-5 md:mb-[53px] ">
+                            <img src={infoicon} alt="info icon" className="w-[15px] md:w-[20px] " />
+                            <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >Limited to 1500 characters</p>
                         </div>
                     </div>   
                 </div>
 
 
-                <div className="bg-white mb-[59px] " >
-                    <div className="bg-[#37BCF7] py-5 pl-[30px] pr-[10px] flex gap-5 items-center text-white  " >
-                        <img src={infoicon2} alt="info icon" className="w-6 h-6"  />
-                        <h3 className="text-[18px] leading-[20px] tracking-[0.5px] font-black" >At the end of your crowdfund, you will get 98% of total raised.</h3>
+                <div className="bg-white mb-6 md:mb-[59px] " >
+                    <div className="bg-[#37BCF7] rounded-t md:rounded-t-none py-5 px-[15px] md:pl-[30px] md:pr-[10px] flex gap-2 md:gap-5 items-center text-white  " >
+                        <img src={infoicon2} alt="info icon" className="w-4 h-4 md:w-6 md:h-6"  />
+                        <h3 className="text-sm md:text-[18px] leading-[20px] tracking-[0.5px] font-black" >
+                            {
+                                isMobile ? 'Click to view an important information' : 'At the end of your crowdfund, you will get 98% of total raised.'
+                            }
+                        </h3>
                     </div>
                     
-                    <div id="amountdetails" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                    onClick={managetoggleclick} >
-                        <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Enter amount details</h3>
-                        <img src={managetoggles.amountdetails ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
-                    </div>
-                    
-                    <div className={` ${managetoggles.amountdetails? 'block' : 'hidden' } p-[30px] `} >
-                        <label htmlFor="target_price" className="block text-xl leading-[20px] tracking-[1px] font-bold mb-5 " >Target amount*</label>
-                        
-                        <input 
-                            type="number"  
-                            className={`h-[56px] w-4/6 rounded px-5 py-[10px] outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
-                            border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5  `} min='100' max='9999999' maxLength="6"
-                            placeholder="How much do you want to raise(amount is in USDT)?"  
-                            onChange={handleInputChange}
-                            id = "target_price"
-                            name="target_price"
+                    <div  
+                        id="amountdetails" 
+                        className=" p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                        onClick={managetoggleclick} 
+                    >
+                        <h3 className="text-base md:text-[22px] md:leading-[22px] tracking-[0.5px] font-black pointer-events-none" >Enter amount details</h3>                        
+                        <img 
+                            src={arrowup} 
+                            alt="down arrow" 
+                            className = {` ${managetoggles.amountdetails? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
                         />
-
-                        <span className="text-lg leading-[22px] text-[#2CA9F2] font-black " >What is USDT?</span>
-                        <div className="flex gap-2 items-center">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >100 - 9999999 USDT</p>
+                    </div>
+                    
+                    <div className={` ${managetoggles.amountdetails? 'block' : 'hidden' } p-3 md:p-[30px] `} >                        
+                        <label htmlFor="target_price" className="block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4  " >
+                            Target amount*
+                        </label> 
+                        <div className="flex flex-col md:flex-row gap-5 ">
+                            <div className="flex flex-col w-full md:w-4/6 gap-[10px] md:gap-5 ">
+                                <input
+                                    type="number"
+                                    className={`md:h-[56px] w-full rounded text-sm md:text-base px-[10px] md:px-5 py-3 outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
+                                    border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2`} min='100' max='9999999' maxLength="6"
+                                    placeholder="How much do you want to raise(amount is in USDT)?"
+                                    onChange={handleInputChange}
+                                    id = "target_price"
+                                    name="target_price"
+                                />
+                                <div className="flex gap-2 items-center">
+                                    <img src={infoicon} alt="info icon" />
+                                    <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >100 - 9999999 USDT</p>
+                                </div>
+                            </div>
+                            <span className="text-sm md:text-lg md:pt-4 leading-[22px] text-[#2CA9F2] font-black cursor-pointer " >
+                                What is USDT?
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white mb-[59px] " >
-                    <div id="co_organisers" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                    onClick={managetoggleclick}>
-                        <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Add co-organisers (Optional)</h3>
-                        <img src={managetoggles.co_organisers ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                <div className="bg-white mb-6 md:mb-[59px] " >                                        
+                    <div 
+                        id="co_organisers" 
+                        className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                        onClick={managetoggleclick}
+                    >
+                        <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                            Add Co-organisers (Optional)
+                        </h3>
+
+                        <img 
+                            src={arrowup} 
+                            alt="down arrow" 
+                            className = {` ${managetoggles.co_organisers? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                        />
                     </div>
-                    <div className={` ${managetoggles.co_organisers? 'block' : 'hidden' } p-[30px]`} >
-                        <button className="flex justify-between mb-5 rounded-r-[24px] rounded-l-lg  py-1 px-4 items-center h-14 w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]"
+                    <div className={` ${managetoggles.co_organisers? 'block' : 'hidden' } p-3 md:p-[30px]`} >
+                        <button className="flex justify-between mb-[10px] md:mb-5 rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg  py-1 px-[10px] md:px-4 items-center h-[40px] md:h-14 w-[165px] md:w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]"
                          onClick={() => {
                             setdisplaySearchCoOrganiser(true)
                          }}
                          >
-                            <span>Add co-organiser</span>
+                            <span className="text-xs md:text-base" >
+                                Add co-organiser
+                            </span>
                             <img src={plusicon} alt="plus icon" />
                         </button>
                         <div className="flex gap-2 items-center">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >A maximum of three(3) users can be added</p>
+                            <img src={infoicon} alt="info icon" className="w-[15px] md:w-[20px] " />
+                            <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >
+                                A maximum of three(3) users can be added
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <SearchCoOrganiser displaySearchCoOrganiser = {displaySearchCoOrganiser} setdisplaySearchCoOrganiser = {setdisplaySearchCoOrganiser} />
 
-                <div className="bg-white mb-[59px] " >
-                    <div id="location" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                    onClick={managetoggleclick}>
-                        <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Location</h3>
-                        <img src={managetoggles.location ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                <div className="bg-white mb-6 md:mb-[59px] " >                    
+                    <div 
+                        id="location" 
+                        className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                        onClick={managetoggleclick}
+                    >
+                        <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                            Location
+                        </h3>
+
+                        <img 
+                            src={arrowup} 
+                            alt="down arrow" 
+                            className = {` ${managetoggles.location? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                        />
                     </div>
-                    <div className={` ${managetoggles.location? 'block' : 'hidden' } p-[30px]`} >
-                        <button className="flex justify-between mb-5 rounded-r-[24px] rounded-l-lg  py-1 px-4 items-center h-14 min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
-                            <span>Nigeria</span>
-                            <img src={removeicon} alt="remove icon" />
+                    <div className={` ${managetoggles.location? 'block' : 'hidden' } p-3 md:p-[30px]`} >
+                        <button className="flex justify-between mb-[10px] md:mb-5 rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg py-[2px] md:py-1 px-[10px] md:px-4 items-center h-[34px] md:h-14 min-w-[106px] md:min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
+                            <span className="text-xs md:text-base" >
+                                Nigeria
+                            </span>
+                            <img src={removeicon} alt="remove icon" className="w-[18px] md:w-6 " />
                         </button>
                         <div className="flex gap-2 items-center">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >By default the location you added in your settings will be used</p>
+                            <img src={infoicon} alt="info icon" className="w-[15px] md:w-5 " />
+                            <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >By default the location you added in your settings will be used</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white mb-[59px] " >
-                    <div id="enddate" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                    onClick={managetoggleclick}>
-                        <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >End date*</h3>
-                        <img src={managetoggles.enddate ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                <div className="bg-white mb-[47px] md:mb-[59px] " >                    
+                    <div 
+                        id="enddate" 
+                        className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                        onClick={managetoggleclick}
+                    >
+                        <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                            End date*
+                        </h3>
+
+                        <img 
+                            src={arrowup} 
+                            alt="down arrow" 
+                            className = {` ${managetoggles.enddate? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                        />
                     </div>
-                    <div className={` ${managetoggles.enddate? 'block' : 'hidden' } p-[30px]`} >
+                    <div className={` ${managetoggles.enddate? 'block' : 'hidden' } p-3 md:p-[30px]`} >
                         <input
                             type="date"
                             name="end_date"
                             id="end_date"
-                            className={`h-[56px] w-[393px] rounded px-5 py-[10px] outline-[#37BCF7] outline-2 
+                            className={`md:h-[56px] w-[250px] md:w-[393px] rounded px-[8px] md:px-5 py-[10px] outline-[#37BCF7] outline-2 
                             focus:caret-[#37BCF7] border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5`}
                             min={formatDate(today)}
                             max={maxDateFormatted}
                             onChange = {handleInputChange}
                         />
                         <div className="flex gap-2 items-center">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >Maximum period for a campaign is 90days</p>
+                            <img src={infoicon} alt="info icon" className="w-[15px] md:w-5 " />
+                            <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >Maximum period for a campaign is 90days</p>
                         </div>
                     </div>
                 </div>
 
-                <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 h-[48px] rounded-[10px] text-white font-bold text-[18px] block  " 
+                <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[300px] w-fit md:w-1/2 md:h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block  " 
                     onClick={startCrowdfund}
                 >
                     <div className={` ${isLoading ? 'block' : 'hidden' } `}>
@@ -386,7 +459,7 @@ function Organisecrowdfundbody(){
                         All done, begin your crowdfund
                     </span>
                 </button>
-                <button className="text-[#37BCF7] mx-auto px-5  w-1/2 h-[48px] rounded-[10px] hover:bg-white font-bold text-[18px] block " >Not now, save for later</button>
+                <button className="text-[#37BCF7] mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[250px] w-fit md:w-1/2 md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >Not now, save for later</button>
 
             </div>
 

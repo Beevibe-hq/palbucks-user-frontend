@@ -9,7 +9,7 @@ function Muteduser(props){
                 {props.name}
             </h4>
 
-            <button className = " bg-[#2CA9F2] min-w-[90px] gap-1 justify-center h-[33px] flex text-white py-2 px-2 rounded-xl items-center font-semibold text-sm  " >
+            <button className = " bg-[#2CA9F2] min-w-[90px] gap-1 flex items-start justify-center h-[33px] text-white py-2 px-2 rounded-xl font-semibold text-sm  " >
                 <img src={muteicon} alt="mute icon" className = "w-[17px] h-[17px]"  />
                 <span>Unmute</span>
             </button>

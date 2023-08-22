@@ -27,18 +27,22 @@ function Mutedaccounts(){
     }
 
     return(
-        <div className = " w-[90%] lg:w-[80] xl:w-[78%] bg-white " >
-            <div className = "flex justify-between items-center py-5 px-7 cursor-pointer " onClick = {managemutedaccounts} >
-                <h3 className = "text-lg font-bold flex gap-2 " >
-                    <img src={muteicon} alt="mute icon" />
-                    <span>Muted accounts</span>
+        <div className = "w-full md:w-[90%] lg:w-[80] xl:w-[78%] bg-white " >
+            <div className = "flex justify-between items-center p-[15px] md:py-5 md:px-7 cursor-pointer " onClick = {managemutedaccounts} >
+                <h3 className = "text-sm md:text-lg font-bold flex items-center gap-2 " >
+                    <img src={muteicon} alt="mute icon" className="w-[15px] h-[15px] md:w-5 md:h-5 " />
+                    <span className="pt-[2px]" >Muted accounts</span>
                 </h3>
-                <img src={openmutedaccounts == 'open' ? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "/>
+                <img 
+                    src={arrowup} 
+                    alt="down arrow" 
+                    className = {` ${openmutedaccounts == 'open'? '' : 'rotate-180'} cursor-pointer w-[20px] h-[10px] md:w-[30px] md:h-[14px]`}
+                />
             </div>
 
             <hr className = " border-[1px] border-[#C4C4C4] " />
                             
-            <div className ={` ${openmutedaccounts == 'open' ? 'flex h-[150px] overflow-auto ' : 'hidden'} px-7 py-6 mb-3 gap-8 flex-wrap items-center `} >                
+            <div className ={` ${openmutedaccounts == 'open' ? 'flex h-[150px] overflow-auto ' : 'hidden'} px-[10px] md:px-7 py-3 md:py-6 mb-3 gap-4 md:gap-8 flex-wrap items-center `} >                
                 {
                     mutedusersdata.map((item,i) =>{
                         return(
