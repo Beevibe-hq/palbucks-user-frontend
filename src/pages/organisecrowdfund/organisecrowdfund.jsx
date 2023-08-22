@@ -23,9 +23,10 @@ function Organisecrowdfund(){
     },[])
 
     return(
-        <div className=' bg-[#F9F9F9] min-h-full' >
+        <div className=' bg-[#F9F9F9] relative min-h-full' >
             <Sidebar />
-            <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
+            <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } 
+            `} >
                 <Navbar />   
                 <Organisecrowdfundbody />
                 

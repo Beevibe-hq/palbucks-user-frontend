@@ -97,11 +97,11 @@ const Demo = ({ formdata, setformdata }) => {
   
 
   return (
-    <div className="">
+    <div className= {` ${croppedImage ? '': 'bg-[#F9F9F9] w-full'} `} >
       {imageSrc ? (
         <React.Fragment>
           {croppedImage ? (
-            <div className="w-[550px] mx-auto mt-5 ">
+            <div className="w-full md:w-[550px] mx-auto mt-5 ">
               <label htmlFor="campaignimage">
                 <img src={croppedImage} alt="Cropped" className="mx-auto w-full border-[2px] border-[#37BCF7] cursor-pointer" />
               </label>
@@ -209,7 +209,7 @@ const Demo = ({ formdata, setformdata }) => {
           } */}
         </React.Fragment>
       ) : (
-        <div className={`w-[837px] h-[240px] flex justify-center items-center mb-5`}>
+        <div className={`w-full fold:h-[150px] phones:h-[200px] md:h-[240px] flex justify-center items-center mb-5`}>
           <label htmlFor="campaignimage" className={`cursor-pointer`}>
             <img src={uploadicon} alt="upload icon" className="w-9 h-11" />
           </label>

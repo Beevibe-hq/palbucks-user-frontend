@@ -38,18 +38,18 @@ function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganise
                 </div>
                 <div className="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
                     
-                        <div className={`w-[681px] min-h-[300px] h-fit py-10 px-9 bg-white rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] `} >
-                            <div className="flex gap-11 items-center justify-center ">
+                        <div className={`w-full md:w-[681px] min-h-[300px] h-fit py-5 md:py-10 px-4 md:px-9 bg-white rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] `} >
+                            <div className="flex gap-5 md:gap-11 items-center justify-center ">
                                 <input
                                     type="search"
-                                    className="w-[80%] xphones:w-[80%] md:w-[320px] brkpoint:w-[300px] h-[30px] phones:h-[40px] lg:w-[345px] xl:w-[480px] xl:h-[44px]
+                                    className="w-full md:w-[320px] brkpoint:w-[300px] h-[30px] phones:h-[40px] lg:w-[345px] xl:w-[480px] xl:h-[44px]
                                         text-base pl-10 md:pl-12 lg:pl-14 text-[#7A7575] bg-[#F9F9F9] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(48%)]
                                         bg-no-repeat rounded-3xl shadow-[0px_0px_16px_rgba(0,0,0,0.04)] md:shadow-none font-merriweather font-normal outline-2 outline-[#37BCF7]
                                         focus:caret-[#2CA9F2] "
                                     placeholder= {isMobile ? 'Search':'Search for Co-organiser(s)'}
                                     onChange={handleSearch}
                                 />
-                                <button className="text-[#37BCF7] text-2xl font-bold " onClick={
+                                <button className="text-[#37BCF7] text-lg md:text-2xl font-bold " onClick={
                                     () => {
                                         setdisplaySearchCoOrganiser(false)
                                     }
@@ -58,11 +58,11 @@ function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganise
                                     Cancel
                                 </button>
                             </div>
-                            <div className={` ${searchValue == '' ? 'flex items-center justify-center h-[300px] text-[#8E8E93] text-center text-2xl' : 'hidden'} `} >
+                            <div className={` ${searchValue == '' ? 'flex items-center justify-center h-[300px] text-[#8E8E93] text-center text-lg md:text-2xl' : 'hidden'} `} >
                                 Search for co-organisers and add them to your campaign
                             </div>
                             <div className={`${searchValue == '' ? 'hidden' :'h-full pt-7 flex flex-col' } `} >
-                                <p className="text-[#8E8E93] text-lg text-center mb-8 " >
+                                <p className="text-[#8E8E93] text-base md:text-lg text-center mb-8 " >
                                     Selected {selected} of {searchResults.length}
                                 </p>
                                 <div className="mb-10 flex flex-col gap-10 max-h-[350px] overflow-auto p-4 " >
@@ -72,7 +72,7 @@ function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganise
                                         ))
                                     }
                                 </div>
-                                <p className="text-lg text-center" >
+                                <p className="text-base md:text-lg text-center" >
                                     Users you invite will have to accept your invitation before they can appear on your campaign
                                 </p>
                             </div>
@@ -132,14 +132,14 @@ const Users = [
 
 const Coorganiser = ({first_name, last_name, dp}) => {
     return(
-        <div className="flex items-center justify-between gap-4 " >
-            <div className="flex gap-[15px] items-center justify-center" >
-                <img src={dp} alt="Profile image" className="w-[60px] h-[60px] rounded-full " />                
-                <p className="text-base font-black " >{first_name} {last_name}</p>
+        <div className="flex items-center justify-between gap-2 md:gap-4 " >
+            <div className="flex gap-2 md:gap-[15px] items-center justify-center" >
+                <img src={dp} alt="Profile pic" className="w-12 h-12 md:w-[60px] md:h-[60px] rounded-full " />                
+                <p className="text-sm md:text-base font-black " >{first_name} {last_name}</p>
             </div>
-            <button className="flex items-center justify-center gap-4 py-[6px] px-3 border-[#37BCF7] rounded-xl border-[3px] " >
-                <img src={addIcon} alt="add Icon" className="w-[30px]" />    
-                <p className="text-base font-black text-[#37BCF7] pt-1 " >Invite user</p>
+            <button className="flex items-center justify-center gap-1 md:gap-4 py-[6px] px-1 md:px-3 border-[#37BCF7] rounded-xl border-[3px] " >
+                <img src={addIcon} alt="add Icon" className="w-6 md:w-[30px]" />    
+                <p className="text-sm md:text-base font-black text-[#37BCF7] pt-1 " >Invite user</p>
             </button>
         </div>
     )

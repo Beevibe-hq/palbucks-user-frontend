@@ -77,67 +77,78 @@ const DisplayProfile = ({goback, setDisplay}) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
     return(
-        <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[19px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+        <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[19px] lg:pr-[27px] pt-5 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
                     
-            <img src={backarrow} alt="backarrow" className="mb-10 w-[32px] inline-block cursor-pointer "  onClick={goback} />
-            <h1 className="font-black text-[32px] mb-4 " >Profile</h1>
-            <p className=" text-[18px] mb-8 " >Change your profile photo, cover photo, bio and more</p>
+            <img src={backarrow} alt="backarrow" className="mb-6 md:mb-10 w-[22px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />            
+            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-2 md:mb-4' >
+                Profile
+            </h1>
+            <p className="text-sm md:text-[18px] mb-8 " >
+                Change your profile photo, cover photo, bio and more
+            </p>
 
-            <div className="bg-white p-5 w-full relative mb-[70px] " >
-                <img src={userInfo.background_image ? userInfo.background_image : campaignimage} alt="campaign" className=" rounded w-full max-h-[250px] 2xl:max-h-[300px] " />
+            <div className="bg-white p-[10px] md:p-5 w-full relative mb-10 md:mb-[70px] " >
+                <img src={userInfo.background_image ? userInfo.background_image : campaignimage} alt="campaign" className=" rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] " />
                 <img 
                     src={userInfo.dp ? userInfo.dp : profilePlaceholder}
                     alt="user avatar" 
-                    className="relative bottom-12 left-2 max-w-full w-[9%] rounded-full inline-block z-10 " 
+                    className="relative bottom-9 md:bottom-12 left-2 max-w-full min-w-[55px] w-[9%] rounded-full inline-block z-10 " 
                 />
                 <button 
-                    className="mb-4 text-[16px] font-black text-white bg-[#37BCF7] py-[5px] px-[15px] rounded-[10px] 
+                    className="hidden md:block mb-4 text-[16px] font-black text-white bg-[#37BCF7] py-[5px] px-[15px] rounded-[10px] 
                     float-right relative top-5" 
                     onClick={ () => setDisplay('editProfile')}
                 >
-                    Edit profile                
+                    Edit profile
                 </button>
 
-                <h1 className=" font-black text-[24px]" >
+                <h1 className=" font-black text-base md:text-[24px] mb-1 md:mb-2 " >
                     {userInfo.first_name ? userInfo.first_name + ' ' + userInfo.last_name : 'Daniel Alba'}
                 </h1>
-                <p className="text-[#8E8E93] mb-5 text-[18px] flex items-center " >
+                <p className="text-[#8E8E93] mb-3 md:mb-5 text-sm md:text-[18px] flex items-center " >
                     @{
-                        userInfo.username? userInfo.username :'@therealdanielalba'
+                        userInfo.username? userInfo.username :'therealdanielalba'
                     }
                     
                     <span className="w-[2px] mx-[10px] h-4 bg-[#8E8E93] inline-block"></span>
 
-                    <img src= {locateicon} alt="" className="inline-block w-[15px] relative bottom-[2px] "/>
+                    <img src= {locateicon} alt="" className="inline-block w-[15px] relative bottom-[2px] pt-1 "/>
                     
                     <span>
                         {userInfo.location ? userInfo.location : 'Lagos, Nigeria'}
                     </span>
                 </p>
-                <p className="text-[18px]" >
+                <p className="mb-5 md:mb-0 text-sm md:text-[18px]" >
                     {
                         userInfo.bio ? userInfo.bio :`Hi there! i am Daniel and i work with WHO to make the world a better place. 
                         I am here basically to raise more funds for the development of the next hybrid child. #HYBRIDCHILDREN`
                     }
                 </p>
+                <button 
+                    className=" md:hidden mb-1 text-sm md:text-[16px] font-black text-white bg-[#37BCF7] py-[4px] px-[11px] rounded-[5px] " 
+                    onClick={ () => setDisplay('editProfile')}
+                >
+                    Edit profile
+                </button>
             </div>
-            <div className="bg-white w-[80%] mx-auto rounded " >
+            
+            <div className="bg-white w-full md:w-[80%] mx-auto rounded " >
                 
-                <div className="py-[25px] border-b-[2px] border-b-[#d1d1d5] ">
-                    <h1 className="text-[22px] text-center font-black " >My Social Links</h1>
+                <div className="p-[15px] md:py-[25px] border-b-[2px] border-b-[#d1d1d5] ">
+                    <h1 className="text-base md:text-[22px] text-center font-black " >My Social Links</h1>
                 </div>
-                <div className="flex py-[30px] px-14 2xl:px-20 justify-around " >
-                    <div className="flex items-center gap-4 bg-[#F9F9F9] py-[15px] px-[31px] rounded-[10px] " >
-                        <Twittericon color = 'blue' />
-                        <h4 className="text-[22px]" >Twitter</h4>
+                <div className="flex gap-2 justify-around p-3 md:py-[30px] md:px-14 2xl:px-20 " >
+                    <div className="flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " >                        
+                        <img src={twittericon} alt="twitter icon" className="w-4 md:w-6 lg:w-8 " />
+                        <h4 className="text-xs md:text-[22px]" >Twitter</h4>
                     </div>
-                    <div className="flex items-center gap-4 bg-[#F9F9F9] py-[15px] px-[31px] rounded-[10px]" >
-                        <img src={facebookicon} alt="" />
-                        <h4 className="text-[22px]" >Facebook</h4>
+                    <div className="flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " >
+                        <img src={facebookicon} alt="facebook icon" className=" w-4 md:w-6 lg:w-8" />
+                        <h4 className="text-xs md:text-[22px]" >Facebook</h4>
                     </div>
-                    <div className="flex items-center gap-4 bg-[#F9F9F9] py-[15px] px-[31px]  rounded-[10px]" >
-                        <img src={instagramicon} alt="" />
-                        <h4 className="text-[22px]" >Instagram</h4>
+                    <div className="flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " >
+                        <img src={instagramicon} alt="Instagram icon" className="w-4 md:w-6 lg:w-8" />
+                        <h4 className="text-xs md:text-[22px]" >Instagram</h4>
                     </div>
                 </div>
             </div>
@@ -233,10 +244,10 @@ const EditProfile = ({goback}) => {
 
     return(
         <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[19px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
-            <h1 className="font-black text-[32px] mb-4 " >
+            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-2 md:mb-4' >
                 Edit your Profile
             </h1>
-            <p className=" text-[18px] mb-8 " >
+            <p className="text-sm md:text-[18px] mb-8 " >
                 Change your profile photo, cover photo, bio and more
             </p>
 
@@ -254,43 +265,57 @@ const EditProfile = ({goback}) => {
             <div className="w-full relative mb-[70px]">
                 
                 <div className="relative">
-                    <img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[250px] 2xl:max-h-[300px] " />
+                    <label htmlFor="background_image">
+                        <img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] " />
+                        
+                    </label>
                     <label htmlFor="background_image">
                         <img
                             src={uploadIcon}
                             alt="upload icon"
-                            className="absolute inset-0 w-[35px] lg:w-[41px] m-auto cursor-pointer "
+                            className="absolute inset-0 w-[27px] md:w-[35px] lg:w-[41px] m-auto cursor-pointer "
                         />
                     </label>
                     <input type="file" accept="image/*" name="background_image" id="background_image" className="hidden" onChange={handleImageUpload} />
                 </div>
-                <div className="absolute bottom-0 left-10 transform translate-x-[-10%] translate-y-[30%]">
-                    <div className="relative w-[60px] lg:w-[120px] h-[60px] lg:h-[120px] mx-auto cursor-pointer ">
-                        <img src={userImages.dp} alt="user avatar" className="w-full h-full rounded-full" />
-                        <div className="w-fit">
-                            <label htmlFor="dp" className="cursor-pointer" >
-                                <img src={uploadIcon} alt="upload icon" className="absolute inset-0 w-[24px] lg:w-[35px] m-auto" />                                
-                            </label>
-                            <input type="file" name="dp" id="dp" className="hidden" onChange={handleImageUpload} />
+                <div className="absolute bottom-0 left-4 md:left-7 lg:left-10 transform translate-x-[-10%] translate-y-[30%]">
+                    <label htmlFor="dp">
+                        <div className="relative w-[60px] md:w-[80px] lg:w-[120px] h-[60px] md:h-[80px] lg:h-[120px] mx-auto cursor-pointer ">
+                            <img src={userImages.dp} alt="user avatar" className="w-full h-full rounded-full" />
+                            <div className="w-fit">
+                                <label htmlFor="dp" className="cursor-pointer" >
+                                    <img src={uploadIcon} alt="upload icon" className="absolute inset-0 w-[18px] md:w-[24px] lg:w-[35px] m-auto" />
+                                </label>
+                                <input type="file" name="dp" id="dp" className="hidden" onChange={handleImageUpload} />
+                            </div>
                         </div>
-                    </div>
+                    </label>
                 </div>
             </div>
 
-            <div className="bg-white mb-[59px] " >
-                <div className="bg-[#37BCF7] py-5 pl-[30px] pr-[10px] flex gap-5 items-center text-white  " >
-                    <img src={infoicon2} alt="info icon" className="w-6 h-6"  />
-                    <h3 className="text-[18px] leading-[20px] tracking-[0.5px] font-black" >
+            <div className="bg-white mb-6 md:mb-[59px] " >                
+                <div className="bg-[#37BCF7] rounded-t md:rounded-t-none py-5 px-[15px] md:pl-[30px] md:pr-[10px] flex gap-2 md:gap-5 items-center text-white  " >
+                    <img src={infoicon2} alt="info icon" className="w-4 h-4 md:w-6 md:h-6"  />                    
+                    <h3 className="text-sm md:text-[18px] leading-[20px] tracking-[0.5px] font-black" >
                         To change your username go to settings
                     </h3>
-                </div>
-                <div id="fullname" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                onClick={managetoggleclick}
+                </div>                
+                <div 
+                    id="fullname" 
+                    className=" p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                    onClick={managetoggleclick}
                 >
-                    <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Full name</h3>
-                    <img src={managetoggles.fullname ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                    <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                        Full name
+                    </h3>
+
+                    <img 
+                        src={arrowup} 
+                        alt="down arrow" 
+                        className = {` ${managetoggles.fullname? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                    />
                 </div>
-                <div className={` ${managetoggles.fullname? 'block' : 'hidden' } p-[30px]`} >
+                <div className={` ${managetoggles.fullname? 'block' : 'hidden' } py-3 px-4 md:p-[30px]`} >
                     <input 
                         id="fullName"
                         name="fullName"
@@ -301,20 +326,29 @@ const EditProfile = ({goback}) => {
                             'Daniel Alba'
                         }
                         onChange = {handleInputChange}
-                        className = {`w-[70%] max-w-[894px] h-[56px] rounded-[4px] border-[1px] border-[#D8D8D8] 
-                        py-2 px-5 outline-0  `} 
+                        className = {`w-full md:w-[70%] max-w-[894px] md:h-[56px] rounded-[4px] border-[1px] border-[#D8D8D8] 
+                        py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `} 
                     />
                 </div>
             </div>
 
-            <div className="bg-white mb-[59px] " >            
-                <div id="bio" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                onClick={managetoggleclick}
+            <div className="bg-white mb-6 md:mb-[59px] " >                            
+                <div 
+                    id="bio" 
+                    className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                    onClick={managetoggleclick}
                 >
-                    <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Bio</h3>
-                    <img src={managetoggles.bio ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                    <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                        Bio
+                    </h3>
+
+                    <img 
+                        src={arrowup} 
+                        alt="down arrow" 
+                        className = {` ${managetoggles.bio? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                    />
                 </div>
-                <div className={` ${managetoggles.bio? 'block' : 'hidden' } p-[30px]`} >
+                <div className={` ${managetoggles.bio? 'block' : 'hidden' } py-3 px-4 md:p-[30px]`} >
                     <textarea
                         type="text"
                         name="bio"
@@ -326,39 +360,60 @@ const EditProfile = ({goback}) => {
                             userInfo.bio:
                             'Hi there! i am Daniel and i work with WHO to make the world a better place. I am here basically to raise more funds for the development of the next hybrid child. #HYBRIDCHILDREN'
                         }
-                        rows="8"
-                        className = {`w-full rounded-[4px] border-[1px] border-[#D8D8D8] 
-                        py-2 px-5 outline-0  `} 
+                        rows="7"
+                        className = {`w-full rounded border-[1px] border-[#D8D8D8] 
+                        py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `} 
                     />
                 </div>
             </div>
 
-            <div className="bg-white mb-[59px] " >
-                <div id="location" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                onClick={managetoggleclick}>
-                    <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Location</h3>
-                    <img src={managetoggles.location ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+            <div className="bg-white mb-6 md:mb-[59px] " >
+                <div 
+                    id="location" 
+                    className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                    onClick={managetoggleclick}
+                >
+                    <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                        Location
+                    </h3>
+
+                    <img 
+                        src={arrowup} 
+                        alt="down arrow" 
+                        className = {` ${managetoggles.location? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                    />
                 </div>
-                <div className={` ${managetoggles.location? 'block' : 'hidden' } p-[30px]`} >
-                    <button className="flex justify-between mb-5 rounded-r-[24px] rounded-l-lg  py-1 px-4 items-center h-14 min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
-                        <span>Nigeria</span>
-                        <img src={removeicon} alt="remove icon" />
-                    </button>                    
+                <div className={` ${managetoggles.location? 'block' : 'hidden' } py-3 px-4 md:p-[30px]`} >                    
+                    <button className="flex justify-between rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg py-[2px] md:py-1 px-[10px] md:px-4 items-center h-[34px] md:h-14 min-w-[106px] md:min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
+                        <span className="text-xs md:text-base" >
+                            Nigeria
+                        </span>
+                        <img src={removeicon} alt="remove icon" className="w-[18px] md:w-6 " />
+                    </button>            
                 </div>
             </div>
 
-            <div className="bg-white mb-[59px] " >            
-                <div id="socialLinks" className=" py-[25px] px-[30px] flex justify-between border-b-2 border-[#e5e2e2] items-center cursor-pointer "
-                onClick={managetoggleclick}
+            <div className="bg-white mb-[47px] md:mb-[59px] " >                            
+                <div 
+                    id="socialLinks" 
+                    className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
+                    onClick={managetoggleclick} 
                 >
-                    <h3 className="text-[22px] leading-[22px] tracking-[0.5px] font-black" >Social links </h3>
-                    <img src={managetoggles.socialLinks ? arrowup: arrowdown} alt="up arrow" className="w-[30px] h-[15px]" />
+                    <h3 className="text-base md:text-[22px] leading-[22px] tracking-[0.5px] font-black pointer-events-none" >
+                        Social links
+                    </h3>
+
+                    <img 
+                        src={arrowup} 
+                        alt="down arrow" 
+                        className = {` ${managetoggles.socialLinks? '' : 'rotate-180'} cursor-pointer w-[22px] md:w-[30px] md:h-[14px] pointer-events-none`}
+                    />
                 </div>
-                <div className={` ${managetoggles.socialLinks? 'flex flex-col gap-14' : 'hidden' } p-[30px]`} >
-                    <div className="flex flex-col gap-5">
-                        <label htmlFor="facebookLink" className="flex items-center gap-[10px]" >
-                            <img src = {facebookIcon} alt="facebook icon" className="w-[25px] inline-block" />
-                            <span className="text-xl font-bold " >Facebook Link</span>
+                <div className={` ${managetoggles.socialLinks? 'flex flex-col gap-5 md:gap-14' : 'hidden' } py-3 px-4 md:p-[30px]`} >
+                    <div className="flex flex-col gap-[10px] md:gap-5">
+                        <label htmlFor="facebookLink" className="flex items-start gap-[10px]" >
+                            <img src = {facebookIcon} alt="facebook icon" className="w-4 md:w-6 inline-block" />
+                            <span className="text-sm md:text-xl font-bold " >Facebook Link</span>
                         </label>
                         <input
                             type="url"
@@ -371,15 +426,16 @@ const EditProfile = ({goback}) => {
                             onChange={
                                 handleInputChange
                             }
-                            placeholder="Enter your facebook links here"
-                            className = {`w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
-                            py-2 px-5 outline-0  `}
+                            placeholder="Enter your facebook link here"
+                            className = {`w-full md:w-[70%] max-w-[894px] md:h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
+                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `}
                         />
                     </div>
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-[10px] md:gap-5">
                         <label htmlFor="twitterLink" className="flex items-center gap-[10px]" >
-                            <img src = {twittericon} alt="twitter icon" className="w-[25px] inline-block" />
-                            <span className="text-xl font-bold " >Twitter Link</span>
+                            {/* <img src = {twittericon} alt="twitter icon" className="w-[25px] inline-block" /> */}
+                            <img src={twittericon} alt="twitter icon" className="w-4 md:w-6" />
+                            <span className="text-sm md:text-xl font-bold " >Twitter Link</span>
                         </label>
                         <input
                             type="url"
@@ -392,15 +448,15 @@ const EditProfile = ({goback}) => {
                             onChange={
                                 handleInputChange
                             }
-                            placeholder="Enter your twitter links here"
-                            className = {`w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
-                            py-2 px-5 outline-0  `}
+                            placeholder="Enter your twitter link here"
+                            className = {` w-full md:w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
+                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `}
                         />
                     </div>
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-[10px] md:gap-5">
                         <label htmlFor="instagramLink" className="flex items-center gap-[10px]" >
-                            <img src = {instagramicon} alt="instagram icon" className="w-[25px] inline-block" />
-                            <span className="text-xl font-bold " >Instagram Link</span>
+                            <img src = {instagramicon} alt="instagram icon" className="w-4 md:w-6 inline-block" />
+                            <span className="text-sm md:text-xl font-bold " >Instagram Link</span>
                         </label>
                         <input
                             type="url"
@@ -413,15 +469,15 @@ const EditProfile = ({goback}) => {
                                 userInfo.social_links.instagram :
                                 ''
                             }                            
-                            placeholder="Enter your instagram links here"
-                            className = {`w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
-                            py-2 px-5 outline-0  `}
+                            placeholder="Enter your instagram link here"
+                            className = {`w-full md:w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
+                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `}
                         />
                     </div>
                 </div>
             </div>
 
-            <button className="bg-[#37BCF7] mb-4 mx-auto px-5  w-1/2 max-w-[400px] md:max-w-[460px] h-[48px] rounded-[10px] text-white font-bold text-[18px] block " 
+            <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto py-[10px] px-5 w-fit min-w-full phones:min-w-[300px] md:w-1/2 max-w-[400px] md:max-w-[460px] md:h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block " 
                 onClick = {handleProfileUpdate}
             >
                 {/* {isLoading ? <Loadingspinner /> : 'Save profile changes'} */}
@@ -432,8 +488,8 @@ const EditProfile = ({goback}) => {
                     Save profile changes
                 </span>
             </button>
-            <button className="text-[#37BCF7] mx-auto px-5  w-1/2 max-w-[400px] xl:max-w-[460px] h-[48px] rounded-[10px] hover:bg-white font-bold text-[18px] block " >
-                cancel changes
+            <button className="text-[#37BCF7] mb-3 md:mb-4 mx-auto py-[10px] px-5 min-w-full w-fit phones:min-w-[300px] md:w-1/2 max-w-[400px] md:max-w-[460px] md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >
+                Cancel changes
             </button>
 
 
@@ -501,7 +557,7 @@ export const CropProfileImage = ({image, setImageforCrop , userImages, setUserIm
         <div className="fixed z-50 inset-0 overflow-y-auto">
             <div className="flex flex-col gap-5 items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
                 <div className="fixed inset-0 bg-gray-500 opacity-75"></div>
-                <div className="w-[550px] h-[400px] inline-block align-bottom bg-gray-900 rounded-lg overflow-hidden shadow-xl transform transition-all relative">
+                <div className="w-full max-w-[550px] h-[280px] md:h-[400px] inline-block align-bottom bg-gray-900 rounded-lg overflow-hidden shadow-xl transform transition-all relative">
                     <Cropper
                         image={profileImageUrl}
                         crop={crop}
@@ -513,7 +569,7 @@ export const CropProfileImage = ({image, setImageforCrop , userImages, setUserIm
                         restrictPosition={false}
                     />
                     <button
-                        className="bg-[#37BCF7] px-8 py-2 text-white font-semibold absolute bottom-4 left-4 shadow-md rounded hover:bg-[#0baef4]"
+                        className="bg-[#37BCF7] px-5 md:px-8 py-2 text-white text-sm md:text-base font-semibold absolute bottom-4 left-4 shadow-md rounded hover:bg-[#0baef4]"
                         onClick={() => {
                             showCroppedImage();
                             setImageforCrop(null)                            

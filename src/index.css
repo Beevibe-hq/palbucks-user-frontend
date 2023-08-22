@@ -201,6 +201,11 @@ code {
     }
 
 
-    
+    /* Remove default highlight color on focus and active states */
+    *:focus,
+    *:active {
+      outline: none; /* Remove the default outline */
+      -webkit-tap-highlight-color: transparent; /* Disable the tap highlight color for WebKit browsers (e.g., Safari) */
+    }
 
 }

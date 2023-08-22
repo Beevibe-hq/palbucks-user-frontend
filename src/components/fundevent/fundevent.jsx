@@ -99,16 +99,19 @@ function Fundevent(props){
          lglaptops:max-w-[310px] mx-auto ` */ }         
         >
             <div className="" onClick = {detailedevent} >
-                <div className = 'flex gap-2 mb-3'>
-                
+                <div className = 'flex gap-2 mb-3'>                
                     <div className="flex shrink-0 -space-x-6">
                         {
                             props.accountimages ? props.accountimages.map((item,i)=>{
                                 return(
-                                    <img src = {item} alt = 'profile img' className='rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' key = {i} />
+                                    <img src = {item} alt = 'profile img' className='rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[48px] phones:h-[48px]' key = {i} />
                                 )
                             })  :
-                            <img src={props.organiser.dp !== null ? props.organiser.dp :profileImgPlaceholder} alt = 'Organizer profile' className=' rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[45px] phones:h-[45px]' />
+                            <img 
+                                src={props.organiser.dp !== null ? props.organiser.dp :profileImgPlaceholder} 
+                                alt = 'Organizer profile' 
+                                className=' rounded-full fold:min-w-[40px] fold:h-[40px] phones:min-w-[48px] phones:h-[48px] md:min-w-[45px] md:h-[45px] '
+                            />
                         }
                     </div>
                     <div className="flex flex-col relative max-w-[100%] truncate">
@@ -130,11 +133,11 @@ function Fundevent(props){
                                 props.organiser.first_name
                             }
                         </h3>
-                        <p className = "text-[14px]">is organizing ...</p>
+                        <p className = "text-[13px] md:text-sm ">is organizing ...</p>
                     </div>
                 </div>
                 <div className = 'relative w-full rounded-t-[10px]'>
-                    <img src={props.crowdfundImage? props.crowdfundImage:eventimg} alt="Fund event" className = ' rounded-t-[10px] w-full phones:h-[175px] xphones:h-[150px] md:h-[135px]' />
+                    <img src={props.crowdfundImage? props.crowdfundImage:eventimg} alt="Fund event" className = 'rounded-t-[10px] w-full phones:h-[175px] xphones:h-[150px] md:h-[135px]' />
                 
                     <div className = 'absolute top-4 left-5 bg-white flex gap-[5px] px-[8px] rounded-lg py-[4px]'>
                         <img src={props.categoryimg ? props.categoryimg:environmentimg } alt="Event category icon" className = 'w-[15px] h-[15px] ' />
@@ -145,19 +148,21 @@ function Fundevent(props){
                 <div className = {`bg-white pt-2 phones:pt-3 xphones:pt-[17px] brkpoint:py-3 rounded-b-[10px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] h-fit md:h-[205.5px] 
                     relative shadow-[0px_0px_35.2294px_rgba(0,0,0,0.04)] hover:bg-[#033F591A] hover:border-[0.1px] hover:border-[#D2D2D4]  `}>
 
-                    <div className="flex justify-between items-center mb-[15px] ">
-                            <h3 className="text-[#8E8E93] text-base leading-5" >{props.location ? props.location.toUpperCase() : 'Lagos'}</h3>
-                        
-                            <button onClick={managelikes} >
-                                <Likeicon liked = {liked} />
-                            </button>                                
+                    <div className="flex justify-between items-center mb-[10px] ">
+                        <h3 className="text-[#8E8E93] text-base leading-5" >
+                            {props.location ? props.location.toUpperCase() : 'LAGOS'}
+                        </h3>
+                    
+                        <button onClick={managelikes} >
+                            <Likeicon liked = {liked} />
+                        </button>                                
                     </div>
 
                     <div className = 'mb-3 phones:mb-5 xphones:mb-6 brkpoint:mb-5 mx-auto'>
-                        <h5 className = "font-black text-base phones:text-[18px] brkpoint:text-[16px] leading-5 tracking-[0.06px] mb-[5px] phones:mb-[8px] xphones:mb-[11px] md:mb-[15px] line-clamp-2 " >
+                        <h5 className = "font-black text-base brkpoint:text-base leading-5 tracking-[0.06px] mb-[5px] phones:mb-[8px] xphones:mb-[11px] md:mb-[15px] line-clamp-2 " >
                             {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
                         </h5>
-                        <p className='text-sm leading-[18px] -tracking-[0.01px] phones:text-[16px] md:text-[15px] mt-0 line-clamp-2 '>
+                        <p className='leading-[18px] -tracking-[0.01px] text-sm md:text-[15px] line-clamp-2 '>
                             {
                                 isMobile ? 'Click to know more about this campaign': props.description ?
                                 props.description :
@@ -166,7 +171,11 @@ function Fundevent(props){
                         </p>
                     </div>
                     <div className = 'md:absolute w-full md:w-[93.5%] mx-auto  md:bottom-2'>
-                        <progress value={props.amt_raised ? props.amt_raised : '23543'} max={props.target_price ? props.target_price : '150000'}  className='progressbar w-full h-[8.5px] appearance-none rounded-[5px] mb-2 phones:mb-4 xphones:mb-5 md:mb-[8px]' />
+                        <progress 
+                            value={props.amt_raised ? props.amt_raised : '23543'} 
+                            max={props.target_price ? props.target_price : '150000'}  
+                            className='progressbar w-full h-[8.5px] appearance-none rounded-[5px] mb-2 phones:mb-[15px] xphones:mb-4 md:mb-[8px]' 
+                        />
                 
                         <p className= 'fold:text-[11px] phones:text-[13px] brkpoint:text-[11px] leading-[18px] -tracking-[0.08px] font-black'>{props.amt_raised ? props.amt_raised.toLocaleString() : '23,543'} USDT raised
                         <span className='text-[#8E8E93]' > of {props.target_price ? props.target_price.toLocaleString() : '150,000'} USDT</span>

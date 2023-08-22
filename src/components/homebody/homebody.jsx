@@ -76,14 +76,17 @@ function Homebody(){
 
 
     return(
-        <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-8 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full '>
+        <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full '>
             <div className = 'fold:mb-5 phones:mb-6 md:mb-10 font-merriweather '>
-                <h1 className = 'font-black fold:text-xl phones:text-2xl md:text-3xl leading-7 tracking-[0.5px] mb-[15px]' >Crowdfunding is better when done together.</h1>
+                <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-[15px]' >
+                  Crowdfunding is better when done together.
+                </h1>
                 <p className = 'hidden md:block font-normal text-lg tracking-[0.8px]' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
             </div>
 
             <div className = 'flex fold:gap-4 phones:gap-4 font-merriweather font-black mb-4 md:mb-5 text-base tracking-[0.06px] leading-5'>
-                <button className = {`w-[82px] md:w-[102px] ${display == 'others' ? 'bg-[#D8D8D8]' : 'bg-inherit hover:bg-[#D8D8D8]'}  h-[35px] md:h-[42px] py-[15px] px-[5px] rounded-[10px] `}
+                <button className = {`w-[82px] md:w-[102px] ${display == 'others' ? 'bg-[#D8D8D8]' : 'bg-inherit hover:bg-[#D8D8D8]'}  
+                  h-[35px] md:h-[42px] py-1 md:py-[15px] px-[5px] rounded-[10px] font-bold text-sm md:text-base `}
                  onClick={ () => {
                     dispatch(setothers())
                     setdisplay('others')
@@ -92,7 +95,8 @@ function Homebody(){
                  >
                     Others
                 </button>
-                <button className = {`w-[92px] md:w-[112px] ${display == 'foryou' ? 'bg-[#D8D8D8]' : 'bg-inherit hover:bg-[#D8D8D8]'} h-[35px] md:h-[42px] rounded-[10px] py-1 px-3 `}
+                <button className = {`w-[92px] md:w-[112px] ${display == 'foryou' ? 'bg-[#D8D8D8]' : 'bg-inherit hover:bg-[#D8D8D8]'}
+                   h-[35px] md:h-[42px] rounded-[10px] py-1 px-3 font-bold text-sm md:text-base `}
                   onClick={ () => {
                     dispatch(setforyou())
                     setdisplay('foryou')
@@ -110,18 +114,18 @@ function Homebody(){
                 //The others page starts here
                 <>
                   <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-merriweather '>
-                      <button className = {`bg-white fold:w-[130px] phones:w-[146px] md:w-[172px] h-[37px] md:h-[39px] flex items-center  justify-between pr-5 pl-3 rounded-tl-[10px]
-                      rounded-tr-[30px] rounded-bl-[10px] rounded-br-[30px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
-                          <span className ='  ' >Popular</span>
+                      <button className = {`bg-white fold:w-[118px] phones:w-[120px] md:w-[172px] h-[30px] md:h-[39px] flex items-center  justify-between pr-5 pl-3 
+                      rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
+                          <span className ='text-sm phones:text-base ' >Popular</span>
                           <img src={arrowdown} alt="down arrow icon" />
                       </button>
-                      <button className = {`bg-white fold:w-[90px] phones:w-[109px] md:w-[132px] h-[37px] md:h-[39px] flex items-center  justify-between pr-5 pl-3 rounded-tl-[10px]
-                      rounded-tr-[30px] rounded-bl-[10px] rounded-br-[30px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
-                          <span className =' ' >All</span>
+                      <button className = {`bg-white fold:w-[90px] phones:w-[109px] md:w-[132px] h-[30px] md:h-[39px] flex items-center  justify-between pr-5 pl-3
+                      rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
+                          <span className ='text-sm phones:text-base' >All</span>
                           <img src={arrowdown} alt="down arrow icon" />
                       </button>
                   </div>
-                  <div className = 'eventparent w-full py-[35px]'>
+                  <div className = 'eventparent w-full py-7 md:py-[35px]'>
                 
                       {
                         /* Note here the id being passed as prop is the key of the array, when coming from the backend we can

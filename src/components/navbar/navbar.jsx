@@ -1,7 +1,7 @@
 import notificationsicon from '../../images/notifications2.svg'
 import userimg from '../../images/user.png'
 import moreicons from '../../images/more icon.svg'
-import applogo from "../../images/applogo.svg";
+import applogo from "../../images/appLogo.svg";
 import menuicon from "../../images/Hamburger Menu.svg"
 import arrowicon from "../../images/arrowright2.svg"
 import Notificationsicon from '../../images/notificationsicon';
@@ -90,10 +90,17 @@ function Navbar(){
                 /> */}
                 <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false }  />
                 <div className=" flex gap-2 items-center">
-                    <img src={userInfo.dp ? userInfo.dp : profilePlaceholder}
-                    onClick = {profilepage}
-                    alt="user avatar" className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} />
-                    <img src={applogo} alt="Palbucks logo" className = "block w-[19px] phones:w-[22px] md:hidden" />
+                    <img 
+                        src={userInfo.dp ? userInfo.dp : profilePlaceholder}
+                        onClick = {profilepage}
+                        alt="user avatar" 
+                        className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} 
+                    />
+                    <img 
+                        src={applogo} 
+                        alt="Palbucks logo" 
+                        className = "block w-[19px] phones:w-[22px] md:hidden" 
+                    />
                     <h2 className = 'hidden md:block text-lg font-black font-merriweather'>{userInfo.first_name} {userInfo.last_name}</h2>
                 </div>
                 {/* <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] cursor-pointer'  /> */}

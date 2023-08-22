@@ -32,18 +32,22 @@ function Blockedaccounts(){
     }
 
     return(
-        <div className = " w-[90%] lg:w-[80] xl:w-[78%] bg-white " >
-            <div className = "flex justify-between items-center py-5 px-7 cursor-pointer " onClick = {manageblockedaccounts} >
-                <h3 className = "text-lg font-bold flex gap-2 " >
-                    <img src={blockicon} alt="block icon" />
-                    <span>Blocked accounts</span>
+        <div className = "w-full md:w-[90%] lg:w-[80] xl:w-[78%] bg-white " >
+            <div className = "flex justify-between items-center p-[15px] md:py-5 md:px-7 cursor-pointer " onClick = {manageblockedaccounts} >
+                <h3 className = "text-sm md:text-lg font-bold flex items-center gap-2 " >
+                    <img src={blockicon} alt="block icon" className="w-[15px] h-[15px] md:w-5 md:h-5 " />
+                    <span className="pt-[2px]" >Blocked accounts</span>
                 </h3>
-                <img src={openblockedaccounts == 'open' ? arrowup : arrowdown} alt="down arrow" className = " cursor-pointer w-[30px] h-[14px] "/>
+                <img 
+                    src={arrowup} 
+                    alt="down arrow" 
+                    className = {` ${openblockedaccounts == 'open'? '' : 'rotate-180'} cursor-pointer w-[20px] h-[10px] md:w-[30px] md:h-[14px]`}
+                />
             </div>
 
             <hr className = " border-[1px] border-[#C4C4C4] " />
                             
-            <div className ={` ${openblockedaccounts == 'open' ? 'flex h-[300px] overflow-auto ' : 'hidden'} px-7 py-6 mb-3 gap-8 flex-wrap items-center `} >                
+            <div className ={` ${openblockedaccounts == 'open' ? 'flex h-[300px] overflow-auto ' : 'hidden'} px-[10px] md:px-7 py-3 md:py-6 mb-3 gap-4 md:gap-8 flex-wrap items-center `} >                
                 {
                     blockedusersdata.map((item,i) =>{
                         return(
