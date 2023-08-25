@@ -118,9 +118,13 @@ function Sidebar(){
                 
                 <NavLink to = '/home'
                     className={` ${activepage == 'home' ? 'text-[#FFFFFF] font-black bg-[#37BCF7] ' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
-                    onClick = { () => { dispatch(setlinkcolor('home')) } }                   
+                    onClick = { () => { 
+                        dispatch(setlinkcolor('home'))
+                        dispatch(closesidebar())
+                        
+                    } }                   
                  >                       
-                    <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
+                    <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'home' ? activehomeicon : homeicon } alt="homepage icon" className = 'w-[20px]' />
                             <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Home</h2>
@@ -132,9 +136,12 @@ function Sidebar(){
             
                 <NavLink to = '/organisecrowdfund'
                     className={` ${activepage == 'organisecrowdfund' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
-                    onClick = { () => { dispatch(setlinkcolor('organisecrowdfund')) } }                   
+                    onClick = { () => { 
+                        dispatch(setlinkcolor('organisecrowdfund')) 
+                        dispatch(closesidebar())
+                    } }                   
                  >                       
-                    <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
+                    <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'organisecrowdfund' ? crowdfundicon : crowdfundicon2 } alt="organise crowdfund icon" className = 'w-[20px]' />
                             <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Organise Crowdfund</h2>
@@ -146,9 +153,12 @@ function Sidebar(){
 
                 <NavLink to = '/wallet'
                     className={` ${activepage == 'wallet' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
-                    onClick = { () => { dispatch(setlinkcolor('wallet')) } }                   
+                    onClick = { () => { 
+                        dispatch(setlinkcolor('wallet')) 
+                        dispatch(closesidebar())
+                    } }                   
                  >                       
-                    <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
+                    <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'wallet' ? walleticon : walleticon } alt="wallet icon" className = 'w-[20px]' />
                             <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Wallet</h2>
@@ -160,9 +170,12 @@ function Sidebar(){
                 
                 <NavLink to = '/settings'
                     className={` ${activepage == 'settings' ? 'text-[#FFFFFF] font-black bg-[#37BCF7]' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
-                    onClick = { () => { dispatch(setlinkcolor('settings')) } }                   
+                    onClick = { () => { 
+                        dispatch(setlinkcolor('settings')) 
+                        dispatch(closesidebar())
+                    } }                   
                  >                       
-                    <div className="h-[82px] flex items-center justify-between px-[10px] md:px-5 ">
+                    <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'settings' ? settingsicon : settingsicon2 } alt="settings crowdfund icon" className = 'w-[20px]' />
                             <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Settings & Privacy</h2>

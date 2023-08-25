@@ -16,8 +16,13 @@ import { checkAuthentication } from "../../auth/checkauthentication"
 import { setLogoutLoading } from "../../actions/actions"
 import emailPasswordValidation from "../../auth/inputValidation"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
+import { useMediaQuery } from "react-responsive"
 
 const Signin = () => {
+
+    const isMobile = useMediaQuery({
+        query: '(max-width: 768px)'
+    })
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -106,110 +111,112 @@ const Signin = () => {
 
   return (
     <div className="font-merriweather relative" >
-      <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
-        <div className=" flex gap-[18px] items-center " >
-            <img src={applogo} alt="Palbucks logo" className="w-[33.4px]" />
-            <img src= {palbucks} alt="palbucks" className=" w-[138px] h-[24px] "  />
-        </div>
+        <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-[60px] lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
+            <div className=" flex gap-[10px] md:gap-[18px] items-center " >
+                <img src={applogo} alt="Palbucks logo" className="w-5 md:w-[33.4px]" />
+                <img src= {palbucks} alt="palbucks" className="w-[77px] md:w-[138px] h-[14px] md:h-[24px] "  />
+            </div>
 
-        <div className="flex items-center gap-[35px]" >
-            <Link to = '/signin' className="text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
-                <span>Don’t have an account yet?</span>
-            </Link>
-            <Link to = '/signup' className="text-[#000000] text-lg font-bold tracking-[0.069px] py-[8px] px-[16px] bg-[#35FAA0] hover:bg-[#35EB98] leading-[22px] flex items-center rounded-[5px] "  >
-                <span>Sign up</span>
-            </Link>
-        </div>
+            <div className="flex items-center gap-[35px]" >
+                <Link to = '/signin' className="hidden md:flex items-center text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] hover:rounded-[5px] "  >
+                    <span>Don’t have an account yet?</span>
+                </Link>
+                <Link to = '/signup' className="text-[#000000] text-lg font-bold tracking-[0.069px] py-[6px] md:py-[8px] px-3 md:px-4 bg-[#35FAA0] hover:bg-[#35EB98] leading-[22px] flex items-center rounded-[5px] "  >
+                    <span>Sign up</span>
+                </Link>
+            </div>
 
-      </header>
+        </header>
 
-        <div className ="w-[400px] h-[800px] absolute -z-10 -right-[0px] -top-[200px] ">
+        <div className ="w-24 md:w-[400px] md:h-[800px] absolute -z-10 -right-[0px] top-[100px] md:-top-[200px] ">
             <img src={bgradient} alt="" className="w-full" />            
         </div>
         
-        <div className ="w-[400px] h-[200px] absolute -z-10 -left-[0px] bottom-[900px] ">
+        <div className ="w-24 md:w-[400px] md:h-[200px] absolute -z-10 -left-[0px] top-[500px] md:bottom-[900px] ">
             <img src={bgradient3} alt="" className="w-full" />            
             {/* <img src={bgradient3} alt="" className="w-full relative -top-[0px] " /> */}
         </div>
 
-      <main className="pt-[70px] pb-10 mt-[103px] " >
-        <h2 className=" mb-[59px] text-center text-[48px] font-black leading-[73px] tracking-[0.069px] " >
-            Sign in
-        </h2>
+        <main className="pt-[25px] lg:pt-[70px] md:pb-10 mt-[70px] md:mt-[90px] lg:mt-[103px] " >
+            <h2 className="mb-9 md:mb-[59px] text-center text-2xl md:text-[48px] font-black md:leading-[73px] tracking-[0.069px] " >
+                Sign in
+            </h2>
 
-        <form action="" className=" block mx-auto w-fit  " >
-            <div className="mb-[56px] flex flex-col ">
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    placeholder="Email"                    
-                    required
-                    onChange={handleInputChange}
-                    className={`mb-[43px] w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] text-[#888888] text-lg bg-[#F9F9F9] border-[3px] 
-                    ${validateInput.email && validateInput.email !== 'correct' ? 
-                    'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
-                    'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
-                    outline-[3px] focus:caret-[#37BCF7] `}
-                /> 
-                {
-                    validateInput.email && validateInput.email !== 'correct' ? (
-                        <p className="-mt-[23px] mb-[43px] text-[#FD6150] text-2xl font-merriweather">
-                            {validateInput.email}
-                        </p>
-                    ) : null
-                }
-                <PasswordInput ignorePasswordVerifier = {true} onChange = {handlePasswordChange} validateInput = {validateInput} setValidateInput = {setValidateInput} />
-                <button 
-                    className="min-w-[228px] mt-[70px] px-[36px] hover:px-[56px] transition-all duration-500 py-[20.1px] 
-                    font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto flex items-center justify-center  " 
-                    onClick={handleSignin}
+            <form action="" className=" block mx-auto w-fit max-w-[270px] phones:max-w-[300px] md:max-w-none  " >
+                <div className="mb-10 md:mb-[56px] flex flex-col ">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        placeholder="Email"                    
+                        required
+                        onChange={handleInputChange}
+                        className={`mb-5 md:mb-[43px] w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] text-[#888888] text-base md:text-lg bg-[#F9F9F9] border-2 md:border-[3px] 
+                        ${validateInput.email && validateInput.email !== 'correct' ? 
+                        'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
+                        'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
+                        outline-[3px] focus:caret-[#37BCF7] `}
+                    /> 
+                    {
+                        validateInput.email && validateInput.email !== 'correct' ? (
+                            <p className="-mt-3 md:-mt-[23px] mb-5 md:mb-[43px] text-[#FD6150] text-lg md:text-2xl font-merriweather">
+                                {validateInput.email}
+                            </p>
+                        ) : null
+                    }
+                    <PasswordInput ignorePasswordVerifier = {true} onChange = {handlePasswordChange} validateInput = {validateInput} setValidateInput = {setValidateInput} />
+                    <button 
+                        className="min-w-[208px] md:min-w-[228px] mt-[35px] md:mt-[70px] px-5 hover:px-[56px] py-[10px] md:py-[20.1px] transition-all duration-500 
+                        font-bold bg-black text-white rounded md:rounded-[8px] text-lg md:text-[28px] mx-auto flex items-center justify-center  " 
+                        onClick={handleSignin}
+                        >
+                        <div className={` ${isLoginLoading ? 'block' : 'hidden' } `}>
+                            <Loadingspinner width = '28px' height = '28px' />
+                        </div>
+                        <span className={` ${isLoginLoading ? 'hidden' : 'block' } `}>
+                            Sign in with email
+                        </span>
+                    </button>
+                </div>
+                <p className="mb-[32px] text-center text-base md:text-2xl" >
+                    or signin using 
+                </p>
+                <div className="flex flex-col gap-[18px] md:gap-[36px] items-center mb-[37px] ">
+                    <button 
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                            rounded md:rounded-[8.5px] `} 
                     >
-                    <div className={` ${isLoginLoading ? 'block' : 'hidden' } `}>
-                        <Loadingspinner width = '28px' height = '28px' />
-                    </div>
-                    <span className={` ${isLoginLoading ? 'hidden' : 'block' } `}>
-                        Sign in with email
-                    </span>
-                </button>
-            </div>
-            <p className=" mb-[32px] text-center text-2xl " > or signin using </p>
-            <div className="flex flex-col gap-[36px] items-center mb-[37px] ">
-                <button 
-                    className= {` w-[600px] h-[80px] py-5 px-7 flex gap-7 items-center justify-center border-[3px] border-black
-                        rounded-[8.5px] `} 
-                >
-                    <img src={googleicon} alt="Google icon"  className=" w-[50px] " />
-                    <span className="text-3xl font-bold  " >
-                        Sign in with Google
-                    </span>
-                </button>
-                <button 
-                    className= {` w-[600px] h-[80px] py-5 px-7 flex gap-7 items-center justify-center border-[3px] border-black
-                        rounded-[8.5px] `} 
-                >
-                    <img src={facebookicon} alt="Facebook icon"  className=" w-[50px] " />
-                    <span className="text-3xl font-bold  " >
-                        Sign in with Facebook
-                    </span>
-                </button>
-                <button 
-                    className= {` w-[600px] h-[80px] py-5 px-7 flex gap-7 items-center justify-center border-[3px] border-black
-                        rounded-[8.5px] `} 
-                >
-                    <img src={twittericon} alt="Twitter icon"  className=" w-[50px] " />
-                    <span className="text-3xl font-bold  " >
-                        Sign in with Twitter
-                    </span>
-                </button>
+                        <img src={googleicon} alt="Google icon"  className="w-7 md:w-[50px] " />
+                        <span className="text-xl md:text-3xl font-bold  " >
+                            Sign in with Google
+                        </span>
+                    </button>
+                    <button 
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                            rounded md:rounded-[8.5px] `} 
+                    >
+                        <img src={facebookicon} alt="Facebook icon"  className="w-7 md:w-[50px] " />
+                        <span className="text-xl md:text-3xl font-bold  " >
+                            Sign in with Facebook
+                        </span>
+                    </button>
+                    <button 
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                            rounded md:rounded-[8.5px] `} 
+                    >
+                        <img src={twittericon} alt="Twitter icon"  className="w-7 md:w-[50px] " />
+                        <span className="text-xl md:text-3xl font-bold  " >
+                            Sign in with Twitter
+                        </span>
+                    </button>
 
-            </div>
-            <p className="w-[580px] mx-auto text-lg text-center tracking-[0.552px] " >
-                <Link to={'/termsofuse'} className = 'font-bold' >Terms of Service </Link> and <Link to={'/privacypolicy'} className = 'font-bold' >Privacy Policy</Link>
-            </p>
-        </form>
+                </div>
+                <p className="mx-auto text-base md:text-lg text-center tracking-[0.552px] " >
+                    <Link to={'/termsofuse'} className = 'font-bold' >Terms of Service </Link> and <Link to={'/privacypolicy'} className = 'font-bold' >Privacy Policy</Link>
+                </p>
+            </form>
 
-      </main>
+        </main>
 
     </div>
   )

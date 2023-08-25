@@ -50,7 +50,7 @@ const PasswordInput = (props) => {
               required
               value={password}
               onChange={handleChange}
-              className={`w-[700px] h-[82px] px-[29px] py-[10px] rounded-[6px] text-[#888888] text-lg bg-[#F9F9F9] border-[3px] 
+              className={`w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] text-[#888888] text-base md:text-lg bg-[#F9F9F9] border-2 md:border-[3px] 
               ${validateInput.password && validateInput.password !== 'Strong password' ? 
               'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
               'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
@@ -62,12 +62,12 @@ const PasswordInput = (props) => {
           >
             {/* <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} /> */}
         
-            <img src={showPassword ? hidepasswordicon : showpasswordicon} alt="show password" className='w-[35px] h-5 ' />
+            <img src={showPassword ? hidepasswordicon : showpasswordicon} alt="show password" className='w-5 h-4 md:w-[35px] md:h-5 ' />
           </span>
         </div>
         {
               validateInput.password && validateInput.password !== 'Strong password' ? (
-                  <p className="mt-[20px] mb-5 text-[#FD6150] text-2xl font-merriweather">
+                  <p className="-mt-3 md:-mt-0 mb-5 text-[#FD6150] text-lg md:text-2xl font-merriweather">
                       {validateInput.password}
                   </p>
               ) : null
@@ -75,30 +75,49 @@ const PasswordInput = (props) => {
 
         
         <div className={` ${props.ignorePasswordVerifier ? 'hidden' : 'flex'} font-merriweather flex-col gap-[15px] bg-[#F9F9F9] py-[10px] px-[15px] rounded-md `} >            
-            <p className='text-lg font-bold '>
+            <p className='text-sm md:text-lg font-bold '>
               Your password must have:
             </p>
             
-            <p className='text-[17px] flex gap-3 ' >      
+            <p className='text-[13px] md:text-[17px] flex gap-3 ' >      
               {/* Displays the black checker before test runs, the orange when the test fails and the green when the test passes */}        
-              <img src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.upperCase ? checker3 : checker2) } alt="verification checker" className='w-[15px]' />
+              <img 
+                src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.upperCase ? checker3 : checker2) } 
+                alt="verification checker" 
+                className='w-[11px] md:w-[15px]' 
+              />
               <span>1 Upper-case letter</span>
             </p>
-            <p className='text-[17px] flex gap-3 ' >              
-              <img src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.lowerCase ? checker3 : checker2) } alt="verification checker" className='w-[15px]' />
+            <p className='text-[13px] md:text-[17px] flex gap-3 ' >              
+              <img 
+                src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.lowerCase ? checker3 : checker2) } 
+                alt="verification checker" 
+                className='w-[11px] md:w-[15px]' 
+              />
               <span>1 lower-case letter</span>
             </p>
             
-            <p className='text-[17px] flex gap-3 ' >
-              <img src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.number ? checker3 : checker2) } alt="verification checker" className='w-[15px]' />
+            <p className='text-[13px] md:text-[17px] flex gap-3 ' >
+              <img 
+                src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.number ? checker3 : checker2) } 
+                alt="verification checker" 
+                className='w-[11px] md:w-[15px]' />
               <span>1 number</span>
             </p>
-            <p className='text-[17px] flex gap-3 ' >
-              <img src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.specialCharacter ? checker3 : checker2) } alt="verification checker" className='w-[15px]' />
+            <p className='text-[13px] md:text-[17px] flex gap-3 ' >
+              <img 
+                src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.specialCharacter ? checker3 : checker2) } 
+                alt="verification checker" 
+                className='w-[11px] md:w-[15px]'
+              />
               <span>1 special character</span>
             </p>
-            <p className='text-[17px] flex gap-3 ' >
-            <img src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.length >= 8  ? checker3 : checker2) } alt="verification checker" className='w-[15px]' />
+            <p className='text-[13px] md:text-[17px] flex gap-3 ' >
+            <img 
+              src={validateInput.passwordtest.testStage === 'preRun' ? checker : (validateInput.passwordtest.length >= 8  ? checker3 : checker2) } 
+              alt="verification checker" 
+              className='w-[11px] md:w-[15px]' 
+            />
               <span>8 characters at least </span>
             </p>
         </div>
