@@ -79,7 +79,7 @@ function Navbar(){
         `} >
             
             <div className = 'flex gap-[15px] max-w-[72%] phones:max-w-[75%] xphones:max-w-fit '>
-                <img src={menuicon} alt="menu icon" className = 'block brkpoint:hidden w-[20px] phones:w-[25px]'
+                <img src={menuicon} alt="menu icon" className = 'block brkpoint:hidden w-[20px] phones:w-[24px]'
                     onClick = {managesidebar} />
                 <Searchbar />
             </div>
