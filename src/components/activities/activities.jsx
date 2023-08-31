@@ -1,10 +1,11 @@
 import Activity from "../activity/activity";
 import downButton from "../../images/wallet/downbutton.svg"
-
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Activities(props) {
 
+    const navigate = useNavigate()
     const [expanded, setExpanded] = useState(false);
 
     const toggleExpansion = () => {
@@ -67,7 +68,14 @@ function Activities(props) {
                             Donate using USDT wallet
                         </button>
 
-                        <button className="mx-auto block px-[30px] pt-[15px] rounded-[10px] text-lg font-black leading-6 tracking-[0.073px] text-[#37BCF7] " >
+                        <button 
+                            className="mx-auto block px-[30px] pt-[15px] rounded-[10px] text-lg font-black leading-6 tracking-[0.073px] text-[#37BCF7] " 
+                            onClick={() => {
+                                console.log(props.eventid)
+                                navigate(`/${props.eventid}/donate`)
+                            }
+                            }
+                            >
                             Donate using card payment
                         </button>
                     </div>

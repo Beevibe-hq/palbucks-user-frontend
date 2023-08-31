@@ -208,7 +208,8 @@ function Detailedevent(props){
                         onClick = {
                             () => {
                                 //dispatch(sethomeorevent('home'))
-                                navigate(-1)
+                                //navigate(-1) This is navigating back to the campaign image page so I'm taking it to home for now
+                                navigate('/home')
                             }
                         }
                         />
@@ -319,6 +320,7 @@ function Detailedevent(props){
                                 target_price = {eventdetails.target_price} 
                                 amt_raised = {eventdetails.amt_raised} 
                                 total_donors = {totaldonations}
+                                eventid = {eventid}
                             />
                         </div>                       
                     </div>
