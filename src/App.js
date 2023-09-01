@@ -41,7 +41,7 @@ import PrivateRoute from './components/privateroute/privateroute'
 import { checkAuthentication } from './auth/checkauthentication'
 import { refreshToken } from './auth/refreshToken'
 import Loadingspinner from './components/loadingspinner/loadingSpinner'
-import Donate from './pages/cardDonation/donate';
+import Donate from './pages/cardDonation/cardDonation';
 
 
 function App() {

@@ -14,13 +14,18 @@ import twitterIcon from "../../images/cardDonation/twitter.svg"
 import copyIcon from "../../images/cardDonation/copy.svg"
 import mailIcon from "../../images/cardDonation/mail.svg"
 import facebookIcon from "../../images/cardDonation/facebook.svg"
+import usdIcon from "../../images/cardDonation/usd.svg"
+import nairaIcon from "../../images/cardDonation/naira.svg"
+import downArrowIcon from "../../images/cardDonation/downArrow.svg"
+
 
 import Navbar from '../../components/navbar/navbar'
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
+import Select from 'react-select'
 
 export default function Donate() {
 
@@ -120,6 +125,53 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
         })
     }
 
+    const options = [
+        {value:'usd' , label:'', image:usdIcon},
+        {value:'naira', label:'', image:nairaIcon}
+    ]
+    const [selectedCurrency, setSelectedCurrency] = useState(options[0])
+    const customStyles = {
+        control: (provided, state) => ({
+          ...provided,
+          position: 'absolute',
+          right: '20px',
+          top: '50%', // Vertically center the Select
+          transform: 'translateY(-50%)',
+          width: '70px', // Set the desired width
+          height:'50px',
+          border:'none',
+          outline:state.isFocused ? 'none' : 'none',          
+          boxShadow: state.isFocused ? '0 0 0 2px rgba(0, 123, 255, 0.25)' : null,          
+          cursor: 'pointer',
+        }),
+        menu: (provided) => ({
+          ...provided,
+          cursor: 'pointer',
+          position: 'absolute',
+          top:'22px',
+          right: '10px',
+          width: '70px', // Set the desired width for the options menu
+        }),   
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            // const color = chroma(data.color);            
+            return {
+              ...styles,
+              backgroundColor: isSelected ? "#37BCF7" : isFocused ? "#37BCF71A" : null,
+              color: "#333333"
+            };
+        }
+
+    };
+
+    const CustomDropdownIndicator = () => (        
+        <img src={downArrowIcon} alt="down arrow" className="w-7 h-7" />
+    );   
+    
+    useEffect(()=>{
+        console.log(selectedCurrency)
+    },[selectedCurrency])
+      
+
     return(
         <div className="">
             <div className="mb-[68px] bg-white py-[37px] px-[59px] max-w-[670px] mx-auto rounded-[10px] " >
@@ -137,16 +189,33 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                     <label htmlFor="amount" className="text-lg font-bold" >
                         What amount do you wish to donate?
                     </label>
-                    <input
-                        type="number"
-                        name="amount"
-                        id="amount"
-                        min={1}
-                        placeholder="Enter your donation (in USD)"
-                        className="w-full h-[70px] py-[10px] px-5 border-[1.5px] border-black rounded bg-white
-                        text-[#888888] text-lg tracking-[0.8px] "
-                        onChange={handleInputChange}
-                    />
+                    <div className="relative h-[70px] flex items-center ">
+                        <input
+                            type="number"
+                            name="amount"
+                            id="amount"
+                            min={1}
+                            placeholder={selectedCurrency.value == 'usd' ? "Enter your donation (in USD)" : selectedCurrency.value == 'naira' ? "Enter your donation (in Naira)" : "Enter your donation"}
+                            className="w-full h-[70px] py-[10px] px-5 border-[1.5px] border-black rounded bg-white
+                            text-[#888888] text-lg tracking-[0.8px] "
+                            onChange={handleInputChange}
+                        />
+                        <Select
+                            defaultValue={options[0]}                    
+                            onChange={setSelectedCurrency}
+                            options={options}
+                            styles = {customStyles}
+                            components = {{
+                                IndicatorSeparator: () => null,
+                                DropdownIndicator: CustomDropdownIndicator,
+                            }}                                                        
+                            formatOptionLabel={option =>
+                                (
+                                    <img src={option.image} alt="option" className="w-5 h-6" />                                
+                                )
+                            }
+                        />
+                    </div>
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="donor" className="mb-5 text-lg font-bold" >
