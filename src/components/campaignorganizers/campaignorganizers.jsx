@@ -2,7 +2,7 @@ import { useState } from "react"
 import arrowdown from "../../images/arrowdown.svg"
 import arrowup from "../../images/arrowup.svg"
 import organizersimg from "../../images/organizers.svg"
-
+import profilePlaceholder from "../../images/profileplaceholder.svg"
 
 function Campaignorganizers(props){
 
@@ -52,6 +52,16 @@ function Campaignorganizers(props){
                     </div>
                     
                     {/* Navigate through the co_organizers list and display them below */}
+                    {
+                        props.co_organisers.map((item,i) =>{
+                            return(
+                                <div key ={i} className = "flex items-center gap-2 md:gap-4 "  >
+                                    <img src={item.dp ? item.dp : profilePlaceholder } alt="coOrganizer profile pic" className = "w-[60px] rounded-full"  />  
+                                    <p className = "font-medium text-base md:text-lg " ><span className = "font-bold" >{item.first_name} {item.last_name}</span> is a co-organiser </p>                                    
+                                </div>
+                            )
+                        })
+                    }
                 </div>
                                 
             

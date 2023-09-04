@@ -137,11 +137,11 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
           right: '20px',
           top: '50%', // Vertically center the Select
           transform: 'translateY(-50%)',
-          width: '70px', // Set the desired width
+          width: '70px', // Set the desired width for the options menu
           height:'50px',
-          border:'none',
-          outline:state.isFocused ? 'none' : 'none',          
-          boxShadow: state.isFocused ? '0 0 0 2px rgba(0, 123, 255, 0.25)' : null,          
+          border:'0',
+          caretColor: 'transparent',  // Remove the blinker
+          boxShadow: state.isFocused ? 0 : 0, //Disable the blue line
           cursor: 'pointer',
         }),
         menu: (provided) => ({
@@ -156,8 +156,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             // const color = chroma(data.color);            
             return {
               ...styles,
-              backgroundColor: isSelected ? "#37BCF7" : isFocused ? "#37BCF71A" : null,
-              color: "#333333"
+              backgroundColor: isSelected ? "#37BCF7" : isFocused ? "#37BCF71A" : null, // Set the color for a focused option              
             };
         }
 
@@ -201,7 +200,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                             onChange={handleInputChange}
                         />
                         <Select
-                            defaultValue={options[0]}                    
+                            defaultValue={options[0]}
                             onChange={setSelectedCurrency}
                             options={options}
                             styles = {customStyles}

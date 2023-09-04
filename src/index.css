@@ -208,4 +208,30 @@ code {
       -webkit-tap-highlight-color: transparent; /* Disable the tap highlight color for WebKit browsers (e.g., Safari) */
     }
 
+
+    /* Custom scrollbar for Chrome, Safari, and Opera */
+    .modalScrollbar::-webkit-scrollbar {
+      width: 13px;
+    }
+
+    /* Track */
+    .modalScrollbar::-webkit-scrollbar-track {
+      background-color: #DDDDDD;
+      border-radius: 10px;  
+      width: 13px;    
+    }
+    
+    /* Handle */
+    .modalScrollbar::-webkit-scrollbar-thumb {
+      background: #888888; 
+      border-radius: 10px;
+      border: 3px solid transparent;      
+      background-clip: content-box; /* This is important */
+    }
+    
+
+    /* Custom scrollbar for Firefox and other browsers */
+    
+
+
 }

@@ -23,7 +23,8 @@ function Homebody(){
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
   const crowdfundEvents = useSelector(state => state.crowdfundEvents)
-  const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.first_name == userInfo.first_name))
+  const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.username !== null && item.organiser.username == userInfo.username)) //(item => item.organiser.first_name == userInfo.first_name))
+
   const lastScrollPositionRef = useRef(null);
   
   //sets state for the homepage's display
@@ -86,7 +87,7 @@ function Homebody(){
 
             <div className = 'flex fold:gap-4 phones:gap-4 font-merriweather font-black mb-4 md:mb-5 text-base tracking-[0.06px] leading-5'>
                 <button className = {`w-[82px] md:w-[102px] ${display == 'others' ? 'bg-[#D8D8D8]' : 'bg-inherit hover:bg-[#D8D8D8]'}  
-                  h-[35px] md:h-[42px] py-1 md:py-[15px] px-[5px] rounded-[10px] font-bold text-sm md:text-base `}
+                  h-[35px] md:h-[42px] py-1 px-[5px] rounded-[10px] font-bold text-sm md:text-base `}
                  onClick={ () => {
                     dispatch(setothers())
                     setdisplay('others')
@@ -134,7 +135,7 @@ function Homebody(){
                           crowdfundEvents.map((item,i)=>{
                               return(
                                 <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
-                                organizeraccounts = {item.organizeraccounts} organiser = {item.organiser} title = {item.title} description = {item.description}
+                                organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
                                 amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
                                 location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
                                 organizer = {item.user_name} is_liked = {item.is_liked}
