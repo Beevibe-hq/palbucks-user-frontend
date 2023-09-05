@@ -22,10 +22,11 @@ import downArrowIcon from "../../images/cardDonation/downArrow.svg"
 import Navbar from '../../components/navbar/navbar'
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 import { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import Select from 'react-select'
+import { baseUrl } from "../../auth/checkauthentication"
 
 export default function Donate() {
 
@@ -38,8 +39,52 @@ export default function Donate() {
         cardName: ''
     })
     
+    // Obtain the crowdfund id and the payment status id (if available) from the url
     const params = useParams()
     const id = params.id
+    const [searchParams] = useSearchParams();
+    
+    useEffect(() => {
+        // Access the individual query parameters
+        const status = searchParams.get('status');
+        const tx_ref = searchParams.get('tx_ref');
+        const transaction_id = searchParams.get('transaction_id');
+
+        if (status === 'successful' ){
+            
+            setpageDisplay('verifyingPayment')
+
+            // Make an api call to verify the transaction
+            const access_token = localStorage.getItem('access_token')
+            const verifyTransaction = async() => {
+                const verify = await fetch(`${baseUrl}/pay/api/${id}/donate/?tx_ref=${tx_ref}&transaction_id=${transaction_id}`,{
+                    headers:{
+                        Authorization: `Bearer ${access_token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    /* body: JSON.stringify({
+                        tx_ref: tx_ref,
+                        transaction_id: transaction_id
+                    }) */
+                })
+                const response = await verify.json()
+                console.log(response)
+                if(verify.status == 200){
+                    //window.open(response.data.link, '_blank')
+                    setpageDisplay('donationSuccessful')
+                }else{
+                    alert('An error occured we couldnt verify this payment,Please refresh the page or try again')
+                    setpageDisplay('donationDetails')
+                }
+            }
+            verifyTransaction()
+
+
+        }else{
+            setpageDisplay('donationDetails')
+        }
+    }, [searchParams]);
+    
 
     const navigate = useNavigate()
     const [pageDisplay, setpageDisplay] = useState('donationDetails')
@@ -101,6 +146,8 @@ export default function Donate() {
                     <CardDetails setpageDisplay={setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} /> :
                     pageDisplay == 'donationSuccessful' ?
                     <DonationSuccessful /> :
+                    pageDisplay == 'verifyingPayment' ?
+                    <PaymentLoading /> :
                     null
                 }
                 
@@ -125,9 +172,50 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
         })
     }
 
+    const [isLoading, setIsLoading] = useState(false)
+    const handleClick = async() => {
+        setIsLoading(true)
+        if(donationDetails.amount == ''){
+            alert('Please fill in the amount you wish to donate')
+            setIsLoading(false)
+            return
+        }else if(donationDetails.amount < 1){
+            alert('Please enter a valid amount')
+            setIsLoading(false)
+            return
+        }
+        
+        /* setpageDisplay('cardDetails');
+        window.scrollTo(0,0) */
+        console.log(selectedCurrency)
+
+        const access_token = localStorage.getItem('access_token')
+        const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate/`,{
+            method:'POST',
+            headers:{
+                Authorization: `Bearer ${access_token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: donationDetails.amount,
+                currency:selectedCurrency.value
+                /* donor: donationDetails.donor */
+            })
+        })
+        const response = await makeDonation.json()
+        console.log(response)
+        if(makeDonation.status == 200){
+            window.open(response.data.link, '_self')
+        }else{
+            alert('An error occured, please try again')
+        }
+
+        setIsLoading(false)
+    }
+
     const options = [
-        {value:'usd' , label:'', image:usdIcon},
-        {value:'naira', label:'', image:nairaIcon}
+        {value:'USD' , label:'', image:usdIcon},
+        {value:'NGN', label:'', image:nairaIcon}
     ]
     const [selectedCurrency, setSelectedCurrency] = useState(options[0])
     const customStyles = {
@@ -165,12 +253,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
     const CustomDropdownIndicator = () => (        
         <img src={downArrowIcon} alt="down arrow" className="w-7 h-7" />
     );   
-    
-    useEffect(()=>{
-        console.log(selectedCurrency)
-    },[selectedCurrency])
       
-
     return(
         <div className="">
             <div className="mb-[68px] bg-white py-[37px] px-[59px] max-w-[670px] mx-auto rounded-[10px] " >
@@ -235,21 +318,17 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                 </div>
             </div>
 
-            <button className="mx-auto w-fit block py-5 px-9 rounded-lg bg-[#000000] 
+            <button className="mx-auto w-fit min-w-[280px] block py-5 px-9 rounded-lg bg-[#000000] 
             text-white text-[28px] font-bold leading-[43px] -tracking-[0.188px] " 
-                onClick={ () => {
-                    if(donationDetails.amount == ''){
-                        alert('Please fill in the amount you wish to donate')
-                        return
-                    }else if(donationDetails.amount < 1){
-                        alert('Please enter a valid amount')
-                        return
-                    }
-                    setpageDisplay('cardDetails');
-                    window.scrollTo(0,0)
-                } }
+                onClick={ handleClick }
             >
-                Enter your card details
+                
+                <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                    <Loadingspinner width = '28px' height = '28px' />
+                </div>
+                <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                    Enter your card details
+                </span>
             </button>
         </div>
     )
@@ -502,4 +581,20 @@ const DonationSuccessful = () => {
         </div>        
     )
 
+}
+
+
+// Payment Loading Component to be displayed while verifying the payment transaction
+const PaymentLoading = () => {
+
+    return(
+        <div className="mb-[68px] bg-white py-[37px] px-[59px] max-w-[670px] mx-auto rounded-[10px] " >
+            <h1 className="text-lg" >
+                Payment Pending
+            </h1>
+            <p className="text-lg" >
+                Please wait while we verify your payment
+            </p>
+        </div>
+    )
 }
