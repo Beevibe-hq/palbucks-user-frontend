@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function Navbar(){
+function Navbar(props){
 
     // Current problem with this is that when the user changes details on another browser, the details wont be updated on this browser
     const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
@@ -56,9 +56,9 @@ function Navbar(){
         
      } */
 
-    /* useEffect(()=>{
+    useEffect(()=>{
 
-        const handlebeforeunload = (e) =>{
+        /* const handlebeforeunload = (e) =>{
             e.preventDefault()
             e.returnValue = '';
             dispatch(setprofilepageinactive())
@@ -69,13 +69,15 @@ function Navbar(){
 
         return () =>{
             window.removeEventListener('beforeunload', handlebeforeunload)
-        }
-    },[]) */
+        } */
+        
+    },[])
 
     return(
         <div className = {`py-[10px] px-2 phones:px-5  md:px-10 h-[90px] md:h-[100px] fixed top-0 right-0
-        ${sidebarslid ? 'left-0 brkpoint:left-[100px]' : 'left-0 brkpoint:left-[250px] lg:left-[280px] xl:left-[320px]' } z-20 bg-[#F9F9F9] 
+        ${props.sidebar === false ? 'left-0' : sidebarslid ? 'left-0 brkpoint:left-[100px]' : 'left-0 brkpoint:left-[250px] lg:left-[280px] xl:left-[320px]' } z-20 bg-[#F9F9F9] 
         shadow-[0px_0px_16px_rgba(0,0,0,0.04)] flex items-center justify-between xphones:justify-between 
+        
         `} >
             
             <div className = 'flex gap-[15px] max-w-[72%] phones:max-w-[75%] xphones:max-w-fit '>

@@ -26,6 +26,7 @@ import { readFile } from "../cropping/cropimage/cropimage";
 import { urltoFile } from "../cropping/cropimage/cropimage";
 import { getCroppedImg } from "../cropping/canvasUtils";
 import { baseUrl } from "../../auth/checkauthentication";
+import { Link } from "react-router-dom";
 import Loadingspinner from "../loadingspinner/loadingSpinner";
 
 function Profilepage(){
@@ -138,15 +139,35 @@ const DisplayProfile = ({goback, setDisplay}) => {
                     <h1 className="text-base md:text-[22px] text-center font-black " >My Social Links</h1>
                 </div>
                 <div className="flex gap-2 justify-around p-3 md:py-[30px] md:px-14 2xl:px-20 " >
-                    <div className="flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " >                        
+                    <div className="cursor-pointer flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] "
+                        onClick={
+                            () => {
+                                if(userInfo.social_links.twitter !== null){
+                                    window.open(userInfo.social_links.twitter)
+                                }
+                            }
+                        }
+                    >                                                
                         <img src={twittericon} alt="twitter icon" className="w-4 md:w-6 lg:w-8 " />
-                        <h4 className="text-xs md:text-[22px]" >Twitter</h4>
+                        <h4 className="text-xs md:text-[22px]" >Twitter</h4>                
                     </div>
-                    <div className="flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " >
+                    <div className="cursor-pointer flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] "
+                        onClick={() => {
+                            if(userInfo.social_links.facebook !== null){
+                                window.open(userInfo.social_links.facebook)
+                            }
+                        }}
+                    >
                         <img src={facebookicon} alt="facebook icon" className=" w-4 md:w-6 lg:w-8" />
                         <h4 className="text-xs md:text-[22px]" >Facebook</h4>
                     </div>
-                    <div className="flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " >
+                    <div className="cursor-pointer flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " 
+                        onClick={() => {
+                            if(userInfo.social_links.instagram !== null){
+                                window.open(userInfo.social_links.instagram)
+                            }
+                        } }
+                    >
                         <img src={instagramicon} alt="Instagram icon" className="w-4 md:w-6 lg:w-8" />
                         <h4 className="text-xs md:text-[22px]" >Instagram</h4>
                     </div>

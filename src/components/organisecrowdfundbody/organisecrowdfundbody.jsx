@@ -2,7 +2,7 @@ import { infoicon, infoicon2, uploadicon } from "../../images";
 import uploadSuccessIcon from "../../images/organiseCrowdfund/Information icon.png"
 import arrowup from "../../images/arrowup.svg"
 import arrowdown from "../../images/arrowdown.svg"
-import arrowdown2 from "../../images/arrowdown2.svg"
+import arrowdown2 from "../../images/organiseCrowdfund/arrowdown2.svg"
 import plusicon from "../../images/plusicon.svg"
 import removeicon from "../../images/removeicon.svg"
 import animalLabel from "../../images/categoryImages/animal label.svg"
@@ -28,6 +28,25 @@ import SearchCoOrganiser from "../searchCoOrganiser/searchCoOrganiser";
 import { useNavigate } from "react-router-dom";
 import Loadingspinner from "../loadingspinner/loadingSpinner";
 import { useMediaQuery } from "react-responsive";
+import Select from "react-select";
+
+// Variables and components for Category react select
+export const options = [
+    {value: 'medical', label: 'Medical', icon:medicalLabel },
+    {value:'faith', label: 'Faith', icon:faithLabel },
+    { value: 'environment', label: 'Environment', icon:environmentLabel },
+    {value:'travel', label: 'Travel', icon:travelLabel },
+    {value:'family', label: 'Family', icon:familyLabel },
+    {value:'wish', label: 'Wish', icon:wishLabel },
+    { value: 'business', label: 'Business', icon:businessLabel },
+    {value: 'animal', label: 'Animals', icon:animalLabel },
+    {value: 'charity', label: 'Charity', icon:charityLabel },
+    {value:'community', label: 'Community', icon:communityLabel },
+    {value:'creative', label: 'Creative', icon:othersLabel },
+    {value:'sports', label: 'Sports', icon:footballLabel },
+    {value:'others', label: 'Others', icon:othersLabel },
+]
+
 
 function Organisecrowdfundbody(){
 
@@ -66,8 +85,7 @@ function Organisecrowdfundbody(){
     const [formdata, setformdata] = useState({
         banner:null,        
         date_posted:today.toISOString(),        
-        end_date: "2019-08-24T14:15:22Z",        
-        //user_name:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).username : 'Jane Doe',
+        end_date: "",        
         organiser:{
             pk:userInfo.pk,
             first_name:userInfo.first_name,
@@ -104,18 +122,70 @@ function Organisecrowdfundbody(){
 
     const startCrowdfund = async () => {
         setIsLoading(true)
-        console.log('starting')
-        const formData = new FormData();
+        
+        
+        const form = new FormData();
         // Iterate over the properties of the formdata object
         for (const [key, value] of Object.entries(formdata)) {
-            formData.append(key, value);
+            form.append(key, value);
         }
+
+        // Validate the input fields
+        if (formdata.title === '') {
+            alert('Please enter a title for your crowdfund')
+            setIsLoading(false)
+            return;
+        }
+        /* if (formdata.description === '') {
+            alert('Please enter a description for your crowdfund')
+            setIsLoading(false)
+            return;
+        } */
+        if (formdata.tags === '') {
+            alert('Please select a category for your crowdfund')
+            setIsLoading(false)
+            return;
+        }
+        if (formdata.target_price <= 0) {
+            alert('Please enter a valid target price for your crowdfund')
+            setIsLoading(false)
+            return;
+        }
+        /* if (formdata.location === '') {
+            alert('Please enter a location for your crowdfund')
+            setIsLoading(false)
+            return;
+        } */ 
+        if (formdata.end_date === '') {
+            alert('Please select an end date for your crowdfund')
+            setIsLoading(false)
+            return;
+        }
+        if (formdata.banner === null) {
+            alert('Please upload a banner for your crowdfund')
+            setIsLoading(false)
+            return;
+        }
+
+        /* // Remove the existing co_organisers key from form
+        form.delete('co_organisers');
+
+        // Assuming formdata.co_organisers is an array of numbers as strings
+        const coOrganisers = formdata.co_organisers.map(Number);
+        console.log(coOrganisers)
+
+        // Now coOrganisers is an array of actual numbers
+        form.append('co_organisers', coOrganisers.join(',')); // Join as a comma-separated string
+
+        
+        console.log(`the type of the coorganisers pk is :  ${typeof(formdata.co_organisers[0])}`)
+        console.log(`here are the coorganisers pk: ${typeof(formdata.co_organisers)}`) */
         
         const access_token = localStorage.getItem('access_token')
 
         const sendCrowdfund = await fetch('https://palbucks-api.onrender.com/funding/api/',{
             method:'POST',
-            body: formData,
+            body: form,
             headers: {
                 Authorization: `Bearer ${access_token}`,
                 //"Content-Type": "multipart/form-data"
@@ -126,22 +196,7 @@ function Organisecrowdfundbody(){
         console.log(resp)
 
         if(sendCrowdfund.ok){
-            console.log('success')
-            /* dispatch(addCrowdfundEvent({
-                id:resp.id,
-                title:resp.title,
-                description:resp.description,
-                target_price:resp.target_price,
-                amt_raised:resp.amt_raised,
-                tags:resp.tags,
-                end_date:resp.end_date,
-                banner:resp.banner,
-                start_date:resp.start_date,
-                user_name:resp.user_name,
-                organizeraccounts:[resp.user_name],
-                date_posted:resp.date_posted,
-                deleted:resp.deleted,
-            })) */
+            console.log('success')            
             dispatch(addCrowdfundEvent(resp))
             navigate('/home')
         }
@@ -166,9 +221,16 @@ function Organisecrowdfundbody(){
         setmanagetoggles({...managetoggles, [currentevent]:!currenttogglevalue })
         //console.log(managetoggles)
     }
-
-      
     
+
+    const CustomDropdownIndicator = () => (
+        <img src = {arrowdown2} alt = 'down arrow' className="w-[15px] h-[14px] " />
+    )
+
+    // Storing the selected coOrganisers
+    const [selectedCoOrganisers, setSelectedCoOrganisers] = useState([])
+    
+        
     return(
         
         <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-merriweather '>
@@ -245,8 +307,8 @@ function Organisecrowdfundbody(){
                         <label htmlFor="category" className=" block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4  " > 
                             Category* 
                         </label>                        
-                        <div className="relative inline-block w-full md:w-64 mb-5 md:mb-[53px] ">
-                            <select 
+                        <div className="w-full max-w-[470px] mb-5 md:mb-[53px] ">
+                            {/* <select 
                                 className={`block cursor-pointer appearance-none w-full bg-white border border-gray-400 
                                 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none 
                                 focus:shadow-outline text-sm md:text-base `}
@@ -258,11 +320,11 @@ function Organisecrowdfundbody(){
                                 <option disabled value="placeholder">Select your category</option>
                                 <option value="environment" >
                                     Environment
-                                    {/* <img src={environmentLabel} alt="environment label" /> */}
+                                    
                                 </option>
                                 <option value="medical" >
                                     Medical
-                                    {/* <img src={medicalLabel} alt="medical label" /> */}
+                                    
                                 </option>
                                 <option value="sports" >Sports</option>
                                 <option value= "family"  >Family</option>
@@ -271,7 +333,41 @@ function Organisecrowdfundbody(){
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg className="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M6 8l4 4 4-4z"/></svg>
-                            </div>
+                            </div> */}
+                            <Select                                
+                                options={options}
+                                placeholder="Select your category"
+                                onChange={(e) => {                                    
+                                    setformdata((prevdata)=> ({...prevdata, tags:e.value }) )
+                                }}
+                                components={{
+                                    DropdownIndicator: CustomDropdownIndicator,
+                                    IndicatorSeparator : () => null 
+                                }}
+                                styles={{
+                                    control: (base, state) => ({
+                                        ...base,
+                                        width:'100%',
+                                        height:'50px',                                        
+                                        border: state.isFocused ? '1px solid gray' : '1px solid gray',
+                                        // This line disable the blue border
+                                        boxShadow: state.isFocused ? 0 : 0,
+                                        "&:hover": {
+                                            border: state.isFocused ? '1px solid gray' : '1px solid gray',
+                                        },
+                                        cursor:'pointer',
+                                        caretColor:'transparent',
+                                        paddingRight:'20px',
+                                        paddingLeft:'10px',
+                                    }),                    
+                                }}
+                                formatOptionLabel={(option) => (
+                                    <div className="flex items-center gap-2 pl-4 ">
+                                        <img src={option.icon} alt="category icon" className="w-4 h-4" />
+                                        <span className="text-sm font-black pt-1" >{option.label}</span>                                        
+                                    </div>
+                                )}
+                            />
                         </div>
 
 
@@ -370,7 +466,12 @@ function Organisecrowdfundbody(){
                          }}
                          >
                             <span className="text-xs md:text-base" >
-                                Add co-organiser
+                                {
+                                    selectedCoOrganisers.length === 0 ? 'Add co-organiser':
+                                    selectedCoOrganisers.length > 1 ? 
+                                    'Added co-organisers':
+                                    'Added co-organiser'
+                                }
                             </span>
                             <img src={plusicon} alt="plus icon" />
                         </button>
@@ -383,7 +484,7 @@ function Organisecrowdfundbody(){
                     </div>
                 </div>
 
-                <SearchCoOrganiser displaySearchCoOrganiser = {displaySearchCoOrganiser} setdisplaySearchCoOrganiser = {setdisplaySearchCoOrganiser} />
+                <SearchCoOrganiser displaySearchCoOrganiser = {displaySearchCoOrganiser} setdisplaySearchCoOrganiser = {setdisplaySearchCoOrganiser} formdata = {formdata} setformdata = {setformdata} selected = {selectedCoOrganisers} setSelected = {setSelectedCoOrganisers} />
 
                 <div className="bg-white mb-6 md:mb-[59px] " >                    
                     <div 
@@ -449,7 +550,7 @@ function Organisecrowdfundbody(){
                     </div>
                 </div>
 
-                <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[300px] w-fit md:w-1/2 md:h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block  " 
+                <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[300px] w-fit md:w-1/2 md:min-h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block  " 
                     onClick={startCrowdfund}
                 >
                     <div className={` ${isLoading ? 'block' : 'hidden' } `}>

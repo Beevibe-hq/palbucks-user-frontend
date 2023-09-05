@@ -41,6 +41,7 @@ import PrivateRoute from './components/privateroute/privateroute'
 import { checkAuthentication } from './auth/checkauthentication'
 import { refreshToken } from './auth/refreshToken'
 import Loadingspinner from './components/loadingspinner/loadingSpinner'
+import Donate from './pages/cardDonation/cardDonation';
 
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
 
             
             <Route path='/detailed/:id' element = { <Detailedevent /> } />
+            <Route path = '/:id/donate' element = { <Donate /> } />
             <Route path= '/settings' element = { <Settings />} />
 
             <Route path='/organisecrowdfund' element = { <PrivateRoute element = { <Home /> } /> } >

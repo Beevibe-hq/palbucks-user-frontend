@@ -10,6 +10,7 @@ import { editEventData, sethomebodydata, sethomeorevent } from "../../actions/ac
 import Likeicon from "../../images/likeicon";
 
 import { useState } from "react";
+import {options} from "../../components/organisecrowdfundbody/organisecrowdfundbody.jsx"
 
 //Fallbacks for the props
 import userimg from '../../images/user2.svg'
@@ -92,6 +93,9 @@ function Fundevent(props){
         //setliked(!liked)
     }
 
+    // Loop through the options array, check if the category matches the option and return the image
+    const categoryImg = options.filter(item => item.value === props.category).map(item => item.icon)        
+
     return(
         <div className = {`w-full sm:max-w-[380px] md:max-w-[360px] smlaptops:max-w-[280px] mdlaptops:max-w-[300px]
          lglaptops:max-w-[280px]  min-w-[200px] cursor-pointer inline-block font-merriweather `
@@ -100,37 +104,49 @@ function Fundevent(props){
         >
             <div className="" onClick = {detailedevent} >
                 <div className = 'flex gap-2 mb-3'>                
-                    <div className="flex shrink-0 -space-x-6">
-                        {
-                            props.accountimages ? props.accountimages.map((item,i)=>{
-                                return(
-                                    <img src = {item} alt = 'profile img' className='rounded-full fold:min-w-[40px] fold:h-[40px]  phones:min-w-[48px] phones:h-[48px]' key = {i} />
-                                )
-                            })  :
+                    <div className="flex shrink-0 -space-x-5">
                             <img 
                                 src={props.organiser.dp !== null ? props.organiser.dp :profileImgPlaceholder} 
                                 alt = 'Organizer profile' 
-                                className=' rounded-full fold:min-w-[40px] fold:h-[40px] phones:min-w-[48px] phones:h-[48px] md:min-w-[45px] md:h-[45px] '
+                                className='z-20 rounded-full fold:min-w-[40px] fold:h-[40px] phones:min-w-[48px] phones:h-[48px] md:min-w-[45px] md:h-[45px] '
                             />
+                        {   
+                            // Display the co-organizers profile images while giving the second image a higher index to be on top of the last
+                            props.co_organisers ? props.co_organisers.map((item,i)=>
+                                i === 0 ? (                                    
+                                    <img 
+                                        key={i}
+                                        src={item.dp !== null ? item.dp :profileImgPlaceholder} 
+                                        alt = 'co-organizer profile img' 
+                                        className='z-10 rounded-full fold:min-w-[40px] fold:h-[40px] phones:min-w-[48px] phones:h-[48px] md:w-[45px] md:h-[45px] '
+                                    />
+                                ):
+                                (
+                                    <img 
+                                        key={i}
+                                        src={item.dp !== null ? item.dp :profileImgPlaceholder} 
+                                        alt = 'co-organizer profile img' 
+                                        className='z-0 rounded-full fold:min-w-[40px] fold:h-[40px] phones:min-w-[48px] phones:h-[48px] md:w-[45px] md:h-[45px]'
+                                    />
+                                )
+                            
+                            ) : ''
                         }
                     </div>
                     <div className="flex flex-col relative max-w-[100%] truncate">
                         <h3 className = "font-black text-[14px] tracking-[0.06px] truncate">
+                            {props.organiser.first_name}        
+                              
                             {
-                                props.organizeraccounts ? props.organizeraccounts.map((item,i,arr)=>{
-                
-                                    return(
-                                        /* i === arr.length - 1 ? (item) :
-                                        i === arr.length - 2 ? item + ' and ' :
-                                        item + ' ,' */
-                                        arr.length === 1 ? item:
-                                        arr.length >= 2 && i === 0 ? item + ' and ':
-                                        arr.length == 2 && i ===1  ?  item :
-                                        arr.length > 2 && i > 1 ? arr.length -1 + ' others' :
-                                        ''
-                                    )
-                                }) :
-                                props.organiser.first_name
+                                props.co_organisers ? props.co_organisers.map((item,i,arr)=>{
+                                                                        
+                                        return(                                        
+                                            arr.length === 1 ? ' and ' +  item.first_name :
+                                            arr.length > 1 && i == 1 ? ' and ' + arr.length + ' others' :                                            
+                                            ''
+                                        ) 
+                                }
+                                ) : null
                             }
                         </h3>
                         <p className = "text-[13px] md:text-sm ">is organizing ...</p>
@@ -139,9 +155,9 @@ function Fundevent(props){
                 <div className = 'relative w-full rounded-t-[10px]'>
                     <img src={props.crowdfundImage? props.crowdfundImage:eventimg} alt="Fund event" className = 'rounded-t-[10px] w-full phones:h-[175px] xphones:h-[150px] md:h-[135px]' />
                 
-                    <div className = 'absolute top-4 left-5 bg-white flex gap-[5px] px-[8px] rounded-lg py-[4px]'>
-                        <img src={props.categoryimg ? props.categoryimg:environmentimg } alt="Event category icon" className = 'w-[15px] h-[15px] ' />
-                        <span className = 'text-sm font-black' >{props.category}</span>
+                    <div className = 'absolute top-4 left-5 bg-white flex items-center justify-center gap-[5px] px-[8px] rounded-lg py-[4px]'>
+                        <img src={categoryImg.length !== 0 ? categoryImg : options.slice(-1)[0].icon } alt="Event category icon" className = 'w-[15px] h-[15px] ' />
+                        <span className = 'text-sm font-black' >{props.category ? props.category : 'Others'}</span>
                     </div>
                 </div>
                 

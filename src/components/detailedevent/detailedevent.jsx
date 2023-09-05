@@ -17,7 +17,7 @@ import Likeicon from "../../images/likeicon"
 import editIcon from "../../images/crowdfunds/editIcon.svg"
 import commentIcon from "../../images/crowdfunds/commentIcon.svg"
 
-
+import {options} from "../../components/organisecrowdfundbody/organisecrowdfundbody"
 import Navbar from "../navbar/navbar"
 import { useMediaQuery } from "react-responsive"
 import Sidebar from "../sidebar/sidebar"
@@ -195,6 +195,8 @@ function Detailedevent(props){
     // Display comment or update modal
     const [displayCommentModal, setDisplayCommentModal] = useState(false)
     
+    // Loop through the options array, check if the category matches the option and return the image
+    const categoryImg = options.filter(item => item.value === eventdetails.tags).map(item => item.icon)        
 
         return(
             <div className=' bg-[#F9F9F9] min-h-full relative ' >
@@ -208,7 +210,8 @@ function Detailedevent(props){
                         onClick = {
                             () => {
                                 //dispatch(sethomeorevent('home'))
-                                navigate(-1)
+                                //navigate(-1) This is navigating back to the campaign image page so I'm taking it to home for now
+                                navigate('/home')
                             }
                         }
                         />
@@ -223,9 +226,9 @@ function Detailedevent(props){
                                 <div className =" relative w-full shrink-0 mb-8 " >
                                     <img src={eventdetails.banner} alt="Fund event" className = {`w-full h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
                                     <div className = 'absolute top-4 left-5 bg-white flex gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
-                                        <img src={eventdetails.categoryimg ? eventdetails.categoryimg : environmentLabel } alt="Event category icon" className = 'w-[17px] h-[17px] ' />
+                                        <img src={categoryImg.length !== 0 ? categoryImg : options.slice(-1)[0].icon } alt="Event category icon" className = 'w-[17px] h-[17px] ' />
                                         <span className = 'text-sm md:text-base font-black' >
-                                            {eventdetails.tags}
+                                            {eventdetails.tags ? eventdetails.tags : 'Others'}
                                         </span>
                                     </div>
                                 </div>
@@ -236,7 +239,7 @@ function Detailedevent(props){
                                             <span>Share Campaign</span>
                                         </button>
                                         <button 
-                                            className = {` ${eventdetails.organiser.first_name == userInfo.first_name ? 
+                                            className = {` ${eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 
                                                 'hidden ' : 
                                                 'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-black rounded-[10px] w-full py-[10px] max-h-[40px] px-4 text-base text-[#000000] font-semibold ' 
                                             } `}
@@ -248,7 +251,7 @@ function Detailedevent(props){
                                         </button>
 
                                         <button 
-                                            className = {` ${eventdetails.organiser.first_name == userInfo.first_name ? 
+                                            className = {` ${eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 
                                             'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-[#37BCF7] rounded-[10px] w-full py-[10px] max-h-[40px] px-4 text-base text-[#37BCF7] font-black ' 
                                             : 'hidden' } `}
                                             >                                            
@@ -274,7 +277,7 @@ function Detailedevent(props){
                                         <span>{eventdetails.location ? eventdetails.location : 'NIGERIA' }</span>
                                     </button>
                                     <hr className = "-mx-3 sm:mx-0  border-[1px] border-[#dcdbdb] mb-3 md:mb-8 " />
-                                    <Campaignorganizers organizerdetails = {organizerdetails} organiser = {eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage = {eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder}  />
+                                    <Campaignorganizers co_organisers = {eventdetails.co_organisers} organiser = {eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage = {eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder}  />
                                     <button className="mt-10 flex items-center justify-center gap-2 py-[5px] px-8 rounded-[20px] bg-[#FFFFFF]
                                         border-[2px] border-[#37BCF7] shadow-[0px_0px_15.786517143249512px_0px_rgba(0,0,0,0.04)]
                                         " 
@@ -315,10 +318,11 @@ function Detailedevent(props){
                                     </button>
                                 </div>                                
                             </div>
-                            <Activities header = {eventdetails.organiser.first_name == userInfo.first_name ? 'personalCampaign' : 'campaign' } 
+                            <Activities header = {eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 'personalCampaign' : 'campaign' } 
                                 target_price = {eventdetails.target_price} 
                                 amt_raised = {eventdetails.amt_raised} 
                                 total_donors = {totaldonations}
+                                eventid = {eventid}
                             />
                         </div>                       
                     </div>

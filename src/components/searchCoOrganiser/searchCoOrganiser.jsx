@@ -4,30 +4,57 @@ import { useEffect, useState } from "react";
 import profileImage2 from "../../images/user2.svg" 
 import profileImage3 from "../../images/user3.svg"
 import profileImage4 from "../../images/user4.svg"
+import profilePlaceholder from "../../images/profileplaceholder.svg"
 import addIcon from "../../images/organiseCrowdfund/addIcon.svg"
+import addIcon2 from "../../images/organiseCrowdfund/addIcon2.svg"
+import { baseUrl } from "../../auth/checkauthentication";
 
-function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganiser}){
+function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganiser, formdata, setformdata, selected ,setSelected }){
 
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
     })
 
+    const access_token = localStorage.getItem('access_token')
+
     const [searchValue, setSearchValue] = useState('')
-    const [selected, setSelected] = useState(0)
+    //const [selected, setSelected] = useState([])
     const [searchResults, setSearchResults] = useState([])
 
-    const handleSearch = (e) => {
-        setSearchValue(e.target.value)                
-    }
+    const handleSearch = async (e) => {
+        try {
+            setSearchValue(e.target.value);
+            const getSearchResults = await fetch(`${baseUrl}/funding/api/add-coorganisers/?q=${e.target.value}`, {
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                },
+            });
+        
+            if (!getSearchResults.ok) {
+                // Handle non-successful response (e.g., 404)
+                console.error(`Request failed with status: ${getSearchResults.status}`);
+                setSearchResults([]); // Set results to an empty array or handle as needed
+                return;
+            }
+        
+            const data = await getSearchResults.json();
+            setSearchResults(data);
+        } catch (error) {
+            // Handle other errors (e.g., network issues)
+            console.error("An error occurred:", error);
+            setSearchResults([]); // Set results to an empty array or handle as needed
+        }
+    };
+      
 
-    useEffect(() => {
+    /* useEffect(() => {
         let results = Users.filter((user) => (
                     user.first_name.toLowerCase().includes(searchValue.toLowerCase()) || user.last_name.toLowerCase().includes(searchValue.toLowerCase())
                     )
                 )
             //console.log(results)
             setSearchResults(results)
-    }, [searchValue])
+    }, [searchValue]) */
 
     
     return(
@@ -63,12 +90,14 @@ function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganise
                             </div>
                             <div className={`${searchValue == '' ? 'hidden' :'h-full pt-7 flex flex-col' } `} >
                                 <p className="text-[#8E8E93] text-base md:text-lg text-center mb-8 " >
-                                    Selected {selected} of {searchResults.length}
+                                    Selected {selected.length} of {searchResults.length}
                                 </p>
-                                <div className="mb-10 flex flex-col gap-10 max-h-[350px] overflow-auto p-4 " >
+                                <div className="mb-10 modalScrollbar flex flex-col gap-10 max-h-[350px] overflow-auto p-4 " >
                                     {
                                         searchResults.map((user,i) => (
-                                            <Coorganiser first_name={user.first_name} last_name={user.last_name} dp={user.dp} key = {i} />
+                                            <Coorganiser pk = {user.pk} user = {user} key = {user.pk} selected = {selected} setSelected = {setSelected} 
+                                                formdata = {formdata} setformdata = {setformdata}
+                                            />
                                         ))
                                     }
                                 </div>
@@ -130,16 +159,48 @@ const Users = [
     },
 ]
 
-const Coorganiser = ({first_name, last_name, dp}) => {
+const Coorganiser = ({user, pk, selected, setSelected, formdata ,setformdata}) => {
+    
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))    
+
     return(
         <div className="flex items-center justify-between gap-2 md:gap-4 " >
             <div className="flex gap-2 md:gap-[15px] items-center justify-center" >
-                <img src={dp} alt="Profile pic" className="w-12 h-12 md:w-[60px] md:h-[60px] rounded-full " />                
-                <p className="text-sm md:text-base font-black " >{first_name} {last_name}</p>
+                <img src={user.dp == null ? profilePlaceholder : user.dp } alt="Profile pic" className="w-12 h-12 md:w-[60px] md:h-[60px] rounded-full " />                
+                <p className="text-sm md:text-base font-black " >{user.first_name} {user.last_name}</p>
             </div>
-            <button className="flex items-center justify-center gap-1 md:gap-4 py-[6px] px-1 md:px-3 border-[#37BCF7] rounded-xl border-[3px] " >
-                <img src={addIcon} alt="add Icon" className="w-6 md:w-[30px]" />    
-                <p className="text-sm md:text-base font-black text-[#37BCF7] pt-1 " >Invite user</p>
+            <button className={` ${formdata.co_organisers.includes(pk)? 'bg-[#37BCF7] text-white ' : 'border-[3px] border-[#37BCF7] hover:bg-[#37BCF71A] text-[#37BCF7]' } flex items-center justify-center gap-1 md:gap-4 py-[6px] px-1 md:px-3 rounded-xl`}
+                onClick={() => {
+
+                    // Check if the user is the same as the organiser
+                    if (userInfo.username === user.username) {
+                        alert('You cannot add yourself as a co-organiser');
+                        return;
+                    }
+                    // Check if the user has already selected 2 co-organisers                    
+                    if (selected.length >= 2 && !formdata.co_organisers.includes(pk)) {
+                      alert('You can only add 2 co-organisers');
+                      return;
+                    }
+                    if (formdata.co_organisers.includes(pk)) {
+                        // Remove the user from the selected list
+                        setSelected(selected.filter((selectedUser) => selectedUser.pk !== pk));
+                        setformdata({...formdata, co_organisers: formdata.co_organisers.filter((selectedUser) => selectedUser !== pk)})
+                    } else {
+                        // Add the user to the selected list
+                        setSelected([...selected, user]);
+                        setformdata({...formdata, co_organisers: [...formdata.co_organisers, Number(pk)]})
+                    }
+                                        
+                  }}
+                  
+            >
+                <img src={formdata.co_organisers.includes(pk) ? addIcon2 : addIcon} alt="add Icon" className="w-6 md:w-[30px]" />    
+                <p className="text-sm md:text-base font-black pt-1 " >
+                    {
+                        formdata.co_organisers.includes(pk) ? 'Invited User' : 'Invite user'
+                    }
+                </p>
             </button>
         </div>
     )
