@@ -1,6 +1,6 @@
 import Activity from "../activity/activity";
 import downButton from "../../images/wallet/downbutton.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Activities(props) {
@@ -11,6 +11,11 @@ function Activities(props) {
     const toggleExpansion = () => {
         setExpanded(!expanded);
     };
+
+    useEffect(()=>{
+        console.log(props.amt_raised)
+        console.log(props.target_price)
+    },[])
   
     return (
         <section className="font-merriweather flex-1 w-1/3 2xl:min-w-[370px] lg:max-w-[370px] bg-white h-fit rounded-[10px] " >
@@ -55,7 +60,7 @@ function Activities(props) {
                                 }
                             </span>
                         </p>
-                        <progress value={props.amt_raised ? props.amt_raised : '23543'} max={props.target ? props.target : '150000'}
+                        <progress value={props.amt_raised ? props.amt_raised : '23543'} max={props.target_price ? props.target_price : '150000'}
                             className='landingpageprogressbar w-full h-[10px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-4' 
                         />
                         <p className="text-lg text-[#C5C5C5] font-medium mb-6 " >
