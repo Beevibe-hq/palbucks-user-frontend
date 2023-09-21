@@ -56,6 +56,9 @@ function Sidebar(){
     const handleLogout = async () => {
         dispatch(setLogoutLoading(true))
         console.log('starting Log out')
+        
+        // Close the sidebar
+        managesidebar()
         try {
             const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
                 method: 'POST',
