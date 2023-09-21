@@ -1,0 +1,44 @@
+/* Default styles for larger screens */
+.otp-input {
+    width: 84px;
+    height: 84px;
+    font-size: 24px;
+    border: 1px solid #000;
+    border-radius: 5.3px;
+    padding: 13px 20px;
+    outline: none;
+    text-align: center;
+    background: #F9F9F9;
+    caret-color: #37BCF7;
+}
+
+/* Default separator style */
+.separator {
+    width: 15px;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 767px) {
+    .otp-input {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+}
+
+/* Media query for tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .otp-input {
+        width: 70px;
+        height: 70px;
+        font-size: 20px;
+    }
+}
+
+/* Focus style */
+.otp-input-focus {
+    border: 2px solid #37BCF7;
+    outline: none;
+    box-shadow: 0 0 5px rgba(55, 188, 247, 0.5);
+    /* Add a box shadow for focus */
+}

@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { checkAuthentication } from "../../auth/checkauthentication"
 import { setLogoutLoading } from "../../actions/actions"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
+import SignUpHeader from "../../components/signUpHeader/signUpHeader"
 
 const Completesignup = () => {
 
@@ -99,51 +100,30 @@ const Completesignup = () => {
 
   return (
     <div className="font-merriweather relative" >
-      <header className="w-full z-50 py-[30px] px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
-        <div className=" flex gap-[18px] items-center " >
-            <img src={applogo} alt="Palbucks logo" className="w-[33.4px]" />
-            <img src= {palbucks} alt="palbucks" className=" w-[138px] h-[24px] "  />
-        </div>
-
-        <div className="flex items-center gap-[35px] " >
-            <Link to = '/signin' className="text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
-                <span>Already have an account?</span>
-            </Link>
-            <Link to = '/signin' className="text-[#000000] text-lg font-bold tracking-[0.069px] py-[8px] px-[16px] bg-[#35FAA0] hover:bg-[#35EB98] leading-[22px] flex items-center rounded-[5px] "  >
-                <span>Sign in</span>
-            </Link>
-        </div>
-
-      </header>
-
-        <div className ="w-[400px] h-[800px] absolute -z-10 -right-[0px] -top-[200px] ">
+        <SignUpHeader />
+          
+        <div className ="w-24 md:w-[400px] md:h-[800px] absolute -z-10 -right-[0px] top-[100px] md:-top-[200px] ">
             <img src={bgradient} alt="" className="w-full" />            
         </div>
         
-        <div className ="w-[400px] h-[200px] absolute -z-10 -left-[0px] bottom-[900px] ">
-            <img src={bgradient3} alt="" className="w-full" />            
-            {/* <img src={bgradient3} alt="" className="w-full relative -top-[0px] " /> */}
+        <div className ="w-24 md:w-[200px] lg:w-[400px] md:h-[200px] absolute -z-10 -left-[10px] md:-left-0 top-[300px] md:bottom-0 lg:top-0 rotate-[12deg] md:rotate-0 ">
+            <img src={bgradient3} alt="" className="w-full" />                        
         </div>
-
-        {/* <div className ="w-[600px] h-screen absolute -z-10 left-0 top-[380px] ">
-            <img src={bgradient} alt="" className="w-full " />
-            <img src={bgradient} alt="" className="w-full relative -top-[350px] " />
-            <img src={bgradient} alt="" className="w-full relative -top-[1000px] " />
-        </div> */}
+        
     
-        <main className="pt-[180px] pb-10 mt-[103px] " >
+        <main className="pt-5 md:pt-[180px] mt-[103px] px-3 " >
             
-            <div className="bg-white w-[950px] mx-auto flex flex-col gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded-[10px] ">                
-                <div className="py-[30px] pl-[50px] pr-[30px] ">
-                    <h3 className="text-[35px] font-black leading-[39px] " >
+            <div className="bg-white w-full phones:w-[98%] md:w-[950px] mx-auto flex flex-col gap-[2.5px] md:gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded md:rounded-[10px] ">                
+                <div className="py-4 md:py-[30px] px-8 md:pl-[50px] md:pr-[30px] ">
+                    <h3 className="text-lg md:text-[35px] font-black md:leading-[39px] " >
                         Continue your signup process...
                     </h3>
                 </div>
-                <div className="flex flex-wrap gap-[50px] px-[50px] py-[47px] border-t-[6px] border-[#F9F9F9] items-center ">
-                    <div className="flex flex-col items-start gap-5">
-                        <label 
+                <div className="flex flex-col md:flex-row flex-wrap gap-8 md:gap-[50px] px-6 md:px-[50px] py-5 md:py-[47px] border-t-[3px] md:border-t-[6px] border-[#F9F9F9] md:items-center ">
+                    <div className="flex flex-col items-start gap-3 md:gap-5">
+                        <label
                             htmlFor="first_name"
-                            className="text-[20px] font-bold "
+                            className="text-base md:text-xl font-bold "
                             >
                             First name
                         </label>
@@ -153,14 +133,14 @@ const Completesignup = () => {
                             id="first_name" 
                             placeholder="Enter your first name"
                             onChange={handleInputChange}
-                            className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
-                                focus:border-[#37BCF7] focus:border-[2px] focus:caret-[#37BCF7] text-lg   `}
+                            className={`w-full md:w-[390px] h-[38px] md:h-[60px] px-3 md:px-[22px] rounded-sm md:rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
+                                focus:border-[#37BCF7] focus:border-[2px] md:focus:border-[2px] focus:caret-[#37BCF7] text-sm md:text-lg   `}
                         />
                     </div>
-                    <div className="flex flex-col items-start gap-5">
+                    <div className="flex flex-col items-start gap-3 md:gap-5">
                         <label 
                             htmlFor="last_name"
-                            className="text-[20px] font-bold "
+                            className="text-base md:text-xl font-bold "
                             >
                             Last name
                         </label>
@@ -170,15 +150,15 @@ const Completesignup = () => {
                             id="last_name" 
                             placeholder="Enter your last name"
                             onChange={handleInputChange}
-                            className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
-                                focus:border-[#37BCF7] focus:border-[2px] focus:caret-[#37BCF7] text-lg   `}
+                            className={`w-full md:w-[390px] h-[38px] md:h-[60px] px-3 md:px-[22px] rounded-sm md:rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
+                                focus:border-[#37BCF7] focus:border-[2px] md:focus:border-[2px] focus:caret-[#37BCF7] text-sm md:text-lg   `}
                         />
                     </div>
 
-                    <div className="flex flex-col items-start gap-5">
+                    <div className="flex flex-col items-start gap-3 md:gap-5">
                         <label 
                             htmlFor="dateOfBirth"
-                            className="text-[20px] font-bold "
+                            className="text-base md:text-xl font-bold "
                             >
                             What is your date of birth?
                         </label>
@@ -187,20 +167,20 @@ const Completesignup = () => {
                             name="dateOfBirth" 
                             id="dateOfBirth"
                             onChange={handleInputChange}                    
-                            className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
-                                focus:border-[#37BCF7] focus:border-[2px] focus:text-[#37BCF7] text-lg   `}
+                            className={`w-full md:w-[390px] h-[38px] md:h-[60px] px-3 md:px-[22px] rounded-sm md:rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
+                                focus:border-[#37BCF7] focus:border-[2px] md:focus:border-[2px] focus:caret-[#37BCF7] text-sm md:text-lg   `}
                             max={maxDateStr} // Set the max attribute to the calculated max date
                         />
                     </div>
 
-                    <div className="flex flex-col items-start gap-5">
+                    <div className="flex flex-col items-start gap-3 md:gap-5">
                         <label 
                             htmlFor="userName"
-                            className="text-[20px] font-bold "
+                            className="text-base md:text-xl font-bold "
                             >
                             What should we call you?
                         </label>
-                        <div className="">
+                        <div className="w-full">
                             <div className="relative mb-[10px]">
                                 <input
                                     type = "text"
@@ -208,9 +188,9 @@ const Completesignup = () => {
                                     id="username"
                                     placeholder="Enter a username"
                                     onChange={handleInputChange}
-                                    className={` w-[390px] h-[60px] px-[22px] rounded border-[1.5px] bg-[#F9F9F9] outline-none focus:border-[2px] text-lg
+                                    className={`w-full md:w-[390px] h-[38px] md:h-[60px] px-3 md:px-[22px] rounded-sm md:rounded border-[1.5px] bg-[#F9F9F9] outline-none focus:border-[1.5px] md:focus:border-[2px] text-sm md:text-lg
                                         ${responseDetail.username == 'Username already exists' ?
-                                        'border-[#FD6150] border-[3px] focus:border-[#FD6150] focus:caret-[#FD6150] ' :
+                                        'border-[#FD6150] border-2 md:border-[3px] focus:border-[#FD6150] focus:caret-[#FD6150] ' :
                                         'border-black focus:border-[#37BCF7]' }
                                      `}
                                 />
@@ -218,14 +198,14 @@ const Completesignup = () => {
                                     (
                                         <img src= { responseDetail.username == 'Username already exists' ? checker2 : checker}
                                             alt="checker"
-                                            className="w-[13px] absolute top-[50%] right-4 transform -translate-y-1/2 cursor-pointer"
+                                            className="w-[9px] md:w-[13px] absolute top-[50%] right-3 md:right-4 transform -translate-y-1/2 cursor-pointer"
                                         />
                                     )
                                 }
                             </div>
                             {
                                 responseDetail.username == 'Username already exists' ? (
-                                    <p className="text-[#FD6150] text-lg font-merriweather">
+                                    <p className="text-[#FD6150] text-sm md:text-lg font-merriweather">
                                         {responseDetail.username}
                                     </p>
                                 ) : null
@@ -237,9 +217,11 @@ const Completesignup = () => {
             </div>
             
             <button 
-                className={`xl:min-w-[288px] min-w-[228px] mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
+                /* className={`xl:min-w-[288px] min-w-[228px] mt-[75px] mb-[29px] px-[50px] hover:px-[65px] transition-all duration-500 py-[15.1px]                 
                 font-bold bg-black text-white rounded-[8px] text-[28px] mx-auto flex items-center justify-center ]                                 
-                `}
+                `} */
+                className="min-w-[208px] md:min-w-[228px] mt-[35px] md:mt-[75px] mb-8 px-[50px] hover:px-[65px] py-[10px] md:py-[20.1px] transition-all duration-500 
+                    font-bold bg-black text-white rounded md:rounded-[8px] text-lg md:text-[28px] mx-auto flex items-center justify-center  " 
                  onClick  = {finishSignup}                 
                 >
                 <div className={` ${isLoginLoading ? 'block' : 'hidden' } `}>

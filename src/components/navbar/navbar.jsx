@@ -75,7 +75,7 @@ function Navbar(props){
 
     return(
         <div className = {`py-[10px] px-2 phones:px-5  md:px-10 h-[90px] md:h-[100px] fixed top-0 right-0
-        ${props.sidebar === false ? 'left-0' : sidebarslid ? 'left-0 brkpoint:left-[100px]' : 'left-0 brkpoint:left-[250px] lg:left-[280px] xl:left-[320px]' } z-20 bg-[#F9F9F9] 
+        ${props.sidebar === false ? 'left-0' : sidebarslid ? 'left-0 brkpoint:left-[100px]' : 'left-0 brkpoint:left-[250px] lg:left-[280px] xl:left-[320px]' } z-30 bg-[#F9F9F9] 
         shadow-[0px_0px_16px_rgba(0,0,0,0.04)] flex items-center justify-between xphones:justify-between 
         
         `} >

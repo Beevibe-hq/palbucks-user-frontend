@@ -136,13 +136,13 @@ function LandingPage(){
 
             <main className="pt-3 md:pt-[70px] lg:pt-[140px] pb-10 mt-[103px] " >
                 
-                <h2 className="mb-5 md:mb-7 lg:mb-[49px] font-black text-center text-2xl md:text-5xl lg:text-[70px] lg:leading-[86px] tracking-[2.323px] " >
+                <h2 className="max-w-[80%] mx-auto mb-5 md:mb-7 lg:mb-[49px] font-black text-center text-2xl md:text-5xl lg:text-[70px] lg:leading-[86px] tracking-[2.323px] " >
                     From your wallets to <br className="hidden md:block" /> their hearts
                 </h2>
                 <p className="mb-5 md:mb-7 lg:mb-[60px] text-sm md:text-xl lg:text-[33px] font-merriweather md:font-arial text-center lg:leading-[45px] tracking-[0.5px] " >
                     Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your card or USDT
                 </p>
-                <button className="mb-7 md:mb-14 lg:mb-[100px] px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px] transition-all duration-500 py-3 md:py-5 lg:py-[23.4px] font-bold bg-black text-white rounded md:rounded-[10px] text-base md:text-2xl lg:text-3xl mx-auto block " >
+                <button className="max-w-[85%] mb-7 md:mb-14 lg:mb-[100px] px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px] transition-all duration-500 py-3 md:py-5 lg:py-[23.4px] font-bold bg-black text-white rounded md:rounded-[10px] text-base md:text-2xl lg:text-3xl mx-auto block " >
                     Start a crowdfund
                 </button>
 
