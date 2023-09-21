@@ -14,11 +14,11 @@ import instagramicon from "../../images/instagramicon.svg"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setnotificationspageactive, setnotificationspageinactive } from "../../actions/actions";
-import Likenotification from "../../components/likenotification/likenotification";
-import Commentnotification from "../../components/commentnotification/commentnotification";
-import Campaignnotification from "../../components/campaignnotification/campaignnotification";
-import Requestnotification from "../../components/requestnotification/requestnotification";
-import Acceptnotification from "../../components/acceptnotification/acceptnotification";
+import Likenotification from "../../components/notifications/likenotification/likenotification";
+import Commentnotification from "../../components/notifications/commentnotification/commentnotification";
+import Campaignnotification from "../../components/notifications/campaignnotification/campaignnotification";
+import Requestnotification from "../../components/notifications/requestnotification/requestnotification";
+import Acceptnotification from "../../components/notifications/acceptnotification/acceptnotification";
 
 function Notificationspage(){
 
@@ -50,27 +50,37 @@ function Notificationspage(){
             <Sidebar />
             <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />
-                <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+                <div className = 'fold:px-2 phones:px-4 lg:pl-[25px] lg:pr-[27px] pt-6 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
                     
-                    <img src={backarrow} alt="backarrow" className="mb-10 w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[32px] mb-4 " >Notifications</h1>
-                    <p className=" text-[18px] mb-8 " >See notifications about your crowdfunding campaigns</p>
+                    <img src={backarrow} alt="backarrow" className="mb-[22px] md:mb-10 w-[25px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />
+                    <h1 className="font-black text-2xl md:text-[32px] mb-[5px] md:mb-4 " >
+                        Notifications
+                    </h1>
+                    <p className=" text-base md:text-lg mb-8 " >
+                        See notifications about your crowdfunding campaigns
+                    </p>
 
-                    <h2 className="text-[20px] font-bold mb-6 " >Today</h2>
-                    <div className="mb-[45px]">
+                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                        Today
+                    </h2>
+                    <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
                         <Likenotification userdp = {useravatar} username = 'Carlos' time = '2 hours ago' />
                         <Commentnotification userdp = {useravatar3} username = 'Tochi' time = '5 hours ago' />
                         <Campaignnotification time = '12 hours ago' campaignstate = '100%' />
                         <Requestnotification userdp={useravatar2} username='Franca' time = '13 hours ago' />
                     </div>
 
-                    <h2 className="text-[20px] font-bold mb-6 " >This week</h2>
-                    <div className="mb-[45px]" >
+                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                        This week
+                    </h2>
+                    <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
                         <Campaignnotification time = '1 day ago' campaignstate = '50%' />
                         <Acceptnotification username = 'Timothy' userdp={useravatar3} time = '2 days ago' />
                     </div>
 
-                    <h2 className="text-[20px] font-bold mb-6 " >This month</h2>
+                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                        This month
+                    </h2>
                     <div>
                         <Likenotification userdp = {useravatar2} username = 'Tochi' time = '2 weeks ago' />
                     </div>

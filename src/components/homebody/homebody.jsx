@@ -151,9 +151,9 @@ function Homebody(){
                 //The foryou page starts here
                 <>
                   
-                  <div className='bg-white w-fit mt-[40px] mb-[31px]' >
+                  <div className='bg-white w-fit mt-[30px] md:mt-[40px] mb-[30px]' >
                       {/* The four buttons below choose the display between the different campaigns */}
-                      <button className={`${forYouView == 'all' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-[16px] py-[10px] px-[15px] w-[80px] rounded-[5px]  `} 
+                      <button className={`${forYouView == 'all' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-sm phones:text-base py-[10px] px-[15px] phones:w-[80px] rounded-[5px]  `} 
                       onClick = { () => {
                           setforYouView('all')
                         }
@@ -161,7 +161,7 @@ function Homebody(){
                       >
                         All
                       </button>
-                      <button className={`${forYouView == 'active' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-[16px] py-[10px] px-[15px] w-[80px] rounded-[5px]  `} 
+                      <button className={`${forYouView == 'active' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-sm phones:text-base py-[10px] px-[15px] phones:w-[80px] rounded-[5px]  `} 
                       onClick = { () => {
                           setforYouView('active')
                         }
@@ -169,7 +169,7 @@ function Homebody(){
                       >
                         Active
                       </button>
-                      <button className={`${forYouView == 'ended' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-[16px] py-[10px] px-[15px] w-[80px] rounded-[5px]  `} 
+                      <button className={`${forYouView == 'ended' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-sm phones:text-base py-[10px] px-[15px] phones:w-[80px] rounded-[5px]  `} 
                       onClick = { () => {
                           setforYouView('ended')
                         }
@@ -177,7 +177,7 @@ function Homebody(){
                       >
                         Ended
                       </button>
-                      <button className={`${forYouView == 'draft' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-[16px] py-[10px] px-[15px] w-[80px] rounded-[5px]  `} 
+                      <button className={`${forYouView == 'draft' ? 'bg-black text-white ' : 'text-[#8E8E93] bg-white' } font-bold text-sm phones:text-base py-[10px] px-[15px] phones:w-[80px] rounded-[5px]  `} 
                       onClick = { () => {
                           setforYouView('draft')
                         }
@@ -191,9 +191,11 @@ function Homebody(){
                   <div>
                     {
                       forYouView == 'all' ? 
-                      <div>
-                        <h2 className='font-black text-[24px] mb-[10px]' >All Campaigns</h2>
-                        <p className='text-[18px] mb-7' >
+                      <div className='md:pr-10' >
+                        <h2 className='font-black text-xl md:text-2xl mb-[5px] md:mb-[10px]' >
+                          All Campaigns
+                        </h2>
+                        <p className='text-base md:text-lg mb-6 md:mb-7' >
                           This is a list of all your campaigns, including active, ended and draft campaigns.
                         </p>
                         {/* {
@@ -236,63 +238,75 @@ function Homebody(){
                       :
                       
                       forYouView == 'active' ? 
-                      <div className='pr-[40px]' >
-                        <h2 className='font-black text-[24px] mb-[10px]' >Active Campaign</h2>
-                        <p className='text-[18px] mb-7 ' >Make edits and also view your dashboard for your active campaign</p>
-                        {/* {
-                            foryoudata.filter(item => item.campaignstatus == 'active').length == 0 ? 
-                            <Emptycampaign title = 'You have no active campaign to show here' /> 
-                            :
-                            foryoudata.filter(item => item.campaignstatus == 'active').map((item,i) =>(
-                            <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft} key = {i} />
-                          ))                                                                               
-                        } */}
-                        {
-                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').length == 0 ?
-                            <Emptycampaign title = 'You have no active campaign to show here' /> :
-                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').map((item,i) =>(
-                            <Activecampaign img = {item.banner} id = {item.id} title = {item.title} daysleft = {checkCampaignStatus(item.end_date).daysLeft} key = {item.id} />
-                          ))
-                        }
+                      <div className='md:pr-[40px]' >
+                          <h2 className='font-black text-xl md:text-2xl mb-[5px] md:mb-[10px]' >
+                            Active Campaign
+                          </h2>
+                          <p className='text-base md:text-lg mb-6 md:mb-7' >
+                            Make edits and also view your dashboard for your active campaign
+                          </p>
+                          {/* {
+                              foryoudata.filter(item => item.campaignstatus == 'active').length == 0 ? 
+                              <Emptycampaign title = 'You have no active campaign to show here' /> 
+                              :
+                              foryoudata.filter(item => item.campaignstatus == 'active').map((item,i) =>(
+                              <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft} key = {i} />
+                            ))                                                                               
+                          } */}
+                          {
+                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').length == 0 ?
+                              <Emptycampaign title = 'You have no active campaign to show here' /> :
+                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').map((item,i) =>(
+                              <Activecampaign img = {item.banner} id = {item.id} title = {item.title} daysleft = {checkCampaignStatus(item.end_date).daysLeft} key = {item.id} />
+                            ))
+                          }
 
                       </div>
                       
                       :
                       
                       forYouView == 'ended' ?
-                      <div className='pr-[40px]' >
-                        <h2 className='font-black text-[24px] mb-[10px]' >Ended Campaign</h2>
-                        <p className='text-[18px] mb-7 ' >These are your campaigns that you ended or has completed its 
-                        time frame. They will automatically be deleted after 30 days.</p>
-                        {/* {
-                          foryoudata.filter(item => item.campaignstatus == 'ended').length == 0 ? 
-                          <Emptycampaign /> : 
-                          foryoudata.filter(item => item.campaignstatus == 'ended').map((item,i) =>(
-                            <Endedcampaign img = {item.img} title = {item.title} key = {i} />
-                          ))
-                        } */}
-                        {
-                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').length == 0 ?
-                            <Emptycampaign /> :
-                          personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').map((item,i) =>(
-                            <Endedcampaign img = {item.banner} id = {item.id} title = {item.title} key = {item.id} />
-                          ))
-                        }
+                      <div className='md:pr-[40px]' >
+                            <h2 className='font-black text-xl md:text-2xl mb-[5px] md:mb-[10px]' >
+                              Ended Campaign
+                            </h2>
+                            <p className='md:text-lg mb-6 md:mb-7' >
+                              These are your campaigns that you ended or has completed its 
+                              time frame. They will automatically be deleted after 30 days.
+                            </p>
+                          {/* {
+                            foryoudata.filter(item => item.campaignstatus == 'ended').length == 0 ? 
+                            <Emptycampaign /> : 
+                            foryoudata.filter(item => item.campaignstatus == 'ended').map((item,i) =>(
+                              <Endedcampaign img = {item.img} title = {item.title} key = {i} />
+                            ))
+                          } */}
+                          {
+                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').length == 0 ?
+                              <Emptycampaign /> :
+                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').map((item,i) =>(
+                              <Endedcampaign img = {item.banner} id = {item.id} title = {item.title} key = {item.id} />
+                            ))
+                          }
                       </div>
                       
                       :
                       
                       forYouView == 'draft' ?
-                      <div className='pr-[40px]' >
-                        <h2 className='font-black text-[24px] mb-[10px]' >Draft Campaign</h2>
-                        <p className='text-[18px] mb-7 ' >Campaigns that are “saved for later” are stored as draft.</p>
-                        {
-                          foryoudata.filter(item => item.campaignstatus == 'draft').length == 0 ? 
-                          <Emptycampaign title = 'Your draft box is empty' /> :
-                          foryoudata.filter(item => item.campaignstatus == 'draft').map((item,i) =>(
-                            <Draftcampaign key = {i} />
-                          ))
-                        }
+                      <div className='md:pr-[40px]' >
+                          <h2 className='font-black text-xl md:text-2xl mb-[5px] md:mb-[10px]' >
+                              Draft Campaign
+                          </h2>
+                          <p className='text-base md:text-lg mb-6 md:mb-7' >
+                              Campaigns that are “saved for later” are stored as draft.
+                          </p>
+                          {
+                            foryoudata.filter(item => item.campaignstatus == 'draft').length == 0 ? 
+                            <Emptycampaign title = 'Your draft box is empty' /> :
+                            foryoudata.filter(item => item.campaignstatus == 'draft').map((item,i) =>(
+                              <Draftcampaign key = {i} />
+                            ))
+                          }
 
                       </div>
                       

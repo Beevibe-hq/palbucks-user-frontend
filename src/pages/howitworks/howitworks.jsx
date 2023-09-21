@@ -46,17 +46,23 @@ function Howitworks(){
                 <Navbar />
                 <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
                     
-                    <img src={backarrow} alt="backarrow" className="mb-10 w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[32px] mb-4 " >How does Palbucks crowdfunding work?</h1>
-                    <p className=" text-[18px] mb-16 " >Palbucks is a platform that enables you crowdfund for a cause in USDT</p>
+                    <img src={backarrow} alt="backarrow" className="mb-[22px] md:mb-10 w-[25px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />
+                    <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
+                        How does Palbucks crowdfunding work?
+                    </h1>                    
+                    <p className=" text-base md:text-lg mb-14 md:mb-16 " >
+                        Palbucks is a platform that enables you crowdfund for a cause in USDT
+                    </p>
 
-                    <h2 className="text-[24px] font-black mb-6 " >Setup Your Crowdfunding Campaign - Step by Step</h2>
+                    <h2 className="text-lg md:text-2xl font-black mb-5 md:mb-6 " >
+                        Setup Your Crowdfunding Campaign - Step by Step
+                    </h2>
                     
                     <div className="flex flex-wrap gap-6" >
                         {
                             setup_crowdfunding_guide.map((item,i) => {
                                 return(
-                                    <Worksguide step = {item.step} icon = {item.icon} description = {item.description} background = {item.background} />
+                                    <Worksguide key={item.step} step = {item.step} icon = {item.icon} description = {item.description} background = {item.background} />
                                 )
                             })
                         }

@@ -132,9 +132,8 @@ const Signin = () => {
             <img src={bgradient} alt="" className="w-full" />            
         </div>
         
-        <div className ="w-24 md:w-[400px] md:h-[200px] absolute -z-10 -left-[0px] top-[500px] md:bottom-[900px] ">
-            <img src={bgradient3} alt="" className="w-full" />            
-            {/* <img src={bgradient3} alt="" className="w-full relative -top-[0px] " /> */}
+        <div className ="w-24 md:w-[200px] lg:w-[400px] md:h-[200px] absolute -z-10 -left-[0px] top-[500px] md:bottom-0 lg:top-0 ">
+            <img src={bgradient3} alt="" className="w-full" />                        
         </div>
 
         <main className="pt-[25px] lg:pt-[70px] md:pb-10 mt-[70px] md:mt-[90px] lg:mt-[103px] " >
