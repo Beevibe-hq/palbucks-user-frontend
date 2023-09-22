@@ -1,7 +1,11 @@
 import Activity from "../activity/activity";
 import downButton from "../../images/wallet/downbutton.svg"
 import { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import user8 from "../../images/user8.svg"
+import user12 from "../../images/user12.svg"
+import user10 from "../../images/user10.svg"
 
 function Activities(props) {
 
@@ -87,10 +91,14 @@ function Activities(props) {
                 ) : null
 
             }
-            <div className={`py-2 px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''}`} >
-                <Activity userdp = {props.user12} />
-                <Activity userdp = {props.user8} />
-                <Activity userdp = {props.user10} />
+            <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''}`} >                            
+                {
+                    activityData.map((item, i) => {
+                        return (
+                            <Activity key={i} userdp={item.userdp} time={item.time} amt={item.amt} username={item.username} />
+                        )
+                    })
+                }
             </div>
             <div className="flex flex-col items-center justify-center rounded-b-[10px] py-3 gap-2 " >
                 <span className="text-xs font-black text-center " >
@@ -109,3 +117,43 @@ function Activities(props) {
 
 
 export default Activities;
+
+
+let activityData = [
+    {
+        userdp: user12,
+        username: 'Doggo',
+        time: '5 mins ago',
+        amt: '5000',
+        activity: 'Made a donation of 500USDT to your crowdfund campaign'
+    },
+    {
+        userdp: user8,
+        username: 'EricatheBoss',
+        time: '1 hour ago',
+        amt: '100',
+        activity: 'Made a donation of 500USDT to your crowdfund campaign'
+    },
+    {
+        userdp: user10,
+        username: 'Anonymous',
+        time: '1 hour ago',
+        amt: '10',
+        activity: 'Made a donation of 500USDT to your crowdfund campaign'
+    },
+    {
+        userdp: user8,
+        username: 'Sir Bob',
+        time: '7 hours ago',
+        amt: '200',
+        activity: 'Made a donation of 500USDT to your crowdfund campaign'
+    },
+    {
+        userdp: user12,
+        username: 'Micheal',
+        time: '20 hours ago',
+        amt: '120000',
+        activity: 'Made a donation of 500USDT to your crowdfund campaign'
+    },
+    
+]
