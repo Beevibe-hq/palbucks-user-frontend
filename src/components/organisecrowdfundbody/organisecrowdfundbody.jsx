@@ -358,7 +358,7 @@ function Organisecrowdfundbody(){
                                         cursor:'pointer',
                                         caretColor:'transparent',
                                         paddingRight:'20px',
-                                        paddingLeft:'10px',
+                                        paddingLeft:'7px',
                                     }),                    
                                 }}
                                 formatOptionLabel={(option) => (

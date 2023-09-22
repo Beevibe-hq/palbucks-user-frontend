@@ -1,7 +1,7 @@
-import Sidebar from "../sidebar/sidebar";
+import Sidebar from "../../components/sidebar/sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import Navbar from "../navbar/navbar";
+import Navbar from "../../components/navbar/navbar";
 import backarrow from "../../images/backarrow.svg"
 import campaignimage from "../../images/campaign image.png"
 import useravatar from "../../images/user3.svg"
@@ -22,12 +22,12 @@ import facebookIcon from "../../images/facebookicon.svg"
 import profilePlaceholder from "../../images/profileplaceholder.svg"
 
 import Cropper from "react-easy-crop";
-import { readFile } from "../cropping/cropimage/cropimage";
-import { urltoFile } from "../cropping/cropimage/cropimage";
-import { getCroppedImg } from "../cropping/canvasUtils";
+import { readFile } from "../../components/cropping/cropimage/cropimage";
+import { urltoFile } from "../../components/cropping/cropimage/cropimage";
+import { getCroppedImg } from "../../components/cropping/canvasUtils";
 import { baseUrl } from "../../auth/checkauthentication";
 import { Link } from "react-router-dom";
-import Loadingspinner from "../loadingspinner/loadingSpinner";
+import Loadingspinner from "../../components/loadingspinner/loadingSpinner";
 
 function Profilepage(){
 

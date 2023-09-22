@@ -39,40 +39,48 @@ function Termsofuse(){
                 <Navbar />
                 <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
                     
-                    <img src={backarrow} alt="backarrow" className="mb-10 w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[32px] mb-4 " >Learn About our Terms of Service</h1>
-                    <p className=" text-[18px] mb-14 " >Updated: March 30, 2022</p>
+                    <img src={backarrow} alt="backarrow" className="mb-[22px] md:mb-10 w-[25px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />
+                    <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
+                        Learn About our Terms of Service
+                    </h1>
+                    <p className=" text-base md:text-lg mb-14 " >
+                        Updated: March 30, 2022
+                    </p>
 
-                    <h2 className="text-[24px] font-black mb-[15px] " >Palbucks Terms of Service</h2>
-                    <p className="text-[18px] mb-5 " >
+                    <h2 className="text-lg md:text-2xl font-black mb-[5px] md:mb-[15px] " >
+                        Palbucks Terms of Service
+                    </h2>
+                    <p className="text-sm md:text-lg mb-5 tracking-[0.1px] " >
                         These General Terms of Service (“General Terms”) are a legal agreement between you, If you are an Organizer 
                         (as defined below), Beneficiary (as defined below) to a Fundraiser (as defined below), comment contributor, 
                         or Donor (as defined below) (collectively referred to herein as a “User”)  ) AND Palbucks, 
                         (”Palbucks,” “we,” “our” or “us”) and govern your use of Palbucks’ services, including mobile applications, 
                         websites, software, hardware, and other products and services (collectively, the “Services”).
                     </p>
-                    <p className="text-[18px] mb-5 " >
+                    <p className="text-sm md:text-lg mb-5 tracking-[0.1px] " >
                         Subject to these Terms of Service, as amended from time to time (“Terms of Service”), Beevibe Technologies 
-                        Limited. provides the Palbucks platform to You (user) through its website at www.Palbucks.com and the 
+                        Limited. provides the Palbucks platform to You (user) through its website at <span className="font-black">www.Palbucks.com</span> and the 
                         Palbucks Community and related services (collectively, with the Platform, including any new features and 
                         applications, the “Services”). If You are located anywhere in the world you are contracting with Beevibe 
                         Technologies Ltd. (Nigeria). Unless specifically indicated otherwise, for purposes of the following Terms 
                         of Service, “Palbucks,” “we,” “us,” “our,” and other similar terms, shall refer to the party with whom you 
                         are contracting.
                     </p>
-                    <p className=" text-[18px] mb-5">
+                    <p className="text-sm md:text-lg mb-5 tracking-[0.1px] " >
                         We reserve the right, at our sole discretion, to change or modify portions of these Terms of Service at any
                         time and without notice. When we do this, we will post the revised Terms of Service on this page and will
                         indicate the date of such revision.
                     </p>
-                    <p className="text-[18px] mb-20 " >
+                    <p className="text-sm md:text-lg mb-12 md:mb-20 tracking-[0.1px] " >
                         Your continued use of the Services after the date of any such changes constitutes your acceptance of the new 
                         Terms of Service. To the extent allowed by law, the English version of these Terms of Service is binding and 
                         other translations are for convenience only. If you do not wish to accept the new Terms of Service, you may 
                         discontinue your use of the Services.
                     </p>
 
-                    <h3 className="text-[24px] font-black mb-8 " >ACCESS AND USE OF THE SERVICES</h3>
+                    <h3 className="text-lg md:text-2xl font-black mb-4 md:mb-8 " >
+                        ACCESS AND USE OF THE SERVICES
+                    </h3>
                     
                     {/* 
                     <div className={`flex gap-2 lg:gap-5 mb-8 `}>
@@ -97,13 +105,15 @@ function Termsofuse(){
                         (“Donations”) from donors (“Donors”) on behalf of the beneficiary of the Fundraiser (“Beneficiary”).`} 
                     />
 
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >2. Payment Processor:</h2>
-                            <p className="text-[18px] tracking-[0.8px] leading-7" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                2. Payment Processor:
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7" >
                                 Palbucks is not a payment processor and does not hold any funds. Instead, Palbucks uses stable coins and 
                                 elements of decentralised finance (defi) on the blockchain for the movement of funds on the platform.. You 
                                 acknowledge and agree that the use of the blockchain is integral to the Services and that we do not exchange 
@@ -113,13 +123,15 @@ function Termsofuse(){
                         </div>
                     </div>
 
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >3. Transaction Fee:</h2>
-                            <p className="text-[18px] tracking-[0.8px] leading-7" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                3. Transaction Fee:
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7" >
                                 Although there are no fees to start or maintain a Fundraiser, please keep in mind that a transaction fee, 
                             including credit and debit charges, is deducted from each withdrawal (hereinafter and on the website referred 
                             to as “Transaction Fee”). To learn more about the Platform and the applicable Transaction Fee, visit Palbucks 
@@ -128,18 +140,18 @@ function Termsofuse(){
                         </div>
                     </div> 
 
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >4. The Services are Platforms; We are not a Broker, Financial Institution, Creditor or Charity:</h2>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >4. The Services are Platforms; We are not a Broker, Financial Institution, Creditor or Charity:</h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 The Services are administrative platforms only. Palbucks facilitates the Fundraiser of the Organizers and
                                 permits Donors to make donations to these Fundraisers. Palbucks is not a broker, agent, financial institution,
                                 creditor or nonprofit corporation.
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 All information and content provided by Palbucks relating to the Services is for informational purposes only,
                                 and Palbucks does not guarantee the accuracy, completeness, timeliness or reliability of any such information
                                 or content. No content is intended to provide financial, legal, tax or other professional advice. Before
@@ -148,13 +160,13 @@ function Termsofuse(){
                                 professional advisor as appropriate. You acknowledge that all information and content accessed by you using
                                 the Services is at your own risk.
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 Palbucks has no control over the conduct of, or any information provided by, a User and hereby disclaims all
                                 liability in this regard to the fullest extent permitted by applicable law. We do not guarantee that a
                                 Fundraiser will obtain a certain amount of Donations or any Donations at all. We do not endorse any Fundraiser,
                                 User, or cause and we
                             </p>
-                            <p className="text-[18px] leading-6 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 make no guarantee, express or implied, that any information provided through the Services is accurate.
                                 We expressly disclaim any liability or responsibility for the outcome or success of any Fundraiser. You,
                                 as a Donor, must make the final determination as to the value and appropriateness of contributing to any
@@ -170,13 +182,15 @@ function Termsofuse(){
                         you understand and agree that Palbucks is not responsible for the use of your Donations or the amount of 
                         funds raised for the User or Fundraiser.`} />
 
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >6. Donors:</h2>
-                            <p className="text-[18px] tracking-[0.8px] leading-7" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                6. Donors:
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 " >
                                 All Donations are at your own risk. When you make a Donation through the Platform, it is your responsibility 
                                 to understand how your money will be used and to check the Fundraiser content regularly for any updates. 
                                 Palbucks is not responsible for any offers, promises, rewards or Promotions (as defined below) made or offered 
@@ -247,13 +261,15 @@ function Termsofuse(){
                         security; and (ii) sign out from your account at the end of each session when accessing the Services. 
                         Palbucks will not be liable for any loss or damage arising from your failure to comply with this section.`} />
                     
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >11. Content Manifestly Made Public by the User:</h2>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                11. Content Manifestly Made Public by the User:
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 A. Public Content; Public Display of Information and Donations. Some of your activity on and through the 
                                 Services is public, such as content you post publicly on the Platform (including descriptions, texts, 
                                 music, sound, information, data, software, graphics, comments, photos, videos, images, trademarks, logos, 
@@ -274,7 +290,7 @@ function Termsofuse(){
                                 Services. Please see our Privacy Policy for information on the ways that we may collect, use, and store 
                                 certain information about you and your use of the Services.
                             </p>
-                            <p className="text-[18px] leading-6 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 " >
                                 B. Other Information. Please be advised that User Content and other information, solicited or unsolicited, 
                                 that you provide to Palbucks may be publicly accessible, such as information you post in forums, comment 
                                 sections or in response to surveys we may send out. We also collect information through customer support 
@@ -342,13 +358,15 @@ function Termsofuse(){
                         your mobile telephone number, you agree to promptly update your Palbucks account information to ensure that your messages 
                         are not sent to the person that acquires your old number.`} />
 
-                    <div className={`flex gap-2 lg:gap-5 mb-20 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-10 md:mb-20 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >16. Prohibited Contents</h2>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                16. Prohibited Contents
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 You are solely responsible for compliance with all applicable law in relation to your Fundraiser or use of 
                                 the Services. You are further solely responsible for all User Content that you upload, post, publish, 
                                 display, transmit or otherwise use. If you are not the Beneficiary of the Fundraiser you organize, you 
@@ -366,11 +384,11 @@ function Termsofuse(){
                                 appropriate legal action, including without limitation, seeking restitution on behalf of ourselves and/or 
                                 our Users. Without limiting the foregoing, you agree and represent, warrant and covenant:
                             </p>
-                            <p className="text-[18px] leading-6 mb-8 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 md:mb-8 " >
                                 A. not to use the Services to raise funds or establish or contribute to any Fundraiser with the implicit or 
                                 explicit purpose of promoting or involving:
                             </p>
-                            <ul className=" list-disc flex flex-col gap-3 text-[18px] pl-10 mb-8 " >
+                            <ul className=" list-disc flex flex-col gap-1 md:gap-3 text-sm md:text-lg pl-5 md:pl-10 mb-4 md:mb-8 " >
                                     <li>
                                         the violation of any law, regulation, industry requirement, or third-party guidelines or agreements by which you are 
                                         bound, including those of payment card providers and transaction processors that you utilize in connection with the Services;
@@ -479,7 +497,7 @@ function Termsofuse(){
                                     </li>
                             </ul>
 
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >        
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >       
                                 B. not to use the Services to transmit or otherwise upload any User Content that: (i) infringes any 
                                 intellectual property or other proprietary rights of any party; (ii) you do not have a right to upload 
                                 under any law or under contractual or fiduciary relationships; (iii) contains software viruses or any 
@@ -489,85 +507,85 @@ function Termsofuse(){
                                 materials, commercial activities and/or sales, “junk mail,” “spam,” “chain letters,” “pyramid schemes,” 
                                 “contests,” “sweepstakes,” or any other form of solicitation;;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 C. not to interfere with or disrupt servers or networks connected to or used to provide the Services or 
                                 their respective features, or disobey any requirements, procedures, policies or regulations of the 
                                 networks connected to or used to provide the Services;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 D. not to harvest, collect or publish personally identifiable information of others;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 E. not to raise funds for a minor without the express permission of the minor’s guardian unless the funds 
                                 are transferred into a trust account for the sole benefit of the minor;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 F. not to use the Services on behalf of a third party or post any personal data or other information about 
                                 a third party, without the express consent of that third party;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 G. not to use another User’s account or URL without permission, impersonate any person or entity, falsely 
                                 state or otherwise misrepresent your affiliation with a person or entity, misrepresent a Charity or 
                                 Fundraiser through the Services, or post User Content in any inappropriate category or areas on the Services;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 H. not to create any liability for Palbucks or cause us to lose (in whole or in part) the services of 
                                 our Internet Service Provider(s), web hosting company or any other vendors or suppliers;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 I. not to gain unauthorized access to the Services, or any account, computer system, or network connected 
                                 to the Services, by any unauthorized or illegal means;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 J. not to obtain or attempt to obtain any materials or information not intentionally made available through 
                                 the Services;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 K. not to use the Services to post, transmit or in any way exploit any information, software or other 
                                 material for commercial purposes, or that contain advertising, except that using the Services for 
                                 fundraising activities in accordance with these Terms of Service is expressly permitted;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 L. not to transmit more request messages through the Services in a given period of time than a human 
                                 can reasonably produce in the same period by using a conventional online web browser;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 M. not to undertake any activity or engage in any conduct that is inconsistent with the business or 
                                 purpose of the Services; or
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 N. not to attempt to undertake indirectly any of the foregoing
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 Additionally, with respect to all Donations you make or accept through the Services, you agree and 
                                 represent, warrant and covenant:
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 A. not to make or accept any Donations that you know or suspect to be erroneous, suspicious or fraudulent;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 B. not to use the Services in or for the benefit of a country, organization, entity, or person embargoed 
                                 or blocked by any government, including those on sanctions lists identified by the Nigerian Economic and 
                                 financial Crimes commission and counterpart organisation elsewhere.
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 C. to maintain reasonable and standard security measures to protect any information transmitted and 
                                 received through the Services, including without limitation, adhering to any security procedures and 
                                 controls required by Palbucks from time to time;
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 D. to maintain a copy of all electronic and other records related to Fundraisers and Donations as 
                                 necessary for Palbucks to verify compliance with these Terms of Service and make such records available 
                                 to Palbucks upon our request. For clarity, the foregoing does not affect or limit your obligations to 
                                 maintain documentation as required by applicable laws, rules, regulations, or governmental authority; and
                             </p>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 E. at Palbucks’ request, to fully cooperate in the auditing of, investigation of (including without 
                                 limitation, investigations by Palbucks, a Payment Processor, or a regulatory or governmental authority), 
                                 and remedial efforts to correct any alleged or uncovered violation or wrongdoing of a User to whom, or 
                                 Fundraiser or Donation to which, you are connected.
                             </p>
-                            <p className="text-[18px] leading-6 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7" >
                                 Palbucks reserves the right to refuse, condition, or suspend any Donations or other transactions that 
                                 we believe in our sole discretion may violate these Terms of Service or harm the interests of our Users, 
                                 business partners, the public, or Palbucks, or that expose you, Palbucks, or others to risks unacceptable 
@@ -580,15 +598,19 @@ function Termsofuse(){
                         </div>
                     </div>                    
 
-                    <h3 className="text-[24px] font-black mb-8 " >INTELLECTUAL PROPERTY RIGHTS</h3>
+                    <h3 className="text-lg md:text-2xl font-black mb-4 md:mb-8 " >
+                        INTELLECTUAL PROPERTY RIGHTS
+                    </h3>
 
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >1. Services Content, Software and Trademarks:</h2>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                1. Services Content, Software and Trademarks:
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 You acknowledge and agree that the Services may contain content or features (“Services Content”) that are 
                                 protected by copyright, patent, trademark, trade secret or other proprietary rights and laws. Except as 
                                 expressly authorized by Palbucks, you agree not to modify, copy, frame, scrape, rent, lease, loan, sell, 
@@ -605,7 +627,7 @@ function Termsofuse(){
                                 sublicense, or otherwise transfer any right in the Software. Any rights not expressly granted herein are 
                                 reserved by Palbucks.
                             </p>
-                            <p className="text-[18px] leading-6 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 " >
                                 The Palbucks name and logos are trademarks and service marks of Palbucks (collectively the “Palbucks 
                                 Trademarks”). Other company, product, and service names and logos used and displayed via the Services 
                                 may be trademarks or service marks of their respective owners, who may or may not endorse or be affiliated 
@@ -676,15 +698,18 @@ function Termsofuse(){
                     the Services.
                     `} marginb = '20' />
                     
-                    <h3 className="text-[24px] font-black mb-3 " >DISCLAIMER OF WARRANTIES</h3>
-                    <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                    
+                    <h3 className="text-lg md:text-2xl font-black mb-3 " >
+                        DISCLAIMER OF WARRANTIES
+                    </h3>
+                    <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                         YOUR USE OF THE SERVICES IS AT YOUR SOLE RISK. THE SERVICES ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” 
                         BASIS. PALBUCKS AND ITS AFFILIATES EXPRESSLY DISCLAIM AND EXCLUDE, TO THE FULLEST EXTENT PERMITTED BY 
                         APPLICABLE LAW, ALL WARRANTIES, CONDITIONS AND REPRESENTATIONS OF ANY KIND, WHETHER EXPRESS, IMPLIED OR 
                         STATUTORY, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
                         PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT.
                     </p>
-                    <p className="text-[18px] leading-6 mb-20 tracking-[0.8px]" >
+                    <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-10 md:mb-20 " >
                         PALBUCKS AND ITS AFFILIATES MAKE NO WARRANTY OR CONDITION THAT: (I) THE SERVICES WILL MEET YOUR 
                         REQUIREMENTS; (II) THE SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE; (III) THE RESULTS 
                         THAT MAY BE OBTAINED FROM THE USE OF THE SERVICES WILL BE ACCURATE OR RELIABLE; OR (IV) THE QUALITY OF ANY 
@@ -692,8 +717,10 @@ function Termsofuse(){
                         MEET YOUR EXPECTATIONS.
                     </p>
 
-                    <h3 className="text-[24px] font-black mb-3 " >LIMITATION OF LIABILITY</h3>
-                    <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                    <h3 className="text-lg md:text-2xl font-black mb-3 " >
+                        LIMITATION OF LIABILITY
+                    </h3>
+                    <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                         YOU EXPRESSLY UNDERSTAND AND AGREE THAT, TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, NEITHER 
                         PALBUCKS NOR ITS AFFILIATES WILL BE LIABLE FOR ANY: (I) INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, 
                         PUNITIVE OR EXEMPLARY DAMAGES; (II) DAMAGES FOR LOSS OF PROFITS;, (III) DAMAGES FOR LOSS OF GOODWILL;, 
@@ -709,26 +736,30 @@ function Termsofuse(){
                         (INCLUDING CONTRACT, NEGLIGENCE, STATUTORY LIABILITY OR OTHERWISE) OR CAUSES OF ACTION EXCEED THE AMOUNT 
                         YOU HAVE PAID PALBUCKS IN THE LAST SIX (6) MONTHS, OR, IF GREATER, ONE HUNDRED U.S. DOLLARS (US$ 100).
                     </p>
-                    <p className="text-[18px] leading-6 mb-20 tracking-[0.8px]" >
+                    <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-10 md:mb-20 " >
                         SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF 
                         LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, SOME OF THE LIMITATIONS SET FORTH ABOVE 
                         MAY NOT APPLY TO YOU. IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE SERVICES OR WITH THESE TERMS OF 
                         SERVICE, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USE OF THE SERVICES.
                     </p>
                     
-                    <h3 className="text-[24px] font-black mb-3 " >DISPUTES</h3>
-                    <p className="text-[18px] leading-6 mb-8 tracking-[0.8px]" >
+                    <h3 className="text-lg md:text-2xl font-black mb-3" >
+                        DISPUTES
+                    </h3>
+                    <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 md:mb-8 " >
                         ARBITRATION CLAUSE & CLASS ACTION WAIVER – IMPORTANT – PLEASE REVIEW AS THIS AFFECTS YOUR LEGAL RIGHTS
                     </p>
 
 
-                    <div className={`flex gap-2 lg:gap-5 mb-8 `}>
-                        <div className="w-[10px] bg-[#37BCF7] rounded-[20px] " >                
+                    <div className={`flex gap-2 lg:gap-5 mb-4 md:mb-8 `}>
+                        <div className="w-[6px] md:w-[10px] bg-[#37BCF7] rounded-[20px] " >                
                         </div>
 
                         <div className="w-full" >
-                            <h2 className="text-[24px] font-black mb-[15px] leading-7 tracking-[0.5px] " >1. Arbitration; Class Action Waiver:</h2>
-                            <p className="text-[18px] leading-6 mb-5 tracking-[0.8px]" >
+                            <h2 className="text-base md:text-[22px] font-black mb-[5px] md:mb-[15px] leading-7 tracking-[0.5px] " >
+                                1. Arbitration; Class Action Waiver:
+                            </h2>
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7 mb-5 " >
                                 YOU AGREE THAT ALL DISPUTES BETWEEN YOU AND US OR ANY OF OUR OFFICERS, DIRECTORS OR EMPLOYEES ACTING IN 
                                 THEIR CAPACITY AS SUCH (WHETHER OR NOT SUCH DISPUTE INVOLVES A THIRD PARTY) WITH REGARD TO YOUR RELATIONSHIP 
                                 WITH US, INCLUDING WITHOUT LIMITATION DISPUTES RELATED TO THESE TERMS OF SERVICE, YOUR USE OF THE SERVICES, 
@@ -738,7 +769,7 @@ function Termsofuse(){
                                 ARBITRATION. YOU UNDERSTAND AND AGREE THAT, BY ENTERING INTO THESE TERMS, YOU AND WE ARE EACH WAIVING OUR 
                                 RIGHT TO A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION.
                             </p>
-                            <p className="text-[18px] leading-6 tracking-[0.8px]" >
+                            <p className="text-sm md:text-lg tracking-[0.1px] md:tracking-[0.8px] md:leading-7" >
                                 Notwithstanding the foregoing, nothing in these Terms of Service will be deemed to waive, preclude, or 
                                 otherwise limit the right of either of us to: (i) bring an individual action in small claims court; (ii) 
                                 pursue an enforcement action through the applicable federal, state, or local agency if that action is 
