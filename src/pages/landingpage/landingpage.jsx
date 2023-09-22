@@ -202,17 +202,17 @@ function LandingPage(){
 
                 </div>
 
-                {/* <div className ="w-[600px] h-screen absolute -z-10 right-0 top-[150px] ">
+                <div className ="w-[200px] md:w-[600px] h-screen absolute -z-10 right-0 top-[250px] md:top-[150px] ">
                     <img src={bgradient2} alt="" className="w-full " />
-                    <img src={bgradient2} alt="" className="w-full relative -top-[350px] " />
-                    <img src={bgradient2} alt="" className="w-full relative -top-[950px] " />
+                    <img src={bgradient2} alt="" className=" w-full relative -top-[350px] " />
+                    <img src={bgradient2} alt="" className="hidden md:block w-full relative -top-[950px] " />
                 </div>
 
-                <div className ="w-[600px] h-screen absolute -z-10 left-0 top-[380px] ">
+                <div className ="w-[200px] md:w-[600px] h-screen absolute -z-10 left-0 top-[480px] md:top-[380px] ">
                     <img src={bgradient1} alt="" className="w-full " />
                     <img src={bgradient1} alt="" className="w-full relative -top-[350px] " />
-                    <img src={bgradient1} alt="" className="w-full relative -top-[1000px] " />
-                </div> */}
+                    <img src={bgradient1} alt="" className="hidden md:block w-full relative -top-[1000px] " />
+                </div>
 
                 <h3 className="mb-4 lg:mb-[60px] ml-[5%] 2xl:ml-[8%] text-lg lg:text-[45px] text-[#000000] font-black lg:leading-[73px] tracking-[0.069px]  " >
                     Featured Crowdfunding Campaign
