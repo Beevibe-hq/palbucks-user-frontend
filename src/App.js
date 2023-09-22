@@ -24,7 +24,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { loadCrowdfundEvents, sethomebodydata, setIsAuthenticated } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
-import Profilepage from './components/profilepage/profilepage'
 import Wallet from './pages/wallet/wallet'
 import Notificationspage from './pages/notificationspage/notificationspage'
 import Helpcenter from './pages/helpcenter/helpcenter'
@@ -42,7 +41,7 @@ import { checkAuthentication } from './auth/checkauthentication'
 import { refreshToken } from './auth/refreshToken'
 import Loadingspinner from './components/loadingspinner/loadingSpinner'
 import Donate from './pages/cardDonation/cardDonation';
-
+import Profilepage from './pages/profilepage/profilepage';
 
 function App() {
     
