@@ -27,6 +27,7 @@ import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import Select from 'react-select'
 import { baseUrl } from "../../auth/checkauthentication"
+import { useMediaQuery } from "react-responsive"
 
 export default function Donate() {
 
@@ -44,6 +45,9 @@ export default function Donate() {
     const id = params.id
     const [searchParams] = useSearchParams();
     
+    const isMobile = useMediaQuery({
+        query: '(max-width: 768px)'
+    })
     useEffect(() => {
         // Access the individual query parameters
         const status = searchParams.get('status');
@@ -92,8 +96,8 @@ export default function Donate() {
     return (
         <div className='bg-[#F9F9F9] min-h-full font-merriweather ' >
             <Navbar sidebar = {false} />
-            <div className= {`mt-[90px] md:mt-[100px] py-[46px] px-[94px]`} >
-                <div className="mb-[99px] flex gap-6 cursor-pointer"
+            <div className= {`mt-[90px] md:mt-[100px] py-[46px] fold:px-1 phones:px-4 md:px-10 lg:px-[94px]`} >
+                <div className="mb-[30px] md:mb-[99px] flex gap-[10px] md:gap-6 cursor-pointer justify-center md:justify-start"
                     onClick={
                         ()=>{
                             if(pageDisplay == 'donationDetails' || pageDisplay == 'donationSuccessful' ){
@@ -104,8 +108,8 @@ export default function Donate() {
                         }
                     }
                 >
-                    <img src={backArrow} alt="Go back" className="w-[32px"  />
-                    <p className="text-[23px] tracking-[0.062px] leading-9 " >
+                    <img src={backArrow} alt="Go back" className="w-[21px] md:w-[32px]"  />
+                    <p className="text-sm font-bold md:text-[23px] md:tracking-[0.062px] md:leading-9 " >
                         {
                             pageDisplay == 'donationDetails' ?
                              'Go back to campaign page':
@@ -117,23 +121,23 @@ export default function Donate() {
                         }
                     </p>
                 </div>
-                <div className="mb-[30px] mx-auto w-fit flex gap-[5px] items-center" >
+                <div className="mb-4 md:mb-[30px] mx-auto w-fit flex gap-[5px] items-center" >
                     <div 
-                        className="w-10 h-10 bg-[#35FAA0] rounded-full flex items-center justify-center text-lg font-bold " >
+                        className="w-8 md:w-10 h-8 md:h-10 bg-[#35FAA0] rounded-full flex items-center justify-center text-base md:text-lg font-bold " >
                         1
                     </div>
-                    <hr className=" w-[103px] bg-[#D2F9E7] h-[6px] " />
+                    <hr className=" w-[30px] md:w-[103px] bg-[#D2F9E7] h-[6px] " />
                     <div
                         className={` ${pageDisplay !== 'donationDetails'? 'bg-[#35FAA0]' : 'bg-[#35FAA033]' }
-                        w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold
+                        w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-base md:text-lg font-bold
                         `}
                     >
                         2
                     </div>
-                    <hr className=" w-[103px] bg-[#D2F9E7] h-[6px] " />
+                    <hr className=" w-[30px] md:w-[103px] bg-[#D2F9E7] h-[6px] " />
                     <div
                         className={` ${pageDisplay == 'donationSuccessful' ? 'bg-[#35FAA0]' : 'bg-[#35FAA033]' }
-                        w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold
+                        w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-base md:text-lg font-bold
                         `}
                     >
                         3
@@ -141,7 +145,7 @@ export default function Donate() {
                 </div>
                 {
                     pageDisplay == 'donationDetails' ?
-                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} /> :
+                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} /> :
                     pageDisplay == 'cardDetails' ?
                     <CardDetails setpageDisplay={setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} /> :
                     pageDisplay == 'donationSuccessful' ?
@@ -158,7 +162,7 @@ export default function Donate() {
 }
 
 
-const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails}) => {
+const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile}) => {
 
     const crowdfundEvents = useSelector(state => state.crowdfundEvents)
     const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
@@ -225,8 +229,8 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
           right: '20px',
           top: '50%', // Vertically center the Select
           transform: 'translateY(-50%)',
-          width: '70px', // Set the desired width for the options menu
-          height:'50px',
+          width: isMobile ? '60px' :'70px', // Set the desired width for the options menu
+          height: isMobile ? '40px' :'50px',
           border:'0',
           caretColor: 'transparent',  // Remove the blinker
           boxShadow: state.isFocused ? 0 : 0, //Disable the blue line
@@ -251,15 +255,15 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
     };
 
     const CustomDropdownIndicator = () => (        
-        <img src={downArrowIcon} alt="down arrow" className="w-7 h-7" />
+        <img src={downArrowIcon} alt="down arrow" className="w-5 md:w-7 h-5 md:h-7" />
     );   
       
     return(
         <div className="">
-            <div className="mb-[68px] bg-white py-[37px] px-[59px] max-w-[670px] mx-auto rounded-[10px] " >
-                <div className="mb-[58px] flex gap-7 " >
-                    <img src={crowdfund.banner} alt="crowdfund banner" className="w-[153px] h-[100px] object-cover rounded " />
-                    <p className="text-xl tracking-[0.069px] " >
+            <div className="mb-[25px] md:mb-[68px] bg-white p-[13px] md:py-[37px] md:px-[59px] max-w-[670px] mx-auto rounded md:rounded-[10px] " >
+                <div className="mb-[38px] md:mb-[58px] flex gap-4 md:gap-7 " >
+                    <img src={crowdfund.banner} alt="crowdfund banner" className="w-[77px] md:w-[153px] h-[68px] md:h-[100px] object-cover rounded " />
+                    <p className="text-sm md:text-xl tracking-[0.069px] " >
                         You are donating to the  <span className="font-black" >
                             {
                                 crowdfund.title
@@ -267,19 +271,19 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                         </span> campaign
                     </p>
                 </div>
-                <div className="mb-[58px] flex flex-col gap-5" >
-                    <label htmlFor="amount" className="text-lg font-bold" >
+                <div className="mb-[31px] md:mb-[58px] flex flex-col gap-3 md:gap-5" >
+                    <label htmlFor="amount" className="text-sm md:text-lg font-bold" >
                         What amount do you wish to donate?
                     </label>
-                    <div className="relative h-[70px] flex items-center ">
+                    <div className="relative h-12 md:h-[70px] flex items-center ">
                         <input
                             type="number"
                             name="amount"
                             id="amount"
                             min={1}
                             placeholder={selectedCurrency.value == 'usd' ? "Enter your donation (in USD)" : selectedCurrency.value == 'naira' ? "Enter your donation (in Naira)" : "Enter your donation"}
-                            className="w-full h-[70px] py-[10px] px-5 border-[1.5px] border-black rounded bg-white
-                            text-[#888888] text-lg tracking-[0.8px] "
+                            className="w-full h-12 md:h-[70px] py-1 md:py-[10px] px-3 md:px-5 border-[1.5px] border-black rounded bg-white
+                            text-[#888888] text-sm md:text-lg tracking-[0.8px] "
                             onChange={handleInputChange}
                         />
                         <Select
@@ -293,14 +297,14 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                             }}                                                        
                             formatOptionLabel={option =>
                                 (
-                                    <img src={option.image} alt="option" className="w-5 h-6" />                                
+                                    <img src={option.image} alt="option" className="w-3 md:w-5 h-3 md:h-6" />                                
                                 )
                             }
                         />
                     </div>
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="donor" className="mb-5 text-lg font-bold" >
+                    <label htmlFor="donor" className="mb-3 md:mb-5 text-sm md:text-lg font-bold" >
                         What is your name? (Leave blank to remain anonymous)
                     </label>
                     <input
@@ -308,18 +312,18 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                         name="donor"
                         id="donor"
                         placeholder="Enter your name"
-                        className="mb-3 h-[70px] w-full py-[10px] px-5 border-[1.5px] border-black rounded bg-white
-                        text-[#888888] text-lg tracking-[0.8px] "
+                        className="mb-3 h-12 md:h-[70px] w-full py-1 md:py-[10px] px-3 md:px-5 border-[1.5px] border-black rounded bg-white
+                        text-[#888888] text-sm md:text-lg tracking-[0.8px] "
                         onChange={handleInputChange}
                     />
-                    <p className="text-sm text-[#525252] tracking-[0.069px] " >
+                    <p className="text-xs sm:text-sm text-[#525252] tracking-[0.069px] " >
                         Your name will be shown as a <span className="font-black">donor</span> to this campaign
                     </p>
                 </div>
             </div>
 
-            <button className="mx-auto w-fit min-w-[280px] block py-5 px-9 rounded-lg bg-[#000000] 
-            text-white text-[28px] font-bold leading-[43px] -tracking-[0.188px] " 
+            <button className="mx-auto w-fit min-w-[200px] md:min-w-[280px] block py-[10px] md:py-5 px-[18px] md:px-9 rounded md:rounded-lg bg-[#000000] 
+            text-white text-[15px] md:text-[28px] font-bold md:leading-[43px] md:-tracking-[0.188px] " 
                 onClick={ handleClick }
             >
                 

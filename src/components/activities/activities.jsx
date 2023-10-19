@@ -119,7 +119,7 @@ function Activities(props) {
 export default Activities;
 
 
-let activityData = [
+export let activityData = [
     {
         userdp: user12,
         username: 'Doggo',

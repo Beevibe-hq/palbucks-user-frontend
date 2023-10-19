@@ -14,7 +14,7 @@ function Activity(props){
     },[])
 
     return(
-        <div className={` ${newActivity ?"bg-[#86FCC6]" : "bg-white md:bg-[#F9F9F9] "} flex gap-[9px] lg:gap-3 py-[10px] md:py-3 px-2 phones:px-5 items-start rounded-[5px]  `}>
+        <div className={` ${newActivity ?"bg-[#86FCC6]" : props.background == 'none' ? "bg-inherit": "bg-white md:bg-[#F9F9F9] "} flex gap-[9px] lg:gap-3 py-[10px] md:py-3 px-2 phones:px-5 items-start rounded-[5px]  `}>
             <img src={props.userdp ? props.userdp : user6} alt="user profile dp" className="w-12 md:w-[57px] rounded-full " />
             <section>
                 <h3 className="font-black text-[15px] md:text-[17px] mb-[3px] md:mb-[6px] " >
