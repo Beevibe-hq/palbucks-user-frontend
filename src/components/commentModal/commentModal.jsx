@@ -5,7 +5,7 @@ import { useState } from "react";
 import Loadingspinner from "../loadingspinner/loadingSpinner";
 import { baseUrl } from "../../auth/checkauthentication";
 
-function CommentModal({displayCommentModal, setDisplayCommentModal, eventid,setCommentData}){
+function CommentModal({displayModals, setDisplayModals, eventid,setCommentData}){
 
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const [isLoading, setIsLoading] = useState(false)
@@ -45,22 +45,22 @@ function CommentModal({displayCommentModal, setDisplayCommentModal, eventid,setC
     
 
     return(
-        <div className={`fixed z-50 inset-0 overflow-y-auto ${displayCommentModal ? 'block' : 'hidden'}`}>
-            <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+        <div className={`w-full fixed z-50 inset-0 overflow-y-auto ${displayModals.commentModal ? 'block' : 'hidden'}`}>
+            <div className="w-full flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
                 <div className="fixed inset-0 transition-opacity" aria-hidden="true" >
                     <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
                 <div className="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
                 
-                <div className={`w-[681px] 2xl:w-[881px] min-h-[300px] h-fit p-9 bg-white rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] font-merriweather `} >
-                    <div className={`${displaySuccessfulComment ? 'hidden' : 'block pt-5 ' }`}>
-                        <div className="mb-8 flex justify-end gap-14 xl:gap-28 items-center px-4 xl:px-8 ">
-                            <h1 className="text-center text-[28px] font-bold " >
+                <div className={`w-[265px] phones:w-[350px] md:w-[681px] 2xl:w-[881px] md:min-h-[300px] h-fit py-6 px-2 phones:px-4 md:p-9 bg-white rounded-md md:rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] font-merriweather `} >
+                    <div className={`${displaySuccessfulComment ? 'hidden' : 'block md:pt-5 ' }`}>
+                        <div className="mb-4 md:mb-8 flex justify-end gap-3 phones:gap-8 md:gap-14 xl:gap-28 items-center md:px-4 xl:px-8 ">
+                            <h1 className="text-center text-sm md:text-[28px] font-bold " >
                                 Write in your comment
                             </h1>
-                            <button className="text-[#37BCF7] text-2xl font-bold " onClick={
-                                () => {
-                                    setDisplayCommentModal(false)
+                            <button className="text-[#37BCF7] text-sm md:text-2xl font-bold "
+                                onClick={() => {
+                                    setDisplayModals((prev) => ({...prev, commentModal: false}))                                    
                                 }
                             } >
                                 Cancel
@@ -69,44 +69,44 @@ function CommentModal({displayCommentModal, setDisplayCommentModal, eventid,setC
                         <textarea
                             name="comment"
                             id="comment"
-                            className="mb-4 border-[1px] border-[#8E8E93] h-[280px] w-full rounded resize-none
-                                p-5 outline-none text-[#888888] text-lg tracking-[0.8px] "
+                            className="mb-2 md:mb-4 border-[1px] border-[#8E8E93] h-[140px] md:h-[280px] w-full rounded resize-none
+                                p-2 md:p-5 outline-none text-[#888888] text-sm md:text-lg tracking-[0.8px] "
                             placeholder="Write in words of support to this campaign"
                             onChange={(e) => setComment(e.target.value)}
                         >
                         </textarea>
-                        <div className="flex gap-2 items-center mb-6 ">
-                            <img src={infoicon} alt="info icon" />
-                            <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >
+                        <div className="flex gap-2 items-center mb-4 md:mb-6 ">
+                            <img src={infoicon} alt="info icon" className="w-3 md:w-5" />
+                            <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >
                                 Limited to 400 characters
                             </p>
                         </div>
-                        <button className = "bg-[#37BCF7] rounded-[10px] py-2 px-[15px] w-1/2 min-w-[230px] block mx-auto "
+                        <button className = "bg-[#37BCF7] rounded-md md:rounded-[10px] py-[5px] md:py-2 px-[15px] w-1/2 min-w-[150px] md:min-w-[230px] block mx-auto "
                             onClick={handleComment}
                         >
                             <div className={` ${isLoading ? 'block' : 'hidden' } `}>
                                 <Loadingspinner width = '28px' height = '28px' />
                             </div>
-                            <span className={` ${isLoading ? 'hidden' : 'block' } text-[#FFFFFF] text-lg font-bold  `} >
+                            <span className={` ${isLoading ? 'hidden' : 'block' } text-[#FFFFFF] text-sm md:text-lg font-bold  `} >
                                 Send comment
                             </span>
                         </button>
                     </div>
-                    <div className={`${displaySuccessfulComment ? 'flex flex-col justify-center items-center pb-8 px-10 xl:px-[80px]' : 'hidden'} `}>
+                    <div className={`${displaySuccessfulComment ? 'flex flex-col justify-center items-center pb-4 md:pb-8 px-5 md:px-10 xl:px-[80px]' : 'hidden'} `}>
                         <img 
                             src={successfulCommentIcon} 
                             alt="comment successful" 
-                            className=""
+                            className="w-[84px] md:w-[168px]"
                         />
-                        <h3 className="mb-4 text-center font-black text-[28px] tracking-[0.069px]" >
+                        <h3 className="mb-2 md:mb-4 text-center font-black text-base md:text-[28px] tracking-[0.069px]" >
                             Comment sent successfully
                         </h3>
-                        <p className="mb-5 text-center text-xl " >
+                        <p className="mb-3 md:mb-5 text-center text-sm md:text-xl " >
                             It is always a good habit to always give words of support to those who needs it 
                         </p>
-                        <button className="py-5 px-9 bg-black rounded-lg text-[28px] font-bold text-white "
+                        <button className="py-3 md:py-5 px-4 md:px-9 bg-black rounded-[5px] md:rounded-lg text-base md:text-[28px] font-bold text-white "
                             onClick={() => {
-                                    setDisplayCommentModal(false)
+                                    setDisplayModals((prev) => ({...prev, commentModal: false}))
                                     setDisplaySuccessfulComment(false)
                                 }
                             }
