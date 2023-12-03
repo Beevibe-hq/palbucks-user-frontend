@@ -22,7 +22,7 @@ import Settings from "./pages/settings/settings";
 import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { loadCrowdfundEvents, sethomebodydata, setIsAuthenticated } from './actions/actions'
+import { addNotification, loadCrowdfundEvents, sethomebodydata, setIsAuthenticated } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Wallet from './pages/wallet/wallet'
 import Notificationspage from './pages/notificationspage/notificationspage'
@@ -42,13 +42,18 @@ import { refreshToken } from './auth/refreshToken'
 import Loadingspinner from './components/loadingspinner/loadingSpinner'
 import Donate from './pages/cardDonation/cardDonation';
 import Profilepage from './pages/profilepage/profilepage';
+//import Pusher from 'pusher-js/types/src/core/pusher';
+import Pusher from 'pusher-js';
 
 function App() {
     
+    const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
     const dispatch = useDispatch();
-    //const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated)
+    const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated)
     const logoutLoading = useSelector(state => state.authReducer.isLoading)    
     const navigate = useNavigate()
+    
 
   useEffect( ()=>{
    
@@ -66,20 +71,59 @@ function App() {
     
     verifyToken()
         
-   //Store crowdfund details in Redux store 
-   // dispatch(sethomebodydata(data))
 
    // Refresh the access token every 15 minutes
    const tokenRefreshInterval = setInterval(()=>{
       refreshToken(dispatch,navigate)
       //alert('refresh')
-   }, 15 * 60 * 1000 )
+   }, 15 * 60 * 1000)
+    
+  
 
    return () => {
       clearInterval(tokenRefreshInterval);
    }
    
   }, [])
+
+  useEffect(() => {
+    /* Implement Real time Notifications system for the app if user is signed in */
+    
+    //alert('I run')
+    if (userInfo !== null) {
+      //alert('true')
+      // Configure pusher for notifications
+      var pusher = new Pusher("a6fc775946470e47c0d0", {
+        cluster: "eu",      
+      })
+
+      // Subscribe to the notifications channel
+      if (userInfo !== null) {
+        var notificationsChannel = pusher.subscribe(userInfo.email)
+      }
+
+      // Listen for notifications
+      notificationsChannel.bind("crowdfund-like", (data) => {
+          dispatch(addNotification(data))
+          console.log(data)
+      })
+      notificationsChannel.bind("crowdfund-comment", (data) => {
+          dispatch(addNotification(data))
+          console.log(data)
+          
+      })
+      notificationsChannel.bind("milestone", (data) => {
+          dispatch(addNotification(data))
+          console.log(data)
+      })
+    }
+
+    return () => {
+      // Unsubscribe from Pusher channels when the component unmounts.
+      /* notificationsChannel.unbind_all();
+      pusher.unsubscribe(userInfo.email); */
+    };
+  },[isAuthenticated])
 
   if(logoutLoading){
     return (

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useRef, useState, useEffect } from "react"
 
-import palbuckslogo from "../../images/landingpagelogo.svg"
+import palbuckslogo from "../../images/appLogo.svg"
 import palbucksgroup from "../../images/palbucks2.svg"
 import bgradient1 from "../../images/bgradient1.svg"
 import bgradient2 from "../../images/bgradient2.svg"
@@ -114,7 +114,7 @@ function LandingPage(){
                     <img src={palbuckslogo} alt="Palbucks logo" className="w-5 md:w-7 lg:w-[33.4px]" />                    
                     <img src={palbucksgroup} alt="palbucks" className="w-[77px] md:w-[108px] lg:w-[138px] h-[14px] md:h-5 lg:h-[24px] "  />
                 </div>
-                <nav className="hidden md:flex items-center xl:gap-[46px] " >
+                <nav className="hidden md:flex items-center xl:gap-[46px] font-arial " >
                     <Link to = '/howitworks' className="text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
                         <span>How it works</span>
                     </Link>
@@ -136,21 +136,30 @@ function LandingPage(){
 
             <main className="pt-3 md:pt-[70px] lg:pt-[140px] pb-10 mt-[103px] " >
                 
-                <h2 className="max-w-[80%] mx-auto mb-5 md:mb-7 lg:mb-[49px] font-black text-center text-2xl md:text-5xl lg:text-[70px] lg:leading-[86px] tracking-[2.323px] " >
+                <h2 className="max-w-[80%] mx-auto mb-5 md:mb-7 lg:mb-[49px] 
+                    font-black text-center text-2xl md:text-5xl lg:text-[70px] lg:leading-[86px]
+                    tracking-[2.323px] [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] " >
                     From your wallets to <br className="hidden md:block" /> their hearts
                 </h2>
                 <p className="mb-5 md:mb-7 lg:mb-[60px] text-sm md:text-xl lg:text-[33px] font-merriweather md:font-arial text-center lg:leading-[45px] tracking-[0.5px] " >
                     Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your card or USDT
                 </p>
-                <button className="max-w-[85%] mb-7 md:mb-14 lg:mb-[100px] px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px] transition-all duration-500 py-3 md:py-5 lg:py-[23.4px] font-bold bg-black text-white rounded md:rounded-[10px] text-base md:text-2xl lg:text-3xl mx-auto block " >
+                <button className="max-w-[85%] mb-7 md:mb-14 lg:mb-[100px] 
+                    px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px]
+                    transition-all duration-500 py-3 md:py-5 lg:py-[23.4px]
+                    font-bold bg-black text-white rounded md:rounded-[10px]
+                    text-base md:text-2xl lg:text-3xl mx-auto block font-arial" >
                     Start a crowdfund
                 </button>
 
                 <div className={`mb-8 lg:mb-[113px] w-[90%] max-w-[1306px] bg-[#033F59] mx-auto pt-[30px] md:pt-10 lg:pt-[77px] pb-[30px] md:pb-10 lg:pb-[20px] 
                     px-8 lg:pl-[120px] lg:pr-[120px] 3xl:pr-[140px] flex flex-col items-center justify-between lg:block
-                    rounded-md md:rounded-xl lg:rounded-[20px] shadow-[13px_7px_58px_-9px_rgba(3,63,89,0.25)] `} >
+                    rounded-md md:rounded-xl lg:rounded-[20px] shadow-[13px_7px_58px_-9px_rgba(3,63,89,0.25)]
+                    font-arial
+                    `} >
 
-                    <h4 className="mb-9 md:mb-14 lg:mb-[70px] text-xl md:text-3xl md:leading-[48px] lg:text-[48px] font-black lg:leading-[73px] tracking-[0.069px] text-center text-white " >
+                    <h4 className="mb-9 md:mb-14 lg:mb-[70px] text-xl md:text-3xl md:leading-[48px] lg:text-[48px] font-black lg:leading-[73px] tracking-[0.069px] text-center text-white
+                    font-merriweather " >
                         Fundraising in Palbucks takes just <br className="hidden lg:block" /> <span className="text-[#35FAA0]" > few minutes</span>
                     </h4>
 
@@ -171,7 +180,7 @@ function LandingPage(){
                     <img src={stepdown} alt="Step down icon pointing to next step" className="mb-10 lg:mb-[75px] inline-block relative top-5 lg:top-20 rotate-45 lg:rotate-0 w-9 lg:w-[183px] "  />
 
                     <div className={` lg:mt-20 lg:ml-auto mb-5 lg:mb-[90px]  relative max-w-[620px] py-2 lg:py-[15px] px-3 lg:px-[25px] rounded lg:rounded-[6.4px] 
-                        rounded-tr-[21px] lg:rounded-tr-[55px] bg-[#35FAA0] border-4 border-black shadow-[0px_0px_20.715068817138672px_0px_rgba(0,0,0,0.04)] `}>
+                        rounded-tr-[21px] lg:rounded-tr-[55px] bg-[#35FAA0] shadow-[0px_0px_20.715068817138672px_0px_rgba(0,0,0,0.04)] `}>
                         <div className="">
                             <img src={step2icon} alt="Step one icon" className="absolute -top-3 phones:-top-[15%] -left-[3%] w-8 xphones:w-10 lg:w-[70.5px]" />
                         </div>
@@ -187,7 +196,7 @@ function LandingPage(){
                     <img src={stepleft} alt="Step down icon pointing to next step" className="mb-10 lg:mb-0 lg:ml-auto lg:mr-20 2xl:mr-36 relative -rotate-[25.8deg] lg:rotate-0 w-9 lg:w-[183px] "  />
 
                     <div className={`relative max-w-[620px] lg:-top-[110px] py-2 lg:py-[15px] px-3 lg:px-[25px] rounded lg:rounded-[6.4px] rounded-tr-[21px] lg:rounded-tr-[55px]
-                         bg-[#F9F9F9] border-4 border-black shadow-[0px_0px_20.715068817138672px_0px_rgba(0,0,0,0.04)]   `}>
+                         bg-[#F9F9F9] shadow-[0px_0px_20.715068817138672px_0px_rgba(0,0,0,0.04)]   `}>
                         <div className="">
                             <img src={step3icon} alt="Step one icon" className="absolute -top-3 phones:-top-[15%] -left-[3%] w-8 xphones:w-10 lg:w-[70.5px]" />    
                         </div>
@@ -226,13 +235,13 @@ function LandingPage(){
 
 
                 <div className="mb-[53px] lg:mb-[178px] mx-[5%] 2xl:mx-[8%] flex justify-between">
-                    <img src={backbtn} alt="" className={`w-[28px] lg:w-[47px] h-[28px] lg:h-[47px] rounded-full ${scrollState.isAtLeftEnd ? 'opacity-50' : 'cursor-pointer'}`} onClick={scrollLeft} />
-                    <img src={scrollState.isAtRightEnd ? rightscroll : leftscroll} alt="" className="w-16 lg:w-[107px] h-6 lg:h-[42px]" />
-                    <img src={forwardbtn} alt="" className={`w-[28px] lg:w-[47px] h-[28px] lg:h-[47px] rounded-full ${scrollState.isAtRightEnd ? 'opacity-50' : 'cursor-pointer'}`} onClick={scrollRight} />
+                    <img src={backbtn} alt="" className={`w-[28px] lg:w-[44px] h-[28px] lg:h-[44px] rounded-full ${scrollState.isAtLeftEnd ? 'opacity-50' : 'cursor-pointer'}`} onClick={scrollLeft} />
+                    {/* <img src={scrollState.isAtRightEnd ? rightscroll : leftscroll} alt="" className="w-16 lg:w-[107px] h-6 lg:h-[42px]" /> */}
+                    <img src={forwardbtn} alt="" className={`w-[28px] lg:w-[44px] h-[28px] lg:h-[44px] rounded-full ${scrollState.isAtRightEnd ? 'opacity-50' : 'cursor-pointer'}`} onClick={scrollRight} />
                 </div>
 
                 <div className="mb-[30px] lg:mb-[113px] bg-[#024C2B] w-full pt-5 lg:pt-[68px] pb-[16px] px-2 phones:px-6 " >
-                    <h4 className="mb-6 lg:mb-[55px] text-[#D8D8D8] text-center text-sm lg:text-[36px] font-bold lg:leading-[73px] tracking-[0.069px] " >
+                    <h4 className="mb-6 lg:mb-[55px] font-arial text-[#D8D8D8] text-center text-sm lg:text-[36px] font-bold lg:leading-[73px] tracking-[0.069px] " >
                         Features
                     </h4>
 
@@ -240,11 +249,11 @@ function LandingPage(){
                         Receive donations from <br className="hidden lg:block" /> Friends and Family in <span className="text-[#35FAA0]" >USDT</span>
                     </h5>
 
-                    <p className="mb-14 lg:mb-[212px] text-white text-base lg:text-[36px] text-center lg:leading-[70px] tracking-[0.55px] " >
+                    <p className="mb-14 lg:mb-[212px] font-arial text-white text-base lg:text-[36px] text-center lg:leading-[70px] tracking-[0.55px] " >
                         You can receive crypto donations for your campaigns from <br className="hidden lg:block" /> your family and friends. We believe that location should not be a <br className="hidden lg:block" />barrier when it comes to raising funds for a cause
                     </p>
                     {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
-                    <div className={`mx-auto mb-[86px] lg:mb-[300px] block w-fit ` }>                        
+                    <div className={`mx-auto mb-[86px] lg:mb-[300px] block w-fit font-arial ` }>                        
                         <div className={`mb-[22px] lg:mb-[72px] w-[250px] phones:w-[270px] lg:w-[800px] lg:h-[200px] bg-[#F9F9F9] -rotate-[5deg] rounded-md lg:rounded-[15px] py-2 lg:py-[23px] px-3 lg:px-[31px]`} >
                             <img src={like} alt="like icon" className="w-6 lg:w-[54px] absolute -top-3 lg:-top-7 -left-2 lg:-left-7 " />
                             <img src={joint} alt="joint icon" className="w-[14px] lg:w-[45px] h-5 lg:h-[60px] absolute -top-3 lg:-top-10 -right-1 lg:-right-5 "  />
@@ -308,13 +317,13 @@ function LandingPage(){
                         Amplify your Campaign by <br className="hidden lg:block" /> adding <span className="text-[#35FAA0]" >Co-organisers</span>
                     </h6>
 
-                    <p className="mb-12 lg:mb-[133px] text-center text-[#FFFFFF] text-base lg:text-[36px] lg:leading-[70px] tracking-[0.552px] " >
+                    <p className="mb-12 lg:mb-[133px] font-arial text-center text-[#FFFFFF] text-base lg:text-[36px] lg:leading-[70px] tracking-[0.552px] " >
                         You can add  participants as co - organisers  to your <br className="hidden lg:block" /> crowdfunding campaign. Team up with friends 
                         around the <br className="hidden lg:block" /> world to get your campaign amplified, and your mission <br className="hidden lg:block" /> accomplished        
                     </p>
 
                     <div className="mx-auto z-[10] relative bg-white  py-[5px] lg:py-3 px-3 lg:px-[33px] rounded-full w-[175px] lg:w-[350px] h-[35px] lg:h-[64px] -rotate-[0.203deg] flex items-center justify-center " >
-                        <span className="text-base lg:text-[28px] font-bold leading-[50px] lg:leading-[121px] tracking-[0.088px] " >Add Co-organisers</span>
+                        <span className="text-base lg:text-[28px] font-arial font-bold leading-[50px] lg:leading-[121px] tracking-[0.088px] " >Add Co-organisers</span>
                     </div>
 
                     <div className="mb-[42px] lg:mb-[78px] mx-auto relative -top-[26px] lg:-top-14 -right-1 lg:-right-2  bg-[#35FAA0] py-[5px] lg:py-3 px-3 lg:px-[33px] rounded-full w-[175px] lg:w-[350px] h-[30px] lg:h-[64px] -rotate-[0.203deg] flex items-center justify-center " >
@@ -340,7 +349,7 @@ function LandingPage(){
                     <h6 className="mb-5 lg:mb-[89px] text-center text-white text-xl lg:text-[74px] font-black leading-8 lg:leading-[113px] tracking-[0.08px] " >
                         Withdraw Donations into <br className="hidden lg:block" /> your <span className="text-[#35FAA0]" >Crypto Wallet</span> or Directly <br className="hidden lg:block" /> into your <span className="text-[#35FAA0]" >Bank Account</span>
                     </h6>
-                    <p className="mb-[50px] lg:mb-[100px] text-center text-lg lg:text-[36px] text-white lg:leading-[70px]  " >
+                    <p className="mb-[50px] lg:mb-[100px] font-arial text-center text-lg lg:text-[36px] text-white lg:leading-[70px]  " >
                         All funds generated from your donation can be withdrawn <br className="hidden lg:block" /> immediately into your USDT cryptocurrency wallet or can be <br className="hidden lg:block" />
                          sent directly into your local bank account
                     </p>
@@ -358,13 +367,13 @@ function LandingPage(){
                 </h6>
                 
                 {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
-                <div className="mb-[54px] lg:mb-[174px] mx-[5%] 2xl:mx-[8%]  flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-1 ">
+                <div className="mb-[54px] lg:mb-[174px] font-arial mx-[5%] 2xl:mx-[8%]  flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-1 ">
                     <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)] bg-[#F9F9F9] px-6 lg:px-7 py-4 lg:py-5 flex flex-col gap-1 lg:gap-[25px] items-center text-center  ">
                         <img src={oneicon} alt="" className="w-8 lg:w-[50px] absolute -right-3 lg:-right-7 -top-3 lg:-top-5" />
                         <p className="text-lg lg:text-[33px] leading-9 lg:leading-[45px] font-bold " >
                             You
                         </p>
-                        <p className="text-[16px] lg:text-[27px] text-[#525252] " > 
+                        <p className="text-[16px] lg:text-[26px] text-[#525252] " > 
                             Start a crowdfunding campaign for yourself to meet up necessary need, or to fulfil a mission of yours. 
                         </p>
                     </div>
@@ -390,17 +399,17 @@ function LandingPage(){
                     </div>
                 </div>
 
-                <button className="mb-[15px] lg:mb-[33px] px-[26px] lg:px-[52px] hover:px-[72.5px] py-[10.4px] lg:py-[23.4px] transition-all duration-500 font-bold bg-black text-white rounded lg:rounded-[10px] text-base lg:text-3xl mx-auto block " >
+                <button className="mb-[15px] lg:mb-[33px] font-arial px-[26px] lg:px-[52px] hover:px-[72.5px] py-[10.4px] lg:py-[23.4px] transition-all duration-500 font-bold bg-black text-white rounded lg:rounded-[10px] text-base lg:text-3xl mx-auto block " >
                     Start a crowdfund
                 </button>
 
-                <p className="mb-10 lg:mb-[123px] text-base lg:text-[33px] text-center lg:leading-[55px] " >
+                <p className="mb-10 lg:mb-[123px] font-arial text-base lg:text-[33px] text-center lg:leading-[55px] " >
                     Its totally free to get started
                 </p>
 
                 {/* <hr className="mx-[5%] 2xl:mx-[8%]" /> */}
                 
-                <footer className="lg:mx-[5%] 2xl:mx-[8%] border-t-[#D8D8D8] lg:border-t-[#525252] border-t-[1px] py-[29px] ">
+                <footer className="lg:mx-[5%] 2xl:mx-[8%] font-arial border-t-[#D8D8D8] lg:border-t-[#525252] border-t-[1px] py-[29px] ">
                     <nav className="flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-[46px] " >
                         <div className="order-2 lg:order-1 flex flex-col lg:flex-row items-center gap-5 lg:gap-7 xl:gap-[46px] ">
                             <Link to = '/termsofuse' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >

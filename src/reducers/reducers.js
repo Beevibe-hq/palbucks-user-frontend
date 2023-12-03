@@ -151,6 +151,28 @@ const otpVerified = (state = false, action) => {
     }
 }
 
+const notificationsData = (state = [], action) => {
+    switch(action.type){
+        case "loadNotifications":
+            return action.payload
+        case "addNotification":
+            return [...state,action.payload]
+        default:
+            return state;
+    }
+}
+
+const newNotificationsAlert = (state = false, action) => {
+    switch(action.type){
+        case "addNotification":
+            return true
+        case "removeNotificationAlert":
+            return false
+        default:
+            return state;
+    }
+}
+
 
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
@@ -164,7 +186,9 @@ const allreducers = combineReducers({
     onnotificationspage,
     signupInfo,
     authReducer,
-    otpVerified
+    otpVerified,
+    notificationsData,
+    newNotificationsAlert
 })
 
 export default allreducers;
