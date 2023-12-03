@@ -90,7 +90,7 @@ function Navbar(props){
                 {/* <img src={notificationsicon} alt="notifications icon" className = ' cursor-pointer hidden md:block w-[21px]' 
                 onClick={notificationspage}
                 /> */}
-                <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false }  />
+                <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false } />
                 <div className=" flex gap-2 items-center">
                     <img 
                         src={userInfo.dp ? userInfo.dp : profilePlaceholder}

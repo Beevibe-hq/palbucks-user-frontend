@@ -172,3 +172,25 @@ export const editEventData = (data) => {
         payload:data
     }
 }
+
+// Load notifications
+export const loadNotifications = (data) => {
+    return{
+        type:'loadNotifications',
+        payload:data
+    }
+}
+
+// Add notification
+export const addNotification = (data) => {
+    return{
+        type:'addNotification',
+        payload:data
+    }
+}
+
+export const removeNotificationAlert = () => {
+    return{
+        type:'removeNotificationAlert'
+    }
+}

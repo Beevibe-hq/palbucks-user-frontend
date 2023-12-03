@@ -58,7 +58,9 @@ function Sidebar(){
         console.log('starting Log out')
         
         // Close the sidebar
-        managesidebar()
+        if (isMobile) {
+            managesidebar()
+        }        
         try {
             const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
                 method: 'POST',

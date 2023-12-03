@@ -4,7 +4,7 @@ import withdrawalicon from "../../images/landingpage/withdrawalicon.svg"
 
 const Landingnotification = (props) => {
   return (
-    <div className="w-fit">
+    <div className="w-fit font-arial ">
         <div className='max-w-full phones:w-[300px] lg:w-[800px] bg-[#F9F9F9] rounded lg:rounded-[10px] py-[10px] lg:py-[30px] px-3 lg:px-[38px] relative z-10 ' >
             <img src= {profileimage7} alt="profile pic" className='absolute -top-5 lg:-top-12 -left-5 lg:-left-12 rounded-full w-[40px] lg:w-[90px] ' />
             <div className="flex gap-[10px] lg:gap-6 items-center ">
