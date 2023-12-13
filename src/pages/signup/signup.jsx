@@ -115,7 +115,7 @@ const Signup = () => {
         
 
   return (
-    <div className="font-merriweather relative" >
+    <div className="font-arial relative" >
         <SignUpHeader />
 
         <div className ="w-24 md:w-[400px] md:h-[800px] absolute -z-10 -right-[0px] top-[100px] md:-top-[200px] ">
@@ -134,11 +134,12 @@ const Signup = () => {
         </div> */}
     
         <main className="pt-[25px] lg:pt-[70px] pb-5 md:pb-10 mt-[70px] md:mt-[90px] lg:mt-[103px] " >
-            <h2 className="mb-9 md:mb-[59px] text-center text-2xl md:text-[48px] font-black md:leading-[73px] tracking-[0.069px] " >
+              <h2 className="mb-9 md:mb-[59px] text-center text-2xl md:text-[48px] font-black md:leading-[73px] tracking-[0.069px]
+                font-merriweather" >
                 Sign up
             </h2>
 
-            <form action="" className=" block mx-auto w-fit max-w-[270px] phones:max-w-[300px] md:max-w-none  " >
+            <form action="" className=" block mx-auto w-fit max-w-[270px] phones:max-w-[300px] md:max-w-none font-arial  " >
                 <div className="mb-10 md:mb-[56px] flex flex-col ">
                     <input 
                         type="email" 
@@ -147,7 +148,7 @@ const Signup = () => {
                         placeholder="Email"                    
                         required
                         onChange={handleInputChange}
-                        className={`mb-5 md:mb-[43px] w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] text-[#888888] text-base md:text-lg bg-[#F9F9F9] border-2 md:border-[3px] 
+                        className={`mb-5 md:mb-[43px] w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] placeholder-[#888888] text-base md:text-xl bg-[#F9F9F9] border-2 md:border-[3px] 
                         ${validateInput.email && validateInput.email !== 'correct' ? 
                         'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
                         'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
@@ -155,7 +156,7 @@ const Signup = () => {
                     /> 
                     {
                         validateInput.email && validateInput.email !== 'correct' ? (
-                            <p className="-mt-3 md:-mt-[23px] mb-5 md:mb-[43px] text-[#FD6150] text-lg md:text-2xl font-merriweather">
+                            <p className="-mt-3 md:-mt-[23px] mb-5 md:mb-[43px] text-[#FD6150] text-sm md:text-lg font-merriweather">
                                 {validateInput.email}
                             </p>
                         ) : null
@@ -166,7 +167,7 @@ const Signup = () => {
 
                     <button 
                         className="min-w-[208px] md:min-w-[228px] mt-[35px] md:mt-[70px] px-5 hover:px-[56px] py-[10px] md:py-[20.1px] transition-all duration-500 
-                        font-bold bg-black text-white rounded md:rounded-[8px] text-lg md:text-[28px] mx-auto flex items-center justify-center  " 
+                        font-bold bg-black text-white rounded md:rounded-[8px] text-lg md:text-[28px] mx-auto flex items-center justify-center font-arial  " 
                         onClick={ handleSignup }
                         
                     >
@@ -183,29 +184,29 @@ const Signup = () => {
                 </p>
                 <div className="flex flex-col gap-[18px] md:gap-[36px] items-center mb-[37px] ">
                     <button 
-                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-4 md:px-7 flex items-center border-[1.5px] md:border-[3px] border-black
                             rounded md:rounded-[8.5px] `} 
                     >
                         <img src={googleicon} alt="Google icon"  className="w-7 md:w-[50px] " />
-                        <span className="text-xl md:text-3xl font-bold  " >
+                        <span className="text-lg md:text-3xl font-bold mx-auto " >
                             Sign up with Google
                         </span>
                     </button>
                     <button 
-                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-4 md:px-7 flex items-center border-[1.5px] md:border-[3px] border-black
                             rounded md:rounded-[8.5px] `} 
                     >
                         <img src={facebookicon} alt="Facebook icon"  className="w-7 md:w-[50px] " />
-                        <span className="text-xl md:text-3xl font-bold  " >
+                        <span className="text-lg md:text-3xl font-bold  mx-auto " >
                             Sign up with Facebook
                         </span>
                     </button>
                     <button 
-                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-4 md:px-7 flex items-center border-[1.5px] md:border-[3px] border-black
                             rounded md:rounded-[8.5px] `} 
                     >
                         <img src={twittericon} alt="Twitter icon"  className="w-7 md:w-[50px] " />
-                        <span className="text-xl md:text-3xl font-bold  " >
+                        <span className="text-lg md:text-3xl font-bold mx-auto  " >
                             Sign up with Twitter
                         </span>
                     </button>

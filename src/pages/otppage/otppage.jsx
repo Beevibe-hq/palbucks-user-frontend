@@ -92,7 +92,7 @@ const Otppage = () => {
         {
             verified ? 
             (
-                <main className="pt-[200px] md:pt-[250px] mt-[103px]px-3 " >
+                <main className="pt-[200px] md:pt-[250px] mt-[103px]px-3 font-arial " >
                     <div className="mb-9 md:mb-[80px] flex flex-col items-center gap-3 md:gap-[25px] py-5 md:py-[50px] px-7 md:px-[106px] w-full phones:w-[90%] md:w-[800px]
                         shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] mx-auto
                     ">
@@ -117,25 +117,25 @@ const Otppage = () => {
                     </button>
                 </main>
             ) : (
-                <main className="pt-[48px] md:pt-[120px] mt-[103px] px-3 " >
+                <main className="pt-[48px] md:pt-[120px] mt-[103px] px-3 font-arial " >
                     <div className="mb-5 md:mb-[49px] flex items-center justify-center w-fit mx-auto gap-[10px] md:gap-[25px] cursor-pointer " 
                     onClick={ () => navigate('/signup') }
                     >
                         <img src={backarrow} alt="Back arrow" className="w-6 md:w-[36px]" />
-                        <span className="text-base md:text-[30px] font-bold " >Entered a wrong email? Change email</span>
+                        <span className="text-base md:text-[25px] font-bold " >Entered a wrong email? Change email</span>
                     </div>
 
                     <div className="bg-white w-full phones:w-[90%] md:w-[750px] mx-auto flex flex-col gap-[2px] md:gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded md:rounded-[10px] ">                
                         <div className=" pt-[18px] md:pt-[41px] pb-3 md:pb-[21px] px-[20px] ">
-                            <h3 className="text-xl md:text-[35px] font-black leading-4 md:leading-[39px] text-center " >
+                            <h3 className="text-xl md:text-[30px] font-black leading-4 md:leading-[39px] text-center " >
                                 Verify your email
                             </h3>
                         </div>
                         <div className="flex flex-col gap-3 md:gap-[45px] px-3 md:px-6 py-6 md:py-[50px] border-t-[2.5px] md:border-t-[5px] border-[#F9F9F9] items-center ">
-                            <p className="text-base md:text-[30px] font-bold leading-4 md:leading-[39px] text-center " >
+                            <p className="text-base md:text-[25px] font-bold leading-4 md:leading-[39px] text-center " >
                                 Enter the 6 digit code
                             </p>
-                            <p className="mb-2 md:mb-0 text-sm md:text-2xl text-center ">
+                            <p className="mb-2 md:mb-0 text-sm md:text-[22px] text-center ">
                                 {`A 6-digit verification code has been sent to ${signupInfo.email ? signupInfo.email : 'your email'}`}
                             </p>
                             <OtpInput
@@ -167,7 +167,7 @@ const Otppage = () => {
                                 }}
                             />
 
-                            <p className=" text-center text-sm md:text-2xl " >
+                            <p className=" text-center text-sm md:text-xl " >
                                 Your code will be active for 10 minutes
                             </p>                    
                         </div>

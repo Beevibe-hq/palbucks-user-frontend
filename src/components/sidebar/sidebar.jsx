@@ -1,8 +1,8 @@
 import { Link,NavLink, useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
-import palbuckslogo from '../../images/palbucks logo22.png'
-import palbucks from '../../images/palbucks.svg'
+
+import palbucks from '../../images/palbucks2.svg'
 import applogo from '../../images/appLogo.svg'
 import enlargeicon from '../../images/Enlarge icon.svg'
 import closeicon from '../../images/hamburger menu.svg'

@@ -99,7 +99,7 @@ const Completesignup = () => {
       
 
   return (
-    <div className="font-merriweather relative" >
+    <div className="font-arial relative" >
         <SignUpHeader />
           
         <div className ="w-24 md:w-[400px] md:h-[800px] absolute -z-10 -right-[0px] top-[100px] md:-top-[200px] ">
@@ -115,7 +115,7 @@ const Completesignup = () => {
             
             <div className="bg-white w-full phones:w-[98%] md:w-[950px] mx-auto flex flex-col gap-[2.5px] md:gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded md:rounded-[10px] ">                
                 <div className="py-4 md:py-[30px] px-8 md:pl-[50px] md:pr-[30px] ">
-                    <h3 className="text-lg md:text-[35px] font-black md:leading-[39px] " >
+                    <h3 className="text-lg md:text-[30px] font-black md:leading-[39px] " >
                         Continue your signup process...
                     </h3>
                 </div>

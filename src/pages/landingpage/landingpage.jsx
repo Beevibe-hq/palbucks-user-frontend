@@ -139,7 +139,7 @@ function LandingPage(){
                 <h2 className="max-w-[80%] mx-auto mb-5 md:mb-7 lg:mb-[49px] 
                     font-black text-center text-2xl md:text-5xl lg:text-[70px] lg:leading-[86px]
                     tracking-[2.323px] [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] " >
-                    From your wallets to <br className="hidden md:block" /> their hearts
+                    From your wallet to <br className="hidden md:block" /> their hearts
                 </h2>
                 <p className="mb-5 md:mb-7 lg:mb-[60px] text-sm md:text-xl lg:text-[33px] font-merriweather md:font-arial text-center lg:leading-[45px] tracking-[0.5px] " >
                     Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your card or USDT
@@ -227,7 +227,8 @@ function LandingPage(){
                     Featured Crowdfunding Campaign
                 </h3>
 
-                <div className={` ${scrollState.isAtRightEnd ? 'ml-[0] 2xl:ml-[0]' : 'ml-[5%] 2xl:ml-[8%]' }  flex gap-5 lg:gap-[43px] mb-[25px] lg:mb-[35px] overflow-x-auto overflow-y-hidden pr-5 lg:pr-20 `} ref={containerRef} style={{ overflowX: 'hidden' }}>                    
+                <div className={` ${scrollState.isAtRightEnd ? 'ml-[0] 2xl:ml-[0]' : 'ml-[5%] 2xl:ml-[8%]'}  flex gap-5 lg:gap-[43px] mb-[25px] lg:mb-[35px] overflow-x-auto overflow-y-hidden pr-5 lg:pr-20 `}
+                    ref={containerRef} style={{ overflowX: 'hidden' }}>                    
                     <Landingcampaign image={landingcampaignimg3} value="23543" target="100000" />
                     <Landingcampaign image={landingcampaignimg} value="1034" target="1500" />
                     <Landingcampaign image={landingcampaignimg2} value="54223" target="250000" />
@@ -330,9 +331,9 @@ function LandingPage(){
                     </div>
                     
                     {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
-                    <div className="w-fit mx-auto mb-[84px] lg:mb-[301px] flex gap-[47px] lg:gap-[180px]">
+                    <div className="w-fit mx-auto mb-[84px] lg:mb-[301px] flex gap-[47px] lg:gap-[150px] xl:gap-[180px]">
                         <div className="lg:mr-16 flex flex-col items-center gap-[6.12pxy] lg:gap-[23px] " >
-                            <img src={profileimage4} alt="profile pic" className="w-[60px] lg:w-[217px]" />
+                            <img src={profileimage4} alt="profile pic" className="w-[60px] lg:w-[180px] xl:w-[217px]" />
                             <span className="text-base lg:text-[43px] lg:leading-[72px] font-black text-white" >
                                 you
                             </span>
@@ -340,8 +341,8 @@ function LandingPage(){
                         </div>
                         <img src={plus} alt="plus icon" className="w-[24px] lg:w-[90px] h-[55px] lg:h-[206px] " />
                         <div className="flex">
-                            <img src={profileimage5} alt="" className="w-[60px] lg:w-[217px] h-[60px] lg:h-[217px] rounded-full" />
-                            <img src={profileimage6} alt="" className="w-[60px] lg:w-[217px] h-[60px] lg:h-[217px] rounded-full relative -left-4 lg:-left-16 " />
+                            <img src={profileimage5} alt="" className="w-[60px] lg:w-[180px] xl:w-[217px] h-[60px] lg:h-[180px] xl:h-[217px] rounded-full" />
+                            <img src={profileimage6} alt="" className="w-[60px] lg:w-[180px] xl:w-[217px] h-[60px] lg:h-[180px] xl::h-[217px] rounded-full relative -left-4 lg:-left-16 " />
                         </div>
                         
                     </div>
@@ -368,32 +369,38 @@ function LandingPage(){
                 
                 {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
                 <div className="mb-[54px] lg:mb-[174px] font-arial mx-[5%] 2xl:mx-[8%]  flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-1 ">
-                    <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)] bg-[#F9F9F9] px-6 lg:px-7 py-4 lg:py-5 flex flex-col gap-1 lg:gap-[25px] items-center text-center  ">
+                    <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] lg:w-[280px] xl:w-[380px] shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)]
+                     bg-[#F9F9F9] px-6 xl:px-7 py-4 xl:py-5 flex flex-col gap-1 lg:gap-4 xl:gap-[25px]
+                     items-center text-center  ">
                         <img src={oneicon} alt="" className="w-8 lg:w-[50px] absolute -right-3 lg:-right-7 -top-3 lg:-top-5" />
-                        <p className="text-lg lg:text-[33px] leading-9 lg:leading-[45px] font-bold " >
+                        <p className="text-lg lg:text-[25px] xl:text-[33px] leading-9 lg:leading-[45px] font-bold " >
                             You
                         </p>
-                        <p className="text-[16px] lg:text-[26px] text-[#525252] " > 
+                        <p className="text-[16px] lg:text-[18px] xl:text-[26px] text-[#525252] " > 
                             Start a crowdfunding campaign for yourself to meet up necessary need, or to fulfil a mission of yours. 
                         </p>
                     </div>
 
-                    <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)] bg-[#35FAA0] px-6 lg:px-7 py-4 lg:py-5 flex flex-col gap-1 lg:gap-[25px] items-center text-center  ">
+                    <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] lg:w-[270px] xl:w-[380px] 
+                    shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)] bg-[#35FAA0]
+                    px-6 xl:px-7 py-4 xl:py-5 flex flex-col gap-1 lg:gap-4 xl:gap-[25px] items-center text-center  ">
                         <img src={twoicon} alt="" className="w-8 lg:w-[50px] absolute -right-3 lg:-right-7 -top-3 lg:-top-5" />
-                        <p className="text-lg lg:text-[33px] leading-9 lg:leading-[45px] font-bold " >
+                        <p className="text-lg lg:text-[25px] xl:text-[33px] leading-9 lg:leading-[45px] font-bold " >
                             Family & Friends
                         </p>
-                        <p className="text-[16px] lg:text-[27px] text-black " > 
+                        <p className="text-[16px] lg:text-[18px] xl:text-[27px] text-black " > 
                             You can also start a crowdfunding campaign on behalf of a family member or a friend. 
                         </p>
                     </div>
 
-                    <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)] bg-[#F9F9F9] px-6 lg:px-7 py-4 lg:py-5 flex flex-col gap-1 lg:gap-[25px] items-center text-center  ">
+                    <div className="relative rounded-md lg:rounded-lg w-full md:w-[380px] lg:w-[270px] xl:w-[380px] 
+                    shadow-[0px_0px_4.016860485076904px_0px_rgba(0,0,0,0.20)] bg-[#F9F9F9]
+                    px-6 xl:px-7 py-4 xl:py-5 flex flex-col gap-1 lg:gap-4 xl:gap-[25px] items-center text-center  ">
                         <img src={threeicon} alt="" className="w-8 lg:w-[50px] absolute -right-3 lg:-right-7 -top-3 lg:-top-5" />
-                        <p className="text-lg lg:text-[33px] leading-9 lg:leading-[45px] font-bold " >
+                        <p className="text-lg lg:text-[25px] xl:text-[33px] leading-9 lg:leading-[45px] font-bold " >
                             Charity
                         </p>
-                        <p className="text-[16px] lg:text-[27px] text-[#525252] " > 
+                        <p className="text-[16px] lg:text-[18px] xl:text-[27px] text-[#525252] " > 
                             Charity Institutions are allowed to raise funds for different causes or needs that might arise overtime.
                         </p>
                     </div>
@@ -412,16 +419,16 @@ function LandingPage(){
                 <footer className="lg:mx-[5%] 2xl:mx-[8%] font-arial border-t-[#D8D8D8] lg:border-t-[#525252] border-t-[1px] py-[29px] ">
                     <nav className="flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-[46px] " >
                         <div className="order-2 lg:order-1 flex flex-col lg:flex-row items-center gap-5 lg:gap-7 xl:gap-[46px] ">
-                            <Link to = '/termsofuse' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
+                            <Link to = '/termsofuse' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
                                 <span>Terms of use</span>
                             </Link>
-                            <Link to = '/privacypolicy' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
+                            <Link to = '/privacypolicy' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
                                 <span>Privacy Policy</span>
                             </Link>
-                            <Link to = '/helpcenter' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
+                            <Link to = '/helpcenter' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
                                 <span>Help Center</span>
                             </Link>
-                            <Link to = '/communityguidelines' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
+                            <Link to = '/communityguidelines' className="text-[#525252] text-base lg:text-lg py-[5px] px-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
                                 <span>Community Guidelines</span>
                             </Link>
                         </div>
