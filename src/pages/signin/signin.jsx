@@ -110,7 +110,7 @@ const Signin = () => {
     };
 
   return (
-    <div className="font-merriweather relative" >
+    <div className="font-arial relative" >
         <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-[60px] lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
             <div className=" flex gap-[10px] md:gap-[18px] items-center " >
                 <img src={applogo} alt="Palbucks logo" className="w-5 md:w-[33.4px]" />
@@ -137,7 +137,7 @@ const Signin = () => {
         </div>
 
         <main className="pt-[25px] lg:pt-[70px] md:pb-10 mt-[70px] md:mt-[90px] lg:mt-[103px] " >
-            <h2 className="mb-9 md:mb-[59px] text-center text-2xl md:text-[48px] font-black md:leading-[73px] tracking-[0.069px] " >
+            <h2 className="mb-9 md:mb-[59px] font-merriweather text-center text-2xl md:text-[48px] font-black md:leading-[73px] tracking-[0.069px] " >
                 Sign in
             </h2>
 
@@ -150,7 +150,7 @@ const Signin = () => {
                         placeholder="Email"                    
                         required
                         onChange={handleInputChange}
-                        className={`mb-5 md:mb-[43px] w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] text-[#888888] text-base md:text-lg bg-[#F9F9F9] border-2 md:border-[3px] 
+                        className={`mb-5 md:mb-[43px] w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] placeholder-[#888888] text-base md:text-xl bg-[#F9F9F9] border-2 md:border-[3px] 
                         ${validateInput.email && validateInput.email !== 'correct' ? 
                         'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
                         'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
@@ -158,7 +158,7 @@ const Signin = () => {
                     /> 
                     {
                         validateInput.email && validateInput.email !== 'correct' ? (
-                            <p className="-mt-3 md:-mt-[23px] mb-5 md:mb-[43px] text-[#FD6150] text-lg md:text-2xl font-merriweather">
+                            <p className="-mt-3 md:-mt-[23px] mb-5 md:mb-[43px] text-[#FD6150] text-sm md:text-lg font-merriweather">
                                 {validateInput.email}
                             </p>
                         ) : null
@@ -182,29 +182,29 @@ const Signin = () => {
                 </p>
                 <div className="flex flex-col gap-[18px] md:gap-[36px] items-center mb-[37px] ">
                     <button 
-                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-4 md:px-7 flex items-center border-[1.5px] md:border-[3px] border-black
                             rounded md:rounded-[8.5px] `} 
                     >
                         <img src={googleicon} alt="Google icon"  className="w-7 md:w-[50px] " />
-                        <span className="text-xl md:text-3xl font-bold  " >
+                        <span className="text-lg md:text-3xl font-bold mx-auto " >
                             Sign in with Google
                         </span>
                     </button>
                     <button 
-                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-4 md:px-7 flex items-center border-[1.5px] md:border-[3px] border-black
                             rounded md:rounded-[8.5px] `} 
                     >
                         <img src={facebookicon} alt="Facebook icon"  className="w-7 md:w-[50px] " />
-                        <span className="text-xl md:text-3xl font-bold  " >
+                        <span className="text-lg md:text-3xl font-bold mx-auto " >
                             Sign in with Facebook
                         </span>
                     </button>
                     <button 
-                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-1 md:px-7 flex gap-2 md:gap-7 items-center justify-center border-[1.5px] md:border-[3px] border-black
+                        className= {`w-full md:w-[600px] md:h-[80px] py-[10px] md:py-5 px-4 md:px-7 flex items-center border-[1.5px] md:border-[3px] border-black
                             rounded md:rounded-[8.5px] `} 
                     >
                         <img src={twittericon} alt="Twitter icon"  className="w-7 md:w-[50px] " />
-                        <span className="text-xl md:text-3xl font-bold  " >
+                        <span className="text-lg md:text-3xl font-bold mx-auto " >
                             Sign in with Twitter
                         </span>
                     </button>

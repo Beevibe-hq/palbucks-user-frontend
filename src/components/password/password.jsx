@@ -50,7 +50,7 @@ const PasswordInput = (props) => {
               required
               value={password}
               onChange={handleChange}
-              className={`w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] text-[#888888] text-base md:text-lg bg-[#F9F9F9] border-2 md:border-[3px] 
+              className={`w-full md:w-[700px] md:h-[82px] px-3 md:px-[29px] py-[10px] rounded-[6px] placeholder-[#888888] text-base md:text-xl bg-[#F9F9F9] border-2 md:border-[3px] 
               ${validateInput.password && validateInput.password !== 'Strong password' ? 
               'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150] ' : 
               'border-black outline-[#37BCF7] focus:border-[#37BCF7]' } 
@@ -67,14 +67,14 @@ const PasswordInput = (props) => {
         </div>
         {
               validateInput.password && validateInput.password !== 'Strong password' ? (
-                  <p className="-mt-3 md:-mt-0 mb-5 text-[#FD6150] text-lg md:text-2xl font-merriweather">
+                  <p className="-mt-3 md:-mt-0 mb-5 text-[#FD6150] text-sm md:text-lg font-arial">
                       {validateInput.password}
                   </p>
               ) : null
           }
 
         
-        <div className={` ${props.ignorePasswordVerifier ? 'hidden' : 'flex'} font-merriweather flex-col gap-[15px] bg-[#F9F9F9] py-[10px] px-[15px] rounded-md `} >            
+        <div className={` ${props.ignorePasswordVerifier ? 'hidden' : 'flex'} font-arial flex-col gap-[15px] bg-[#F9F9F9] py-[10px] px-[15px] rounded-md `} >            
             <p className='text-sm md:text-lg font-bold '>
               Your password must have:
             </p>

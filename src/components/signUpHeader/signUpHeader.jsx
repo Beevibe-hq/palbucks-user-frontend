@@ -11,7 +11,7 @@ function SignUpHeader() {
                 <img src= {palbucks} alt="palbucks" className="w-[77px] md:w-[138px] h-[14px] md:h-[24px] "  />
             </div>
 
-            <div className="flex items-center gap-[35px] " >
+            <div className="flex items-center gap-[35px] font-arial " >
                 <Link to = '/signin' className="hidden md:flex items-center text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] hover:rounded-[5px] "  >
                     <span>Already have an account?</span>
                 </Link>
