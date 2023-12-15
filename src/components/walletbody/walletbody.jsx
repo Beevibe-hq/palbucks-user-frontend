@@ -34,8 +34,8 @@ function Walletbody(){
     const newActivities = activityData.filter( item => item.time.includes('mins') )
 
     return(
-        <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[31px] lg:pr-[43px] pt-8 md:pt-[37px] pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
-            <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
+        <div className = 'fold:px-2 phones:px-[20px] md:px-3 lg:pl-[31px] lg:pr-[43px] pt-8 md:pt-[37px] pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
+            <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 font-merriweather " >
                 Wallet
             </h1>
             <p className=" text-base md:text-lg mb-7 md:mb-8 " >
@@ -69,12 +69,12 @@ function Walletbody(){
                     <h2 className={` ${ isMobile ? currentMobileDisplay == 'balance' ? '':'hidden' : ''} text-lg md:text-[22px] font-black mb-5 md:mb-[35px] `}>                        
                         Account Balance and Information
                     </h2>
-                    <div className={` ${ isMobile ? currentMobileDisplay == 'balance' ? '':'hidden' : ''} flex flex-col w-full md:w-fit `}>
+                    <div className={` ${ isMobile ? currentMobileDisplay == 'balance' ? '':'hidden' : ''} flex flex-col w-full `}>
                         
-                        <div className="flex flex-col md:flex-row gap-4 lg:gap-7 mb-5 md:mb-12 " >
-                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 lg:gap-4 2xl:min-w-[350px] 
+                        <div className="flex flex-col 2xl:flex-row gap-4 lg:gap-7 mb-5 md:mb-12 w-full " >
+                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 2xl:min-w-[350px] 
                                 bg-white py-3 phones:py-5 md:py-[25px] 2xl:py-[30px] px-[15px] phones:px-[30px] rounded-[10px]
-                                shadow-[0px_0px_16px_rgba(0,0,0,0.04)] "
+                                shadow-[0px_0px_16px_rgba(0,0,0,0.04)] w-full "
                             >
                                 <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >
@@ -83,7 +83,7 @@ function Walletbody(){
                                     <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+23356 USDT </h4>
                                 </section>
                             </div>
-                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 lg:gap-4 2xl:min-w-[350px] 
+                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 2xl:min-w-[350px] 
                                 bg-white py-3 phones:py-5 md:py-[25px] 2xl:py-[30px] px-[15px] phones:px-[30px] rounded-[10px]
                                 shadow-[0px_0px_16px_rgba(0,0,0,0.04)] "
                             >
@@ -175,7 +175,7 @@ function Walletbody(){
                                 
                 <div className={` ${ isMobile ? currentMobileDisplay == 'activities' ? 'block':'hidden' : ''} `}>
                     {/* <Activities user10 = {user10} user12 = {user12} user8 = {user8} header = {'wallet'} /> */}
-                    <section className="font-merriweather md:flex-1 md:w-1/3 2xl:min-w-[370px] lg:max-w-[370px] md:bg-white h-fit rounded-[10px] " >
+                    <section className="font-arial md:flex-1 md:min-w-[320px] 2xl:min-w-[370px] lg:min-w-[350px] lg:max-w-[370px] md:bg-white h-fit rounded-[10px] " >
                         <div className={`py-5 md:py-[35px] md:px-[23px] md:border-b-[0.5px] md:border-[#D8D8D8]`}>                
                             <h3 className="text-lg md:text-[22px] font-black mb-[5px] md:mb-3 " >Activites</h3>
                             <p className="text-sm md:text-base" >See  your donation activites for your campaign. </p>

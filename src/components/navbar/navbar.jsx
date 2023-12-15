@@ -76,7 +76,7 @@ function Navbar(props){
     return(
         <div className = {`py-[10px] px-2 phones:px-5  md:px-10 h-[90px] md:h-[100px] fixed top-0 right-0
         ${props.sidebar === false ? 'left-0' : sidebarslid ? 'left-0 brkpoint:left-[100px]' : 'left-0 brkpoint:left-[250px] lg:left-[280px] xl:left-[320px]' } z-30 bg-[#F9F9F9] 
-        shadow-[0px_0px_16px_rgba(0,0,0,0.04)] flex items-center justify-between xphones:justify-between 
+        shadow-[0px_0px_16px_rgba(0,0,0,0.04)] flex items-center justify-between font-arial
         
         `} >
             
@@ -103,7 +103,7 @@ function Navbar(props){
                         alt="Palbucks logo" 
                         className = "block w-[19px] phones:w-[22px] md:hidden" 
                     />
-                    <h2 className = 'hidden md:block text-lg font-black font-merriweather'>{userInfo.first_name} {userInfo.last_name}</h2>
+                    <h2 className = 'hidden md:block text-base font-black'>{userInfo.first_name} {userInfo.last_name}</h2>
                 </div>
                 {/* <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] cursor-pointer'  /> */}
                 <Moreicons active = {moreiconsactive} onClick = {handlemoreicons} />

@@ -21,7 +21,7 @@ function Transactions(props){
             />
             <div className="flex justify-between gap-1 w-full">
                 <div className="flex flex-col gap-0 " >
-                    <h5 className="inline-block text-sm md:text-base font-black mb-[10px]" >
+                    <h5 className="inline-block text-sm md:text-base font-black mb-[3px] md:mb-[10px] max-w-[170px] md:max-w-none" >
                     {
                     transactiontype === 'credit' ? 'Funding into wallet' :
                     transactiontype === 'debit' ? 'Withdrawal into external wallet' :
