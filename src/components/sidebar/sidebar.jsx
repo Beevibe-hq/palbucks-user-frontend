@@ -11,6 +11,7 @@ import activehomeicon from '../../images/homeicon.svg'
 import crowdfundicon from '../../images/crowdfundicon.svg'
 import crowdfundicon2 from '../../images/crowdfundicon2.svg'
 import walleticon from '../../images/walleticon2.svg'
+import walleticon2 from '../../images/wallet/walleticon.svg'
 import settingsicon from '../../images/settingsicon.svg'
 import settingsicon2 from '../../images/settingsicon2.svg'
 import activesettingsicon from '../../images/settings1.svg'
@@ -102,7 +103,7 @@ function Sidebar(){
     return(
         <div className = {` ${ isMobile ? sidebaropen ? 'left-0 w-[80%] minitablet:w-[60%] ' : '-left-full' : sidebarslid ? 'w-[100px] flex flex-col items-center' : `md:block w-[90%] minitablet:w-[60%]
             brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]` }  h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0  py-16 md:py-[35px]
-            bg-white flex-shrink-0 transition-all duration-500 ease-in-out `} >
+            bg-white flex-shrink-0 transition-all duration-500 ease-in-out font-arial `} >
             
             <div className = 'mb-[60px] lg:mb-0'>
                 
@@ -119,7 +120,7 @@ function Sidebar(){
                 
             </div>
 
-            <nav className={` ${sidebarslid ? '':'' } w-full brkpoint:mt-[50px] brkpoint:py-10 flex flex-col gap-0 font-merriweather `}>                
+            <nav className={` ${sidebarslid ? '':'' } w-full brkpoint:mt-[50px] brkpoint:py-10 flex flex-col gap-0 `}>                
                 
                 <NavLink to = '/home'
                     className={` ${activepage == 'home' ? 'text-[#FFFFFF] font-black bg-[#37BCF7] ' : 'hover:bg-[#37BCF71A] text-[#525252] font-medium'} } `}
@@ -132,7 +133,7 @@ function Sidebar(){
                     <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'home' ? activehomeicon : homeicon } alt="homepage icon" className = 'w-[20px]' />
-                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Home</h2>
+                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-base leading-4 ${activepage == 'home' ? 'font-black':'font-normal' } `}>Home</h2>
                         </div>
                         <img src={activepage == 'home' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
 
@@ -149,7 +150,7 @@ function Sidebar(){
                     <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'organisecrowdfund' ? crowdfundicon : crowdfundicon2 } alt="organise crowdfund icon" className = 'w-[20px]' />
-                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Organise Crowdfund</h2>
+                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-base leading-4 ${activepage == 'organisecrowdfund' ? 'font-semibold':'font-normal' } `}>Organise Crowdfund</h2>
                         </div>
                         <img src={activepage == 'organisecrowdfund' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
 
@@ -165,8 +166,8 @@ function Sidebar(){
                  >                       
                     <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
-                            <img src={ activepage == 'wallet' ? walleticon : walleticon } alt="wallet icon" className = 'w-[20px]' />
-                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Wallet</h2>
+                            <img src={ activepage == 'wallet' ? walleticon2 : walleticon } alt="wallet icon" className = 'w-[20px]' />
+                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-base leading-4 ${activepage == 'wallet' ? 'font-semibold':'font-normal' } `}>Wallet</h2>
                         </div>
                         <img src={activepage == 'wallet' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
 
@@ -183,7 +184,7 @@ function Sidebar(){
                     <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'settings' ? settingsicon : settingsicon2 } alt="settings crowdfund icon" className = 'w-[20px]' />
-                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-[16px] minitablet:text-base leading-4 xl:text-base`}>Settings & Privacy</h2>
+                            <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-base leading-4 ${activepage == 'settings' ? 'font-semibold':'font-normal' } `}>Settings & Privacy</h2>
                         </div>
                         <img src={activepage == 'settings' ? arrowwhite : arrowright} alt="right arrow" className='w-[7px] h-[12px]' />
 
@@ -197,7 +198,7 @@ function Sidebar(){
                 onClick={handleLogout}
             >
                 <img src={logouticon} alt="Logout icon" className="w-[24px]" />
-                <h3 className={` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } font-merriweather `} >Logout</h3>
+                <h3 className={` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } `} >Logout</h3>
             </div>
             
         </div>

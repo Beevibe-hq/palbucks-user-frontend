@@ -233,8 +233,8 @@ function Organisecrowdfundbody(){
         
     return(
         
-        <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-merriweather '>
-            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-8 md:mb-[15px]' >
+        <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-arial '>
+            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-8 md:mb-[15px] font-merriweather ' >
                 Setup your crowdfunding campaign
             </h1>
             <p className="hidden md:block text-lg tracking-[0.8px] mb-14 " >Organising your campaign take less than 2 minutes</p>
@@ -358,7 +358,7 @@ function Organisecrowdfundbody(){
                                         cursor:'pointer',
                                         caretColor:'transparent',
                                         paddingRight:'20px',
-                                        paddingLeft:'7px',
+                                        paddingLeft:'-10px',
                                     }),                    
                                 }}
                                 formatOptionLabel={(option) => (
@@ -378,7 +378,7 @@ function Organisecrowdfundbody(){
                             name="description" 
                             id="description" 
                             rows="10" 
-                            className={` mb-[10px] md:mb-5 w-full p-[10px] md:p-5 text-sm md:text-base outline-none border-[1px] border-[#8E8E93] `} 
+                            className={` mb-[10px] md:mb-5 w-full p-[10px] md:p-5 text-sm md:text-base outline-none border-[1px] border-[#8E8E93] focus:border-[#37BCF7] focus:border-2 `} 
                             placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." 
                             onChange={handleInputChange}
                             maxLength= "1500"
@@ -394,7 +394,7 @@ function Organisecrowdfundbody(){
 
 
                 <div className="bg-white mb-6 md:mb-[59px] " >
-                    <div className="bg-[#37BCF7] rounded-t md:rounded-t-none py-5 px-[15px] md:pl-[30px] md:pr-[10px] flex gap-2 md:gap-5 items-center text-white  " >
+                    <div className="bg-[#37BCF7] rounded-t md:rounded-t-none py-[15px] md:py-5 px-[15px] md:pl-[30px] md:pr-[10px] flex gap-2 md:gap-5 items-center text-white  " >
                         <img src={infoicon2} alt="info icon" className="w-4 h-4 md:w-6 md:h-6"  />
                         <h3 className="text-sm md:text-[18px] leading-[20px] tracking-[0.5px] font-black" >
                             {
