@@ -23,7 +23,7 @@ function Settings(){
     },[])
 
     return(
-        <div className='font-merriweather bg-[#F9F9F9] min-h-full overflow-y-auto max-h-[100vh]'>
+        <div className='font-arial bg-[#F9F9F9] min-h-full overflow-y-auto max-h-[100vh]'>
             <Sidebar />
             <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />   

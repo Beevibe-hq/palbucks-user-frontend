@@ -19,7 +19,7 @@ function Changepassword(){
         <div>
                 <h3 className = "text-base md:text-xl font-bold mb-7 md:mb-8 " >Change Your Password</h3>
 
-                <div className = " rounded-[5px] w-full md:w-[90%] lg:w-[80%] xl:w-[75%] bg-white " >
+                <div className = " rounded-[5px] w-full md:w-[90%] lg:w-full xl:w-[75%] bg-white " >
                     <div className = "flex justify-between items-center p-[15px] md:py-5 md:px-7 cursor-pointer " onClick = {managepasswordbody} >
                         <h3 className = "text-sm md:text-lg font-bold" >
                             Password 
@@ -41,7 +41,7 @@ function Changepassword(){
                                     id="currentpassword" 
                                     placeholder = "What is your current password?" 
                                     className = {`w-full md:w-[370px] h-[46px] border-[0.5px] border-[#DDDDDD] 
-                                    py-2 px-[10px] md:px-5 outline-0 text-sm md:text-base rounded `}
+                                    py-2 px-[10px] md:px-5 outline-0 text-sm md:text-base rounded focus:border-[#2CA9F2] focus:border-2 `}
                                  />
                                 <label 
                                     htmlFor="currentpassword" 
@@ -58,7 +58,7 @@ function Changepassword(){
                                         id="newpassword" 
                                         placeholder = "What is your new password?" 
                                         className = {`w-[100%] h-[46px] border-[0.5px] border-[#DDDDDD] 
-                                        py-2 px-[10px] md:px-5 rounded text-sm md:text-base outline-0 `} 
+                                        py-2 px-[10px] md:px-5 rounded text-sm md:text-base outline-0 focus:border-[#2CA9F2] focus:border-2 `} 
                                     />
                                 </section>
 
@@ -69,13 +69,13 @@ function Changepassword(){
                                         id="newpassword" 
                                         placeholder = "Repeat your new password?" 
                                         className = {`w-[100%] h-[46px] border-[0.5px] border-[#DDDDDD] 
-                                        py-2 px-[10px] md:px-5 rounded text-sm md:text-base outline-0 `}     
+                                        py-2 px-[10px] md:px-5 rounded text-sm md:text-base outline-0 focus:border-[#2CA9F2] focus:border-2 `}     
                                     />
                                 </section>
                             </div>
 
                             <button 
-                                className = {`bg-[#2CA9F2] min-w-[102px] md:min-w-[160px] w-fit hover:bg-blue-500 h-[42px] text-white rounded-[5px] md:rounded-[12px] px-[11px] md:px-[15px] py-1 md:py-[5px] 
+                                className = {`bg-[#2CA9F2] min-w-[102px] md:min-w-[160px] w-fit hover:bg-blue-500 h-9 md:h-[42px] text-white rounded-[5px] md:rounded-[12px] px-[11px] md:px-[15px] py-[2px] md:py-[5px] 
                                 font-black text-sm md:text-lg leading-7 `} 
                             >
                                 Change password

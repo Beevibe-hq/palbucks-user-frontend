@@ -52,10 +52,10 @@ function Helpcenter(){
             <Sidebar />
             <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isTablet && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />
-                <div className = 'fold:px-2 phones:px-4 lg:pl-[22px] lg:pr-[35px] pt-8 md:pt-[46px] pb-5 lg:pb-[30px] mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+                <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[22px] lg:pr-[35px] pt-8 md:pt-[46px] pb-5 lg:pb-[30px] mt-[90px] md:mt-[100px] font-arial w-full h-full '>
                     
                     <img src={backarrow} alt="backarrow" className="mb-[22px] md:mb-10 w-[25px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
+                    <h1 className="font-black font-merriweather text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
                         Hi there, how can we help you?
                     </h1>
                     <p className=" text-base md:text-lg mb-7 md:mb-8 " >
@@ -63,10 +63,10 @@ function Helpcenter(){
                     </p>
 
                     <div className="flex w-[96%] xl:w-[96%] mb-14 md:mb-10 gap-0 ">
-                        <input type="search" className=" w-full h-[30px] phones:h-[40px] xl:h-[44px]
-                        text-sm md:text-base pl-10 md:pl-12 lg:pl-14 text-[#7A7575] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(47%)] md:bg-[left_calc(2%)_top_calc(45%)] xl:bg-[left_calc(2%)_top_calc(48%)]
-                        bg-no-repeat rounded-l-3xl shadow-[0px_0px_16px_rgba(0,0,0,0.04)] md:shadow-none font-merriweather font-normal outline-2 outline-[#37BCF7]
-                        focus:caret-[#2CA9F2] "
+                        <input type="search" className=" w-full xl:w-[80%] max-w-[950px] h-[30px] phones:h-[40px] xl:h-[44px]
+                        text-sm md:text-base pl-10 md:pl-12 lg:pl-14 placeholder-[#7A7575] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(47%)] md:bg-[left_calc(2%)_top_calc(45%)] xl:bg-[left_calc(2%)_top_calc(48%)]
+                        bg-no-repeat rounded-l-3xl shadow-[0px_0px_16px_rgba(0,0,0,0.04)] md:shadow-none font-normal outline-2 outline-[#37BCF7]
+                        focus:caret-[#2CA9F2] focus:border-[#37BCF7] focus:border-2 "
                         placeholder= {smallMobile ? 'Search Help':'Search the Palbucks Help Center'} />
                         <div className="bg-[#37BCF7] text-white flex items-center justify-center w-[90px] lg:w-[110px] xl:w-[120px] h-[30px] phones:h-[40px] xl:h-[44px]
                         rounded-r-3xl text-sm md:text-lg font-black cursor-pointer " >

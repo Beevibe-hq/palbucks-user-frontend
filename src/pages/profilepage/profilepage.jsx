@@ -78,22 +78,22 @@ const DisplayProfile = ({goback, setDisplay}) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
     return(
-        <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[19px] lg:pr-[27px] pt-5 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+        <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[19px] lg:pr-[27px] pt-5 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
                     
             <img src={backarrow} alt="backarrow" className="mb-6 md:mb-10 w-[22px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />            
-            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-2 md:mb-4' >
+            <h1 className = 'font-black font-merriweather text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-2 md:mb-4' >
                 Profile
             </h1>
             <p className="text-sm md:text-[18px] mb-8 " >
                 Change your profile photo, cover photo, bio and more
             </p>
 
-            <div className="bg-white p-[10px] md:p-5 w-full relative mb-10 md:mb-[70px] " >
-                <img src={userInfo.background_image ? userInfo.background_image : campaignimage} alt="campaign" className=" rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] " />
+            <div className="bg-white p-[10px] md:p-5 w-full xl:w-[80%] relative mb-10 md:mb-[70px] " >
+                <img src={userInfo.background_image ? userInfo.background_image : campaignimage} alt="campaign" className=" rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] object-cover " />
                 <img 
                     src={userInfo.dp ? userInfo.dp : profilePlaceholder}
                     alt="user avatar" 
-                    className="relative bottom-9 md:bottom-12 left-2 max-w-full min-w-[55px] w-[9%] rounded-full inline-block z-10 " 
+                    className="relative bottom-9 lg:bottom-12 left-2 max-w-full min-w-[55px] w-[9%] rounded-full inline-block z-10 " 
                 />
                 <button 
                     className="hidden md:block mb-4 text-[16px] font-black text-white bg-[#37BCF7] py-[5px] px-[15px] rounded-[10px] 
@@ -103,7 +103,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                     Edit profile
                 </button>
 
-                <h1 className=" font-black text-base md:text-[24px] mb-1 md:mb-2 " >
+                <h1 className=" font-black text-base md:text-[24px] mb-1 md:mb-2 -mt-5 md:-mt-0 " >
                     {userInfo.first_name ? userInfo.first_name + ' ' + userInfo.last_name : 'Daniel Alba'}
                 </h1>
                 <p className="text-[#8E8E93] mb-3 md:mb-5 text-sm md:text-[18px] flex items-center " >
@@ -119,7 +119,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                         {userInfo.location ? userInfo.location : 'Lagos, Nigeria'}
                     </span>
                 </p>
-                <p className="mb-5 md:mb-0 text-sm md:text-[18px]" >
+                <p className="mb-5 md:mb-0 text-sm leading-6 md:text-[18px] md:leading-[30px] " >
                     {
                         userInfo.bio ? userInfo.bio :`Hi there! i am Daniel and i work with WHO to make the world a better place. 
                         I am here basically to raise more funds for the development of the next hybrid child. #HYBRIDCHILDREN`
@@ -133,7 +133,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                 </button>
             </div>
             
-            <div className="bg-white w-full md:w-[80%] mx-auto rounded " >
+            <div className="bg-white w-full xl:w-[80%] rounded " >
                 
                 <div className="p-[15px] md:py-[25px] border-b-[2px] border-b-[#d1d1d5] ">
                     <h1 className="text-base md:text-[22px] text-center font-black " >My Social Links</h1>
@@ -264,8 +264,8 @@ const EditProfile = ({goback}) => {
     }
 
     return(
-        <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[19px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
-            <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-2 md:mb-4' >
+        <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[19px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
+            <h1 className = 'font-black font-merriweather text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-2 md:mb-4' >
                 Edit your Profile
             </h1>
             <p className="text-sm md:text-[18px] mb-8 " >
@@ -283,11 +283,11 @@ const EditProfile = ({goback}) => {
                 />
             }
 
-            <div className="w-full relative mb-[70px]">
+            <div className="w-full relative xl:w-[80%] mb-[70px]">
                 
                 <div className="relative">
                     <label htmlFor="background_image">
-                        <img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] " />
+                        <div className="w-fit bg-black "><img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] object-cover" /></div>
                         
                     </label>
                     <label htmlFor="background_image">
@@ -314,7 +314,7 @@ const EditProfile = ({goback}) => {
                 </div>
             </div>
 
-            <div className="bg-white mb-6 md:mb-[59px] " >                
+            <div className="bg-white mb-6 md:mb-[59px] xl:w-[80%] " >                
                 <div className="bg-[#37BCF7] rounded-t md:rounded-t-none py-5 px-[15px] md:pl-[30px] md:pr-[10px] flex gap-2 md:gap-5 items-center text-white  " >
                     <img src={infoicon2} alt="info icon" className="w-4 h-4 md:w-6 md:h-6"  />                    
                     <h3 className="text-sm md:text-[18px] leading-[20px] tracking-[0.5px] font-black" >
@@ -348,12 +348,14 @@ const EditProfile = ({goback}) => {
                         }
                         onChange = {handleInputChange}
                         className = {`w-full md:w-[70%] max-w-[894px] md:h-[56px] rounded-[4px] border-[1px] border-[#D8D8D8] 
-                        py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `} 
+                        py-3 px-[10px] md:px-5 text-sm md:text-base outline-0
+                        focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2]
+                        `} 
                     />
                 </div>
             </div>
 
-            <div className="bg-white mb-6 md:mb-[59px] " >                            
+            <div className="bg-white mb-6 md:mb-[59px] xl:w-[80%] " >                            
                 <div 
                     id="bio" 
                     className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
@@ -383,12 +385,12 @@ const EditProfile = ({goback}) => {
                         }
                         rows="7"
                         className = {`w-full rounded border-[1px] border-[#D8D8D8] 
-                        py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `} 
+                        py-3 px-[10px] md:px-5 text-sm md:text-base outline-0 focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2] `} 
                     />
                 </div>
             </div>
 
-            <div className="bg-white mb-6 md:mb-[59px] " >
+            <div className="bg-white mb-6 md:mb-[59px] xl:w-[80%] " >
                 <div 
                     id="location" 
                     className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
@@ -414,7 +416,7 @@ const EditProfile = ({goback}) => {
                 </div>
             </div>
 
-            <div className="bg-white mb-[47px] md:mb-[59px] " >                            
+            <div className="bg-white mb-[47px] md:mb-[59px] xl:w-[80%] " >                            
                 <div 
                     id="socialLinks" 
                     className="  p-[15px] md:py-[25px] md:px-[30px] flex justify-between border-b-2 border-[#c2bfbf] items-center cursor-pointer "
@@ -449,7 +451,7 @@ const EditProfile = ({goback}) => {
                             }
                             placeholder="Enter your facebook link here"
                             className = {`w-full md:w-[70%] max-w-[894px] md:h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
-                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `}
+                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0 focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2] `}
                         />
                     </div>
                     <div className="flex flex-col gap-[10px] md:gap-5">
@@ -471,7 +473,7 @@ const EditProfile = ({goback}) => {
                             }
                             placeholder="Enter your twitter link here"
                             className = {` w-full md:w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
-                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `}
+                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0 focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2] `}
                         />
                     </div>
                     <div className="flex flex-col gap-[10px] md:gap-5">
@@ -492,26 +494,29 @@ const EditProfile = ({goback}) => {
                             }                            
                             placeholder="Enter your instagram link here"
                             className = {`w-full md:w-[70%] max-w-[894px] h-14 rounded-[4px] border-[1px] border-[#D8D8D8]
-                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0  `}
+                            py-3 px-[10px] md:px-5 text-sm md:text-base outline-0 focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2] `}
                         />
                     </div>
                 </div>
             </div>
 
-            <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto py-[10px] px-5 w-fit min-w-full phones:min-w-[300px] md:w-1/2 max-w-[400px] md:max-w-[460px] md:h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block " 
-                onClick = {handleProfileUpdate}
-            >
-                {/* {isLoading ? <Loadingspinner /> : 'Save profile changes'} */}
-                <div className={` ${isLoading ? 'block' : 'hidden' } `}>
-                        <Loadingspinner width = '28px' height = '28px' />
-                </div>
-                <span className={` ${isLoading ? 'hidden' : 'block' } `} >
-                    Save profile changes
-                </span>
-            </button>
-            <button className="text-[#37BCF7] mb-3 md:mb-4 mx-auto py-[10px] px-5 min-w-full w-fit phones:min-w-[300px] md:w-1/2 max-w-[400px] md:max-w-[460px] md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >
-                Cancel changes
-            </button>
+            <div className="w-full xl:w-[80%] ">
+                
+                <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto py-[10px] px-5 w-fit min-w-full phones:min-w-[300px] md:w-1/2 max-w-[400px] md:max-w-[460px] md:h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block "
+                    onClick = {handleProfileUpdate}
+                >
+                    {/* {isLoading ? <Loadingspinner /> : 'Save profile changes'} */}
+                    <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                            <Loadingspinner width = '28px' height = '28px' />
+                    </div>
+                    <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                        Save profile changes
+                    </span>
+                </button>
+                <button className="text-[#37BCF7] mb-3 md:mb-4 mx-auto py-[10px] px-5 min-w-full w-fit phones:min-w-[300px] md:w-1/2 max-w-[400px] md:max-w-[460px] md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >
+                    Cancel changes
+                </button>
+            </div>
 
 
 

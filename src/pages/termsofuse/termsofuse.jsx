@@ -37,10 +37,10 @@ function Termsofuse(){
             <Sidebar />
             <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />
-                <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+                <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
                     
                     <img src={backarrow} alt="backarrow" className="mb-[22px] md:mb-10 w-[25px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
+                    <h1 className="font-black font-merriweather text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
                         Learn About our Terms of Service
                     </h1>
                     <p className=" text-base md:text-lg mb-14 " >
@@ -59,7 +59,7 @@ function Termsofuse(){
                     </p>
                     <p className="text-sm md:text-lg mb-5 tracking-[0.1px] " >
                         Subject to these Terms of Service, as amended from time to time (“Terms of Service”), Beevibe Technologies 
-                        Limited. provides the Palbucks platform to You (user) through its website at <span className="font-black">www.Palbucks.com</span> and the 
+                        Limited. provides the Palbucks platform to You (user) through its website at <span className="font-black">www.Palbucks.co</span> and the 
                         Palbucks Community and related services (collectively, with the Platform, including any new features and 
                         applications, the “Services”). If You are located anywhere in the world you are contracting with Beevibe 
                         Technologies Ltd. (Nigeria). Unless specifically indicated otherwise, for purposes of the following Terms 

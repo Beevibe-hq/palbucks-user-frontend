@@ -42,21 +42,21 @@ function Walletbody(){
                 Check your wallet balance, connect to your external wallet, withdraw  your funds
             </p>
 
-            <div className="flex md:hidden mb-7 " >
+            <div className="flex lg:hidden md:gap-3 mb-7 " >
                 <button className={`py-[7px] phones:py-[10px] px-[12px] phones:px-[15px] 
-                    ${currentMobileDisplay == 'balance' ? 'text-white bg-black' : 'text-[#8E8E93]'} rounded-[5px]  text-sm `}
+                    ${currentMobileDisplay == 'balance' ? 'text-white bg-black' : 'text-[#8E8E93]'} rounded-[5px]  text-sm md:text-base `}
                     onClick = {() => setCurrentMobileView('balance') }
                 >
                     Balance
                 </button>
                 <button className={`py-[7px] phones:py-[10px] px-[12px] phones:px-[15px] 
-                    ${currentMobileDisplay == 'transactions' ? 'text-white bg-black' : 'text-[#8E8E93]'} rounded-[5px]  text-sm `}
+                    ${currentMobileDisplay == 'transactions' ? 'text-white bg-black' : 'text-[#8E8E93]'} rounded-[5px]  text-sm md:text-base `}
                     onClick = {() => setCurrentMobileView('transactions') }
                 >
                     Transactions
                 </button>
                 <button className={`py-[7px] phones:py-[10px] px-[12px] phones:px-[15px] 
-                    ${currentMobileDisplay == 'activities' ? 'text-white bg-black' : 'text-[#8E8E93]'} rounded-[5px]  text-sm `}
+                    ${currentMobileDisplay == 'activities' ? 'text-white bg-black' : 'text-[#8E8E93]'} rounded-[5px]  text-sm md:text-base `}
                     onClick = {() => setCurrentMobileView('activities') }
                 >
                     Activities
@@ -114,7 +114,7 @@ function Walletbody(){
                             text-lg md:text-[22px] font-black mb-7 md:4 " >
                             Latest Transactions
                         </h4>
-                        <button className="flex float-right bg-[#F9F9F9] text-xs py-1 pl-[6px] md:pl-2 pr-3 md:pr-4 
+                        <button className="flex float-right bg-[#ffffff] text-xs py-1 pl-[6px] md:pl-2 pr-3 md:pr-4 
                             items-center gap-6 rounded-l-lg rounded-r-[20px] md:rounded-r-3xl " >
                             <span>This month</span>
                             <img src={arrowdown} alt="" className="relative bottom-[2px] w-[12px] md:w-[15px] h-[7px] md:h-[9px] " />

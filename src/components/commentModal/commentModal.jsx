@@ -52,13 +52,13 @@ function CommentModal({displayModals, setDisplayModals, eventid,setCommentData})
                 </div>
                 <div className="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
                 
-                <div className={`w-[265px] phones:w-[350px] md:w-[681px] 2xl:w-[881px] md:min-h-[300px] h-fit py-6 px-2 phones:px-4 md:p-9 bg-white rounded-md md:rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] font-merriweather `} >
+                <div className={`w-[280px] phones:w-[350px] md:w-[681px] 2xl:w-[881px] md:min-h-[300px] h-fit py-6 px-2 phones:px-4 md:p-9 bg-white rounded-md md:rounded-[10px] shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] font-arial `} >
                     <div className={`${displaySuccessfulComment ? 'hidden' : 'block md:pt-5 ' }`}>
-                        <div className="mb-4 md:mb-8 flex justify-end gap-3 phones:gap-8 md:gap-14 xl:gap-28 items-center md:px-4 xl:px-8 ">
-                            <h1 className="text-center text-sm md:text-[28px] font-bold " >
+                        <div className="mb-4 md:mb-8 relative flex justify-center items-center md:px-4 xl:px-8 ">
+                            <h1 className="text-center text-xs phones:text-sm md:text-2xl font-bold relative right-5 phones:right-0 " >
                                 Write in your comment
                             </h1>
-                            <button className="text-[#37BCF7] text-sm md:text-2xl font-bold "
+                            <button className="text-[#37BCF7] text-xs phones:text-sm md:text-base lg:text-xl font-bold absolute right-10 phones:right-1 "
                                 onClick={() => {
                                     setDisplayModals((prev) => ({...prev, commentModal: false}))                                    
                                 }
@@ -69,8 +69,8 @@ function CommentModal({displayModals, setDisplayModals, eventid,setCommentData})
                         <textarea
                             name="comment"
                             id="comment"
-                            className="mb-2 md:mb-4 border-[1px] border-[#8E8E93] h-[140px] md:h-[280px] w-full rounded resize-none
-                                p-2 md:p-5 outline-none text-[#888888] text-sm md:text-lg tracking-[0.8px] "
+                            className="mb-2 md:mb-4 border-[1px] border-[#8E8E93] h-[100px] phones:h-[140px] md:h-[280px] fold:w-[90%] phones:w-full rounded resize-none
+                                p-2 md:p-5 outline-none placeholder-[#888888] text-xs phones:text-sm md:text-base tracking-[0.8px] focus:border-2 focus:border-[#37BCF7] "
                             placeholder="Write in words of support to this campaign"
                             onChange={(e) => setComment(e.target.value)}
                         >
@@ -87,7 +87,7 @@ function CommentModal({displayModals, setDisplayModals, eventid,setCommentData})
                             <div className={` ${isLoading ? 'block' : 'hidden' } `}>
                                 <Loadingspinner width = '28px' height = '28px' />
                             </div>
-                            <span className={` ${isLoading ? 'hidden' : 'block' } text-[#FFFFFF] text-sm md:text-lg font-bold  `} >
+                            <span className={` ${isLoading ? 'hidden' : 'block' } text-[#FFFFFF] text-xs phones:text-sm md:text-lg font-bold  `} >
                                 Send comment
                             </span>
                         </button>
