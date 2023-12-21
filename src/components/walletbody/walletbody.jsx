@@ -21,7 +21,7 @@ function Walletbody(){
 
     const [currentMobileDisplay, setCurrentMobileView] = useState('balance')
     const isMobile = useMediaQuery({
-        query: '(max-width: 768px)'
+        query: '(max-width: 940px)'
     })
 
     const [expanded, setExpanded] = useState(false);

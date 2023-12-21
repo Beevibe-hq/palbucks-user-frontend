@@ -145,32 +145,72 @@ function Detailedevent(props){
         //setliked(!liked)
     }
     
+
+
+    // Display modals
+    const [displayModals, setDisplayModals] = useState({
+        commentModal: false,
+        updateModal: false,
+        donateModal: false
+    })
+    
+    const [eventDetailsDisplay, setEventDetailsDisplay] = useState({
+        readMore: false,
+        displayButton:false
+    })
+    const [commentsActivitiesView, setCommentsActivitiesView] = useState('comments')
     
     useEffect(()=>{            
-            window.scrollTo(0,0)
-            setliked(eventdetails.is_liked)
-                        
-            //Fetch the comments for this event from the backend
-            const getComments = async() => {
-                const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${eventid}/comments/`,{
-                    headers:{
-                        Authorization: `Bearer ${access_token}`
-                    }
-                })
-                const data = await response.json()
-                
-                if(response.ok){
-                    // Sort data in descending order of timestamp before storing
-                    data.sort((a,b) => {
-                        return new Date(b.timestamp) - new Date(a.timestamp)
-                    })
-                    setCommentData(data)
-                }else{
-                    alert('Failed to get comments')
+        window.scrollTo(0,0)
+        setliked(eventdetails.is_liked)
+                    
+        //Fetch the comments for this event from the backend
+        const getComments = async() => {
+            const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${eventid}/comments/`,{
+                headers:{
+                    Authorization: `Bearer ${access_token}`
                 }
+            })
+            const data = await response.json()
+            
+            if(response.ok){
+                // Sort data in descending order of timestamp before storing
+                data.sort((a,b) => {
+                    return new Date(b.timestamp) - new Date(a.timestamp)
+                })
+                setCommentData(data)
+            }else{
+                alert('Failed to get comments')
             }
-            getComments()
-    },[])
+        }
+        getComments()
+    
+        // Check for number of characters in eventdetails.description
+        if (eventdetails.description) {
+            let chars = eventdetails.description.length;
+            if (chars <= 250) {
+                setEventDetailsDisplay((prevDisplay) => ({
+                    ...prevDisplay,
+                    displayButton:false,
+                }))
+            } else {
+                setEventDetailsDisplay((prevDisplay) => ({
+                    ...prevDisplay,
+                    displayButton:true,
+                }) )
+            }
+        } else {
+            setEventDetailsDisplay((prevDisplay) => ({
+                    ...prevDisplay,
+                    displayButton:true,
+            }) )
+        }
+
+    }, [])
+    
+    useEffect(() => {
+        console.log(eventDetailsDisplay)
+    },[eventDetailsDisplay])
 
     //Comment data
     const [commentData, setCommentData] = useState([])
@@ -187,7 +227,7 @@ function Detailedevent(props){
     })
 
     const isMobile = useMediaQuery({
-        query: '(max-width: 768px)'
+        query: '(max-width: 940px)'
     })
 
     const end_date = new Date(eventdetails.end_date);
@@ -200,15 +240,6 @@ function Detailedevent(props){
     // Determines number of comments to show
     const [commentsNumber, setCommentsNumber] = useState(Math.ceil(commentData.length/2))
 
-    // Display modals
-    const [displayModals, setDisplayModals] = useState({
-        commentModal: false,
-        updateModal: false,
-        donateModal: false
-    })
-    
-    const [readMore, setReadMore] = useState(false)
-    const [commentsActivitiesView, setCommentsActivitiesView] = useState('comments')
     
     // Loop through the options array, check if the category matches the option and return the image
     const categoryImg = options.filter(item => item.value === eventdetails.tags).map(item => item.icon) 
@@ -220,7 +251,7 @@ function Detailedevent(props){
                 <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isTablet && sidebaropen ? 'blur-sm' : '' }
                 `} >
                     <Navbar />
-                    <div className = 'fold:px-1 phones:px-3 md:px-6 lg:px-10 pt-6 md:pt-8 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full'>
+                    <div className = 'fold:px-1 phones:px-3 md:px-6 lg:px-10 pt-6 md:pt-8 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-arial '>
                 
                         <img src={backarrow} alt="back arrow" className = {`w-[22px] md:w-8 mb-5 md:mb-[34px] cursor-pointer`}
                         onClick = {
@@ -237,10 +268,10 @@ function Detailedevent(props){
                             <span className="font-semibold text-sm md:text-base " >{`${eventdetails.end_date ? daysLeft : eventdetails.days } days remaining`}</span>
                         </div>
                 
-                        <div className="font-merriweather w-full flex flex-col md:flex-row gap-3 md:justify-between 2xl:gap-11 2xl:justify-start ">
-                            <div className="w-full md:w-[60%] ">
+                        <div className="w-full flex flex-col lg:flex-row gap-3 lg:justify-between 2xl:gap-11 2xl:justify-start ">
+                            <div className="w-full lg:w-[60%] ">
                                 <div className =" relative w-full shrink-0 mb-4 md:mb-8 " >
-                                    <img src={eventdetails.banner} alt="Fund event" className = {`w-full h-[200px] xphones:h-[215px] md:h-[350px] rounded-sm md:rounded-xl `} />
+                                    <img src={eventdetails.banner} alt="Fund event" className = {`w-full h-[200px] xphones:h-[215px] sm:h-[350px] rounded-[5px] md:rounded-xl object-cover `} />
                                     <div className = 'absolute top-4 left-5 bg-white flex gap-1 md:gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
                                         <img src={categoryImg.length !== 0 ? categoryImg : options.slice(-1)[0].icon } alt="Event category icon" className = 'w-3 md:w-[17px] md:h-[17px] ' />
                                         <span className = 'text-xs md:text-base font-black' >
@@ -348,7 +379,7 @@ function Detailedevent(props){
                                     <h1 className = "font-black text-base md:text-[22px] mb-3 md:mb-4 md:leading-7 " >
                                         {eventdetails.title? eventdetails.title : 'This is the title of the main user’s crowdfunding'}
                                     </h1>
-                                    <p className ={` font-medium md:font-normal mb-1 md:mb-2 text-sm md:text-lg ${readMore ? 'line-clamp-4 md:line-clamp-[7]': ''} `} >
+                                    <p className ={` font-medium md:font-normal mb-1 md:mb-2 text-sm md:text-lg ${eventDetailsDisplay.readMore ? 'line-clamp-4 md:line-clamp-[4]': ''} `} >
                                         {
                                             eventdetails.description ? eventdetails.description :
                                             `This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
@@ -358,23 +389,29 @@ function Detailedevent(props){
                                         }
                                     </p>
                                     <button
-                                        className="text-sm md:text-base mb-4 md:mb-5 border-b-2 border-black"
+                                        className={`text-sm md:text-base mb-4 md:mb-5 border-b-2 border-black ${eventDetailsDisplay.displayButton ? 'block':'hidden'} `}
                                         onClick={() => {
-                                            setReadMore(!readMore)
+                                            
+                                            setEventDetailsDisplay((prevDisplay) => ({
+                                                ...prevDisplay,
+                                                readMore: !prevDisplay.readMore
+                                            }))
+
+
                                         }}    
                                         >
                                         {
-                                            readMore ? 'Read more' : 'Read less'
+                                            eventDetailsDisplay.readMore ? 'Read more' : 'Read less'
                                         }
                                     </button>
-                                    <button className = "mb-4 flex items-center justify-center gap-[3px] h-[28px] rounded-[9px] md:p-3 text-base font-semibold " >
-                                        <img src = {locateicon} alt = 'location icon' className = "w-[16px] relative bottom-[2px] " />
+                                    <button className = "mb-4 flex items-center justify-center gap-[3px] h-[28px] rounded-[9px] md:py-3 text-base font-semibold " >
+                                        <img src = {locateicon} alt = 'location icon' className = "w-[16px] " />
                                         <span>{eventdetails.location ? eventdetails.location : 'NIGERIA' }</span>
                                     </button>
                                     <hr className = "border-[1px] border-[#dcdbdb] mb-5 md:mb-8 " />
                                     <Campaignorganizers co_organisers={eventdetails.co_organisers} organiser={eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage={eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder} />
                                     
-                                    <div className= {`flex  md:hidden mt-[35px]`} >
+                                    <div className= {`flex  lg:hidden mt-[35px]`} >
                                         <button className={` ${commentsActivitiesView == 'comments' ? 'bg-[#000000] rounded-[5px] text-white  text-sm  ' :
                                             'text-[#8E8E93]'} py-[10px] px-[15px] font-black `}
                                             onClick = {()=>setCommentsActivitiesView('comments')}
@@ -390,7 +427,7 @@ function Detailedevent(props){
                                     </div>
                                     
                                     <div className={` ${isMobile && commentsActivitiesView !== 'comments' ? 'hidden' : 'block'} `} >
-                                        <button className={`mt-[25px] md:mt-10 items-center flex justify-center gap-2 py-[3px] md:py-[5px] px-3 md:px-8 
+                                        <button className={`mt-[25px] md:mt-10 items-center flex justify-center gap-2 py-[3px] md:py-[5px] px-3 
                                             rounded-[20px] bg-[#FFFFFF]
                                             border-[2px] border-[#37BCF7] shadow-[0px_0px_15.786517143249512px_0px_rgba(0,0,0,0.04)]
                                         `}
@@ -461,7 +498,7 @@ function Detailedevent(props){
                                     </div>
                                 </div>                                
                             </div>
-                            <div className="hidden md:block" >
+                            <div className="hidden lg:block" >
                                 <Activities
                                     header={eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 'personalCampaign' : 'campaign'} 
                                     target_price = {eventdetails.target_price} 
