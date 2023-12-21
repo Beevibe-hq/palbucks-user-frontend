@@ -44,10 +44,10 @@ function Howitworks(){
             <Sidebar />
             <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />
-                <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+                <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
                     
                     <img src={backarrow} alt="backarrow" className="mb-[22px] md:mb-10 w-[25px] md:w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
+                    <h1 className="font-black font-merriweather text-[22px] md:text-[32px] mb-[5px] md:mb-4 " >
                         How does Palbucks crowdfunding work?
                     </h1>                    
                     <p className=" text-base md:text-lg mb-14 md:mb-16 " >

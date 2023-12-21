@@ -8,7 +8,7 @@ function Policyheads(props){
                 <div className="h-full w-5 bg-[#37BCF7] rounded-[10px] " >
                 </div>
                 <div className="w-[404px] m-[15px]" >
-                    <h3 className="text-[#000000] font-black text-[40px] " >
+                    <h3 className="text-[#000000] font-black font-merriweather text-[40px] " >
                         {props.title}
                     </h3>
                 </div>

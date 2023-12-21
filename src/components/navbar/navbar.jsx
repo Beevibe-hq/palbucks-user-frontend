@@ -52,9 +52,12 @@ function Navbar(props){
         moreiconsactive ? setmoreiconsactive(false) : setmoreiconsactive(true)
      }
 
-     /* const displaymorepages(){
-        
-     } */
+    const [onDonorPage, setOnDonorPage] = useState(false)
+    useEffect(() => {
+        if(props.onDonorPage){
+            setOnDonorPage(true)
+        }
+    },[])
 
     useEffect(()=>{
 
@@ -83,7 +86,7 @@ function Navbar(props){
             <div className = 'flex gap-[15px] max-w-[72%] phones:max-w-[75%] xphones:max-w-fit '>
                 <img src={menuicon} alt="menu icon" className = 'block brkpoint:hidden w-[20px] phones:w-[24px]'
                     onClick = {managesidebar} />
-                <Searchbar />
+                <Searchbar onDonorPage = {props.onDonorPage} />
             </div>
 
             <div className = 'flex items-center gap-3 xphones:gap-[15px] md:gap-4 lg:gap-8'>

@@ -227,7 +227,7 @@ function Detailedevent(props){
     })
 
     const isMobile = useMediaQuery({
-        query: '(max-width: 940px)'
+        query: '(max-width: 1280px)'
     })
 
     const end_date = new Date(eventdetails.end_date);
@@ -268,8 +268,8 @@ function Detailedevent(props){
                             <span className="font-semibold text-sm md:text-base " >{`${eventdetails.end_date ? daysLeft : eventdetails.days } days remaining`}</span>
                         </div>
                 
-                        <div className="w-full flex flex-col lg:flex-row gap-3 lg:justify-between 2xl:gap-11 2xl:justify-start ">
-                            <div className="w-full lg:w-[60%] ">
+                        <div className="w-full flex flex-col xl:flex-row gap-3 xl:justify-between 2xl:gap-11 2xl:justify-start ">
+                            <div className="w-full xl:w-[60%] ">
                                 <div className =" relative w-full shrink-0 mb-4 md:mb-8 " >
                                     <img src={eventdetails.banner} alt="Fund event" className = {`w-full h-[200px] xphones:h-[215px] sm:h-[350px] rounded-[5px] md:rounded-xl object-cover `} />
                                     <div className = 'absolute top-4 left-5 bg-white flex gap-1 md:gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
@@ -379,7 +379,7 @@ function Detailedevent(props){
                                     <h1 className = "font-black text-base md:text-[22px] mb-3 md:mb-4 md:leading-7 " >
                                         {eventdetails.title? eventdetails.title : 'This is the title of the main user’s crowdfunding'}
                                     </h1>
-                                    <p className ={` font-medium md:font-normal mb-1 md:mb-2 text-sm md:text-lg ${eventDetailsDisplay.readMore ? 'line-clamp-4 md:line-clamp-[4]': ''} `} >
+                                    <p className ={` font-medium md:font-normal mb-1 md:mb-2 text-sm md:text-lg ${eventDetailsDisplay.readMore ? 'line-clamp-3 md:line-clamp-[3] lg:line-clamp-4': ''} `} >
                                         {
                                             eventdetails.description ? eventdetails.description :
                                             `This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
@@ -411,7 +411,7 @@ function Detailedevent(props){
                                     <hr className = "border-[1px] border-[#dcdbdb] mb-5 md:mb-8 " />
                                     <Campaignorganizers co_organisers={eventdetails.co_organisers} organiser={eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage={eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder} />
                                     
-                                    <div className= {`flex  lg:hidden mt-[35px]`} >
+                                    <div className= {`flex  xl:hidden mt-[35px]`} >
                                         <button className={` ${commentsActivitiesView == 'comments' ? 'bg-[#000000] rounded-[5px] text-white  text-sm  ' :
                                             'text-[#8E8E93]'} py-[10px] px-[15px] font-black `}
                                             onClick = {()=>setCommentsActivitiesView('comments')}
@@ -498,7 +498,7 @@ function Detailedevent(props){
                                     </div>
                                 </div>                                
                             </div>
-                            <div className="hidden lg:block" >
+                            <div className="hidden xl:block" >
                                 <Activities
                                     header={eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 'personalCampaign' : 'campaign'} 
                                     target_price = {eventdetails.target_price} 

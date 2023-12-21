@@ -91,11 +91,11 @@ export default function Donate() {
     
 
     const navigate = useNavigate()
-    const [pageDisplay, setpageDisplay] = useState('donationDetails')
+    const [pageDisplay, setpageDisplay] = useState('donationSuccessful')
 
     return (
-        <div className='bg-[#F9F9F9] min-h-full font-merriweather ' >
-            <Navbar sidebar = {false} />
+        <div className='bg-[#F9F9F9] min-h-full font-arial ' >
+            <Navbar sidebar = {false} onDonorPage = {true} />
             <div className= {`mt-[90px] md:mt-[100px] py-[46px] fold:px-1 phones:px-4 md:px-10 lg:px-[94px]`} >
                 <div className="mb-[30px] md:mb-[99px] flex gap-[10px] md:gap-6 cursor-pointer justify-center md:justify-start"
                     onClick={
@@ -271,7 +271,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                         </span> campaign
                     </p>
                 </div>
-                <div className="mb-[31px] md:mb-[58px] flex flex-col gap-3 md:gap-5" >
+                <div className="flex flex-col gap-3 md:gap-5" >
                     <label htmlFor="amount" className="text-sm md:text-lg font-bold" >
                         What amount do you wish to donate?
                     </label>
@@ -283,7 +283,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                             min={1}
                             placeholder={selectedCurrency.value == 'usd' ? "Enter your donation (in USD)" : selectedCurrency.value == 'naira' ? "Enter your donation (in Naira)" : "Enter your donation"}
                             className="w-full h-12 md:h-[70px] py-1 md:py-[10px] px-3 md:px-5 border-[1.5px] border-black rounded bg-white
-                            text-[#888888] text-sm md:text-lg tracking-[0.8px] "
+                            placeholder-[#888888] text-sm md:text-lg tracking-[0.8px] focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2] "
                             onChange={handleInputChange}
                         />
                         <Select
@@ -303,23 +303,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                         />
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <label htmlFor="donor" className="mb-3 md:mb-5 text-sm md:text-lg font-bold" >
-                        What is your name? (Leave blank to remain anonymous)
-                    </label>
-                    <input
-                        type="text"
-                        name="donor"
-                        id="donor"
-                        placeholder="Enter your name"
-                        className="mb-3 h-12 md:h-[70px] w-full py-1 md:py-[10px] px-3 md:px-5 border-[1.5px] border-black rounded bg-white
-                        text-[#888888] text-sm md:text-lg tracking-[0.8px] "
-                        onChange={handleInputChange}
-                    />
-                    <p className="text-xs sm:text-sm text-[#525252] tracking-[0.069px] " >
-                        Your name will be shown as a <span className="font-black">donor</span> to this campaign
-                    </p>
-                </div>
+                
             </div>
 
             <button className="mx-auto w-fit min-w-[200px] md:min-w-[280px] block py-[10px] md:py-5 px-[18px] md:px-9 rounded md:rounded-lg bg-[#000000] 
@@ -560,13 +544,13 @@ const DonationSuccessful = () => {
                         </div>
                     </div>
                     <div className="flex justify-center gap-10 " >
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer border-[1px] border-black py-[10px] px-[31px] rounded-[10px] ">
+                        <div className="flex items-center justify-center gap-[17px] cursor-pointer border-[1px] border-black py-[10px] px-[31px] rounded-[10px] md:w-[250px] ">
                             <img src={mailIcon} alt="mail link" className="w-[25px] h-[25px] " />
                             <span className="text-[22px]" >
                                 Send Email
                             </span>
                         </div>
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer border-[1px] border-black py-[10px] px-[31px] rounded-[10px] ">
+                        <div className="flex items-center justify-center gap-[17px] cursor-pointer border-[1px] border-black py-[10px] px-[31px] rounded-[10px] md:w-[250px] ">
                             <img src={copyIcon} alt="copy link" className="w-[25px] h-[25px] " />
                             <span className="text-[22px]" >
                                 Copy link

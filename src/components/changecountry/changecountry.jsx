@@ -17,7 +17,7 @@ function Changecountry(){
     }
 
     return(
-        <div className = " rounded-[5px] w-full md:w-[90%] lg:w-[80%] xl:w-[75%] bg-white " >
+        <div className = " rounded-[5px] w-full md:w-[90%] lg:w-full xl:w-[75%] bg-white " >
             <div className = "flex justify-between items-center p-[15px] md:py-5 md:px-7 cursor-pointer " onClick = {managecountry} >
                 <h3 className = "text-sm md:text-lg font-bold" >
                     Location
@@ -38,10 +38,10 @@ function Changecountry(){
                         placeholder = "Search your country" 
                         className = {`
                             w-[250px] h-[46px] border-[0.5px] border-[#DDDDDD] 
-                            text-sm md:text-base py-2 px-2 md:px-5 outline-0 rounded-lg  `} 
+                            text-sm md:text-base py-2 px-2 md:px-5 outline-0 rounded-lg focus:border-[#2CA9F2] focus:border-2 `} 
                     />
                     <button 
-                        className = {`bg-[#2CA9F2] min-w-[102px] md:min-w-[160px] w-fit hover:bg-blue-500 h-[42px] text-white rounded-[5px] md:rounded-[12px] px-[11px] md:px-[15px] py-1 md:py-[5px] 
+                        className = {`bg-[#2CA9F2] min-w-[102px] md:min-w-[160px] w-fit hover:bg-blue-500 h-9 md:h-[42px] text-white rounded-[5px] md:rounded-[12px] px-[11px] md:px-[15px] py-[2px] md:py-[5px] 
                         font-black text-sm md:text-lg leading-7 `} 
                     >
                         Change location

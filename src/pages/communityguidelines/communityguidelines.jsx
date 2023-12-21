@@ -39,10 +39,10 @@ function CommunityGuidelines(){
             <Sidebar />
             <div className =  {` ${sidebarslid ? 'ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isMobile && sidebaropen ? 'blur-sm' : '' } `} >
                 <Navbar />
-                <div className = 'fold:px-2 phones:px-3 md:px-3 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-merriweather w-full h-full '>
+                <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[25px] lg:pr-[27px] pt-8 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
                     
                     <img src={backarrow} alt="backarrow" className="mb-10 w-[32px] inline-block cursor-pointer "  onClick={goback} />
-                    <h1 className="font-black text-[32px] mb-4 " >Learn About Our Community Guidelines</h1>
+                    <h1 className="font-black font-merriweather text-[32px] mb-4 " >Learn About Our Community Guidelines</h1>
                     <p className=" text-[18px] mb-16 " >The Palbucks community cannot condole any immoral or illicit behaviour</p>
 
                     <h2 className="text-[24px] font-black mb-[15px] " >Palbucks Community Guidelines</h2>
