@@ -22,7 +22,7 @@ function Activities(props) {
     },[])
   
     return (
-        <section className="font-merriweather flex-1 w-1/3 2xl:min-w-[370px] lg:max-w-[370px] bg-white h-fit rounded-[10px] " >
+        <section className="font-arial flex-1 w-1/3 md:min-w-[320px] 2xl:min-w-[370px] lg:min-w-[350px] lg:max-w-[370px] bg-white h-fit rounded-[10px] " >
             {
                 props.header === 'personalCampaign' ?  (
                     <div className={`py-[35px] px-[23px] border-b-[0.5px] border-[#D8D8D8]`}>                

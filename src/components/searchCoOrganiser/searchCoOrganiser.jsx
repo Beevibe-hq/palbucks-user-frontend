@@ -70,7 +70,7 @@ function SearchCoOrganiser({displaySearchCoOrganiser, setdisplaySearchCoOrganise
                                 <input
                                     type="search"
                                     className=" w-[65%] phones:w-[70%] md:w-[420px] h-[30px] xphones:h-[40px] xl:w-[450px] xl:h-[44px] relative right-5 md:right-2
-                                        text-sm xphones:text-base pl-10 md:pl-12 lg:pl-14 placeholder-[#7A7575] bg-[#F9F9F9] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(48%)]
+                                        text-sm xphones:text-base pl-10 md:pl-12 lg:pl-14 placeholder-[#7A7575] bg-[#ecebeb] bg-[length:20px] md:bg-[length:24px] bg-[image:url('./images/search.svg')] bg-[left_calc(5%)_top_calc(48%)]
                                         bg-no-repeat rounded-3xl shadow-[0px_0px_16px_rgba(0,0,0,0.04)] md:shadow-none font-arial font-normal focus:border-2 focus:border-[#37BCF7]
                                         focus:caret-[#2CA9F2] "
                                     placeholder= {isMobile ? 'Search':'Search for Co-organiser(s)'}
