@@ -19,11 +19,20 @@ import Commentnotification from "../../components/notifications/commentnotificat
 import Campaignnotification from "../../components/notifications/campaignnotification/campaignnotification";
 import Requestnotification from "../../components/notifications/requestnotification/requestnotification";
 import Acceptnotification from "../../components/notifications/acceptnotification/acceptnotification";
+import { timeDifference } from "../../components/detailedevent/detailedevent";
 
 function Notificationspage(){
 
     const dispatch = useDispatch()    
     const notificationsData = useSelector(state => state.notificationsData)
+    // console.log(notificationsData)
+    
+    // Convert notificationData timestamp to time ago format
+    notificationsData.forEach((data) => {          
+        data.time = timeDifference(data.timestamp)     
+        console.log(data.time)
+    })
+    
     const newNotificationsAlert = useSelector(state => state.newNotificationsAlert)
 
     const sidebarslid = useSelector(state => state.sidebarslid)
@@ -101,20 +110,17 @@ function Notificationspage(){
                         /*  Map / Display the notifications data with necessary UI, 
                             note: the data will still be filtered into day, week and month
                          */
-                        notificationsData.map((data, i) => {    
-                            if (data !== null) {
-                                return <h1 className="text-xl mb-4 text-[#37BCF7]" key={i} >{data.message}</h1>
-                            }
+                        notificationsData.map((data, i) => {
                             if (data.type == 'like') {
-                                return <Likenotification userdp={data.userdp} username={data.username} time={data.time} />
+                                return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
                             } else if (data.type == 'comment') {
-                                return <Commentnotification userdp={data.userdp} username={data.username} time={data.time} />
-                            }else if (data.type == 'campaign') {
-                                return <Campaignnotification time={data.time} campaignstate={data.campaignstate} />
+                                return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
+                            }else if (data.type == 'milestone') {
+                                return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
                             }else if (data.type == 'request') {
-                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} />
+                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                             }else if (data.type == 'accept') {
-                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} />
+                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                             }
                         })
                     }
@@ -123,8 +129,8 @@ function Notificationspage(){
                         Today
                     </h2>
                     <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
-                        <Likenotification userdp = {useravatar} username = 'Carlos' time = '2 hours ago' />
-                        <Commentnotification userdp = {useravatar3} username = 'Tochi' time = '5 hours ago' />
+                        <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Carlos' time = '2 hours ago' />
+                        <Commentnotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '5 hours ago' />
                         <Campaignnotification time = '12 hours ago' campaignstate = '100%' />
                         <Requestnotification userdp={useravatar2} username='Franca' time = '13 hours ago' />
                     </div>
@@ -133,7 +139,7 @@ function Notificationspage(){
                         This week
                     </h2>
                     <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
-                        <Campaignnotification time = '1 day ago' campaignstate = '50%' />
+                        <Campaignnotification timestamp = '1 day ago' percentage_reached = '50' />
                         <Acceptnotification username = 'Timothy' userdp={useravatar3} time = '2 days ago' />
                     </div>
 
@@ -141,7 +147,7 @@ function Notificationspage(){
                         This month
                     </h2>
                     <div>
-                        <Likenotification userdp = {useravatar2} username = 'Tochi' time = '2 weeks ago' />
+                        <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '2 weeks ago' />
                     </div>
 
 

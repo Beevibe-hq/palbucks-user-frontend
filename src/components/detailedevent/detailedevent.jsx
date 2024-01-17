@@ -209,7 +209,7 @@ function Detailedevent(props){
     }, [])
     
     useEffect(() => {
-        console.log(eventDetailsDisplay)
+        //console.log(eventDetailsDisplay)
     },[eventDetailsDisplay])
 
     //Comment data
@@ -521,44 +521,6 @@ export default Detailedevent
 //This is the component for each comment
 function Comment(props){
     
-    //  Calculate time difference between now and the time the comment was made
-    const timeDifference = (timestamp) => {
-        const now = new Date();
-        const commentTime = new Date(timestamp);
-        const difference = now - commentTime;
-        const seconds = Math.floor(difference / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const weeks = Math.floor(days / 7);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(days / 365);
-
-        if (years > 0) {
-            return `${years} years ago`;
-        }
-        if (months > 0) {
-            return `${months} months ago`;
-        }
-        if (weeks > 0) {
-            return `${weeks} weeks ago`;
-        }        
-        if (days > 0) {
-            return `${days} days ago`;
-        }
-        if (hours > 0) {
-            return `${hours} hours ago`;
-        }
-        if (minutes > 0) {
-            return `${minutes} mins ago`;
-        }
-        if (seconds > 0) {
-            return `${seconds} secs ago`;
-        }
-
-        return "Just now";    
-    }
-
     return(
         <div className="flex items-start gap-3 md:gap-4  " >
             <img src={props.image} alt="user 7 profile" className="w-12 md:w-[60px] rounded-full " />
@@ -577,7 +539,44 @@ function Comment(props){
     )
 }
 
+//  Calculate time difference between now and the time the comment was made
+export  const timeDifference = (timestamp) => {
+    const now = new Date();
+    const commentTime = new Date(timestamp);
+    const difference = now - commentTime;
+    const seconds = Math.floor(difference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
 
+    if (years > 0) {
+        return `${years} years ago`;
+    }
+    if (months > 0) {
+        return `${months} months ago`;
+    }
+    if (weeks > 0) {
+        return `${weeks} weeks ago`;
+    }        
+    if (days > 0) {
+        return `${days} days ago`;
+    }
+    if (hours > 0) {
+        return `${hours} hours ago`;
+    }
+    if (minutes == 1) return "1 min ago";
+    
+    if (minutes > 0) {
+        return `${minutes} mins ago`;
+    }
+    if (seconds > 0) {
+        return `${seconds} secs ago`;
+    }
+    return "Just now";    
+}
 
 //Comments data carrying the necessary detail in each comment
 /* let commentdata = [

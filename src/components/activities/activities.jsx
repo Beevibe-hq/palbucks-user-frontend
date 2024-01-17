@@ -17,8 +17,8 @@ function Activities(props) {
     };
 
     useEffect(()=>{
-        console.log(props.amt_raised)
-        console.log(props.target_price)
+        /* console.log(props.amt_raised)
+        console.log(props.target_price) */
     },[])
   
     return (
