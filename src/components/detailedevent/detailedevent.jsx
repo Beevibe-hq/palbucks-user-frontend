@@ -555,15 +555,25 @@ export  const timeDifference = (timestamp) => {
     if (years > 0) {
         return `${years} years ago`;
     }
+
+    if  (months == 1 ) return '1 month ago'
+
     if (months > 0) {
         return `${months} months ago`;
     }
+
+    if (weeks == 1) return '1 week ago'
+
     if (weeks > 0) {
         return `${weeks} weeks ago`;
     }        
+
     if (days > 0) {
         return `${days} days ago`;
     }
+
+    if (hours == 1) return "1 hour ago"
+
     if (hours > 0) {
         return `${hours} hours ago`;
     }
@@ -572,6 +582,9 @@ export  const timeDifference = (timestamp) => {
     if (minutes > 0) {
         return `${minutes} mins ago`;
     }
+
+    if (seconds == 1) return "1 sec ago"
+
     if (seconds > 0) {
         return `${seconds} secs ago`;
     }

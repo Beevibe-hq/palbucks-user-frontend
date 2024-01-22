@@ -12,8 +12,7 @@ function Commentnotification(props){
                     {props.time}
                 </p>
                 <p className="text-sm md:text-lg" >
-                    <span className="font-black" >Commented</span> on your crowdfunding campaign 
-                    <span className="font-black" >“{props.comment}”</span>
+                    <span className="font-black" >Commented</span> on your crowdfunding campaign <span className="font-black" > “{props.comment}”</span>
                  </p>
 
             </div>

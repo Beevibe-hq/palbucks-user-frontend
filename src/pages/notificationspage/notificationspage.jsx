@@ -25,13 +25,19 @@ function Notificationspage(){
 
     const dispatch = useDispatch()    
     const notificationsData = useSelector(state => state.notificationsData)
-    // console.log(notificationsData)
-    
+    console.log(notificationsData)
+    alert('I d')
     // Convert notificationData timestamp to time ago format
     notificationsData.forEach((data) => {          
         data.time = timeDifference(data.timestamp)     
-        console.log(data.time)
+        //console.log(data.time)
     })
+
+    // Split my notifications data into three groups for display in today, this week and this month
+    let todayNotifications = notificationsData.filter(data => data.time.includes('hour') || data.time.includes('min') || data.time.includes('sec'))
+    let weekNotifications = notificationsData.filter(data => data.time.includes('day'))
+    let monthNotifications = notificationsData.filter(data => data.time.includes('week'))
+    let yearNotifications = notificationsData.filter(data => data.time.includes('month') || data.time.includes('year') )
     
     const newNotificationsAlert = useSelector(state => state.newNotificationsAlert)
 
@@ -49,36 +55,7 @@ function Notificationspage(){
 
     useEffect(()=>{
         dispatch(setnotificationspageactive())
-        window.scrollTo(0, 0)
-        
-        /* // Fetch notifications data from the server
-
-        // Testing configuration here
-        // Configure pusher for notifications and suscribe to the channel
-        var pusher = new Pusher("a6fc775946470e47c0d0", {
-            cluster: "eu",      
-        })        
-
-        // Subscribe to the notifications channel
-        if (userInfo !== null) {
-            var notificationsChannel = pusher.subscribe(userInfo.email)
-        }
-
-
-        // This might still be moved to the app.js page to be used and accessed globally immediately you login
-        notificationsChannel.bind("crowdfund-like", (data) => {
-            setNotificationsData([...notificationsData, data])
-            console.log(data)
-        })
-        notificationsChannel.bind("crowdfund-comment", (data) => {
-            setNotificationsData([...notificationsData, data])
-            console.log(data)
-        })
-        notificationsChannel.bind("milestone", (data) => {
-            setNotificationsData([...notificationsData, data])
-            console.log(data)
-        }) */        
-
+        window.scrollTo(0, 0)    
         return () =>{
             dispatch(setnotificationspageinactive())
         }
@@ -104,13 +81,18 @@ function Notificationspage(){
                     </h1>
                     <p className=" text-base md:text-lg mb-8 " >
                         See notifications about your crowdfunding campaigns
-                    </p>
-
-                    {   
-                        /*  Map / Display the notifications data with necessary UI, 
-                            note: the data will still be filtered into day, week and month
-                         */
-                        notificationsData.map((data, i) => {
+                    </p>                   
+                    
+                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                        Today
+                    </h2>
+                    <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
+                        {/* <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Carlos' time = '2 hours ago' />
+                        <Commentnotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '5 hours ago' />
+                        <Campaignnotification time = '12 hours ago' campaignstate = '100%' />
+                        <Requestnotification userdp={useravatar2} username='Franca' time = '13 hours ago' /> */}
+                        {
+                            todayNotifications.reverse().map((data, i) => {
                             if (data.type == 'like') {
                                 return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
                             } else if (data.type == 'comment') {
@@ -122,32 +104,55 @@ function Notificationspage(){
                             }else if (data.type == 'accept') {
                                 return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                             }
-                        })
-                    }
-                    
-                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
-                        Today
-                    </h2>
-                    <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
-                        <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Carlos' time = '2 hours ago' />
-                        <Commentnotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '5 hours ago' />
-                        <Campaignnotification time = '12 hours ago' campaignstate = '100%' />
-                        <Requestnotification userdp={useravatar2} username='Franca' time = '13 hours ago' />
+                        }) 
+                        }
                     </div>
+
+
 
                     <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
                         This week
                     </h2>
                     <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
-                        <Campaignnotification timestamp = '1 day ago' percentage_reached = '50' />
-                        <Acceptnotification username = 'Timothy' userdp={useravatar3} time = '2 days ago' />
+                        {/* <Campaignnotification timestamp = '1 day ago' percentage_reached = '50' />
+                        <Acceptnotification username = 'Timothy' userdp={useravatar3} time = '2 days ago' /> */}
+                        {
+                           weekNotifications.reverse().map((data, i) => {
+                            if (data.type == 'like') {
+                                return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
+                            } else if (data.type == 'comment') {
+                                return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
+                            }else if (data.type == 'milestone') {
+                                return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
+                            }else if (data.type == 'request') {
+                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
+                            }else if (data.type == 'accept') {
+                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
+                            }
+                        }) 
+                        }
                     </div>
 
                     <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
                         This month
                     </h2>
                     <div>
-                        <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '2 weeks ago' />
+                        {/* <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '2 weeks ago' /> */}
+                        {
+                           monthNotifications.reverse().map((data, i) => {
+                            if (data.type == 'like') {
+                                return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
+                            } else if (data.type == 'comment') {
+                                return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
+                            }else if (data.type == 'milestone') {
+                                return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
+                            }else if (data.type == 'request') {
+                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
+                            }else if (data.type == 'accept') {
+                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
+                            }
+                        }) 
+                        }
                     </div>
 
 
