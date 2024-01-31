@@ -26,7 +26,7 @@ function Notificationspage(){
     const dispatch = useDispatch()    
     const notificationsData = useSelector(state => state.notificationsData)
     console.log(notificationsData)
-    alert('I d')
+    
     // Convert notificationData timestamp to time ago format
     notificationsData.forEach((data) => {          
         data.time = timeDifference(data.timestamp)     

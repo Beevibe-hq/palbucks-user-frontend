@@ -24,6 +24,7 @@ import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { closesidebar, increasesidebar, opensidebar, reducesidebar, setIsAuthenticated, setlinkcolor, setLogoutLoading } from '../../actions/actions'
 import { checkAuthentication } from '../../auth/checkauthentication'
+import { persistor } from '../..'
 
 function Sidebar(){
 
@@ -55,42 +56,33 @@ function Sidebar(){
     })
 
     const handleLogout = async () => {
-        dispatch(setLogoutLoading(true))
-        console.log('starting Log out')
-        
+        dispatch(setLogoutLoading(true));
+        console.log('starting Log out');
+
         // Close the sidebar
         if (isMobile) {
-            managesidebar()
-        }        
+            managesidebar();
+        }
+
         try {
             const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
                 method: 'POST',
-                /* body:JSON.stringify({
-                    "refresh":'ds'
-                }),
-                headers: {
-                    'Content-Type': 'application/json', 
-                }, */
             });
-      
+
             const logoutResponse = await logout.json();
             console.log(logoutResponse);
-        
+
             if (logout.ok) {
-
-                navigate('/signin');
-
                 // Clear all data from localStorage
-                localStorage.clear();            
-                
-                dispatch(setLogoutLoading(false))
-                
-                // check authentication again to logout everything
-                await checkAuthentication(dispatch)
-                //dispatch(setIsAuthenticated(false))
+                await persistor.purge();
 
-                
-                
+                // check authentication again to logout everything
+                await checkAuthentication(dispatch);
+
+                dispatch(setLogoutLoading(false));
+
+                // Navigate to login page
+                navigate('/signin');
             } else {
                 console.error('Logout failed');
             }
@@ -98,6 +90,7 @@ function Sidebar(){
             console.error(error);
         }
     };
+
       
     
     return(

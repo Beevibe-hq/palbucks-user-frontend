@@ -120,8 +120,8 @@ function App() {
 
     return () => {
       // Unsubscribe from Pusher channels when the component unmounts.
-      /* notificationsChannel.unbind_all();
-      pusher.unsubscribe(userInfo.email); */
+      notificationsChannel?.unbind_all();
+      pusher?.unsubscribe(userInfo.email);
     };
   },[isAuthenticated])
 

@@ -16,11 +16,6 @@ function CommentModal({displayModals, setDisplayModals, eventid,setCommentData})
 
     const handleComment = async() => {
         setIsLoading(true)
-        /* setTimeout(() => {
-            setIsLoading(false)
-            setDisplaySuccessfulComment(true)
-        }, 2000) */
-
         const response = await fetch (`${baseUrl}/funding/api/${eventid}/comments/` ,{
             method: 'POST',
             headers: {
@@ -35,7 +30,8 @@ function CommentModal({displayModals, setDisplayModals, eventid,setCommentData})
         console.log(data)        
         if(response.status == 200){
             setDisplaySuccessfulComment(true);            
-            setCommentData((prev) => [data,...prev])
+            setCommentData((prev) => [data, ...prev])
+            setDisplayModals((prev) => ({...prev, commentModal: false}))
         }else{
             alert('Comment failed')
         }        
@@ -91,31 +87,8 @@ function CommentModal({displayModals, setDisplayModals, eventid,setCommentData})
                                 Send comment
                             </span>
                         </button>
-                    </div>
-                    <div className={`${displaySuccessfulComment ? 'flex flex-col justify-center items-center pb-4 md:pb-8 px-5 md:px-10 xl:px-[80px]' : 'hidden'} `}>
-                        <img 
-                            src={successfulCommentIcon} 
-                            alt="comment successful" 
-                            className="w-[84px] md:w-[168px]"
-                        />
-                        <h3 className="mb-2 md:mb-4 text-center font-black text-base md:text-[28px] tracking-[0.069px]" >
-                            Comment sent successfully
-                        </h3>
-                        <p className="mb-3 md:mb-5 text-center text-sm md:text-xl " >
-                            It is always a good habit to always give words of support to those who needs it 
-                        </p>
-                        <button className="py-3 md:py-5 px-4 md:px-9 bg-black rounded-[5px] md:rounded-lg text-base md:text-[28px] font-bold text-white "
-                            onClick={() => {
-                                    setDisplayModals((prev) => ({...prev, commentModal: false}))
-                                    setDisplaySuccessfulComment(false)
-                                }
-                            }
-                        >
-                            Go back to campaign
-                        </button>
-                    </div>
+                    </div>                    
                 </div>
-
 
                 </div>
             </div>
