@@ -103,11 +103,11 @@ function App() {
       }
 
       // Listen for notifications
-      notificationsChannel.bind("crowdfund-like", (data) => {
+      notificationsChannel.bind("like", (data) => {
           dispatch(addNotification(data))
-          console.log(data)
+          console.log(data)          
       })
-      notificationsChannel.bind("crowdfund-comment", (data) => {
+      notificationsChannel.bind("comment", (data) => {
           dispatch(addNotification(data))
           console.log(data)
           
@@ -120,8 +120,8 @@ function App() {
 
     return () => {
       // Unsubscribe from Pusher channels when the component unmounts.
-      /* notificationsChannel.unbind_all();
-      pusher.unsubscribe(userInfo.email); */
+      notificationsChannel?.unbind_all();
+      pusher?.unsubscribe(userInfo.email);
     };
   },[isAuthenticated])
 

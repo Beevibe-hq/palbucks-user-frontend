@@ -10,10 +10,10 @@ function Campaignnotification(props){
                     Palbucks
                 </h4>
                 <p className="mb-[10px] md:mb-[15px] text-[13px] md:text-base  " >
-                    {props.time}
+                    {props.timestamp}
                 </p>
                 <p className="text-sm md:text-lg mb-[10px] md:mb-[15px] " >
-                    Your crowdfunding campaign has reached <span className="font-black" >{props.campaignstate}</span> of its goal.
+                    Your crowdfunding campaign has reached <span className="font-black" >{props.percentage_reached}%</span> of its goal.
                  </p>
                  <button className="border-2 border-[#E61B00] py-[6px] px-[13px] md:px-[15px] rounded-[5px] md:rounded-[10px] text-[#E61B00] text-xs md:text-base font-black " >
                     End campaign

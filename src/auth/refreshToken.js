@@ -4,6 +4,8 @@ import { setIsAuthenticated } from "../actions/actions";
 export const refreshToken = async (dispatch,navigate) => {
     const refresh_token = localStorage.getItem('refresh_token');
 
+    // when refresh token, it logs out even though last fetched access token may still be valid
+
     if (refresh_token) {
         try {
             const newToken = await fetch('https://palbucks-api.onrender.com/auth/token/refresh/', {

@@ -13,6 +13,10 @@ import Draftcampaign from '../draftcampaign/draftcampaign'
 import Endedcampaign from '../endedcampaign/endedcampaign'
 import Emptycampaign from '../emptycampaign/emptycampaign'
 
+import Select from 'react-select'
+import { options } from "../../components/organisecrowdfundbody/organisecrowdfundbody"
+import { useMediaQuery } from 'react-responsive'
+
 function Homebody(){
 
   const userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -22,9 +26,23 @@ function Homebody(){
   
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
-  const crowdfundEvents = useSelector(state => state.crowdfundEvents)
+  
+  // Not working yet
+  const filterOutdatedEvents = (date) => {
+    const now = new Date()
+    const eventDate = new Date(date)
+    const timeDifference = eventDate - now
+    if (Math.sign(timeDifference) !== -1) {
+      return true
+    } else {
+      return false
+    }
+  }
+  const crowdfundEvents = useSelector(state => state.crowdfundEvents.filter(filterOutdatedEvents));
+  console.log(crowdfundEvents)
+  
   const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.username !== null && item.organiser.username == userInfo.username)) //(item => item.organiser.first_name == userInfo.first_name))
-
+  
   const lastScrollPositionRef = useRef(null);
   
   //sets state for the homepage's display
@@ -34,6 +52,20 @@ function Homebody(){
   //sets state for the foryou page's display
   const [forYouView, setforYouView] = useState('all')
 
+
+
+  //custom dropdown indicator for Select tag/component
+  const CustomDropdownIndicator = () => (
+        <img src = {arrowdown} alt = 'down arrow' className="w-[15px] h-[14px] " />
+  )
+
+  const isMobile = useMediaQuery({
+    query:'(max-width:768px)'
+  })
+
+  // Add all to the options array
+  const optionsWithAll = [{ label: 'All', value: 'all' }, ...options]  
+  const [selectedOption, setSelectedOption] = useState('all')
   
   const checkCampaignStatus = (date) => {
     const today = new Date()
@@ -74,7 +106,7 @@ function Homebody(){
       }
         }
   }, [])
-
+  
 
     return(
         <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-arial '>
@@ -115,16 +147,78 @@ function Homebody(){
                 //The others page starts here
                 <>
                   <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-merriweather '>
-                      <button className = {`bg-white fold:w-[118px] phones:w-[120px] md:w-[172px] h-[30px] md:h-[39px] flex items-center  justify-between pr-5 pl-3 
+                      <button className = {`bg-white fold:w-[118px] phones:w-[120px] md:w-[172px] h-[38px] md:h-[39px] flex items-center justify-between pr-5 pl-3 
                       rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
                           <span className ='text-[13px] md:text-base ' >Popular</span>
                           <img src={arrowdown} alt="down arrow icon" />
                       </button>
-                      <button className = {`bg-white fold:w-[90px] phones:w-[109px] md:w-[132px] h-[30px] md:h-[39px] flex items-center  justify-between pr-5 pl-3
+                      {/* <button className = {`bg-white fold:w-[90px] phones:w-[109px] md:w-[132px] h-[30px] md:h-[39px] flex items-center justify-between pr-5 pl-3
                       rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
                           <span className ='text-[13px] md:text-base ' >All</span>
                           <img src={arrowdown} alt="down arrow icon" />
-                      </button>
+                      </button> */}
+                  <div className="bg-white min-w-[90px] phones:min-w-[120px] md:min-w-[150px] h-[30px] md:h-[39px]
+                    rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none">
+                    <Select
+                      options={optionsWithAll}
+                      placeholder="All"
+                      onChange={(e) => { 
+                        setSelectedOption(e.value)
+                      }}
+                      components={{
+                          DropdownIndicator: CustomDropdownIndicator,
+                          IndicatorSeparator : () => null
+                      }}
+                      styles={{
+                          control: (base, state) => ({
+                              ...base,
+                              width:'100%',
+                              height:'100%',
+                              border: state.isFocused ? 0 : 0,
+                              // This line disable the blue border
+                              boxShadow: state.isFocused ? 0 : 0,
+                              "&:hover": {
+                                  border: state.isFocused ? 0 : 0,
+                              },
+                              cursor:'pointer',
+                              caretColor:'transparent',
+                              paddingRight: isMobile ? '12px' : '20px',
+                              paddingLeft:isMobile ? '4px':'12px',
+                              borderTopLeftRadius:'10px',
+                              borderBottomLeftRadius:'10px',
+                              borderTopRightRadius:'30px',
+                              borderBottomRightRadius:'30px',
+                              color: 'black',
+                              z:'10'
+                          }),
+                          menu: base => ({
+                            ...base,
+                            width: '200%',
+                            zIndex: '30',      
+                            color: 'black',
+                          }),
+                          menuList: base => ({
+                            ...base,
+                            // kill the white space on first and last option
+                            padding: 0,
+                          }),
+                          placeholder: base => ({
+                            ...base,
+                            color: 'black',
+                            fontSize:isMobile ? '13px':'16px'
+                          })
+                      }}
+                      formatOptionLabel={(option) => (
+                          <div className="flex items-center gap-2 pl-0 ">
+                          {
+                            option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
+                          }
+                              <span className="text-[13px] md:text-base pt-1" >{option.label}</span>
+                          </div>
+                      )}
+                    />
+                  </div>
+                      
                   </div>
                   <div className = 'eventparent w-full py-7 md:py-[35px]'>
                 
@@ -132,6 +226,9 @@ function Homebody(){
                         /* Note here the id being passed as prop is the key of the array, when coming from the backend we can
                           request for an id in each of the objects,
                         */
+                    
+                        // Display all the events if the selected option is all or filter the events by the selected option
+                          selectedOption == 'all' ?                        
                           crowdfundEvents.map((item,i)=>{
                               return(
                                 <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
@@ -141,6 +238,17 @@ function Homebody(){
                                 organizer = {item.user_name} is_liked = {item.is_liked}
                                 />
                               )
+                          })
+                          :
+                          crowdfundEvents.filter(item => item.tags == selectedOption).map((item,i)=>{
+                            return(
+                              <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
+                              organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
+                              amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
+                              location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
+                              organizer = {item.user_name} is_liked = {item.is_liked}
+                              />
+                            )
                           })
                       }
                   </div>

@@ -24,6 +24,7 @@ import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { closesidebar, increasesidebar, opensidebar, reducesidebar, setIsAuthenticated, setlinkcolor, setLogoutLoading } from '../../actions/actions'
 import { checkAuthentication } from '../../auth/checkauthentication'
+import { persistor } from '../..'
 
 function Sidebar(){
 
@@ -55,42 +56,33 @@ function Sidebar(){
     })
 
     const handleLogout = async () => {
-        dispatch(setLogoutLoading(true))
-        console.log('starting Log out')
-        
+        dispatch(setLogoutLoading(true));
+        console.log('starting Log out');
+
         // Close the sidebar
         if (isMobile) {
-            managesidebar()
-        }        
+            managesidebar();
+        }
+
         try {
             const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
                 method: 'POST',
-                /* body:JSON.stringify({
-                    "refresh":'ds'
-                }),
-                headers: {
-                    'Content-Type': 'application/json', 
-                }, */
             });
-      
+
             const logoutResponse = await logout.json();
             console.log(logoutResponse);
-        
+
             if (logout.ok) {
-
-                navigate('/signin');
-
                 // Clear all data from localStorage
-                localStorage.clear();
-                
-                dispatch(setLogoutLoading(false))
-                
-                // check authentication again to logout everything
-                await checkAuthentication(dispatch)
-                //dispatch(setIsAuthenticated(false))
+                await persistor.purge();
 
-                
-                
+                // check authentication again to logout everything
+                await checkAuthentication(dispatch);
+
+                dispatch(setLogoutLoading(false));
+
+                // Navigate to login page
+                navigate('/signin');
             } else {
                 console.error('Logout failed');
             }
@@ -98,6 +90,7 @@ function Sidebar(){
             console.error(error);
         }
     };
+
       
     
     return(
@@ -107,7 +100,7 @@ function Sidebar(){
             
             <div className = 'mb-[60px] lg:mb-0'>
                 
-                <div className = {`absolute left-[5px]  brkpoint:relative  brkpoint:float-none flex brkpoint:mx-auto gap-2 items-center justify-center mb-5 `} > 
+                <div className = {`absolute left-[15px] md:left-0  brkpoint:relative brkpoint:float-none flex gap-2 items-center justify-start md:px-5 mb-5 `} > 
                     <img src={applogo} alt="Palbucks logo" className = 'cursor-pointer w-5 md:w-6 ' />
                     {/* <h1 className = {` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } font-bold text-[#033F59] text-xl md:text-2xl leading-6 tracking-tighter `} >Palbucks</h1> */}
                     <img src={palbucks} alt="palbucks" className = {` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } w-[100px] h-[18px] `} />

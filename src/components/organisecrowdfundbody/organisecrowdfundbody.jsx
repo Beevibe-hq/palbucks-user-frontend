@@ -362,7 +362,7 @@ function Organisecrowdfundbody(){
                                     }),                    
                                 }}
                                 formatOptionLabel={(option) => (
-                                    <div className="flex items-center gap-2 pl-4 ">
+                                    <div className="flex items-center gap-2 ">
                                         <img src={option.icon} alt="category icon" className="w-4 h-4" />
                                         <span className="text-sm font-black pt-1" >{option.label}</span>                                        
                                     </div>

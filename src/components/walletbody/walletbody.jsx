@@ -63,7 +63,7 @@ function Walletbody(){
                 </button>
             </div>
             
-            <div className="md:flex md:gap-[54px]" >
+            <div className="lg:flex lg:gap-[54px]" >
                 
                 <section className="w-full md:w-fit" >
                     <h2 className={` ${ isMobile ? currentMobileDisplay == 'balance' ? '':'hidden' : ''} text-lg md:text-[22px] font-black mb-5 md:mb-[35px] `}>                        
@@ -173,9 +173,9 @@ function Walletbody(){
 
                 </section>
                                 
-                <div className={` ${ isMobile ? currentMobileDisplay == 'activities' ? 'block':'hidden' : ''} `}>
+                <div className={` ${ isMobile ? currentMobileDisplay == 'activities' ? 'block':'hidden' : ''}  `}>
                     {/* <Activities user10 = {user10} user12 = {user12} user8 = {user8} header = {'wallet'} /> */}
-                    <section className="font-arial md:flex-1 md:min-w-[320px] 2xl:min-w-[370px] lg:min-w-[350px] lg:max-w-[370px] md:bg-white h-fit rounded-[10px] " >
+                    <section className="font-arial md:flex-1 md:min-w-[320px] md:max-w-[450px] 2xl:min-w-[370px] lg:min-w-[350px] lg:max-w-[370px] lg:bg-white h-fit rounded-[10px] " >
                         <div className={`py-5 md:py-[35px] md:px-[23px] md:border-b-[0.5px] md:border-[#D8D8D8]`}>                
                             <h3 className="text-lg md:text-[22px] font-black mb-[5px] md:mb-3 " >Activites</h3>
                             <p className="text-sm md:text-base" >See  your donation activites for your campaign. </p>

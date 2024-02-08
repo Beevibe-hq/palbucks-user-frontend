@@ -27,6 +27,7 @@ import CommentModal from "../commentModal/commentModal"
 import Activity from "../../components/activity/activity"
 import { activityData } from "../activities/activities"
 import DonationModal from "../donationModal/donationModal"
+import CryptoDonationModal from "../cryptoDonationModal/cryptoDonationModal"
 
 function Detailedevent(props){
     
@@ -89,7 +90,8 @@ function Detailedevent(props){
       
     arrangeorganizerdetails()
 
-    let totaldonations = formatnumber(eventdetails.totaldonations);
+    let totaldonations = formatnumber(eventdetails.no_of_donors);
+    console.log(totaldonations)
 
     //This manages the like button
     const [liked,setliked] = useState(eventdetails.is_liked)
@@ -151,7 +153,17 @@ function Detailedevent(props){
     const [displayModals, setDisplayModals] = useState({
         commentModal: false,
         updateModal: false,
-        donateModal: false
+        donateModal: false,
+        cryptoDonationModal: false,
+        cryptoDonationData: {
+            payment_id: "5428124683",
+            payment_status: "waiting",
+            pay_address: "0x4Ffc8580870272E52a8eB07cb2B89fC5fE4402bF",
+            pay_amount: 100,
+            pay_currency: "usdtbsc",
+            order_id: "73282b3d-2afc-4d5e-aba5-f6feced5fcf3",
+            expiration_estimate_date: "2024-02-01T15:53:15.177Z"
+        }
     })
     
     const [eventDetailsDisplay, setEventDetailsDisplay] = useState({
@@ -180,7 +192,7 @@ function Detailedevent(props){
                 })
                 setCommentData(data)
             }else{
-                alert('Failed to get comments')
+                console.log('Failed to get comments')
             }
         }
         getComments()
@@ -209,7 +221,7 @@ function Detailedevent(props){
     }, [])
     
     useEffect(() => {
-        console.log(eventDetailsDisplay)
+        //console.log(eventDetailsDisplay)
     },[eventDetailsDisplay])
 
     //Comment data
@@ -336,6 +348,12 @@ function Detailedevent(props){
                                         setDisplayModals={setDisplayModals}
                                         eventid = {eventid}
                                     />
+
+                                    <CryptoDonationModal 
+                                        displayModals={displayModals}
+                                        setDisplayModals={setDisplayModals}
+                                        eventid={eventid}                                        
+                                    />
                                     
                                     <div className={` md:hidden `}>
                                         <p className={`text-sm md:text-lg font-black md:leading-4 mb-4`} >
@@ -353,7 +371,7 @@ function Detailedevent(props){
                                         />
                                         <p className="text-sm md:text-lg text-[#C5C5C5] font-medium mb-4 " >
                                             {
-                                                totaldonations == null ? '2.2k donations so far' : totaldonations + ' donations so far'
+                                                totaldonations == null ? '2.2k donations so far' : totaldonations == 1 ? totaldonations + ' donation so far' : totaldonations + ' donations so far'
                                             } 
                                         </p>
 
@@ -504,7 +522,9 @@ function Detailedevent(props){
                                     target_price = {eventdetails.target_price} 
                                     amt_raised = {eventdetails.amt_raised}
                                     total_donors = {totaldonations}
-                                    eventid = {eventid}
+                                    eventid={eventid}
+                                    setDisplayModals={setDisplayModals}
+                                    displayModals = {displayModals}
                                 />
                             </div>
                         </div>                       
@@ -521,44 +541,6 @@ export default Detailedevent
 //This is the component for each comment
 function Comment(props){
     
-    //  Calculate time difference between now and the time the comment was made
-    const timeDifference = (timestamp) => {
-        const now = new Date();
-        const commentTime = new Date(timestamp);
-        const difference = now - commentTime;
-        const seconds = Math.floor(difference / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const weeks = Math.floor(days / 7);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(days / 365);
-
-        if (years > 0) {
-            return `${years} years ago`;
-        }
-        if (months > 0) {
-            return `${months} months ago`;
-        }
-        if (weeks > 0) {
-            return `${weeks} weeks ago`;
-        }        
-        if (days > 0) {
-            return `${days} days ago`;
-        }
-        if (hours > 0) {
-            return `${hours} hours ago`;
-        }
-        if (minutes > 0) {
-            return `${minutes} mins ago`;
-        }
-        if (seconds > 0) {
-            return `${seconds} secs ago`;
-        }
-
-        return "Just now";    
-    }
-
     return(
         <div className="flex items-start gap-3 md:gap-4  " >
             <img src={props.image} alt="user 7 profile" className="w-12 md:w-[60px] rounded-full " />
@@ -577,7 +559,57 @@ function Comment(props){
     )
 }
 
+//  Calculate time difference between now and the time the comment was made
+export  const timeDifference = (timestamp) => {
+    const now = new Date();
+    const commentTime = new Date(timestamp);
+    const difference = now - commentTime;
+    const seconds = Math.floor(difference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
 
+    if (years > 0) {
+        return `${years} years ago`;
+    }
+
+    if  (months == 1 ) return '1 month ago'
+
+    if (months > 0) {
+        return `${months} months ago`;
+    }
+
+    if (weeks == 1) return '1 week ago'
+
+    if (weeks > 0) {
+        return `${weeks} weeks ago`;
+    }        
+
+    if (days > 0) {
+        return `${days} days ago`;
+    }
+
+    if (hours == 1) return "1 hour ago"
+
+    if (hours > 0) {
+        return `${hours} hours ago`;
+    }
+    if (minutes == 1) return "1 min ago";
+    
+    if (minutes > 0) {
+        return `${minutes} mins ago`;
+    }
+
+    if (seconds == 1) return "1 sec ago"
+
+    if (seconds > 0) {
+        return `${seconds} secs ago`;
+    }
+    return "Just now";    
+}
 
 //Comments data carrying the necessary detail in each comment
 /* let commentdata = [
