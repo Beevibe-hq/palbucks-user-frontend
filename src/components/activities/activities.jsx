@@ -6,9 +6,12 @@ import { useNavigate } from "react-router-dom";
 import user8 from "../../images/user8.svg"
 import user12 from "../../images/user12.svg"
 import user10 from "../../images/user10.svg"
+import { baseUrl } from "../../auth/checkauthentication";
+import { useDispatch } from "react-redux";
+import { setPaymentMode } from "../../actions/actions";
 
 function Activities(props) {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const [expanded, setExpanded] = useState(false);
 
@@ -41,7 +44,7 @@ function Activities(props) {
                         />
                         <p className="text-lg text-[#C5C5C5] font-medium " >
                             {
-                                props.total_donors == null ? '2.2k donations so far' : props.total_donors + ' donations so far'
+                                props.total_donors == null ? '2.2k donations so far' : props.total_donors == 1 ? props.total_donors + ' donation so far' : props.total_donors + ' donations so far'
                             } 
                         </p>
                     </div>
@@ -69,11 +72,17 @@ function Activities(props) {
                         />
                         <p className="text-lg text-[#C5C5C5] font-medium mb-6 " >
                             {
-                                props.total_donors == null ? '2.2k donations so far' : props.total_donors + ' donations so far'
+                                props.total_donors == null ? '2.2k donations so far' : props.total_donors == 1 ? props.total_donors + ' donation so far' : props.total_donors + ' donations so far'
                             } 
                         </p>
 
-                        <button className="mx-auto block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] " >
+                        <button className="mx-auto block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] "
+                            onClick={() => {
+                                console.log(props.eventid)
+                                navigate(`/${props.eventid}/donate`)
+                                dispatch(setPaymentMode('crypto'))
+                            }}
+                        >
                             Donate using USDT wallet
                         </button>
 
@@ -82,6 +91,7 @@ function Activities(props) {
                             onClick={() => {
                                 console.log(props.eventid)
                                 navigate(`/${props.eventid}/donate`)
+                                dispatch(setPaymentMode('fiat'))
                             }
                             }
                             >

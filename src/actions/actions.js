@@ -194,3 +194,10 @@ export const removeNotificationAlert = () => {
         type:'removeNotificationAlert'
     }
 }
+
+export const setPaymentMode = (data) => {
+    return {
+        type: 'setPaymentMode',
+        payload:data
+    }
+}

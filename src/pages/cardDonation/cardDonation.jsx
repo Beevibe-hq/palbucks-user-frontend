@@ -28,6 +28,7 @@ import { useSelector } from "react-redux"
 import Select from 'react-select'
 import { baseUrl } from "../../auth/checkauthentication"
 import { useMediaQuery } from "react-responsive"
+import CryptoDonationModal from "../../components/cryptoDonationModal/cryptoDonationModal"
 
 export default function Donate() {
 
@@ -39,6 +40,7 @@ export default function Donate() {
         cvv: '',
         cardName: ''
     })
+    
     
     // Obtain the crowdfund id and the payment status id (if available) from the url
     const params = useParams()
@@ -88,6 +90,20 @@ export default function Donate() {
             setpageDisplay('donationDetails')
         }
     }, [searchParams]);
+
+    const [displayModals, setDisplayModals] = useState({
+        cryptoDonationModal: false,
+        cryptoDonationData: {
+            payment_id: "5428124683",
+            payment_status: "waiting",
+            pay_address: "0x4Ffc8580870272E52a8eB07cb2B89fC5fE4402bF",
+            pay_amount: 100,
+            pay_currency: "usdtbsc",
+            order_id: "73282b3d-2afc-4d5e-aba5-f6feced5fcf3",
+            expiration_estimate_date: "2024-02-04T19:43:15.177Z"
+        }
+    })
+    
     
 
     const navigate = useNavigate()
@@ -145,7 +161,7 @@ export default function Donate() {
                 </div>
                 {
                     pageDisplay == 'donationDetails' ?
-                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} /> :
+                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} displayModals = {displayModals} setDisplayModals = {setDisplayModals} /> :
                     pageDisplay == 'cardDetails' ?
                     <CardDetails setpageDisplay={setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} /> :
                     pageDisplay == 'donationSuccessful' ?
@@ -156,65 +172,115 @@ export default function Donate() {
                 }
                 
             </div>
+            <CryptoDonationModal 
+                displayModals={displayModals}
+                setDisplayModals={setDisplayModals}
+                eventid={id}                                        
+            />
             
         </div>
     )
 }
 
 
-const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile}) => {
+const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile , displayModals, setDisplayModals}) => {
 
     const crowdfundEvents = useSelector(state => state.crowdfundEvents)
     const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
-
-    
+    const [cryptoDonationAmount, setCryptoDonationAmount] = useState(0)
+    const paymentMode = useSelector(state => state.paymentMode)
 
     const handleInputChange = (e) => {
-        setdonationDetails({
+        if (paymentMode == 'crypto') {
+            setCryptoDonationAmount(e.target.value)
+        } else if (paymentMode == 'fiat') {
+            setdonationDetails({
             ...donationDetails,
             [e.target.name]: e.target.value
         })
+        }        
     }
 
     const [isLoading, setIsLoading] = useState(false)
-    const handleClick = async() => {
-        setIsLoading(true)
-        if(donationDetails.amount == ''){
-            alert('Please fill in the amount you wish to donate')
+    
+    const handleClick = async () => {
+        
+        if (paymentMode == 'crypto') {   
+            
+            setIsLoading(true)
+            if (cryptoDonationAmount == 0) {
+                alert('Please fill in the amount of usdt you wish to donate')
+                setIsLoading(false)
+                return
+            } else if (cryptoDonationAmount < 1) {
+                alert('Please enter a valid amount')
+                setIsLoading(false)
+                return
+            }
+            const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate-crypto/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: cryptoDonationAmount,
+                    currency: "usdtbsc"
+                })
+            })       
+            const resp = await makeDonation.json()
+            console.log(resp)     
+            console.log(makeDonation.status);
+            if (makeDonation.status === 200) {
+                setDisplayModals((prev) => ({
+                    ...prev,
+                    cryptoDonationModal: true,
+                    cryptoDonationData: resp
+                }))                                    
+            } else {
+                console.log('error')
+            }  
             setIsLoading(false)
-            return
-        }else if(donationDetails.amount < 1){
-            alert('Please enter a valid amount')
-            setIsLoading(false)
-            return
+
+        }else if(paymentMode == 'fiat'){
+            setIsLoading(true)
+            if(donationDetails.amount == ''){
+                alert('Please fill in the amount you wish to donate')
+                setIsLoading(false)
+                return
+            }else if(donationDetails.amount < 1){
+                alert('Please enter a valid amount')
+                setIsLoading(false)
+                return
+            }
+            
+            /* setpageDisplay('cardDetails');
+            window.scrollTo(0,0) */
+            console.log(selectedCurrency)
+
+            const access_token = localStorage.getItem('access_token')
+            const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate-fiat/`,{
+                method:'POST',
+                headers:{
+                    Authorization: `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: donationDetails.amount,
+                    currency:selectedCurrency.value
+                    /* donor: donationDetails.donor */
+                })
+            })
+            const response = await makeDonation.json()
+            console.log(response)
+            if(makeDonation.status == 200){
+                window.open(response.data.authorization_url, '_self')
+            }else{
+                alert('An error occured, please try again')
+            }
+
+            setIsLoading(false)    
         }
         
-        /* setpageDisplay('cardDetails');
-        window.scrollTo(0,0) */
-        console.log(selectedCurrency)
-
-        const access_token = localStorage.getItem('access_token')
-        const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate/`,{
-            method:'POST',
-            headers:{
-                Authorization: `Bearer ${access_token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount: donationDetails.amount,
-                currency:selectedCurrency.value
-                /* donor: donationDetails.donor */
-            })
-        })
-        const response = await makeDonation.json()
-        console.log(response)
-        if(makeDonation.status == 200){
-            window.open(response.data.link, '_self')
-        }else{
-            alert('An error occured, please try again')
-        }
-
-        setIsLoading(false)
     }
 
     const options = [
@@ -315,7 +381,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                     <Loadingspinner width = '28px' height = '28px' />
                 </div>
                 <span className={` ${isLoading ? 'hidden' : 'block' } `} >
-                    Enter your card details
+                    Make a donation
                 </span>
             </button>
         </div>

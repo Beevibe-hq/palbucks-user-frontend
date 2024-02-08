@@ -173,6 +173,15 @@ const newNotificationsAlert = (state = false, action) => {
     }
 }
 
+const paymentMode = (state = 'fiat', action) => {
+    switch (action.type) {
+        case "setPaymentMode":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
@@ -188,7 +197,8 @@ const allreducers = combineReducers({
     authReducer,
     otpVerified,
     notificationsData,
-    newNotificationsAlert
+    newNotificationsAlert,
+    paymentMode
 })
 
 export default allreducers;

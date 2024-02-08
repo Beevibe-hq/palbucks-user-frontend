@@ -27,6 +27,7 @@ import CommentModal from "../commentModal/commentModal"
 import Activity from "../../components/activity/activity"
 import { activityData } from "../activities/activities"
 import DonationModal from "../donationModal/donationModal"
+import CryptoDonationModal from "../cryptoDonationModal/cryptoDonationModal"
 
 function Detailedevent(props){
     
@@ -89,7 +90,8 @@ function Detailedevent(props){
       
     arrangeorganizerdetails()
 
-    let totaldonations = formatnumber(eventdetails.totaldonations);
+    let totaldonations = formatnumber(eventdetails.no_of_donors);
+    console.log(totaldonations)
 
     //This manages the like button
     const [liked,setliked] = useState(eventdetails.is_liked)
@@ -151,7 +153,17 @@ function Detailedevent(props){
     const [displayModals, setDisplayModals] = useState({
         commentModal: false,
         updateModal: false,
-        donateModal: false
+        donateModal: false,
+        cryptoDonationModal: false,
+        cryptoDonationData: {
+            payment_id: "5428124683",
+            payment_status: "waiting",
+            pay_address: "0x4Ffc8580870272E52a8eB07cb2B89fC5fE4402bF",
+            pay_amount: 100,
+            pay_currency: "usdtbsc",
+            order_id: "73282b3d-2afc-4d5e-aba5-f6feced5fcf3",
+            expiration_estimate_date: "2024-02-01T15:53:15.177Z"
+        }
     })
     
     const [eventDetailsDisplay, setEventDetailsDisplay] = useState({
@@ -180,7 +192,7 @@ function Detailedevent(props){
                 })
                 setCommentData(data)
             }else{
-                alert('Failed to get comments')
+                console.log('Failed to get comments')
             }
         }
         getComments()
@@ -336,6 +348,12 @@ function Detailedevent(props){
                                         setDisplayModals={setDisplayModals}
                                         eventid = {eventid}
                                     />
+
+                                    <CryptoDonationModal 
+                                        displayModals={displayModals}
+                                        setDisplayModals={setDisplayModals}
+                                        eventid={eventid}                                        
+                                    />
                                     
                                     <div className={` md:hidden `}>
                                         <p className={`text-sm md:text-lg font-black md:leading-4 mb-4`} >
@@ -353,7 +371,7 @@ function Detailedevent(props){
                                         />
                                         <p className="text-sm md:text-lg text-[#C5C5C5] font-medium mb-4 " >
                                             {
-                                                totaldonations == null ? '2.2k donations so far' : totaldonations + ' donations so far'
+                                                totaldonations == null ? '2.2k donations so far' : totaldonations == 1 ? totaldonations + ' donation so far' : totaldonations + ' donations so far'
                                             } 
                                         </p>
 
@@ -504,7 +522,9 @@ function Detailedevent(props){
                                     target_price = {eventdetails.target_price} 
                                     amt_raised = {eventdetails.amt_raised}
                                     total_donors = {totaldonations}
-                                    eventid = {eventid}
+                                    eventid={eventid}
+                                    setDisplayModals={setDisplayModals}
+                                    displayModals = {displayModals}
                                 />
                             </div>
                         </div>                       
