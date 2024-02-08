@@ -95,7 +95,7 @@ function Sidebar(){
     
     return(
         <div className = {` ${ isMobile ? sidebaropen ? 'left-0 w-[80%] minitablet:w-[60%] ' : '-left-full' : sidebarslid ? 'w-[100px] flex flex-col items-center' : `md:block w-[90%] minitablet:w-[60%]
-            brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]` }  h-full fixed z-30 overflow-x-hidden top-0 border-orange-600 border-0  py-16 md:py-[35px]
+            brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]` }  h-full fixed z-30 top-0 bottom-0 border-orange-600 border-0  py-16 md:py-[35px]
             bg-white flex-shrink-0 transition-all duration-500 ease-in-out font-arial `} >
             
             <div className = 'mb-[60px] lg:mb-0'>
