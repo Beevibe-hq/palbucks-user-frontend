@@ -112,7 +112,7 @@ function Organisecrowdfundbody(){
                 end_date:formattedDate
             }) )    
 
-        }else{
+        } else {
             setformdata((prevdata)=> ({
                 ...prevdata,
                 [event.target.name]:event.target.value
@@ -151,6 +151,12 @@ function Organisecrowdfundbody(){
             setIsLoading(false)
             return;
         }
+        if (formdata.target_price > 9999999) {
+            alert("You've exceeded the maximum target amount")
+            setIsLoading(false)
+            return;
+        }
+
         /* if (formdata.location === '') {
             alert('Please enter a location for your crowdfund')
             setIsLoading(false)
@@ -425,7 +431,12 @@ function Organisecrowdfundbody(){
                                 <input
                                     type="number"
                                     className={`md:h-[56px] w-full rounded text-sm md:text-base px-[10px] md:px-5 py-3 outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
-                                    border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2`} min='100' max='9999999' maxLength="6"
+                                    border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2
+                                    ${formdata.target_price > 9999999 ? 'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150]': ''}
+                                    `}
+                                    min='100'
+                                    max='9999999'
+                                    maxLength="6"
                                     placeholder="How much do you want to raise(amount is in USDT)?"
                                     onChange={handleInputChange}
                                     id = "target_price"

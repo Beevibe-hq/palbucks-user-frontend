@@ -38,6 +38,7 @@ import twittericon from "../../images/landingpage/twittericon.svg"
 import instagramicon from "../../images/landingpage/instagramicon.svg"
 import copyrighticon from "../../images/landingpage/copyright.svg"
 import menuicon from "../../images/Hamburger Menu.svg"
+import cancelMenuIcon from "../../images/hamburger menu.svg"
 
 import Landingcampaign from "../../components/landingcampaign/landingcampaign"
 import Landingnotification from "../../components/landingnotification/landingnotification"
@@ -107,6 +108,15 @@ function LandingPage(){
         };
     }, []); */
 
+    const [mobileMenu, setMobileMenu] = useState('close')
+    const handleMobileMenu = () => {
+        if(mobileMenu == 'open'){
+            setMobileMenu('close')
+        }else{
+            setMobileMenu('open')
+        }
+    }
+
     return(
         <div className="font-merriweather" >
             <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-10 lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
@@ -131,8 +141,43 @@ function LandingPage(){
                         <span>Sign up</span>
                     </Link>
                 </nav>
-                <img src={menuicon} alt="menu icon" className="w-5 h-5 md:hidden" />
+                <img src={menuicon} alt="menu icon" className="w-5 h-5 md:hidden" onClick={handleMobileMenu} />
             </header>
+
+            <div className={` ${mobileMenu == 'open' ? '' : 'hidden'} md:hidden font-merriweather h-full w-full z-50 bg-white fixed top-0 pt-4 px-5`}>
+                <div className="mb-6 flex justify-between items-center ">
+                    <div className=" flex gap-[10px] md:gap-4 items-center " >
+                        <img src={palbuckslogo} alt="Palbucks logo" className="w-5 md:w-7 lg:w-[33.4px]" />
+                        <img src={palbucksgroup} alt="palbucks" className="w-[77px] md:w-[108px] lg:w-[138px] h-[14px] md:h-5 lg:h-[24px] "  />
+                    </div>
+                    <img src={cancelMenuIcon} alt="cancel menu icon" className="w-6" onClick={handleMobileMenu} />
+                </div>
+                <nav className="mb-8 flex flex-col gap-2">
+                    <Link to = '/howitworks' className="py-3"  >
+                        <span>How it works</span>
+                    </Link>
+                    <Link to = '/discover' className="py-3"  >
+                        <span>Discover campaigns</span>
+                    </Link>
+                    <Link to = '/helpcenter' className="py-3"  >
+                        <span>Help center</span>
+                    </Link>
+                    <Link to = '/communityguidelines' className="py-3"  >
+                        <span>Community guidelines</span>
+                    </Link>
+                </nav>
+
+                <button className="mb-5 bg-[#000] rounded w-full py-[10px] px-5 font-bold text-[#FFF]" 
+                    onClick={()=>{navigate('/organisecrowdfund')}}
+                >
+                    Start a crowdfund
+                </button>
+                <button className="border-[1px] border-[#8E8E93] rounded w-full py-[10px] px-5 font-bold text-[#000]" 
+                    onClick={()=> {navigate('/signin')}}
+                >
+                    Sign in
+                </button>
+            </div>
 
             <main className="pt-3 md:pt-[70px] lg:pt-[140px] pb-10 mt-[103px] " >
                 
@@ -148,7 +193,9 @@ function LandingPage(){
                     px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px]
                     transition-all duration-500 py-3 md:py-5 lg:py-[23.4px]
                     font-bold bg-black text-white rounded md:rounded-[10px]
-                    text-base md:text-2xl lg:text-3xl mx-auto block font-arial" >
+                    text-base md:text-2xl lg:text-3xl mx-auto block font-arial"
+                    onClick={()=>{navigate('/organisecrowdfund')}} 
+                     >
                     Start a crowdfund
                 </button>
 
@@ -406,7 +453,9 @@ function LandingPage(){
                     </div>
                 </div>
 
-                <button className="mb-[15px] lg:mb-[33px] font-arial px-[26px] lg:px-[52px] hover:px-[72.5px] py-[10.4px] lg:py-[23.4px] transition-all duration-500 font-bold bg-black text-white rounded lg:rounded-[10px] text-base lg:text-3xl mx-auto block " >
+                <button className="mb-[15px] lg:mb-[33px] font-arial px-[26px] lg:px-[52px] hover:px-[72.5px] py-[10.4px] lg:py-[23.4px] transition-all duration-500 font-bold bg-black text-white rounded lg:rounded-[10px] text-base lg:text-3xl mx-auto block " 
+                    onClick={()=>{navigate('/organisecrowdfund')}}
+                >
                     Start a crowdfund
                 </button>
 
