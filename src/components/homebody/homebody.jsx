@@ -146,7 +146,7 @@ function Homebody(){
 
                 //The others page starts here
                 <>
-                  <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-merriweather '>
+                  <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-arial '>
                       <button className = {`bg-white fold:w-[118px] phones:w-[120px] md:w-[172px] h-[38px] md:h-[39px] flex items-center justify-between pr-5 pl-3 
                       rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
                           <span className ='text-[13px] md:text-base ' >Popular</span>
@@ -208,12 +208,12 @@ function Homebody(){
                             fontSize:isMobile ? '13px':'16px'
                           })
                       }}
-                      formatOptionLabel={(option) => (
+                      formatOptionLabel={(option, { isSelected}) => (
                           <div className="flex items-center gap-2 pl-0 ">
                           {
-                            option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
+                            selectedOption !== option.value && option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
                           }
-                              <span className="text-[13px] md:text-base pt-1" >{option.label}</span>
+                              <span className="text-[13px] md:text-base pt-1 " >{option.label}</span>
                           </div>
                       )}
                     />

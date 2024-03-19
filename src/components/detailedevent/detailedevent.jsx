@@ -28,57 +28,55 @@ import Activity from "../../components/activity/activity"
 import { activityData } from "../activities/activities"
 import DonationModal from "../donationModal/donationModal"
 import CryptoDonationModal from "../cryptoDonationModal/cryptoDonationModal"
+import { baseUrl } from "../../auth/checkauthentication"
 
 function Detailedevent(props){
-    
+    const access_token = localStorage.getItem('access_token')
     const userInfo = JSON.parse(localStorage.getItem("userInfo")) 
     /*
-     This selects homebodydata from redux store so as to get the complete details of the selected funding event.
-     When the fundevent is clicked, an id is passed from the url params to select particular event.
-     */
+    This selects homebodydata from redux store so as to get the complete details of the selected funding event.
+    When the fundevent is clicked, an id is passed from the url params to select particular event.
+    */
     let homebodydata = useSelector(state => state.crowdfundEvents)
-
+    //console.log(homebodydata)
     const dispatch = useDispatch()
     const params = useParams()
     const navigate = useNavigate()
-
+    
+    
     //This selects the particular event from the homebodydata array
     let eventid = params.id
-    let eventdetails = homebodydata.filter(item => item.id == eventid)[0]
-    
-    var organizerdetails = []
-    function arrangeorganizerdetails(){
-        
-        /* organizerdetails = [
-            {
-                image: eventdetails.organizeraccounts[0],
-                name:eventdetails.organizeraccounts[0],
-            },
-            {
-                image: eventdetails.organizeraccounts[1],
-                name:eventdetails.organizeraccounts[1],
-            }
-        ] */
-        
-        //Puts organizerdetails in the above structure so it can be accessed easily in campaignorganizers component
-        if(eventdetails.organizeraccounts){
-            for(let i = 0; i<eventdetails.organizeraccounts.length; i++ ){
-            
-                let organizer = {
-                    name:eventdetails.organizeraccounts[i],
-                    image:eventdetails.org ? eventdetails.organizerimg[i] : null
+    //var eventdetails = homebodydata.filter(item => item.id == eventid)[0]
+    const [eventdetails, setEventDetails] = useState(homebodydata.filter(item => item.id == eventid)[0])
+
+    useEffect(() => {
+        if (!eventdetails) {
+            const getCrowdfund = async() => {
+                const response = await fetch(`${baseUrl}/funding/api/${eventid}`, {
+                    /* headers: {
+                        Authorization: `Bearer ${access_token}`,                    
+                    } */
+                })
+
+                if (response.ok) {
+                    let data = await response.json()        
+                    console.log(eventdetails)
+                    setEventDetails(data)
+                    totaldonations = formatnumber(data.no_of_donors)
+
+                } else {
+                    console.error(await response.json())
+                    console.log('ran')
                 }
-                organizerdetails.push(organizer)
-            }
-        }else{
-            let organizer = {
-                name:eventdetails.user_name,
-                image: eventdetails.user_img ? eventdetails.user_img : profileImgPlaceholder 
-            }
-            organizerdetails.push(organizer)
+            }        
+            getCrowdfund()        
         }
-    }    
+    },[eventdetails])
+
     
+    
+            
+        
     //This converts the total number of people donated from normal numbers to formatted for space
     const formatnumber = n => {
         if (n < 1e3) return n;
@@ -88,14 +86,14 @@ function Detailedevent(props){
         if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
     };
       
-    arrangeorganizerdetails()
-
-    let totaldonations = formatnumber(eventdetails.no_of_donors);
-    console.log(totaldonations)
+    if (eventdetails) {
+        var totaldonations = formatnumber(eventdetails.no_of_donors);    
+    }
+    
+    
 
     //This manages the like button
-    const [liked,setliked] = useState(eventdetails.is_liked)
-    const access_token = localStorage.getItem('access_token')
+    const [liked,setliked] = useState(eventdetails.is_liked)    
     const managelikes = async(event) =>{         
         //prevent the parent div's onclick from trigerring        
         event.stopPropagation();
@@ -220,9 +218,6 @@ function Detailedevent(props){
 
     }, [])
     
-    useEffect(() => {
-        //console.log(eventDetailsDisplay)
-    },[eventDetailsDisplay])
 
     //Comment data
     const [commentData, setCommentData] = useState([])

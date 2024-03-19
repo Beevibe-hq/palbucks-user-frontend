@@ -11,6 +11,7 @@ import locateicon from "../../images/locateicon2.svg"
 import twittericon from "../../images/twittericon.svg"
 import facebookicon from "../../images/facebookicon.svg"
 import instagramicon from "../../images/instagramicon.svg"
+import infoicon2  from "../../images/info icon.png";
 import { useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { removeNotificationAlert, setnotificationspageactive, setnotificationspageinactive } from "../../actions/actions";
@@ -68,6 +69,7 @@ function Notificationspage(){
         }
     },[newNotificationsAlert])
 
+    console.log(notificationsData.length)
     return(
         <div className='bg-[#F9F9F9] min-h-full overflow-y-auto max-h-[100vh]'>
             <Sidebar />
@@ -83,7 +85,7 @@ function Notificationspage(){
                         See notifications about your crowdfunding campaigns
                     </p>                   
                     
-                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                    <h2 className={` ${todayNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6 `} >
                         Today
                     </h2>
                     <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
@@ -110,7 +112,7 @@ function Notificationspage(){
 
 
 
-                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                    <h2 className={` ${weekNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6`} >
                         This week
                     </h2>
                     <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
@@ -133,7 +135,7 @@ function Notificationspage(){
                         }
                     </div>
 
-                    <h2 className="text-base md:text-xl font-bold mb-[18px] md:mb-6 " >
+                    <h2 className={` ${monthNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6 `} >
                         This month
                     </h2>
                     <div>
@@ -155,6 +157,12 @@ function Notificationspage(){
                         }
                     </div>
 
+                    <div className={` ${notificationsData.length == 0 ? 'flex mr-auto w-fit items-center justify-center gap-5 px-20 xl:px-40': 'hidden' }  `} >
+                        <img src={infoicon2} alt="info icon" className="w-6" />
+                        <p className="text-lg font-arial text-[#8E8E93]" >No notification to show</p>
+                    </div>
+                    
+                    {/* No year notification code yet */}
 
                 </div>
             </div>
