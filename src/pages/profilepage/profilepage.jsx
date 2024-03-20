@@ -442,7 +442,7 @@ const EditProfile = ({goback}) => {
                             type="url"
                             name="facebook"
                             defaultValue={
-                                userInfo.social_links.facebook ?
+                                userInfo.social_links?.facebook ?
                                 userInfo.social_links.facebook :
                                 '' 
                             }
@@ -464,7 +464,7 @@ const EditProfile = ({goback}) => {
                             type="url"
                             name="twitter"
                             defaultValue={
-                                userInfo.social_links.twitter ?
+                                userInfo.social_links?.twitter ?
                                 userInfo.social_links.twitter :
                                 ''
                             }
@@ -488,7 +488,7 @@ const EditProfile = ({goback}) => {
                                 handleInputChange
                             }
                             defaultValue={
-                                userInfo.social_links.instagram ?
+                                userInfo.social_links?.instagram ?
                                 userInfo.social_links.instagram :
                                 ''
                             }                            
