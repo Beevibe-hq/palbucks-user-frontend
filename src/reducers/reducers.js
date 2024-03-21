@@ -182,6 +182,15 @@ const paymentMode = (state = 'fiat', action) => {
     }
 }
 
+const homePageSearchField = (state = '', action) => {
+    switch (action.type) {
+        case "addSearchValue":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
@@ -198,7 +207,8 @@ const allreducers = combineReducers({
     otpVerified,
     notificationsData,
     newNotificationsAlert,
-    paymentMode
+    paymentMode,
+    homePageSearchField
 })
 
 export default allreducers;

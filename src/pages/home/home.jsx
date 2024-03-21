@@ -40,8 +40,7 @@ function Home(){
                 })
                 
                 const crowdfunds = await response.json()
-                if(response.ok){                
-                    //console.log(crowdfunds)
+                if(response.ok){                                  
                     dispatch(loadCrowdfundEvents(crowdfunds))
                 }else{
                     console.error(crowdfunds)

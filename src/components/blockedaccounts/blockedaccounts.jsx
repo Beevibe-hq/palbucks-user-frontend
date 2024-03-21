@@ -47,13 +47,14 @@ function Blockedaccounts(){
 
             <hr className = " border-[1px] border-[#C4C4C4] " />
                             
-            <div className ={` ${openblockedaccounts == 'open' ? 'flex h-[300px] overflow-auto ' : 'hidden'} px-[10px] md:px-7 py-3 md:py-6 mb-3 gap-4 md:gap-8 flex-wrap items-center `} >                
+            <div className ={` ${openblockedaccounts == 'open' ? 'flex h-[300px] overflow-auto ' : 'hidden'} px-[10px] md:px-7 py-3 md:py-6 mb-3 gap-4 md:gap-8 flex-wrap items-center ${blockedusersdata.length ? '' : 'justify-center h-[150px] '} `} >                
                 {
-                    blockedusersdata.map((item,i) =>{
+                    blockedusersdata.length? blockedusersdata.map((item,i) =>{
                         return(
                             <Blockeduser key={i} image = {item.image} name = {item.name}  />
                         )
-                    } )                    
+                    }) :
+                    <p className="text-[#8E8E93] text-[17px] text-center" >Nothing to show here :)</p>        
                 }
             </div>                            
         
@@ -62,7 +63,7 @@ function Blockedaccounts(){
 }
 
 const blockedusersdata = [
-    {
+    /* {
         image:userimg10,
         name:'Lola'
     },
@@ -87,7 +88,7 @@ const blockedusersdata = [
     {
         image:userimg5,
         name:'Samuellateomatheend'
-    }
+    } */
 ]
 
 export default Blockedaccounts

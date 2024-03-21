@@ -201,3 +201,10 @@ export const setPaymentMode = (data) => {
         payload:data
     }
 }
+
+export const addSearchValue = (data) => {
+    return {
+        type: 'addSearchValue',
+        payload:data
+    }
+}
