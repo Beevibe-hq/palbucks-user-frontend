@@ -10,6 +10,7 @@ import Transactions from "../transactions/transactions"
 import Activities from "../activities/activities"
 import { useState } from "react"
 import { useMediaQuery } from "react-responsive"
+import Select from 'react-select'
 
 function Walletbody(){
 
@@ -31,7 +32,21 @@ function Walletbody(){
     };
 
     // Filter out the length of the new activities
-    const newActivities = activityData.filter( item => item.time.includes('mins') )
+    const newActivities = activityData.filter(item => item.time.includes('mins'))
+    
+    const amountEarnedOptions = [
+        { value: 'last3months', label: 'Last 3 months' },
+        { value: 'last6months', label: 'Last 6 months' },
+        { value: 'last12months', label: 'Last 12 months' },        
+    ]
+    const [selectedAmountEarnedOption, setSelectedAmountEarnedOption] = useState({
+        value: 'last3months',
+        label: 'Last 3 months'
+    })
+    //custom dropdown indicator for Select tag/component
+    const CustomDropdownIndicator = () => (
+            <img src = {arrowdown} alt = 'down arrow' className="w-[12px] md:w-[15px] h-[7px] md:h-[9px] " />
+    )
 
     return(
         <div className = 'fold:px-2 phones:px-[20px] md:px-3 lg:pl-[31px] lg:pr-[43px] pt-8 md:pt-[37px] pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
@@ -79,8 +94,8 @@ function Walletbody(){
                                 <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >
                                     <h4 className="text-base md:text-lg text-[#525252]" >Wallet Balance</h4>
-                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >9922778 USDT</h4>
-                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+23356 USDT </h4>
+                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{/* 9922778 */}0 USDT</h4>
+                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >{/* +23356 USDT */} </h4>
                                 </section>
                             </div>
                             <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 2xl:min-w-[350px] 
@@ -88,14 +103,64 @@ function Walletbody(){
                                 shadow-[0px_0px_16px_rgba(0,0,0,0.04)] "
                             >
                                 <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
-                                <section className="flex flex-col gap-2 md:gap-3" >
-                                    <button className="flex bg-[#F9F9F9] text-xs py-1 pl-[6px] md:pl-2 pr-3 md:pr-4 
-                                        items-center gap-6 rounded-l-lg rounded-r-[20px] md:rounded-r-3xl " >
-                                        <span>Last 3 months</span>
-                                        <img src={arrowdown} alt="" className="relative bottom-[2px] w-[12px] md:w-[15px] h-[7px] md:h-[9px] " />
-                                    </button>
+                                <section className="flex flex-col gap-2 md:gap-3" >                                    
+                                    <Select
+                                        options={amountEarnedOptions}
+                                        onChange={(e) => {
+                                            setSelectedAmountEarnedOption(e.value)
+                                        }}
+                                        placeholder='Last 3 months'
+                                        components={{
+                                            DropdownIndicator: CustomDropdownIndicator,
+                                            IndicatorSeparator : () => null
+                                        }}
+                                        styles={{
+                                            control: (base, state) => ({
+                                                ...base,
+                                                width:'145px',
+                                                height:'12px',
+                                                border: state.isFocused ? 0 : 0,
+                                                // This line disable the blue border
+                                                boxShadow: state.isFocused ? 0 : 0,
+                                                "&:hover": {
+                                                    border: state.isFocused ? 0 : 0,
+                                                },
+                                                backgroundColor:'#F9F9F9',
+                                                cursor:'pointer',
+                                                caretColor:'transparent',
+                                                paddingRight: isMobile ? '12px' : '16px',
+                                                paddingLeft:isMobile ? '6px':'8px',
+                                                borderTopLeftRadius:'8px',
+                                                borderBottomLeftRadius:'8px',
+                                                borderTopRightRadius: isMobile ? '20px' : '24px',
+                                                borderBottomRightRadius:isMobile ? '20px' : '24px',
+                                                color: 'blue',
+                                                z: '10',
+                                                fontSize:'12px'
+                                            }),
+                                            menu: base => ({
+                                                ...base,
+                                                width: '100%',
+                                                zIndex: '30',      
+                                                color: 'black',
+                                                fontSize:'12px'
+                                            }),
+                                            menuList: base => ({
+                                                ...base,
+                                                // kill the white space on first and last option
+                                                padding: 0,
+                                                fontSize:'12px'
+                                            }),
+                                            placeholder: base => ({
+                                                ...base,
+                                                color: 'black',
+                                                fontSize:'12px'
+                                            })
+                                        }}
+                                        
+                                    />
                                     <h4 className="text-[#525252] text-base md:text-lg " >Amount Earned</h4>
-                                    <h4 className="font-black text-lg md:text-[22px] leading-6 " >123908 USDT</h4>
+                                    <h4 className="font-black text-lg md:text-[22px] leading-6 " >{/* 123908 */}0 USDT</h4>
                                 </section>
                             </div>
                         </div>

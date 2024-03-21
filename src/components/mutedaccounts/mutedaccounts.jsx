@@ -42,13 +42,14 @@ function Mutedaccounts(){
 
             <hr className = " border-[1px] border-[#C4C4C4] " />
                             
-            <div className ={` ${openmutedaccounts == 'open' ? 'flex h-[150px] overflow-auto ' : 'hidden'} px-[10px] md:px-7 py-3 md:py-6 mb-3 gap-4 md:gap-8 flex-wrap items-center `} >                
+            <div className ={` ${openmutedaccounts == 'open' ? 'flex h-[150px] overflow-auto ' : 'hidden'} px-[10px] md:px-7 py-3 md:py-6 mb-3 gap-4 md:gap-8 flex-wrap items-center ${mutedusersdata.length ? '' : 'justify-center'}  `} >                
                 {
-                    mutedusersdata.map((item,i) =>{
+                    mutedusersdata.length? mutedusersdata.map((item,i) =>{
                         return(
                             <Muteduser key={i} image = {item.image} name = {item.name}  />
                         )
-                    } )                    
+                    }) :
+                    <p className="text-[#8E8E93] text-[17px] text-center" >Nothing to show here :)</p>    
                 }
             </div>                            
         
@@ -57,7 +58,7 @@ function Mutedaccounts(){
 }
 
 const mutedusersdata = [
-    {
+    /* {
         image:userimg2,
         name:'Franca'
     },
@@ -72,7 +73,7 @@ const mutedusersdata = [
     {
         image:userimg3,
         name:'Lilian',    
-    }
+    } */
 ]
 
 export default Mutedaccounts

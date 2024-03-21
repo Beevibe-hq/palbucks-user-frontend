@@ -100,7 +100,10 @@ function Sidebar(){
             
             <div className = 'mb-[60px] lg:mb-0'>
                 
-                <div className = {`absolute left-[15px] md:left-0  brkpoint:relative brkpoint:float-none flex gap-2 items-center justify-start md:px-5 mb-5 `} > 
+                <div className={`absolute left-[15px] md:left-0  brkpoint:relative brkpoint:float-none flex gap-2 items-center justify-start md:px-5 mb-5 cursor-pointer `}
+                    onClick={() => {
+                        navigate('/home');
+                }}> 
                     <img src={applogo} alt="Palbucks logo" className = 'cursor-pointer w-5 md:w-6 ' />
                     {/* <h1 className = {` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } font-bold text-[#033F59] text-xl md:text-2xl leading-6 tracking-tighter `} >Palbucks</h1> */}
                     <img src={palbucks} alt="palbucks" className = {` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } w-[100px] h-[18px] `} />

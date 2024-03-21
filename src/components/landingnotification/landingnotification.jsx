@@ -13,7 +13,7 @@ const Landingnotification = (props) => {
                     <p className='text-xs lg:text-2xl font-black ' >Withdrawal into external wallet</p>
                     <p className='text-[10px] lg:text-xl '> March {props.date}, 2023</p>
                 </div>
-                <p className='ml-auto text-sm lg:text-[28px] font-black ' >{props.amount} USDT</p>
+                <p className='ml-auto text-sm lg:text-[28px] font-black ' >{props.amount}</p>
             </div>
         </div>
 

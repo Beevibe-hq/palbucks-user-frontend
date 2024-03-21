@@ -26,7 +26,9 @@ function Homebody(){
   
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
-  
+
+  const searchFieldValue = useSelector(state => state.homePageSearchField)
+
   // Not working yet
   const filterOutdatedEvents = (date) => {
     const now = new Date()
@@ -146,17 +148,12 @@ function Homebody(){
 
                 //The others page starts here
                 <>
-                  <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-merriweather '>
+                  <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-arial '>
                       <button className = {`bg-white fold:w-[118px] phones:w-[120px] md:w-[172px] h-[38px] md:h-[39px] flex items-center justify-between pr-5 pl-3 
                       rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
                           <span className ='text-[13px] md:text-base ' >Popular</span>
                           <img src={arrowdown} alt="down arrow icon" />
                       </button>
-                      {/* <button className = {`bg-white fold:w-[90px] phones:w-[109px] md:w-[132px] h-[30px] md:h-[39px] flex items-center justify-between pr-5 pl-3
-                      rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
-                          <span className ='text-[13px] md:text-base ' >All</span>
-                          <img src={arrowdown} alt="down arrow icon" />
-                      </button> */}
                   <div className="bg-white min-w-[90px] phones:min-w-[120px] md:min-w-[150px] h-[30px] md:h-[39px]
                     rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none">
                     <Select
@@ -208,12 +205,12 @@ function Homebody(){
                             fontSize:isMobile ? '13px':'16px'
                           })
                       }}
-                      formatOptionLabel={(option) => (
+                      formatOptionLabel={(option, { isSelected}) => (
                           <div className="flex items-center gap-2 pl-0 ">
                           {
-                            option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
+                            selectedOption !== option.value && option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
                           }
-                              <span className="text-[13px] md:text-base pt-1" >{option.label}</span>
+                              <span className="text-[13px] md:text-base pt-1 " >{option.label}</span>
                           </div>
                       )}
                     />
@@ -222,11 +219,20 @@ function Homebody(){
                   </div>
                   <div className = 'eventparent w-full py-7 md:py-[35px]'>
                 
-                      {
-                        /* Note here the id being passed as prop is the key of the array, when coming from the backend we can
-                          request for an id in each of the objects,
-                        */
-                    
+                    {
+                      
+                        searchFieldValue.length > 0 ?
+                        crowdfundEvents.filter(item => item.title.toLowerCase().includes(searchFieldValue.toLowerCase())).map((item, i) => {
+                          return (
+                            <Fundevent category={item.tags} crowdfundImage={item.banner} accountimages={item.organizerimg}
+                              organiser={item.organiser} title={item.title} co_organisers={item.co_organisers} description={item.description}
+                              amt_raised={item.amt_raised} target_price={item.target_price} categoryimg={item.categoryimg}
+                              location={item.location} key={item.id} eventimg={item.placeholder} liked={item.liked} id={item.id}
+                              organizer={item.user_name} is_liked={item.is_liked}
+                            />
+                          )
+                        })
+                        :                                          
                         // Display all the events if the selected option is all or filter the events by the selected option
                           selectedOption == 'all' ?                        
                           crowdfundEvents.map((item,i)=>{
@@ -234,7 +240,7 @@ function Homebody(){
                                 <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
                                 organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
                                 amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
-                                location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
+                                location = {item.location} key = {item.id} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
                                 organizer = {item.user_name} is_liked = {item.is_liked}
                                 />
                               )
@@ -245,7 +251,7 @@ function Homebody(){
                               <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
                               organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
                               amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
-                              location = {item.location} key = {i} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
+                              location = {item.location} key = {item.id} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
                               organizer = {item.user_name} is_liked = {item.is_liked}
                               />
                             )

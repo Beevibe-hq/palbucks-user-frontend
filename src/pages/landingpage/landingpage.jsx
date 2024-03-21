@@ -276,9 +276,9 @@ function LandingPage(){
 
                 <div className={` ${scrollState.isAtRightEnd ? 'ml-[0] 2xl:ml-[0]' : 'ml-[5%] 2xl:ml-[8%]'}  flex gap-5 lg:gap-[43px] mb-[25px] lg:mb-[35px] overflow-x-auto overflow-y-hidden pr-5 lg:pr-20 `}
                     ref={containerRef} style={{ overflowX: 'hidden' }}>                    
-                    <Landingcampaign image={landingcampaignimg3} value="23543" target="100000" />
+                    <Landingcampaign image={landingcampaignimg3} value="23,543" target="100000" />
                     <Landingcampaign image={landingcampaignimg} value="1034" target="1500" />
-                    <Landingcampaign image={landingcampaignimg2} value="54223" target="250000" />
+                    <Landingcampaign image={landingcampaignimg2} value="54,223" target="250000" />
                 </div>
 
 
@@ -315,7 +315,7 @@ function LandingPage(){
                                         5 mins ago
                                     </p>   
                                     <p className="text-xs lg:text-[26px] lg:leading-8  " >
-                                        Made a donation of <span className="font-bold" >500USDT</span> to your crowdfund campaign 
+                                        Made a donation of $<span className="font-bold" >500</span> to your crowdfund campaign 
                                     </p>
                                 </div>
                             </div>
@@ -353,7 +353,7 @@ function LandingPage(){
                                         24 hours ago
                                     </p>   
                                     <p className="text-xs lg:text-[26px] lg:leading-8 " >
-                                        Made a donation of <span className="font-bold" >250USDT</span> to your crowdfund campaign 
+                                        Made a donation of $<span className="font-bold" >250</span> to your crowdfund campaign 
                                     </p>
                                 </div>
                             </div>
@@ -403,9 +403,9 @@ function LandingPage(){
                     </p>
                     {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
                     <div className="w-fit max-w-[90%] mx-auto">
-                        <Landingnotification date = '13' amount = '5000' />
-                        <Landingnotification date = '9' amount = '987' />
-                        <Landingnotification date = '3' amount = '5783' />
+                        <Landingnotification date = '13' amount = '5000 USDT' />
+                        <Landingnotification date = '9' amount = '$987' />
+                        <Landingnotification date = '3' amount = '$5783' />
                     </div>
                     
                 </div>

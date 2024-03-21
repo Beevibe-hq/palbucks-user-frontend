@@ -33,29 +33,28 @@ function Home(){
 
             // Send the image using Fetch API
             try{
-            const response = await fetch('https://palbucks-api.onrender.com/funding/api/',{
-                headers:{
-                    Authorization:`Bearer ${access_token}`,
-                }
-            })
-            
-            const crowdfunds = await response.json()
-            if(response.ok){                
-                //console.log(crowdfunds)
-                dispatch(loadCrowdfundEvents(crowdfunds))
-            }else{
-                console.error(crowdfunds)
-                /* if(crowdfunds.code == 'token_not_valid'){                    
-                    // Attempt to refresh token first before redirecting
-                    const response = await refreshToken(dispatch, navigate)
-                    if (response == 'success'){
-                        window.location.reload(true)
-                    }else{
-                        navigate('/signin')
-                        localStorage.clear()
+                const response = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+                    headers:{
+                        Authorization:`Bearer ${access_token}`,
                     }
-                } */
-            }
+                })
+                
+                const crowdfunds = await response.json()
+                if(response.ok){                                  
+                    dispatch(loadCrowdfundEvents(crowdfunds))
+                }else{
+                    console.error(crowdfunds)
+                    /* if(crowdfunds.code == 'token_not_valid'){                    
+                        // Attempt to refresh token first before redirecting
+                        const response = await refreshToken(dispatch, navigate)
+                        if (response == 'success'){
+                            window.location.reload(true)
+                        }else{
+                            navigate('/signin')
+                            localStorage.clear()
+                        }
+                    } */
+                }
             }            
             catch(error){
                 console.error(error)

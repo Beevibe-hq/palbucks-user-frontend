@@ -75,7 +75,7 @@ export default Profilepage;
 
 const DisplayProfile = ({goback, setDisplay}) => {
 
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))    
 
     return(
         <div className = 'fold:px-2 phones:px-5 md:px-10 lg:pl-[19px] lg:pr-[27px] pt-5 md:pt-12 pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
@@ -116,13 +116,12 @@ const DisplayProfile = ({goback, setDisplay}) => {
                     <img src= {locateicon} alt="" className="inline-block w-[15px] relative bottom-[2px] pt-1 "/>
                     
                     <span>
-                        {userInfo.location ? userInfo.location : 'Lagos, Nigeria'}
+                        {userInfo.location && userInfo.location}
                     </span>
                 </p>
                 <p className="mb-5 md:mb-0 text-sm leading-6 md:text-[18px] md:leading-[30px] " >
                     {
-                        userInfo.bio ? userInfo.bio :`Hi there! i am Daniel and i work with WHO to make the world a better place. 
-                        I am here basically to raise more funds for the development of the next hybrid child. #HYBRIDCHILDREN`
+                        userInfo.bio && userInfo.bio                        
                     }
                 </p>
                 <button 
@@ -442,7 +441,7 @@ const EditProfile = ({goback}) => {
                             type="url"
                             name="facebook"
                             defaultValue={
-                                userInfo.social_links.facebook ?
+                                userInfo.social_links?.facebook ?
                                 userInfo.social_links.facebook :
                                 '' 
                             }
@@ -464,7 +463,7 @@ const EditProfile = ({goback}) => {
                             type="url"
                             name="twitter"
                             defaultValue={
-                                userInfo.social_links.twitter ?
+                                userInfo.social_links?.twitter ?
                                 userInfo.social_links.twitter :
                                 ''
                             }
@@ -488,7 +487,7 @@ const EditProfile = ({goback}) => {
                                 handleInputChange
                             }
                             defaultValue={
-                                userInfo.social_links.instagram ?
+                                userInfo.social_links?.instagram ?
                                 userInfo.social_links.instagram :
                                 ''
                             }                            
