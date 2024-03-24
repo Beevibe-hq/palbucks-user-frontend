@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Navbar from "../../components/navbar/navbar";
 import backarrow from "../../images/backarrow.svg"
-import campaignimage from "../../images/campaign image.png"
+import campaignimage from "../../images/Campaign image.png"
 import useravatar from "../../images/user3.svg"
 import locateicon from "../../images/locateicon2.svg"
 import twittericon from "../../images/twittericon.svg"
@@ -121,7 +121,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                 </p>
                 <p className="mb-5 md:mb-0 text-sm leading-6 md:text-[18px] md:leading-[30px] " >
                     {
-                        userInfo.bio && userInfo.bio                        
+                        userInfo.bio ? userInfo.bio : 'No bio yet!'
                     }
                 </p>
                 <button 
@@ -138,7 +138,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                     <h1 className="text-base md:text-[22px] text-center font-black " >My Social Links</h1>
                 </div>
                 <div className="flex gap-2 justify-around p-3 md:py-[30px] md:px-14 2xl:px-20 " >
-                    <div className="cursor-pointer flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] "
+                    <div className={` ${userInfo.social_links.twitter ? 'flex' : 'hidden'} cursor-pointer  items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] `}
                         onClick={
                             () => {
                                 if(userInfo.social_links.twitter !== null){
@@ -150,7 +150,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                         <img src={twittericon} alt="twitter icon" className="w-4 md:w-6 lg:w-8 " />
                         <h4 className="text-xs md:text-[22px]" >Twitter</h4>                
                     </div>
-                    <div className="cursor-pointer flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] "
+                    <div className={` ${userInfo.social_links.facebook ? 'flex' : 'hidden'} cursor-pointer  items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] `}
                         onClick={() => {
                             if(userInfo.social_links.facebook !== null){
                                 window.open(userInfo.social_links.facebook)
@@ -160,7 +160,7 @@ const DisplayProfile = ({goback, setDisplay}) => {
                         <img src={facebookicon} alt="facebook icon" className=" w-4 md:w-6 lg:w-8" />
                         <h4 className="text-xs md:text-[22px]" >Facebook</h4>
                     </div>
-                    <div className="cursor-pointer flex items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] " 
+                    <div className={` ${userInfo.social_links.instagram ? 'flex' : 'hidden'} cursor-pointer  items-center justify-center gap-2 md:gap-4 bg-[#F9F9F9] py-[5px] md:py-[15px] px-[14px] md:px-[31px] rounded md:rounded-[10px] `}
                         onClick={() => {
                             if(userInfo.social_links.instagram !== null){
                                 window.open(userInfo.social_links.instagram)
@@ -170,6 +170,14 @@ const DisplayProfile = ({goback, setDisplay}) => {
                         <img src={instagramicon} alt="Instagram icon" className="w-4 md:w-6 lg:w-8" />
                         <h4 className="text-xs md:text-[22px]" >Instagram</h4>
                     </div>
+                    {
+                        !userInfo.social_links.twitter &&
+                        !userInfo.social_links.facebook &&
+                        !userInfo.social_links.instagram && (
+                        <p className="text-[#8E8E93] text-[14px]  md:text-[17px] " >
+                            No link to show here
+                        </p>
+                    )}                    
                 </div>
             </div>
 
@@ -286,7 +294,7 @@ const EditProfile = ({goback}) => {
                 
                 <div className="relative">
                     <label htmlFor="background_image">
-                        <div className="w-fit bg-black "><img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] object-cover" /></div>
+                        <div className="w-fit"><img src={userImages.background_image} alt="campaign" className="rounded w-full max-h-[150px] md:max-h-[250px] 2xl:max-h-[300px] object-cover" /></div>
                         
                     </label>
                     <label htmlFor="background_image">

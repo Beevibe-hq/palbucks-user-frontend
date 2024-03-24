@@ -9,6 +9,9 @@ import user10 from "../../images/user10.svg"
 import { baseUrl } from "../../auth/checkauthentication";
 import { useDispatch } from "react-redux";
 import { setPaymentMode } from "../../actions/actions";
+import downButton2 from "../../images/wallet/downbutton2.svg"
+import { infoicon } from "../../images"
+
 
 function Activities(props) {
     const dispatch = useDispatch();
@@ -101,23 +104,27 @@ function Activities(props) {
                 ) : null
 
             }
-            <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''}`} >                            
+            <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''} ${activityData.length ? '': 'flex items-center justify-center'} `} >                            
                 {
-                    activityData.map((item, i) => {
+                    activityData.length ? activityData.map((item, i) => {
                         return (
                             <Activity key={i} userdp={item.userdp} time={item.time} amt={item.amt} username={item.username} />
                         )
-                    })
+                    }) :
+                    <p className="text-[#8E8E93] text-sm md:text-lg flex gap-2 items-center" >
+                        <img src={infoicon} alt="info icon" className="" />
+                        <span>No latest activity </span>
+                    </p>
                 }
             </div>
             <div className="flex flex-col items-center justify-center rounded-b-[10px] py-3 gap-2 " >
-                <span className="text-xs font-black text-center " >
-                    Click on button to go down
+                <span className={`text-xs font-black text-center ${activityData.length ? '' : 'text-[#D8D8D8]'} `} >
+                    { expanded ? 'Click on button to go up' : 'Click on button to go down' }
                 </span>
                 <img 
-                    src={downButton} 
+                    src={activityData.length? downButton: downButton2} 
                     alt="down button" 
-                    className={`w-8 cursor-pointer transform ${expanded ? 'duration-slow' : 'rotate-180 duration-slow'}`}
+                    className={`w-8 cursor-pointer transform ${expanded ?  'rotate-180 duration-slow' :'duration-slow'  }`}
                     onClick={toggleExpansion} 
                 />
             </div>
@@ -130,7 +137,7 @@ export default Activities;
 
 
 export let activityData = [
-    {
+    /* {
         userdp: user12,
         username: 'Doggo',
         time: '5 mins ago',
@@ -164,6 +171,6 @@ export let activityData = [
         time: '20 hours ago',
         amt: '120000',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
-    },
+    }, */
     
 ]
