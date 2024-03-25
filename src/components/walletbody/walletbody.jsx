@@ -4,6 +4,8 @@ import user8 from "../../images/user8.svg"
 import user12 from "../../images/user12.svg"
 import user10 from "../../images/user10.svg"
 import downButton from "../../images/wallet/downbutton.svg"
+import downButton2 from "../../images/wallet/downbutton2.svg"
+import { infoicon } from "../../images"
 
 import Activity from "../activity/activity"
 import Transactions from "../transactions/transactions"
@@ -39,10 +41,18 @@ function Walletbody(){
         { value: 'last6months', label: 'Last 6 months' },
         { value: 'last12months', label: 'Last 12 months' },        
     ]
+    const transactionsHistoryOptions = [{value: 'thismonth', label:'This month'}, ...amountEarnedOptions]
+    
     const [selectedAmountEarnedOption, setSelectedAmountEarnedOption] = useState({
         value: 'last3months',
         label: 'Last 3 months'
     })
+
+    const [selectedTransactionsHistoryOption, setSelectedTransactionsHistoryOption] = useState({
+        value: 'thismonth',
+        label: 'This month'
+    })
+
     //custom dropdown indicator for Select tag/component
     const CustomDropdownIndicator = () => (
             <img src = {arrowdown} alt = 'down arrow' className="w-[12px] md:w-[15px] h-[7px] md:h-[9px] " />
@@ -95,7 +105,7 @@ function Walletbody(){
                                 <section className="flex flex-col gap-2 md:gap-3" >
                                     <h4 className="text-base md:text-lg text-[#525252]" >Wallet Balance</h4>
                                     <h4 className="text-lg md:text-[22px] font-black leading-6 " >{/* 9922778 */}0 USDT</h4>
-                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >{/* +23356 USDT */} </h4>
+                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 USDT </h4>
                                 </section>
                             </div>
                             <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 2xl:min-w-[350px] 
@@ -179,12 +189,69 @@ function Walletbody(){
                             text-lg md:text-[22px] font-black mb-7 md:4 " >
                             Latest Transactions
                         </h4>
-                        <button className="flex float-right bg-[#ffffff] text-xs py-1 pl-[6px] md:pl-2 pr-3 md:pr-4 
+                        {/* <button className="flex float-right bg-[#ffffff] text-xs py-1 pl-[6px] md:pl-2 pr-3 md:pr-4 
                             items-center gap-6 rounded-l-lg rounded-r-[20px] md:rounded-r-3xl " >
                             <span>This month</span>
                             <img src={arrowdown} alt="" className="relative bottom-[2px] w-[12px] md:w-[15px] h-[7px] md:h-[9px] " />
-                        </button>
-                        <div className="">
+                        </button> */}
+                        <div className="flex float-right relative bottom-2 ">
+                            <Select
+                                options={transactionsHistoryOptions}
+                                onChange={(e) => {
+                                    setSelectedTransactionsHistoryOption(e.value)
+                                }}
+                                placeholder='This month'
+                                components={{
+                                    DropdownIndicator: CustomDropdownIndicator,
+                                    IndicatorSeparator : () => null
+                                }}
+                                styles={{
+                                    control: (base, state) => ({
+                                        ...base,
+                                        width: isMobile ? '120px':'145px',
+                                        height:'12px',
+                                        border: state.isFocused ? 0 : 0,
+                                        // This line disable the blue border
+                                        boxShadow: state.isFocused ? 0 : 0,
+                                        "&:hover": {
+                                            border: state.isFocused ? 0 : 0,
+                                        },
+                                        backgroundColor:'#ffffff',
+                                        cursor:'pointer',
+                                        caretColor:'transparent',
+                                        paddingRight: isMobile ? '8px' : '16px',
+                                        paddingLeft:isMobile ? '4px':'8px',
+                                        borderTopLeftRadius:'8px',
+                                        borderBottomLeftRadius:'8px',
+                                        borderTopRightRadius: isMobile ? '20px' : '24px',
+                                        borderBottomRightRadius:isMobile ? '20px' : '24px',
+                                        color: 'blue',
+                                        z: '10',
+                                        fontSize:'12px'
+                                    }),
+                                    menu: base => ({
+                                        ...base,
+                                        width: '100%',
+                                        zIndex: '30',
+                                        color: 'black',
+                                        fontSize:'12px'
+                                    }),
+                                    menuList: base => ({
+                                        ...base,
+                                        // kill the white space on first and last option
+                                        padding: 0,
+                                        fontSize:'12px'
+                                    }),
+                                    placeholder: base => ({
+                                        ...base,
+                                        color: 'black',
+                                        fontSize:'12px'
+                                    })
+                                }}
+                            
+                            />
+                        </div>
+                        {/* <div className="">
                             <div className="mb-12 md:mb-11">
                                 <h5 className="text-sm mb-[18px] md:mb-[26px] font-bold md:font-normal " >
                                     Today
@@ -221,19 +288,11 @@ function Walletbody(){
                                     </div>
                                 }
                             </div>
-
-                            {/* {
-                                
-                                transactionsdata.filter().map((item,i)=>{
-                                    return(
-                                        <div>
-
-                                        </div>
-                                    )
-                                })
-                            } */}
-                        </div>
-                        
+                        </div> */}
+                        <p className="text-[#8E8E93] text-sm md:text-lg text-center flex gap-2 items-center justify-center" >
+                            <img src={infoicon} alt="info icon" className="" />
+                            No latest transaction
+                        </p>    
                     </div>
 
                 </section>
@@ -246,23 +305,27 @@ function Walletbody(){
                             <p className="text-sm md:text-base" >See  your donation activites for your campaign. </p>
                         </div>
                         <NewActivityNotification number={newActivities.length} />
-                        <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''}`} >                            
+                        <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''} ${activityData.length ? '': 'flex items-center justify-center'} `} >                            
                             {
-                                activityData.map((item, i) => {
+                                activityData.length ? activityData.map((item, i) => {
                                     return (
                                         <Activity key={i} userdp={item.userdp} time={item.time} amt={item.amt} username={item.username} />
                                     )
-                                })
+                                }) :
+                                <p className="text-[#8E8E93] text-sm md:text-lg flex gap-2 items-center" >
+                                    <img src={infoicon} alt="info icon" className="" />
+                                    <span>No latest activity </span>
+                                </p>
                             }
                         </div>
                         <div className="hidden md:flex flex-col items-center justify-center rounded-b-[10px] py-3 gap-2 " >
-                            <span className="text-xs font-black text-center " >
-                                Click on button to go down
+                            <span className={`text-xs font-black text-center ${activityData.length ? '' : 'text-[#D8D8D8]'} `} >
+                                { expanded ? 'Click on button to go up' : 'Click on button to go down' }
                             </span>
                             <img 
-                                src={downButton} 
+                                src={activityData.length? downButton: downButton2} 
                                 alt="down button" 
-                                className={`w-8 cursor-pointer transform ${expanded ? 'duration-slow' : 'rotate-180 duration-slow'}`}
+                                className={`w-8 cursor-pointer transform ${expanded ?  'rotate-180 duration-slow' :'duration-slow'  }`}
                                 onClick={toggleExpansion} 
                             />
                         </div>
@@ -280,7 +343,7 @@ export default Walletbody
 const NewActivityNotification = (props) => {
 
     return (
-        <div className="bg-[#37BCF7] rounded-full px-3 py-2 text-sm md:text-base font-black w-fit mt-1 mb-3 md:mt-3 md:mb-1 md:ml-3 ">
+        <div className={` ${props.number < 1 ? 'hidden' : ''} bg-[#37BCF7] rounded-full px-3 py-2 text-sm md:text-base font-black w-fit mt-1 mb-3 md:mt-3 md:mb-1 md:ml-3`}>
             {props.number} new {props.number > 1 ? 'activities' : 'activity'}
         </div>
     )
@@ -288,7 +351,7 @@ const NewActivityNotification = (props) => {
 
 
 let activityData = [
-    {
+    /* {
         userdp: user12,
         username: 'Doggo',
         time: '5 mins ago',
@@ -322,7 +385,7 @@ let activityData = [
         time: '20 hours ago',
         amt: '120000',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
-    },
+    }, */
     
 ]
 

@@ -1,12 +1,18 @@
 import applogo from "../../images/appLogo.svg"
 import palbucks from "../../images/palbucks2.svg"
+import { useNavigate } from "react-router-dom"
 
 import { Link } from "react-router-dom"
 
 function SignUpHeader() {
+
+    const navigate = useNavigate()
+
     return (
         <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-[60px] lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
-            <div className=" flex gap-[10px] md:gap-[18px] items-center " >
+            <div className=" flex gap-[10px] items-center cursor-pointer " onClick={() => {
+                navigate('/')
+            }} >
                 <img src={applogo} alt="Palbucks logo" className="w-5 md:w-[33.4px]" />
                 <img src= {palbucks} alt="palbucks" className="w-[77px] md:w-[138px] h-[14px] md:h-[24px] "  />
             </div>

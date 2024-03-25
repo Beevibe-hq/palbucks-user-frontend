@@ -46,15 +46,6 @@ import { useSelector } from "react-redux"
 
 function LandingPage(){
 
-    const navigate = useNavigate()
-    const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated)
-
-    const containerRef = useRef(null);
-
-    const [scrollState, setScrollState] = useState({
-        isAtLeftEnd: true,
-        isAtRightEnd: false,
-    });
 
     const animateOnHover = (e) => {
         const element = e.target
@@ -64,49 +55,86 @@ function LandingPage(){
         }, 1000)
     }
 
-    /* const handleScroll = () => {
-        const container = containerRef.current;
-        setScrollState({
-            isAtLeftEnd: container.scrollLeft === 0,
-            isAtRightEnd: container.scrollLeft + container.clientWidth === container.scrollWidth,
-        });
-    }; */
+    const navigate = useNavigate()
+    const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated)
 
-    const scrollRight = () => {
-        containerRef.current.scrollBy({
-            left: containerRef.current.offsetWidth,
-            behavior: 'smooth',
-        });
+    const containerRef = useRef(null);
 
-        setScrollState({
-            isAtLeftEnd: false,
-            isAtRightEnd: true
-        });
+    const [scrollState, setScrollState] = useState({
+        isAtLeftEnd: true,
+        isAtRightEnd: false,
+    });
+    
+
+    const handleScroll = (direction) => {
+        const scrollContainer = containerRef.current;
+
+        if (scrollContainer) {
+            const scrollItemWidth = (scrollContainer?.firstChild).offsetWidth;
+            const visibleItemCount = Math.floor(scrollContainer.offsetWidth / scrollItemWidth);
+            const scrollAmount = scrollItemWidth * visibleItemCount;
+
+            if (direction === 'left') {
+                scrollContainer.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth',
+                })
+            } else {
+                scrollContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth',
+                });
+            }
+
+            handleScrollCheck(containerRef)
+        }
     };
 
-    const scrollLeft = () => {
-        containerRef.current.scrollBy({
-            left: -containerRef.current.offsetWidth,
-            behavior: 'smooth',
-        });
+    const handleScrollCheck = () => {
+        const scrollContainer = containerRef.current;
 
-        setScrollState({
-            isAtLeftEnd: true,
-            isAtRightEnd: false
-        });
-    };
+        if (scrollContainer) {
+            // first check if there's no scroll and display all the arrows
+            if (scrollContainer.scrollWidth <= scrollContainer.offsetWidth) {  
+                //alert('no scroll')
+                setScrollState((prevScrollState) => ({
+                    ...prevScrollState,
+                    isAtLeftEnd: false,
+                    isAtRightEnd:false
+                }))
+                return;
+            }
+
+            if (Math.ceil(scrollContainer.scrollLeft + scrollContainer.offsetWidth) >= Math.floor(scrollContainer.scrollWidth)) {                
+                setScrollState((prevScrollState) => ({
+                    ...prevScrollState,                
+                    isAtRightEnd: true ,
+                    isAtLeftEnd: false                
+                }));
+                //alert('right')
+            }else if (scrollContainer.scrollLeft <= 0) {
+                setScrollState((prevScrollState) => ({
+                    ...prevScrollState,                
+                    isAtRightEnd:false,
+                    isAtLeftEnd: true            
+                }));
+                //alert('left')
+            } else {
+                setScrollState((prevScrollState) => ({
+                    ...prevScrollState,
+                    isAtRightEnd: false,
+                    isAtLeftEnd: false
+                }));
+                //alert('middle')
+            }
+        }
+
+        
+    }
 
     useEffect(() => {
         isAuthenticated ? navigate('/home') : navigate('/')        
-    },[])
-
-    /* useEffect(() => {
-        const container = containerRef.current;
-        container.addEventListener('scroll', handleScroll);
-        return () => {
-            container.removeEventListener('scroll', handleScroll);
-        };
-    }, []); */
+    },[])    
 
     const [mobileMenu, setMobileMenu] = useState('close')
     const handleMobileMenu = () => {
@@ -120,7 +148,9 @@ function LandingPage(){
     return(
         <div className="font-merriweather" >
             <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-10 lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
-                <div className=" flex gap-[10px] md:gap-4 lg:gap-[18px] items-center " >
+                <div className=" flex gap-[10px] items-center cursor-pointer " onClick={() => {
+                    navigate('/')
+                }}  >
                     <img src={palbuckslogo} alt="Palbucks logo" className="w-5 md:w-7 lg:w-[33.4px]" />                    
                     <img src={palbucksgroup} alt="palbucks" className="w-[77px] md:w-[108px] lg:w-[138px] h-[14px] md:h-5 lg:h-[24px] "  />
                 </div>
@@ -274,8 +304,12 @@ function LandingPage(){
                     Featured Crowdfunding Campaign
                 </h3>
 
-                <div className={` ${scrollState.isAtRightEnd ? 'ml-[0] 2xl:ml-[0]' : 'ml-[5%] 2xl:ml-[8%]'}  flex gap-5 lg:gap-[43px] mb-[25px] lg:mb-[35px] overflow-x-auto overflow-y-hidden pr-5 lg:pr-20 `}
-                    ref={containerRef} style={{ overflowX: 'hidden' }}>                    
+                <div className={` ${scrollState.isAtRightEnd ? 'ml-[0] 2xl:ml-[0]' : 'ml-[5%] 2xl:ml-[8%]'}  flex gap-5 lg:gap-[43px] mb-[25px] lg:mb-[35px] overflow-x-auto overflow-y-hidden pr-5 lg:pr-20 scrollContainer `}
+                    ref={containerRef}
+                    onScroll={() => {
+                        handleScrollCheck()
+                    }}
+                >                    
                     <Landingcampaign image={landingcampaignimg3} value="23,543" target="100000" />
                     <Landingcampaign image={landingcampaignimg} value="1034" target="1500" />
                     <Landingcampaign image={landingcampaignimg2} value="54,223" target="250000" />
@@ -283,9 +317,24 @@ function LandingPage(){
 
 
                 <div className="mb-[53px] lg:mb-[178px] mx-[5%] 2xl:mx-[8%] flex justify-between">
-                    <img src={backbtn} alt="" className={`w-[28px] lg:w-[44px] h-[28px] lg:h-[44px] rounded-full ${scrollState.isAtLeftEnd ? 'opacity-50' : 'cursor-pointer'}`} onClick={scrollLeft} />
-                    {/* <img src={scrollState.isAtRightEnd ? rightscroll : leftscroll} alt="" className="w-16 lg:w-[107px] h-6 lg:h-[42px]" /> */}
-                    <img src={forwardbtn} alt="" className={`w-[28px] lg:w-[44px] h-[28px] lg:h-[44px] rounded-full ${scrollState.isAtRightEnd ? 'opacity-50' : 'cursor-pointer'}`} onClick={scrollRight} />
+                    <img
+                        src={backbtn}
+                        alt=""
+                        className={`w-[28px] lg:w-[44px] h-[28px] lg:h-[44px] rounded-full 
+                        ${scrollState.isAtLeftEnd ? 'opacity-50' : 'cursor-pointer'}`}
+                        onClick={() => {
+                            handleScroll('left')
+                        }}
+                    />
+                    <img
+                        src={forwardbtn}
+                        alt=""
+                        className={`w-[28px] lg:w-[44px] h-[28px] lg:h-[44px] rounded-full 
+                        ${scrollState.isAtRightEnd ? 'opacity-50' : 'cursor-pointer'}`}
+                        onClick={() => {
+                            handleScroll('right')
+                        }}
+                    />
                 </div>
 
                 <div className="mb-[30px] lg:mb-[113px] bg-[#024C2B] w-full pt-5 lg:pt-[68px] pb-[16px] px-2 phones:px-6 " >

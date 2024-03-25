@@ -16,6 +16,7 @@ import { useEffect, useState } from "react"
 import Likeicon from "../../images/likeicon"
 import editIcon from "../../images/crowdfunds/editIcon.svg"
 import commentIcon from "../../images/crowdfunds/commentIcon.svg"
+import { infoicon } from "../../images"
 
 import {options} from "../../components/organisecrowdfundbody/organisecrowdfundbody"
 import Navbar from "../navbar/navbar"
@@ -470,7 +471,7 @@ function Detailedevent(props){
                                         />
 
                                         <h3 className="mt-6 mb-6 md:mb-7 text-base md:text-lg font-bold " >
-                                            Comments (105)
+                                            Comments ({commentData.length})
                                         </h3>
                                         <div className=" flex flex-col gap-5 md:gap-8">
                                             {
@@ -481,11 +482,19 @@ function Detailedevent(props){
                                                 })
                                             }
                                         </div>
-                                        <button className={ ` ${commentData.length == 0 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
+                                        <button className={ ` ${commentData.length == 0 || commentData.length < 4 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
                                         rounded-[10px] font-black text-base tracking-[0.06px] `} 
-                                        onClick = {()=>setCommentsNumber(commentData.length)}
+                                            onClick={() => {
+                                                // If there's more comments to see, set all others to display, else if all is already being displayed, set minimum to display
+                                                if (commentsNumber < commentData.length) {
+                                                    setCommentsNumber(commentData.length)
+                                                } else if (commentsNumber == commentData.length && commentsNumber > 3) {
+                                                    setCommentsNumber(Math.ceil(commentData.length/2 < 3 ? 3 : commentData.length/2))
+                                                }
+                                                
+                                            }}
                                         >
-                                            See more
+                                            { commentsNumber < commentData.length ? 'See more' : 'See less'}
                                         </button>
                                     </div>
                                     <div className={` ${isMobile && commentsActivitiesView == 'activities' ? 'block' : 'hidden'} `} >
@@ -494,16 +503,20 @@ function Detailedevent(props){
                                         </h3>
                                         <div className={`flex flex-col gap-5 md:gap-8`} >                            
                                             {
-                                                activityData.map((item, i) => {
+                                                activityData.length ? activityData.map((item, i) => {
                                                     return (
                                                         <Activity key={i} userdp={item.userdp} time={item.time} amt={item.amt} username={item.username}
                                                         background = "none"
                                                         />
                                                     )
-                                                })
+                                                }) :
+                                                <p className="text-[#8E8E93] text-sm md:text-lg flex gap-2 items-center" >
+                                                    <img src={infoicon} alt="info icon" className="" />
+                                                    <span>No latest activity </span>
+                                                </p>
                                             }
                                         </div>
-                                        <button className={ ` ${commentData.length == 0 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
+                                        <button className={ ` hidden ${commentData.length == 0 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
                                         rounded-[10px] font-black text-base tracking-[0.06px] `}                                         
                                         >
                                             See more

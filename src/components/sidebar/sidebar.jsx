@@ -75,6 +75,7 @@ function Sidebar(){
             if (logout.ok) {
                 // Clear all data from localStorage
                 await persistor.purge();
+                localStorage.clear()
 
                 // check authentication again to logout everything
                 await checkAuthentication(dispatch);
