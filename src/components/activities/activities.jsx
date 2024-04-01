@@ -34,11 +34,11 @@ function Activities(props) {
                     <div className={`py-[35px] px-[23px] border-b-[0.5px] border-[#D8D8D8]`}>                
                         <p className={`text-lg font-black leading-4 mb-4`} >
                             {
-                                props.amt_raised + ' USDT raised'
+                               '$' + props.amt_raised + ' raised'
                             }
                             <span className="tracking-[0.06px] text-base text-[#8E8E93] leading-5 " >
                                 {
-                                    ' of ' + props.target_price + ' USDT'
+                                    ' of $' + props.target_price
                                 }
                             </span>
                         </p>

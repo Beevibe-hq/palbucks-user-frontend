@@ -217,7 +217,7 @@ function LandingPage(){
                     From your wallet to <br className="hidden md:block" /> their hearts
                 </h2>
                 <p className="mb-5 md:mb-7 lg:mb-[60px] text-sm md:text-xl lg:text-[33px] font-merriweather md:font-arial text-center lg:leading-[45px] tracking-[0.5px] " >
-                    Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your card or USDT
+                    Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your bank card or USDT
                 </p>
                 <button className="max-w-[85%] mb-7 md:mb-14 lg:mb-[100px] 
                     px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px]
@@ -343,11 +343,11 @@ function LandingPage(){
                     </h4>
 
                     <h5 className="mb-5 lg:mb-[54px] text-xl lg:text-[74px] leading-8 lg:leading-[113px] tracking-[0.08px] font-black text-white text-center font-merriweather" >
-                        Receive donations from <br className="hidden lg:block" /> Friends and Family in <span className="text-[#35FAA0]" >USDT</span>
+                        Receive kind donations in <br className="hidden lg:block" /> <span className="text-[#35FAA0]" > Different Currencies</span>
                     </h5>
 
                     <p className="mb-14 lg:mb-[212px] font-arial text-white text-base lg:text-[36px] text-center lg:leading-[70px] tracking-[0.55px] " >
-                        You can receive crypto donations for your campaigns from <br className="hidden lg:block" /> your family and friends. We believe that location should not be a <br className="hidden lg:block" />barrier when it comes to raising funds for a cause
+                        You can receive donations for your campaigns from anyone, <br className="hidden lg:block" /> anywhere around the world. We believe that location should <br className="hidden lg:block" />not be a barrier when it comes to raising funds for a cause
                     </p>
                     {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
                     <div className={`mx-auto mb-[86px] lg:mb-[300px] block w-fit font-arial ` }>                        
@@ -470,7 +470,7 @@ function LandingPage(){
                      items-center text-center  ">
                         <img src={oneicon} alt="" className="w-8 lg:w-[50px] absolute -right-3 lg:-right-7 -top-3 lg:-top-5" />
                         <p className="text-lg lg:text-[25px] xl:text-[33px] leading-9 lg:leading-[45px] font-bold " >
-                            You
+                            Yourself
                         </p>
                         <p className="text-[16px] lg:text-[18px] xl:text-[26px] text-[#525252] " > 
                             Start a crowdfunding campaign for yourself to meet up necessary need, or to fulfil a mission of yours. 
