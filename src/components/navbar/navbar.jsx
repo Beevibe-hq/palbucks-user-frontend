@@ -20,7 +20,7 @@ function Navbar(props){
     // Current problem with this is that when the user changes details on another browser, the details wont be updated on this browser
     const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
 
-    const [moreiconsactive , setmoreiconsactive] = useState(false)
+    const [moreIconsActive , setmoreIconsActive] = useState(false)
 
     const onprofilepage = useSelector(state => state.onprofilepage)
     const onnotificationspage = useSelector(state => state.onnotificationspage)
@@ -49,7 +49,7 @@ function Navbar(props){
      }
 
      const handlemoreicons = () => {
-        moreiconsactive ? setmoreiconsactive(false) : setmoreiconsactive(true)
+        moreIconsActive ? setmoreIconsActive(false) : setmoreIconsActive(true)
      }
 
     const [onDonorPage, setOnDonorPage] = useState(false)
@@ -96,7 +96,7 @@ function Navbar(props){
                 <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false } />
                 <div className=" flex gap-2 items-center">
                     <img 
-                        src={userInfo.dp ? userInfo.dp : profilePlaceholder}
+                        src={userInfo?.dp ? userInfo.dp : profilePlaceholder}
                         onClick = {profilepage}
                         alt="user avatar" 
                         className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} 
@@ -106,13 +106,13 @@ function Navbar(props){
                         alt="Palbucks logo" 
                         className = "block w-[19px] phones:w-[22px] md:hidden" 
                     />
-                    <h2 className = 'hidden md:block text-base font-black'>{userInfo.first_name} {userInfo.last_name}</h2>
+                    <h2 className = 'hidden md:block text-base font-black'>{userInfo?.first_name? userInfo.first_name : ''} {userInfo?.last_name? userInfo.last_name:''}</h2>
                 </div>
                 {/* <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] cursor-pointer'  /> */}
-                <Moreicons active = {moreiconsactive} onClick = {handlemoreicons} />
+                <Moreicons active = {moreIconsActive} onClick = {handlemoreicons} />
             </div>
             
-            <div className={` ${moreiconsactive ? 'block' : 'hidden'}  bg-white absolute right-10 top-[80px] w-[300px] xl:w-[369px] `}>
+            <div className={` ${moreIconsActive ? 'block' : 'hidden'}  bg-white absolute right-10 top-[80px] w-[300px] xl:w-[369px] `}>
                 <ul className='w-full py-[10px] px-[15px] flex flex-col' >
                     <Link to= '/howitworks' >
                         <li  className='flex justify-between w-full bg-white cursor-pointer py-[15px] pl-[15px] pr-[22px] hover:bg-[#37BCF71A] '>

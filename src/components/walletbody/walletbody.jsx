@@ -24,7 +24,7 @@ function Walletbody(){
 
     const [currentMobileDisplay, setCurrentMobileView] = useState('balance')
     const isMobile = useMediaQuery({
-        query: '(max-width: 940px)'
+        query: '(max-width: 1024px)'
     })
 
     const [expanded, setExpanded] = useState(false);
@@ -88,7 +88,7 @@ function Walletbody(){
                 </button>
             </div>
             
-            <div className="lg:flex lg:gap-[54px]" >
+            <div className="lg:flex lg:gap-[64px]" >
                 
                 <section className="w-full md:w-fit" >
                     <h2 className={` ${ isMobile ? currentMobileDisplay == 'balance' ? '':'hidden' : ''} text-lg md:text-[22px] font-black mb-5 md:mb-[35px] `}>                        
@@ -97,18 +97,18 @@ function Walletbody(){
                     <div className={` ${ isMobile ? currentMobileDisplay == 'balance' ? '':'hidden' : ''} flex flex-col w-full `}>
                         
                         <div className="flex flex-col 2xl:flex-row gap-4 lg:gap-7 mb-5 md:mb-12 w-full " >
-                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 2xl:min-w-[350px] 
+                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 md:min-w-[380px] 2xl:min-w-[350px] 
                                 bg-white py-3 phones:py-5 md:py-[25px] 2xl:py-[30px] px-[15px] phones:px-[30px] rounded-[10px]
                                 shadow-[0px_0px_16px_rgba(0,0,0,0.04)] w-full "
                             >
                                 <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >
                                     <h4 className="text-base md:text-lg text-[#525252]" >Wallet Balance</h4>
-                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{/* 9922778 */}0 USDT</h4>
-                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 USDT </h4>
+                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{/* 9922778 */}0 USD</h4>
+                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 USD </h4>
                                 </section>
                             </div>
-                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 2xl:min-w-[350px] 
+                            <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 md:min-w-[380px] 2xl:min-w-[350px] 
                                 bg-white py-3 phones:py-5 md:py-[25px] 2xl:py-[30px] px-[15px] phones:px-[30px] rounded-[10px]
                                 shadow-[0px_0px_16px_rgba(0,0,0,0.04)] "
                             >
@@ -170,7 +170,7 @@ function Walletbody(){
                                         
                                     />
                                     <h4 className="text-[#525252] text-base md:text-lg " >Amount Earned</h4>
-                                    <h4 className="font-black text-lg md:text-[22px] leading-6 " >{/* 123908 */}0 USDT</h4>
+                                    <h4 className="font-black text-lg md:text-[22px] leading-6 " >{/* 123908 */}0 USD</h4>
                                 </section>
                             </div>
                         </div>

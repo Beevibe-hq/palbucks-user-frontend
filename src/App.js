@@ -150,17 +150,21 @@ function App() {
             <Route path = '/:id/donate' element = { <Donate /> } />
             <Route path= '/settings' element = { <Settings />} />
 
-            <Route path='/organisecrowdfund' element = { <PrivateRoute element = { <Home /> } /> } >
+            <Route path='/organisecrowdfund' element = { <PrivateRoute element = { <Organisecrowdfund /> } /> } >
               <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />              
             </Route>
 
-            <Route path='/profilepage' element  = {<Profilepage />} />
-            <Route path='/wallet' element = {<Wallet/>} />
-            <Route path='/notificationspage' element = { <Notificationspage />} />
-            <Route exact path='/helpcenter' element = { <PrivateRoute element = { <Helpcenter />} />} >
-              <Route path='/helpcenter' element = { <Helpcenter /> } />
+            <Route path='/profilepage' element = { <PrivateRoute element = { <Profilepage /> } /> } >
+              <Route path='/profilepage' element={<Profilepage />} />
             </Route>
-            <Route path='/howitworks' element = { <Howitworks /> } />
+
+            <Route path='/wallet' element = { <PrivateRoute element = { <Wallet /> } /> } >
+              <Route path='/wallet' element={<Wallet />} />
+            </Route>
+          
+            <Route path='/notificationspage' element = { <Notificationspage />} />                      
+            <Route path='/helpcenter' element = { <Helpcenter /> } />                        
+            <Route path='/howitworks' element={<Howitworks />} />
             <Route path = '/termsofuse' element = { <Termsofuse /> } />
             <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
             <Route path='/communityguidelines' element = { <CommunityGuidelines/> } />
