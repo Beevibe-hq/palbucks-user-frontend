@@ -1,11 +1,12 @@
 import Likeicon from "../../../images/likeicon"
 import likeIcon from "../../../images/notifications/likeIcon.svg"
+import profilePlaceholder from "../../../images/profileplaceholder.svg"
 
 function Likenotification(props){
 
     return(
         <div className="flex items-start gap-[10px] md:gap-4 bg-white border-[1px] border-[#F9F9F9] py-[10px] md:py-[15px] px-[20px] rounded-[5px] md:rounded-none " >
-            <img src={`https://palbucks-bucket.s3.amazonaws.com/${props.userdp}`} alt="user profile" className=" w-12 md:w-[56px] rounded-full" />
+            <img src={props.userdp ? `https://palbucks-bucket.s3.amazonaws.com/${props.userdp}`: profilePlaceholder} alt="user profile" className=" w-12 md:w-[56px] rounded-full" />
             <div className="" >
                 <h4 className="font-black text-base md:text-lg mb-1 md:mb-[6px]" >
                     {props.username}
