@@ -1,5 +1,3 @@
-import applogo from "../../images/appLogo.svg"
-import palbucks from "../../images/palbucks2.svg"
 import bgradient from "../../images/authpages/bgradient.svg"
 import bgradient2 from "../../images/bgradient1.svg"
 import bgradient3 from "../../images/authpages/bgradient2.svg"
@@ -10,12 +8,11 @@ import checker3 from "../../images/authpages/checker3.svg"
 
 
 
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { checkAuthentication } from "../../auth/checkauthentication"
-import { setLogoutLoading } from "../../actions/actions"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 import SignUpHeader from "../../components/signUpHeader/signUpHeader"
 
@@ -106,14 +103,14 @@ const Completesignup = () => {
             <img src={bgradient} alt="" className="w-full" />            
         </div>
         
-        <div className ="w-24 md:w-[200px] lg:w-[400px] md:h-[200px] absolute -z-10 -left-[10px] md:-left-0 top-[300px] md:bottom-0 lg:top-0 rotate-[12deg] md:rotate-0 ">
+        <div className ="w-24 md:w-[200px] lg:w-[400px] md:h-[200px] absolute -z-10 -left-[10px] md:-left-0 top-[300px] md:top-[600px] md:bottom-0 lg:top-0 rotate-[12deg] md:rotate-0 ">
             <img src={bgradient3} alt="" className="w-full" />                        
         </div>
         
     
         <main className="pt-5 md:pt-[180px] mt-[103px] px-3 " >
             
-            <div className="bg-white w-full phones:w-[98%] md:w-[950px] mx-auto flex flex-col gap-[2.5px] md:gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded md:rounded-[10px] ">                
+            <div className="bg-white w-full phones:w-[98%] md:w-[75%] lg:w-[950px] mx-auto flex flex-col gap-[2.5px] md:gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded md:rounded-[10px] ">                
                 <div className="py-4 md:py-[30px] px-8 md:pl-[50px] md:pr-[30px] ">
                     <h3 className="text-lg md:text-[30px] font-black md:leading-[39px] " >
                         Continue your signup process...

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import { Link } from "react-router-dom"
 
-function SignUpHeader() {
+function SignUpHeader(props) {
 
     const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ function SignUpHeader() {
             </div>
 
             <div className="flex items-center gap-[35px] font-arial " >
-                <Link to = '/signin' className="hidden md:flex items-center text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] hover:rounded-[5px] "  >
+                <Link to = '/signin' className={` ${props.page == 'anonymouscrowdfund' ? 'hidden' : 'hidden md:flex' }   items-center text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] hover:rounded-[5px] `}  >
                     <span>Already have an account?</span>
                 </Link>
                 <Link to = '/signin' className="text-[#000000] text-lg font-bold tracking-[0.069px] py-[6px] md:py-[8px] px-3 md:px-4 bg-[#35FAA0] hover:bg-[#35EB98] leading-[22px] flex items-center rounded-[5px] "  >

@@ -208,3 +208,10 @@ export const addSearchValue = (data) => {
         payload:data
     }
 }
+
+export const addCountryOptions = (data) => {
+    return {
+        type: 'addCountryOptions',
+        payload:data
+    }
+}

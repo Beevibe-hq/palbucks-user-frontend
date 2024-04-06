@@ -5,10 +5,12 @@ import { useMediaQuery } from "react-responsive"
 import Loadingspinner from "../loadingspinner/loadingSpinner"
 
 import Select from 'react-select'
+import { useDispatch } from "react-redux"
+import { addCountryOptions } from "../../actions/actions"
 
 function Changecountry(props) {
     
-
+    const dispatch = useDispatch()
     const [countries, setcountries] = useState([])
     const [selectedCountry, setSelectedCountry] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -37,7 +39,7 @@ function Changecountry(props) {
         value: country.name.common,
         label: country.name.common
     })).sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically    
-
+    dispatch(addCountryOptions(countryOptions))
 
 
     const [opencountry, setopencountry] = useState(true)

@@ -174,7 +174,7 @@ function LandingPage(){
                 <img src={menuicon} alt="menu icon" className="w-5 h-5 md:hidden" onClick={handleMobileMenu} />
             </header>
 
-            <div className={` ${mobileMenu == 'open' ? '' : 'hidden'} md:hidden font-merriweather h-full w-full z-50 bg-white fixed top-0 pt-4 px-5`}>
+            <div className={` ${mobileMenu == 'open' ? '' : 'hidden'} md:hidden font-arial h-full w-full z-50 bg-white fixed top-0 pt-4 px-5`}>
                 <div className="mb-6 flex justify-between items-center ">
                     <div className=" flex gap-[10px] md:gap-4 items-center " >
                         <img src={palbuckslogo} alt="Palbucks logo" className="w-5 md:w-7 lg:w-[33.4px]" />
@@ -198,7 +198,7 @@ function LandingPage(){
                 </nav>
 
                 <button className="mb-5 bg-[#000] rounded w-full py-[10px] px-5 font-bold text-[#FFF]" 
-                    onClick={()=>{navigate('/organisecrowdfund')}}
+                    onClick={()=>{navigate('/anonymouscrowdfund')}} 
                 >
                     Start a crowdfund
                 </button>
@@ -224,7 +224,7 @@ function LandingPage(){
                     transition-all duration-500 py-3 md:py-5 lg:py-[23.4px]
                     font-bold bg-black text-white rounded md:rounded-[10px]
                     text-base md:text-2xl lg:text-3xl mx-auto block font-arial"
-                    onClick={()=>{navigate('/organisecrowdfund')}} 
+                    onClick={()=>{navigate('/anonymouscrowdfund')}} 
                      >
                     Start a crowdfund
                 </button>
@@ -503,7 +503,7 @@ function LandingPage(){
                 </div>
 
                 <button className="mb-[15px] lg:mb-[33px] font-arial px-[26px] lg:px-[52px] hover:px-[72.5px] py-[10.4px] lg:py-[23.4px] transition-all duration-500 font-bold bg-black text-white rounded lg:rounded-[10px] text-base lg:text-3xl mx-auto block " 
-                    onClick={()=>{navigate('/organisecrowdfund')}}
+                    onClick={()=>{navigate('/anonymouscrowdfund')}} 
                 >
                     Start a crowdfund
                 </button>
