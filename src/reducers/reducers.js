@@ -191,6 +191,50 @@ const homePageSearchField = (state = '', action) => {
     }
 }
 
+const countryOptions = (state = [], action) => {
+    switch (action.type) {
+        case "addCountryOptions":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
+const anonymousCrowdfundData = ( state = {
+    crowdfundData: {
+            title: '',
+            tag: '',
+            date_posted:'',        
+            end_date: "", 
+            banner: null,
+            description: '',
+            start_date: '',
+            target_price:0,
+            amt_raised:0,
+            tags:'',
+            location:'',
+            co_organisers:[],
+        },
+        personalInfo: {
+            first_name:'',
+            last_name:'',
+            dateOfBirth:'',
+            username:'',
+            gender:1,
+            phone:'293',
+            bio:'Humble man',
+            email: '',            
+            password:''
+        }
+}, action) => {
+    switch (action.type) {
+        case "addAnonymousCrowdfundData":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 
 const allreducers = combineReducers({
     sidebarstate: sidebarstate,
@@ -208,7 +252,9 @@ const allreducers = combineReducers({
     notificationsData,
     newNotificationsAlert,
     paymentMode,
-    homePageSearchField
+    homePageSearchField,
+    countryOptions,
+    anonymousCrowdfundData
 })
 
 export default allreducers;

@@ -44,6 +44,7 @@ import Donate from './pages/cardDonation/cardDonation';
 import Profilepage from './pages/profilepage/profilepage';
 //import Pusher from 'pusher-js/types/src/core/pusher';
 import Pusher from 'pusher-js';
+import AnonymousCrowdfundForm from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundForm';
 
 function App() {
     
@@ -168,6 +169,7 @@ function App() {
             <Route path = '/termsofuse' element = { <Termsofuse /> } />
             <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
             <Route path='/communityguidelines' element = { <CommunityGuidelines/> } />
+            <Route path='/anonymouscrowdfund' element = { <AnonymousCrowdfundForm/> } />
           </Routes>
         </div>      
     );
