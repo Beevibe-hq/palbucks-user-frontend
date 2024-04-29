@@ -215,3 +215,10 @@ export const addCountryOptions = (data) => {
         payload:data
     }
 }
+
+export const updateAnonymousCrowdfundData = (data) => {
+    return {
+        type: 'updateAnonymousCrowdfundData',
+        payload:data
+    }
+}

@@ -18,6 +18,8 @@ import activesettingsicon from '../../images/settings1.svg'
 import logouticon from '../../images/logout.svg'
 import arrowright from '../../images/arrowright.svg'
 import arrowwhite from '../../images/arrowwhite.svg'
+import arrowDown from "../../images/Front arrow icon.svg"
+import outIcon from "../../images/Out.svg"
 
 import Navelements from '../navelements/navelements'
 import { useEffect, useState} from 'react'
@@ -95,9 +97,12 @@ function Sidebar(){
       
     
     return(
-        <div className = {` ${ isMobile ? sidebaropen ? 'left-0 w-[80%] minitablet:w-[60%] ' : '-left-full' : sidebarslid ? 'w-[100px] flex flex-col items-center' : `md:block w-[90%] minitablet:w-[60%]
-            brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]` }  h-full fixed z-30 top-0 bottom-0 border-orange-600 border-0  py-16 md:py-[35px]
-            bg-white flex-shrink-0 transition-all duration-500 ease-in-out font-arial `} >
+        <div className={`${
+            isMobile ? 
+            (sidebaropen ? 'left-0 w-[80%] minitablet:w-[60%] overflow-y-auto scrollContainer' : '-left-full') : 
+            (sidebarslid ? 'w-[100px] flex flex-col items-center' : 'md:block w-[90%] minitablet:w-[60%] overflow-y-auto brkpoint:w-[250px] lg:w-[280px] xl:w-[320px]')
+        } h-full fixed z-30 top-0 bottom-0 border-orange-600 border-0 py-16 md:py-[35px] bg-white flex-shrink-0 transition-all duration-500 ease-in-out font-arial`}
+        >
             
             <div className = 'mb-[60px] lg:mb-0'>
                 
@@ -178,7 +183,7 @@ function Sidebar(){
                         dispatch(closesidebar())
                     } }                   
                  >                       
-                    <div className="h-[82px] flex items-center justify-between px-[15px] md:px-5 ">
+                    <div className={` h-[82px] flex items-center justify-between px-[15px] md:px-5 `}>
                         <div className = {`flex gap-[10px] items-center text-xl cursor-pointer`}  >
                             <img src={ activepage == 'settings' ? settingsicon : settingsicon2 } alt="settings crowdfund icon" className = 'w-[20px]' />
                             <h2 className={`${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } text-base leading-4 ${activepage == 'settings' ? 'font-semibold':'font-normal' } `}>Settings & Privacy</h2>
@@ -188,10 +193,109 @@ function Sidebar(){
                     </div>
                 </NavLink>
 
+                <div className="px-[15px] py-[30px]">
+                    <div className={` md:hidden border-t-[#888888] border-t-[0.5px] `} >
+                        
+                        <div className={`flex gap-[10px] items-center justify-between cursor-pointer py-6 `}  >
+                            <h2 className='text-base leading-4 text-[#525252] ' >
+                                Support & Legal
+                            </h2>
+                            <img src={arrowDown} alt="down arrow" className='w-[18px]' />
+                        </div>
+                        <ul className='text-[#525252] text-sm border-l-[1px] border-l-[#37BCF7] pl-2 flex flex-col gap-1 ' >
+                            <Link to='/howitworks'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='pb-2' >
+                                    How it works
+                                </li>
+                            </Link>
+                            
+                            <Link to='/helpcenter'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='py-2' >
+                                    Help center
+                                </li>
+                            </Link>
+                            
+                            <Link to='/termsofuse'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='py-2' >
+                                    Terms of use
+                                </li>
+                            </Link>
+                            
+                            <Link to='/termsofuse'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='py-2' >
+                                    Terms of use
+                                </li>
+                            </Link>
+                            
+                            <Link to='/privacypolicy'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='py-2' >
+                                    Privacy policy
+                                </li>
+                            </Link>
+
+                            <Link to='/communityguidelines'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='py-2' >
+                                    Community guidelines
+                                </li>
+                            </Link>
+
+                            <Link to='/communityguidelines'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='py-2 flex justify-between w-full' >
+                                    <span className=''>AML policy</span>
+                                    <img src={outIcon} alt="" className='w-[14px]' />
+                                </li>
+                            </Link>
+
+                            <Link to='/communityguidelines'
+                                onClick={() => {
+                                    dispatch(closesidebar())
+                                }}
+                            >
+                                <li className='pt-2 flex justify-between w-full' >
+                                    <span className=''>KYC guidelines</span>
+                                    <img src={outIcon} alt="" className='w-[14px]' />
+                                </li>
+                            </Link>
+
+                        </ul>
+
+                    </div>
+                </div>
+
             </nav>
 
             <div 
-                className = 'absolute bottom-[5%] left-[10px] md:left-5 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-normal cursor-pointer'
+                className={`md:absolute md:bottom-[5%] md:left-5 flex items-center gap-4 text-[#525252] text-base xl:text-lg font-normal cursor-pointer
+                px-[15px] md:px-0
+                `}
                 onClick={handleLogout}
             >
                 <img src={logouticon} alt="Logout icon" className="w-[24px]" />

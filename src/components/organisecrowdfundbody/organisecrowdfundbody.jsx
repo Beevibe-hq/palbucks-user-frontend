@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import Loadingspinner from "../loadingspinner/loadingSpinner";
 import { useMediaQuery } from "react-responsive";
 import Select from "react-select";
+import SuccessfulCrowdfundLaunchModal from "./successfulcrowdfundlaunch";
 
 // Variables and components for Category react select
 export const options = [
@@ -122,8 +123,8 @@ function Organisecrowdfundbody(){
 
     const startCrowdfund = async () => {
         setIsLoading(true)
-        
-        
+                
+        console.log(formdata)
         const form = new FormData();
         // Iterate over the properties of the formdata object
         for (const [key, value] of Object.entries(formdata)) {
@@ -171,21 +172,7 @@ function Organisecrowdfundbody(){
             alert('Please upload a banner for your crowdfund')
             setIsLoading(false)
             return;
-        }
-
-        /* // Remove the existing co_organisers key from form
-        form.delete('co_organisers');
-
-        // Assuming formdata.co_organisers is an array of numbers as strings
-        const coOrganisers = formdata.co_organisers.map(Number);
-        console.log(coOrganisers)
-
-        // Now coOrganisers is an array of actual numbers
-        form.append('co_organisers', coOrganisers.join(',')); // Join as a comma-separated string
-
-        
-        console.log(`the type of the coorganisers pk is :  ${typeof(formdata.co_organisers[0])}`)
-        console.log(`here are the coorganisers pk: ${typeof(formdata.co_organisers)}`) */
+        }        
         
         const access_token = localStorage.getItem('access_token')
 
@@ -204,12 +191,23 @@ function Organisecrowdfundbody(){
         if(sendCrowdfund.ok){
             console.log('success')            
             dispatch(addCrowdfundEvent(resp))
-            navigate('/home')
+
+
+            // Display successful crowdfund launch modal
+            setSuccessfulLaunchModal({display:true, crowdfundData:resp})
+            //navigate('/home')
         }
         
         setIsLoading(false)
     };
-      
+
+    const [successfulLaunchModal, setSuccessfulLaunchModal] = useState({
+        display: false,
+        crowdfundData: {
+            id:12
+        }
+    })
+        
 
     const [managetoggles, setmanagetoggles] = useState({
         crowdfundingdetails:true,
@@ -246,23 +244,11 @@ function Organisecrowdfundbody(){
             <p className="hidden md:block text-lg tracking-[0.8px] mb-14 " >Organising your campaign take less than 2 minutes</p>
 
             <div className="max-w-full 2xl:max-w-[960px] 4xl:max-w-[1000px] ">                
-                <div className=" bg-white rounded-[4px] mb-[59px] " >
+                <div className="bg-white rounded-[4px] mb-[59px] " >
                     <div className="text-center py-3 md:py-6 border-b-2 border-[#e5e2e2] ">
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
                     <div className="p-3 md:p-7 flex flex-col items-center relative " >
-                        {/* <div className={` ${formdata.banner ? 'bg-inherit' : 'bg-[#F9F9F9]' }  w-[837px] h-[240px] flex justify-center items-center mb-5 `} >
-                            <label htmlFor="campaignimage" className={` ${formdata.banner ? 'hidden' : 'block'} cursor-pointer`} >
-                                <img src={uploadicon} alt="upload icon" className="w-9 h-11"  />
-                            </label>
-                            <input type="file" name="campaignimage" id="campaignimage" className="hidden" 
-                            accept="image/png, image/jpeg, image/jpg, image/svg+xml"
-                            onChange={ (event) => {
-                                setformdata((prevformdata)=> ({...prevformdata, banner:URL.createObjectURL(event.target.files[0]) }) )
-                            } }                            
-                            />
-                            <img src={formdata.banner} alt="" className={` ${formdata.banner? 'w-[442px] h-[240px]' : 'hidden' }`}  />
-                        </div> */}
                         <CropImage formdata = {formdata} setformdata = {setformdata}  />
                         <div className={` ${ formdata.banner ? '' : 'mt-4 md:mt-5' } flex gap-3 items-center py-1 `} >
                             <img src={formdata.banner ? uploadSuccessIcon:infoicon} alt="info icon" />
@@ -547,7 +533,8 @@ function Organisecrowdfundbody(){
                     </span>
                 </button>
                 <button className="text-[#37BCF7] mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[250px] w-fit md:w-1/2 md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >Not now, save for later</button>
-
+                
+                <SuccessfulCrowdfundLaunchModal successfulLaunchModal = {successfulLaunchModal} setSuccessfulLaunchModal = {setSuccessfulLaunchModal} />
             </div>
 
         </div>

@@ -8,17 +8,43 @@ import Select from "react-select"
 import { options } from "../../components/organisecrowdfundbody/organisecrowdfundbody"
 import arrowdown2 from "../../images/organiseCrowdfund/arrowdown.svg"
 import { useMediaQuery } from "react-responsive"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { updateAnonymousCrowdfundData } from "../../actions/actions"
+import { useNavigate } from "react-router-dom"
 
-function AnonymousCrowdfundForm() {
+function AnonymousCrowdfundFormTitle() {
 
     const isMobile = useMediaQuery({
         query:'(max-width: 767px)'   
     })
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const prevCrowdfundData = useSelector((state) => state.anonymousCrowdfundData )
+    //console.log(prevCrowdfundData)
+    //alert(prevCrowdfundData.personalInfo.phone)
+
+    /* const [crowdfundData, setCrowdfundData] = useState(() => {
+        if (prevCrowdfundData && prevCrowdfundData.crowdfundData) {
+            const { tags, title, location } = prevCrowdfundData.crowdfundData;
+                return { tags, title, location };
+        } else {
+        // If prevCrowdfundData doesn't exist or doesn't contain the desired properties, set default values
+            return {
+                tags: '',
+                title: '',
+                location: ''
+            };
+        }
+    }); */
+    const [crowdfundData, setCrowdfundData] = useState({
+        tags: '',
+        title: '',
+        location: ''
+    })
+
     
     const [countries, setcountries] = useState([])    
     useEffect(() => {
-
         const getCountries = async () => {
             try {
                 const response = await fetch('https://restcountries.com/v3.1/all?fields=name');
@@ -36,63 +62,12 @@ function AnonymousCrowdfundForm() {
         value: country.name.common,
         label: country.name.common
     })).sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically    
-
-    const [isLoginLoading, setIsLoginLoading] = useState(false)
-    
-    //const today = new Date();
-    /* const [formdata, setformdata] = useState({
-        banner:null,        
-        date_posted:today.toISOString(),        
-        end_date: "",        
-        organiser:{
-            pk:userInfo.pk,
-            first_name:userInfo.first_name,
-            last_name:userInfo.last_name,
-            email:userInfo.email,
-            username:userInfo.username
-        },
-        title:'',
-        description:'',
-        start_date:today.toISOString(),
-        target_price:0,
-        amt_raised:0,
-        tags:'',
-        location:'',
-        co_organisers:[],
-    }) */
-
-    const [anonymousCrowdfundData, setAnonymousCrowdfundData] = useState({
-        crowdfundData: {
-            title: '',
-            tag: '',
-            date_posted:'',        
-            end_date: "", 
-            banner: null,
-            description: '',
-            start_date: '',
-            target_price:0,
-            amt_raised:0,
-            tags:'',
-            location:'',
-            co_organisers:[],
-        },
-        personalInfo: {
-            first_name:'',
-            last_name:'',
-            dateOfBirth:'',
-            username:'',
-            gender:1,
-            phone:'293',
-            bio:'Humble man',
-            email: '',            
-            password:''
-        }
-    })
-
-    const [tag, setTag] = useState('')
+                    
     const CustomDropdownIndicator = () => (
         <img src = {arrowdown2} alt = 'down arrow' className="w-[15px] h-[14px] " />
     )
+
+
     
     return (
         <div className="relative font-arial" >
@@ -109,7 +84,7 @@ function AnonymousCrowdfundForm() {
 
 
                 <div className="bg-white w-full phones:w-[98%] md:w-[70%] lg:w-[950px] mx-auto flex flex-col gap-[2.5px] md:gap-[5px] shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded md:rounded-[10px] ">                
-                    <div className="py-4 md:py-[30px] px-8 md:pl-[50px] md:pr-[30px] ">
+                    <div className="py-4 md:py-[30px] px-6 md:pl-[50px] md:pr-[30px] ">
                         <h3 className="text-lg md:text-[30px] font-black md:leading-[39px] " >
                             Let's begin your journey
                         </h3>
@@ -127,7 +102,10 @@ function AnonymousCrowdfundForm() {
                                 name="title" 
                                 id="title" 
                                 placeholder="Enter your campaign title"
-                                /* onChange={handleInputChange} */
+                                value={crowdfundData.title}
+                                onChange={(e) => {
+                                    setCrowdfundData((prevData) => ({...prevData, title:e.target.value}) )
+                                } }
                                 className={`w-full md:min-w-[390px] h-[38px] md:h-[60px] px-3 md:px-[22px] rounded-sm md:rounded border-[1.5px] border-black bg-[#F9F9F9] outline-none
                                     focus:border-[#37BCF7] focus:border-[2px] md:focus:border-[2px] focus:caret-[#37BCF7] text-sm md:text-lg   `}
                             />
@@ -143,9 +121,10 @@ function AnonymousCrowdfundForm() {
                             <Select                                
                                 options={options}
                                 placeholder="Select category"
-                                onChange={(e) => {                                    
-                                    setTag(e.value)
+                                onChange={(e) => {
+                                    setCrowdfundData((prevData) => ({...prevData, tags:e.value}) )
                                 }}
+                                defaultValue={crowdfundData.tags? crowdfundData.tags: ''}
                                 components={{
                                     DropdownIndicator: CustomDropdownIndicator,
                                     IndicatorSeparator : () => null 
@@ -200,8 +179,8 @@ function AnonymousCrowdfundForm() {
                                 options={countryOptions}
                                 placeholder="Select country"
                                 onChange={(e) => {
-                                    /* setSelectedCountry(e.value) */
-                                }}
+                                    setCrowdfundData((prevData) => ({...prevData, location:e.value}) )
+                                } }
                                 components={{
                                     DropdownIndicator: CustomDropdownIndicator,
                                     IndicatorSeparator : () => null
@@ -250,12 +229,18 @@ function AnonymousCrowdfundForm() {
                     `} */
                     className="min-w-[208px] md:min-w-[228px] mt-[35px] md:mt-[75px] mb-8 px-[50px] hover:px-[65px] py-[10px] md:py-[20.1px] transition-all duration-500 
                         font-bold bg-black text-white rounded md:rounded-[8px] text-lg md:text-[28px] mx-auto flex items-center justify-center  " 
-                    /* onClick  = {finishSignup} */                 
+                    onClick={() => {
+                        if (crowdfundData.title !== '' && crowdfundData.location !== '' && crowdfundData.tags !== '') {
+                            console.log(crowdfundData)
+                            dispatch(updateAnonymousCrowdfundData({crowdfundData:crowdfundData}))    
+                            navigate('/anonymouscrowdfundformamount')
+                        } else {
+                            alert('Fill all inputs')
+                        }
+                        
+                    }}                 
                     >
-                    <div className={` ${isLoginLoading ? 'block' : 'hidden' } `}>
-                        <Loadingspinner width = '28px' height = '28px' />
-                    </div>
-                    <span className={` ${isLoginLoading ? 'hidden' : 'block' } `}>
+                    <span className={` block`}>
                         Continue
                     </span>
                 </button> 
@@ -265,4 +250,4 @@ function AnonymousCrowdfundForm() {
     )
 }
 
-export default AnonymousCrowdfundForm
+export default AnonymousCrowdfundFormTitle
