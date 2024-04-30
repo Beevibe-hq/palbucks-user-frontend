@@ -9,7 +9,7 @@ import bgradient3 from "../../images/authpages/bgradient2.svg"
 import backarrow from "../../images/backarrow.svg"
 import verifiedicon from "../../images/authpages/verify.svg"
 
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 //import OtpInput from "../../components/otpinput/otpinput"
 import OtpInput from 'react-otp-input';
@@ -25,6 +25,12 @@ const Otppage = () => {
 
     const signupInfo = useSelector((state) => state.signupInfo)
     
+    const location = useLocation()
+     //Check if the 'from' parameter is present in the URL showing it's coming from anonymouscrowdfund
+    const params = new URLSearchParams(location.search);
+    const fromFeature = params.get('from') === 'anonymouscrowdfund';
+
+
     const navigate = useNavigate()
     const [otp, setOtp] = useState()
     let verified = useSelector((state) => state.otpVerified)
@@ -109,7 +115,11 @@ const Otppage = () => {
                         font-bold bg-black text-white rounded md:rounded-[8px] text-lg md:text-[28px] mx-auto flex items-center justify-center  " 
                         onClick={ () => 
                             {                                                                                                   
-                                navigate('/completesignup')
+                                if (fromFeature) {
+                                    navigate('/anonymouscrowdfundformdescription')
+                                } else {
+                                    navigate('/completesignup')
+                                }
                             } 
                         }
                         >

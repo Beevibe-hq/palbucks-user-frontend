@@ -44,7 +44,11 @@ import Donate from './pages/cardDonation/cardDonation';
 import Profilepage from './pages/profilepage/profilepage';
 //import Pusher from 'pusher-js/types/src/core/pusher';
 import Pusher from 'pusher-js';
-import AnonymousCrowdfundForm from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundForm';
+import AnonymousCrowdfundFormTitle from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundFormTitlePage';
+import AnonymousCrowdfundTargetAmountPage from './pages/AnonymousCrowdfundForm/TargetAmountPage';
+import AnonymousCrowdfundFormDescription from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundFormDescriptionPage';
+import AnonymousCrowdfundFormBanner from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundFormBannerPage';
+import DiscoverPage from './pages/discover/DiscoverPage';
 
 function App() {
     
@@ -145,7 +149,6 @@ function App() {
             <Route exact path='/home' element = { <PrivateRoute element = {<Home />} />} >
               <Route path='/home' element={<Home />} />
             </Route>
-
             
             <Route path='/detailed/:id' element = { <Detailedevent /> } />
             <Route path = '/:id/donate' element = { <Donate /> } />
@@ -169,7 +172,12 @@ function App() {
             <Route path = '/termsofuse' element = { <Termsofuse /> } />
             <Route path = '/privacypolicy' element = { <Privacypolicy /> }  />
             <Route path='/communityguidelines' element = { <CommunityGuidelines/> } />
-            <Route path='/anonymouscrowdfund' element = { <AnonymousCrowdfundForm/> } />
+            <Route path='/anonymouscrowdfundformtitle' element={<AnonymousCrowdfundFormTitle />} />
+            <Route path='/anonymouscrowdfundformamount' element={<AnonymousCrowdfundTargetAmountPage />} />
+            <Route path='/anonymouscrowdfundformdescription' element={<AnonymousCrowdfundFormDescription />} />
+            <Route path='/anonymouscrowdfundformbanner' element={<AnonymousCrowdfundFormBanner />} />
+            <Route path='/discover' element={<DiscoverPage />} />
+          
           </Routes>
         </div>      
     );

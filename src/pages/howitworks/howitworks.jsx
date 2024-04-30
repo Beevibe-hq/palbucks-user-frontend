@@ -88,13 +88,13 @@ let setup_crowdfunding_guide = [
         step:'Enter Crowdfunding details',
         icon:icon2,
         description: 'Type in your crowdfunding details, that is: (1) Title of the campaign, (2) Description  (3) Category of campaign',
-        background:'green',
+        background:'white',
     },
     {
         step:'Enter Target Amount',
         icon:icon3,
         description:'Next you will have to enter your target amount (denomination value is USDT). This amount will be between 100 USDT to 1 million USDT. ',
-        background:'green'
+        background:'white',
     },
     {
         step:'Add a Co-organiser (Optional) ',
@@ -112,13 +112,13 @@ let setup_crowdfunding_guide = [
         step:'Upload a Campaign Image',
         icon:icon6,
         description:'Finally, you will have to upload an image that will be appropriate for your campaign. Your image should follow our Community Guidelines.',
-        background:'green'
+        background:'white',
     },
     {
         step:'Let Everyone Know About your Campaign',
         icon:icon7,
         description:'Share your crowdfunding campaign on social media by either copying the generated link for your campaign or by using the share button.',
-        background:'green'
+        background:'white',
     },
     {
         step:'Manage your Campaign',

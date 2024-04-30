@@ -254,3 +254,80 @@ code {
   scrollbar-width: none;
   /* Firefox */
 }
+
+
+
+
+
+
+
+
+
+
+.discovereventparent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 370px));
+  gap: 30px;
+  row-gap: 50px;
+
+}
+
+
+@media screen and (max-width: 1280px) {
+  .discovereventparent {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    row-gap: 40px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .discovereventparent {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    row-gap: 30px;
+  }
+}
+
+
+.BlockComponent {
+  /* Add styles for each block component */
+  width: calc(25% - 20px);
+  /* Adjust width as needed */
+  margin: 10px;
+  /* Adjust margin as needed */
+}
+
+@media screen and (max-width: 1200px) {
+  .BlockComponent {
+    width: calc(20% - 20px);
+    /* Adjust width as needed */
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .BlockComponent {
+    width: calc(25% - 20px);
+    /* Adjust width as needed */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .BlockComponent {
+    width: calc(33.33% - 20px);
+    /* Adjust width as needed */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .BlockComponent {
+    width: calc(50% - 20px);
+    /* Adjust width as needed */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .BlockComponent {
+    width: calc(100% - 20px);
+    /* Adjust width as needed */
+  }
+}

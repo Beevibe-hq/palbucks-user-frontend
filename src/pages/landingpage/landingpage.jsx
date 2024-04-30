@@ -128,7 +128,6 @@ function LandingPage(){
                 //alert('middle')
             }
         }
-
         
     }
 
@@ -159,7 +158,7 @@ function LandingPage(){
                         <span>How it works</span>
                     </Link>
 
-                    <Link to = '/discover' className="text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] "  >
+                    <Link to = '/discover' className="text-[#525252] text-lg py-[5px] px-[10px] hover:p-[10px] hover:bg-[#D8D8D8] leading-[14px] flex items-center hover:rounded-[5px] ">
                         <span>Discover</span>
                     </Link>
 
@@ -198,7 +197,7 @@ function LandingPage(){
                 </nav>
 
                 <button className="mb-5 bg-[#000] rounded w-full py-[10px] px-5 font-bold text-[#FFF]" 
-                    onClick={()=>{navigate('/anonymouscrowdfund')}} 
+                    onClick={()=>{navigate('/anonymouscrowdfundformtitle')}} 
                 >
                     Start a crowdfund
                 </button>
@@ -224,7 +223,7 @@ function LandingPage(){
                     transition-all duration-500 py-3 md:py-5 lg:py-[23.4px]
                     font-bold bg-black text-white rounded md:rounded-[10px]
                     text-base md:text-2xl lg:text-3xl mx-auto block font-arial"
-                    onClick={()=>{navigate('/anonymouscrowdfund')}} 
+                    onClick={()=>{navigate('/anonymouscrowdfundformtitle')}} 
                      >
                     Start a crowdfund
                 </button>
@@ -503,7 +502,7 @@ function LandingPage(){
                 </div>
 
                 <button className="mb-[15px] lg:mb-[33px] font-arial px-[26px] lg:px-[52px] hover:px-[72.5px] py-[10.4px] lg:py-[23.4px] transition-all duration-500 font-bold bg-black text-white rounded lg:rounded-[10px] text-base lg:text-3xl mx-auto block " 
-                    onClick={()=>{navigate('/anonymouscrowdfund')}} 
+                    onClick={()=>{navigate('/anonymouscrowdfundformtitle')}} 
                 >
                     Start a crowdfund
                 </button>

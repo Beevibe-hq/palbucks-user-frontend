@@ -4,6 +4,7 @@ import moreicons from '../../images/more icon.svg'
 import applogo from "../../images/appLogo.svg";
 import menuicon from "../../images/Hamburger Menu.svg"
 import arrowicon from "../../images/arrowright2.svg"
+import outIcon from "../../images/Out.svg"
 import Notificationsicon from '../../images/notificationsicon';
 import Moreicons from '../../images/moreicons';
 import Searchbar from "../searchbar/searchbar";
@@ -90,9 +91,6 @@ function Navbar(props){
             </div>
 
             <div className = 'flex items-center gap-3 xphones:gap-[15px] md:gap-4 lg:gap-8'>
-                {/* <img src={notificationsicon} alt="notifications icon" className = ' cursor-pointer hidden md:block w-[21px]' 
-                onClick={notificationspage}
-                /> */}
                 <Notificationsicon onClick = {notificationspage} active = {onnotificationspage ? true : false } />
                 <div className=" flex gap-2 items-center">
                     <img 
@@ -101,14 +99,13 @@ function Navbar(props){
                         alt="user avatar" 
                         className={` ${onprofilepage ? 'border-[3px] border-[#37BCF7]': '' } w-[28px] phones:w-[35px] md:w-[40px] cursor-pointer rounded-[50%]`} 
                     />
-                    <img 
+                    {/* <img 
                         src={applogo} 
                         alt="Palbucks logo" 
                         className = "block w-[19px] phones:w-[22px] md:hidden" 
-                    />
+                    /> */}
                     <h2 className = 'hidden md:block text-base font-black'>{userInfo?.first_name? userInfo.first_name : ''} {userInfo?.last_name? userInfo.last_name:''}</h2>
-                </div>
-                {/* <img src={moreicons} alt="More icons" className = 'hidden md:block w-[35px] h-[10px] cursor-pointer'  /> */}
+                </div>                
                 <Moreicons active = {moreIconsActive} onClick = {handlemoreicons} />
             </div>
             
@@ -148,6 +145,20 @@ function Navbar(props){
                         <li  className='flex justify-between w-full bg-white cursor-pointer py-[15px] pl-[15px] pr-[22px] hover:bg-[#37BCF71A] mb-[10px] '>
                             <span className='text-[17px] leading-4'>Community guidelines</span>
                             <img src={arrowicon} alt="" className='w-[7px] h-[15px]' />
+                        </li>
+                    </Link>
+
+                    <Link to= '/communityguidelines' >
+                        <li  className='flex justify-between w-full bg-white cursor-pointer py-[15px] pl-[15px] pr-[22px] hover:bg-[#37BCF71A] mb-[10px] '>
+                            <span className='text-[17px] leading-4'>AML policy</span>
+                            <img src={outIcon} alt="" className='w-[22px] h-[22px]' />
+                        </li>
+                    </Link>
+
+                    <Link to= '/communityguidelines' >
+                        <li  className='flex justify-between w-full bg-white cursor-pointer py-[15px] pl-[15px] pr-[22px] hover:bg-[#37BCF71A] mb-[10px] '>
+                            <span className='text-[17px] leading-4'>KYC guidelines</span>
+                            <img src={outIcon} alt="" className='w-[22px] h-[22px]' />
                         </li>
                     </Link>
 

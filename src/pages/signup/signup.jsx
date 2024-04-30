@@ -8,7 +8,7 @@ import bgradient2 from "../../images/bgradient1.svg"
 import bgradient3 from "../../images/authpages/bgradient2.svg"
 
 
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
@@ -22,6 +22,11 @@ const Signup = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    //Check if the 'from' parameter is present in the URL showing it's coming from anonymouscrowdfund
+    const params = new URLSearchParams(location.search);
+    const fromFeature = params.get('from') === 'anonymouscrowdfund';
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -87,10 +92,20 @@ const Signup = () => {
                         // Dispatch the sign up info to redux store                        
                         const updatedSignupInfo = {email: accountInfo.email, password: accountInfo.password, otp: data.otp}
                         dispatch(setSignupInfo(updatedSignupInfo))
-                        dispatch(addOtp(data.otp))                        
+                        dispatch(addOtp(data.otp))   
+                        
+                        const {access_token, refresh_token} = data
+                        if(access_token && refresh_token){
+                            localStorage.setItem('access_token',access_token)
+                            localStorage.setItem('refresh_token',refresh_token);
+                        }
 
                         // Navigate to otp page
-                        navigate(`/otppage`)        
+                        if (fromFeature) {
+                            navigate(`/otppage?from=anonymouscrowdfund`)                            
+                        } else {
+                            navigate(`/otppage`)    
+                        }                        
                     }
                     else{
                         // Display error message                        
@@ -136,7 +151,7 @@ const Signup = () => {
         <main className="pt-[25px] lg:pt-[70px] pb-5 md:pb-10 mt-[70px] md:mt-[90px] lg:mt-[103px] " >
               <h2 className="mb-9 md:mb-[59px] text-center text-2xl md:text-[48px] font-black md:leading-[73px] tracking-[0.069px]
                 font-merriweather" >
-                Sign up
+                { fromFeature ? 'Create an account to continue' : 'Sign up'}
             </h2>
 
             <form action="" className=" block mx-auto w-fit max-w-[270px] phones:max-w-[300px] md:max-w-none font-arial  " >

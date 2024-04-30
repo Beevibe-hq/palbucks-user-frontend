@@ -200,36 +200,47 @@ const countryOptions = (state = [], action) => {
     }
 }
 
-const anonymousCrowdfundData = ( state = {
+const initialState = {
     crowdfundData: {
-            title: '',
-            tag: '',
-            date_posted:'',        
-            end_date: "", 
-            banner: null,
-            description: '',
-            start_date: '',
-            target_price:0,
-            amt_raised:0,
-            tags:'',
-            location:'',
-            co_organisers:[],
-        },
-        personalInfo: {
-            first_name:'',
-            last_name:'',
-            dateOfBirth:'',
-            username:'',
-            gender:1,
-            phone:'293',
-            bio:'Humble man',
-            email: '',            
-            password:''
-        }
-}, action) => {
+        title: '',
+        date_posted:'',        
+        end_date: "", 
+        banner: null,
+        description: '',
+        start_date: '',
+        target_price:0,
+        amt_raised:0,
+        tags:'',
+        location:'',
+        co_organisers:[],
+    },
+    personalInfo: {
+        first_name:'',
+        last_name:'',
+        dateOfBirth:'',
+        username:'',
+        gender:0,
+        phone:'29334234',
+        bio:'Humble man',
+        email: '',            
+        password: '',
+        otp:''
+    }
+}
+const anonymousCrowdfundData = ( state = initialState, action) => {
     switch (action.type) {
-        case "addAnonymousCrowdfundData":
-            return action.payload
+        case "updateAnonymousCrowdfundData":
+            return {
+                ...state,
+                crowdfundData: {
+                    ...state.crowdfundData,
+                    ...action.payload.crowdfundData,
+                },
+                personalInfo: {
+                    ...state.personalInfo,
+                    ...action.payload.personalInfo,
+                }
+            };
         default:
             return state;
     }
