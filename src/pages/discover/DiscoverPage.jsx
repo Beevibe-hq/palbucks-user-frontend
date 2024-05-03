@@ -35,6 +35,34 @@ function DiscoverPage() {
         }
     }
 
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        // Get crowdfund details
+        const getCrowdfunds = async() => {                            
+            try{
+                const response = await fetch('https://palbucks-api.onrender.com/funding/api/')                
+                const crowdfunds = await response.json()
+                if(response.ok){                                  
+                    //dispatch(loadCrowdfundEvents(crowdfunds))
+                    setData(crowdfunds)
+                    console.log(crowdfunds)
+                }else{
+                    console.error(crowdfunds)                    
+                }
+            }            
+            catch(error){
+                console.error(error)
+            }        
+        }
+
+        getCrowdfunds()
+    }, [])
+
+    useEffect(() => {
+        console.log(data[0])
+    },[data])
+
 
     //custom dropdown indicator for Select tag/component
     const CustomDropdownIndicator = () => (
@@ -50,10 +78,14 @@ function DiscoverPage() {
     const [selectedOption, setSelectedOption] = useState('all')
 
     const maxItemsPerRow = 4; // Adjust this based on your requirement
-    const numRows = Math.ceil(data.length / maxItemsPerRow);
+    //const numRows = Math.ceil(data.length / maxItemsPerRow);
 
 
-
+    if (data.length === 0) {
+        return (
+            <div>Loading...</div>       
+        )
+    }
     return (
         <div className="font-merriweather" >
             <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-10 lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
@@ -175,9 +207,9 @@ function DiscoverPage() {
                     data.map((crowdfund, index) => (
                         <DiscoverPageCrowdfunds
                             key={index}
-                            crowdfundImage={crowdfund.crowdfundImage}
+                            banner={crowdfund.banner}
                             title={crowdfund.title}
-                            organiser={crowdfund.organizer}
+                            organiser={crowdfund.organiser}
                             value={crowdfund.amt_raised}
                             target={crowdfund.target_price}
                         />
@@ -189,9 +221,9 @@ function DiscoverPage() {
                     {data.map((item, index) => (
                         <DiscoverPageCrowdfunds
                             key={index}
-                            crowdfundImage={item.crowdfundImage}
+                            banner={item.banner}
                             title={item.title}
-                            organiser={item.organizer}
+                            organiser={item.organiser}
                             value={item.amt_raised}
                             target={item.target_price}
                         />
@@ -217,12 +249,13 @@ export default DiscoverPage;
 
 
 function DiscoverPageCrowdfunds(props) {
-    
+    console.log(props.organiser);    
+
     return (
         <div className= {` w-full sm:max-w-[380px] md:max-w-[360px] smlaptops:max-w-[280px] mdlaptops:max-w-[350px]
             lglaptops:max-w-[350px]  min-w-[200px] cursor-pointer inline-block font-arial p-3 `} >
             <img
-                src={props.crowdfundImage? props.crowdfundImage:eventImg4}
+                src={props.banner? props.banner:eventImg4}
                 alt="Campaign pic"
                 className="mb-[18px] rounded-[10px] object-cover w-full 
                 h-[196px] phones:h-[196px] xphones:h-[196px]"
@@ -232,7 +265,11 @@ function DiscoverPageCrowdfunds(props) {
             </h3>
 
             <div className="mb-8 flex gap-[6px] items-center " >
-                <img src={props.organiser?.dp !== null ? props.organiser.dp :profileImgPlaceholder} alt="crowdfund organiser" className="rounded-full w-[30px] h-[30px] " />
+                <img
+                    src={props.organiser.dp !== null ? props.organiser.dp : profileImgPlaceholder}
+                    alt="crowdfund organiser"
+                    className="rounded-full w-[30px] h-[30px] "
+                />
                 <p className="text-lg" >
                     organized by <span className="font-black" >{props.organiser?.first_name ? props.organiser.first_name : 'Lucy'}</span>
                 </p>
@@ -252,30 +289,30 @@ function DiscoverPageCrowdfunds(props) {
 
 
 
-let data = [
-  {
-    organizer: {
-        dp: user,
-        first_name: 'Lucy'
-    },
-    tags:'Environment',
-    crowdfundImage: eventImg,    
-    title: 'Pastor Richard is helping 5000 children find a home',
-    description: "Description of the ongoing event that users will read to know what it's about",
-    amt_raised: 10000,
-    target_price:12000,
-    location:'Cyprus',
-    days:'30',
-    totaldonations:20403,
-    liked:true,
+let date = [
+    {
+        organiser: {
+            dp: user,
+            first_name: 'Lucy'
+        },
+        tags:'Environment',
+        banner: eventImg,    
+        title: 'Pastor Richard is helping 5000 children find a home',
+        description: "Description of the ongoing event that users will read to know what it's about",
+        amt_raised: 10000,
+        target_price:12000,
+        location:'Cyprus',
+        days:'30',
+        totaldonations:20403,
+        liked:true,
     },
     {
-        organizer: {
+        organiser: {
             dp: user2,
             first_name: 'John'
         },
         tags:'Environment',
-        crowdfundImage: eventImg2,    
+        banner: eventImg2,    
         title: 'Help our Lucy survive cancer',
         description: "Description of the ongoing event that users will read to know what it's about",
         amt_raised: 10000,
@@ -286,12 +323,12 @@ let data = [
         liked:false,
     },
     {
-        organizer: {
+        organiser: {
             dp: user3,
             first_name: 'Jenny'
         },
         tags:'Environment',
-        crowdfundImage: eventImg3,    
+        banner: eventImg3,    
         title: 'Thomas is painting to help raise mone for the less privileged',
         description: "Description of the ongoing event that users will read to know what it's about",
         amt_raised: 10000,
@@ -302,12 +339,12 @@ let data = [
         liked:true,
     },
     {
-        organizer: {
+        organiser: {
             dp: user4,
             first_name: 'Jenny'
         },
         tags:'Environment',
-        crowdfundImage: eventImg4,    
+        banner: eventImg4,    
         title: 'This is the title of the main user’s crowdfunding kcmsdij isnd ',
         description: "Description of the ongoing event that users will read to know what it's about",
         amt_raised: 10000,
@@ -318,12 +355,12 @@ let data = [
         liked:true,
     },
     {
-        organizer: {
+        organiser: {
             dp: user,
             first_name: 'Lucy'
         },
         tags:'Environment',
-        crowdfundImage: eventimg7,    
+        banner: eventimg7,    
         title: 'Help our Tia and Tiana celebrate the perfect birthday ',
         description: "Description of the ongoing event that users will read to know what it's about",
         amt_raised: 10000,
@@ -334,12 +371,12 @@ let data = [
         liked:true,
     },
     {
-        organizer: {
+        organiser: {
             dp: user,
             first_name: 'Lucy'
         },
         tags:'Environment',
-        crowdfundImage: eventimg7,    
+        banner: eventimg7,    
         title: 'Help our Tia and Tiana celebrate the perfect birthday ',
         description: "Description of the ongoing event that users will read to know what it's about",
         amt_raised: 10000,
@@ -350,12 +387,12 @@ let data = [
         liked:true,
     },
     {
-        organizer: {
+        organiser: {
             dp: user,
             first_name: 'Lucy'
         },
         tags:'Environment',
-        crowdfundImage: eventimg7,    
+        banner: eventimg7,    
         title: 'Help our Tia and Tiana celebrate the perfect birthday ',
         description: "Description of the ongoing event that users will read to know what it's about",
         amt_raised: 10000,
