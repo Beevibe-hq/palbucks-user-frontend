@@ -202,7 +202,7 @@ function Organisecrowdfundbody(){
     };
 
     const [successfulLaunchModal, setSuccessfulLaunchModal] = useState({
-        display: true,
+        display: false,
         crowdfundData: {
             id:12
         }
