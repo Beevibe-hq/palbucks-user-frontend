@@ -58,8 +58,8 @@ const crowdfundEvents = (state = [], action) =>{
             return action.payload
         case 'addCrowdfundEvent':
             return [...state,action.payload]
-        case 'loadCrowdfundEvents':
-            return /* state.concat(action.payload) */ action.payload
+        case 'loadCrowdfundEvents':/* state.concat(action.payload) */
+            return  action.payload
         case 'editEventData':            
             return state.map((event)=>{
                 if(event.id == action.payload.id){                  

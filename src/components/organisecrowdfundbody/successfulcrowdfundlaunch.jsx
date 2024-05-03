@@ -22,9 +22,9 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                 </div>
                 <div className="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8">
                 
-                    <div className={`w-[280px] phones:w-[350px] md:w-[681px] 2xl:w-[881px] md:min-h-[300px] 
+                    <div className={`w-[100%] xphones:w-[350px] md:w-[681px] 2xl:w-[881px] md:min-h-[300px] 
                     h-fit py-6 px-2 phones:px-4 md:p-10 bg-white rounded-md md:rounded-[10px]
-                    shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] font-arial`} >
+                    shadow-[0px_0px_72px_0px_rgba(0,0,0,0.04)] font-arial mx-auto`} >
                         {currentDisplay === 'congrats' ? 
                             <div className="flex flex-col">
                                 <button className=" text-[14px] md:text-[26px] font-bold ml-auto "
@@ -71,7 +71,7 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                     </p>
                                     <div className="flex items-start gap-3 mb-4 md:mb-10">
                                         <button className="" onClick={() => {
-                                            const textToCopy = `https://www.palbucks.co/${successfulLaunchModal.crowdfundData.id}`;
+                                            const textToCopy = `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
                                             navigator.clipboard.writeText(textToCopy)
                                             .then(() => {
                                                 console.log('Text copied to clipboard:', textToCopy);
@@ -87,7 +87,7 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
 
                                         <div className="flex flex-col relative -top-[2px]" >
                                             <span className="text-[13px] md:text-[18px] font-bold" >Copy link</span>        
-                                            <span className="text-[12px] md:text-sm " >{`https://www.palbucks.co/${successfulLaunchModal.crowdfundData.id}`}</span>    
+                                            <span className="text-[12px] md:text-sm " >{`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`}</span>    
                                         </div>    
                                     </div>
                                     <div className="mb-11 bg-[#35FAA01A] rounded-[10px] py-[10px] md:py-4 px-3 md:pl-6 md:pr-[93px] mx-auto " >
@@ -96,30 +96,53 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                     <div className="flex flex-col md:flex-row gap-[24px] md:gap-[30%] " >
                                         
                                         <div className="flex flex-col gap-6 md:gap-11" >
-                                            <div className="flex items-center gap-3 " >
+                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                                window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));        
+                                            } } >
                                                 <img src={facebookIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Facebook</span>
                                             </div>
-                                            <div className="flex items-center gap-3 " >
+                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                                const text = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
+                                                window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text));
+                                            } } >
                                                 <img src={xIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >X</span>
                                             </div>
-                                            <div className="flex items-center gap-3 " >
+                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                                window.open("fb-messenger://share/?link=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));
+
+                                            } } >
                                                 <img src={messengerIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Messenger</span>
                                             </div>    
                                         </div>
                                         
                                         <div className="flex flex-col gap-6 md:gap-11" >
-                                            <div className="flex items-center gap-3 " >
+                                            <div className="flex items-center gap-3 " onClick={() => {
+                                                    /* const text = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
+                                                    window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text)); */
+                                                    
+                                                    const text = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
+                                                    const imageUrl = "https://palbucks-bucket.s3.amazonaws.com/crowdfunding/banners/66a4b9eff63f4605807b0f081aa07caf_Screenshot_from_2024-04-16_04-39-23.png"
+                                                    const encodedText = encodeURIComponent(text);
+                                                    const encodedImageUrl = encodeURIComponent(imageUrl);
+                                                    window.open(`https://wa.me/?text=${encodedText}&attachment=${encodedImageUrl}`);
+                                            }} >
                                                 <img src={whatsappIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Whatsapp</span>
                                             </div>       
-                                            <div className="flex items-center gap-3 " >
+                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                                window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));        
+                                            } } >
                                                 <img src={instagramIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Instagram</span>
                                             </div>
-                                            <div className="flex items-center gap-3 " >
+                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                                const subject = "Check out this link";
+                                                const body = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
+                                                window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                                            } } >
                                                 <img src={mailIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Email</span>
                                             </div>        
