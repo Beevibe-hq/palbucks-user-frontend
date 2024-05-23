@@ -49,6 +49,11 @@ import AnonymousCrowdfundTargetAmountPage from './pages/AnonymousCrowdfundForm/T
 import AnonymousCrowdfundFormDescription from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundFormDescriptionPage';
 import AnonymousCrowdfundFormBanner from './pages/AnonymousCrowdfundForm/AnonymousCrowdfundFormBannerPage';
 import DiscoverPage from './pages/discover/DiscoverPage';
+import Kyc from './pages/kyc/kyc';
+import BankWithdrawal from './pages/bankWithdrawal/bankwithdrawal';
+import UsdtWithdrawal from './pages/usdtWithdrawal/usdtWithdrawal';
+import FundWalletWithBank from './pages/fundWallet/fundWallet';
+import FundWalletWithCrypto from './pages/fundWallet/fundWalletWithCrypto';
 
 function App() {
     
@@ -177,7 +182,11 @@ function App() {
             <Route path='/anonymouscrowdfundformdescription' element={<AnonymousCrowdfundFormDescription />} />
             <Route path='/anonymouscrowdfundformbanner' element={<AnonymousCrowdfundFormBanner />} />
             <Route path='/discover' element={<DiscoverPage />} />
-          
+            <Route path='/kyc' element={<Kyc />} />
+            <Route path='/bankwithdrawal' element = { <BankWithdrawal /> } />
+            <Route path='/usdtwithdrawal' element={<UsdtWithdrawal />} />
+            <Route path='/bankfunding' element={<FundWalletWithBank />} />
+            <Route path='/cryptofunding' element ={ <FundWalletWithCrypto />  } />
           </Routes>
         </div>      
     );

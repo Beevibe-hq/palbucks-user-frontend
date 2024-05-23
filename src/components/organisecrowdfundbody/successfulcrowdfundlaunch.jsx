@@ -46,7 +46,7 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                     <p className=" mb-[26px] md:mb-[59px] text-center text-[13px] md:text-[20px] leading-[32px]" >
                                         You have successfully launched your campaign
                                     </p>
-                                    <button className=" rounded-lg bg-[#000000] py-3 md:py-5 px-4 md:px-8 text-[#FFFFFF] text-sm md:text-2xl font-bold "
+                                    <button className="rounded md:rounded-lg bg-[#000000] py-3 md:py-5 px-4 md:px-8 text-[#FFFFFF] text-sm md:text-2xl font-bold "
                                     onClick={() => {setCurrentDisplay('share')}}
                                     >
                                         Share your campaign
