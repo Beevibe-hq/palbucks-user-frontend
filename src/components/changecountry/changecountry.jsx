@@ -76,7 +76,7 @@ function Changecountry(props) {
                 //alert('Location changed successfully')
                 localStorage.setItem('userInfo', JSON.stringify(response))
             }else{
-                alert('Email change failed')
+                alert('Location change failed')
             }
         }
         setIsLoading(false)
@@ -97,17 +97,7 @@ function Changecountry(props) {
             <hr className = " border-[1px] border-[#C4C4C4] " />
             
             <div className = {` ${opencountry ? '': 'hidden'} flex flex-col gap-3 px-[15px] md:px-7 py-3 md:py-6`} >                  
-            <div className ={` ${opencountry ? 'flex flex-col md:flex-row md:items-center ' : 'hidden'} gap-5 md:gap-8 `} >
-                    
-                    {/* <input 
-                        type="text" 
-                        placeholder = "Search your country" 
-                        className = {`
-                            w-[250px] h-[46px] border-[0.5px] border-[#DDDDDD] 
-                            text-sm md:text-base py-2 px-2 md:px-5 outline-0 rounded-lg 
-                            focus:border-[#2CA9F2] focus:border-2 `} 
-                    /> */}
-
+            <div className ={` ${opencountry ? 'flex flex-col md:flex-row md:items-center ' : 'hidden'} gap-5 md:gap-8 `} >                    
                     <Select
                         options={countryOptions}
                         placeholder="Search your country"

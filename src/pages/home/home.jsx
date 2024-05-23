@@ -9,6 +9,7 @@ import Sidebar from "../../components/sidebar/sidebar";
 import { loadCrowdfundEvents } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
 import {refreshToken} from "../../auth/refreshToken"
+import KycModal from "../../components/kyc/kycModal";
 
 function Home(){
 
@@ -23,6 +24,8 @@ function Home(){
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
     })
+
+    const [kycModal, setKycModal] = useState(true)
 
     useEffect(()=>{
         dispatch(setlinkcolor('home'))
@@ -74,6 +77,7 @@ function Home(){
                 {/* { homeorevent == 'home' ? <Homebody /> : <Detailedevent details = {homeorevent} /> } */}
                 <Homebody />
             </div>
+            <KycModal kycModal = {kycModal} setKycModal = {setKycModal} />
         </div>
     )
 }

@@ -11,6 +11,7 @@ import { getOrientation } from 'get-orientation/browser';
 //import ImgDialog from '../ImgDialog';
 import { getCroppedImg, getRotatedImage } from '../canvasUtils';
 import { uploadicon } from '../../../images';
+import { useMediaQuery } from 'react-responsive';
 
 const ORIENTATION_TO_ANGLE = {
   '3': 180,
@@ -94,6 +95,10 @@ const Demo = ({ formdata, setformdata }) => {
       setImageSrc(imageDataUrl);      
     }
   };
+
+  const isMobile = useMediaQuery({
+      query:'(max-width:768px)'
+  })
   
 
   return (
@@ -113,7 +118,7 @@ const Demo = ({ formdata, setformdata }) => {
                 crop={crop}
                 rotation={rotation}
                 zoom={zoom}
-                aspect={6 / 3}              
+                aspect= {isMobile ? 6 / 6 : 6 /4} 
                 onCropChange={setCrop}
                 onRotationChange={setRotation}
                 onCropComplete={onCropComplete}

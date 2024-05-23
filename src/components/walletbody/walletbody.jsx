@@ -13,9 +13,11 @@ import Activities from "../activities/activities"
 import { useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import Select from 'react-select'
+import WithdrawalModal from "../withdrawalModal/withdrawalModal"
+import FundingModal from "../fundingModal/fundingModal"
 
 function Walletbody(){
-
+    
     const processtransactiondata = () =>{
         let today = new Date().toDateString() //Get today's date
         let day = parseInt(today.split(' ')[1]) //Get the day and convert it to number
@@ -57,6 +59,9 @@ function Walletbody(){
     const CustomDropdownIndicator = () => (
             <img src = {arrowdown} alt = 'down arrow' className="w-[12px] md:w-[15px] h-[7px] md:h-[9px] " />
     )
+
+    const [withdrawalModal, setWithdrawalModal] = useState(false)
+    const [fundingModal, setFundingModal] = useState(false)
 
     return(
         <div className = 'fold:px-2 phones:px-[20px] md:px-3 lg:pl-[31px] lg:pr-[43px] pt-8 md:pt-[37px] pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
@@ -175,15 +180,23 @@ function Walletbody(){
                             </div>
                         </div>
                         <button className={`text-base text-white bg-[#37BCF7] leading-5 font-black py-[10px] px-[15px] 
-                        block w-[85%] md:w-[67%] max-w-[403px] h-[42px] rounded-[5px] md:rounded-[10px] mb-[12px] mx-auto `} >
+                        block w-[85%] md:w-[67%] max-w-[403px] h-[42px] rounded-[5px] md:rounded-[10px] mb-[12px] mx-auto `}
+                            onClick={()=> {setWithdrawalModal(true)}}
+                        >
                             Withdraw Funds
                         </button>
                         <button className={`text-base text-[#37BCF7] hover:bg-white leading-5 font-black py-[10px] px-[15px] 
-                        block w-[85%] md:w-[67%] max-w-[403px] h-[42px] rounded-[5px] md:rounded-[10px] mb-[70px] mx-auto `} >
+                            block w-[85%] md:w-[67%] max-w-[403px] h-[42px] rounded-[5px] md:rounded-[10px] mb-[70px] mx-auto `}
+                            onClick={()=> {setFundingModal(true)}}
+                        >
                             Fund Wallet
                         </button>
                     </div>
                     
+                    <WithdrawalModal withdrawalModal={withdrawalModal} setWithdrawalModal={setWithdrawalModal} />
+                    <FundingModal fundingModal={fundingModal} setFundingModal={setFundingModal} />
+
+
                     <div className={` ${ isMobile ? currentMobileDisplay == 'transactions' ? 'block':'hidden' : ''} `}>
                         <h4 className="inline-block clear-right leading-6 
                             text-lg md:text-[22px] font-black mb-7 md:4 " >
