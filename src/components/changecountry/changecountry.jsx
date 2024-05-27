@@ -7,6 +7,7 @@ import Loadingspinner from "../loadingspinner/loadingSpinner"
 import Select from 'react-select'
 import { useDispatch } from "react-redux"
 import { addCountryOptions } from "../../actions/actions"
+import { baseUrl } from "../../auth/checkauthentication"
 
 function Changecountry(props) {
     
@@ -62,7 +63,7 @@ function Changecountry(props) {
             const access_token = localStorage.getItem('access_token')
             const formdata = new FormData()
             formdata.append("location",selectedCountry)
-            const changeLocation = await fetch(`https://palbucks-api.onrender.com/users/api/profile/`,{
+            const changeLocation = await fetch(`${baseUrl}/users/api/profile/`,{
                 method:'PATCH',
                 headers:{
                     Authorization: `Bearer ${access_token}`,

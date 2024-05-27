@@ -25,7 +25,7 @@ import Navelements from '../navelements/navelements'
 import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { closesidebar, increasesidebar, opensidebar, reducesidebar, setIsAuthenticated, setlinkcolor, setLogoutLoading } from '../../actions/actions'
-import { checkAuthentication } from '../../auth/checkauthentication'
+import { baseUrl, checkAuthentication } from '../../auth/checkauthentication'
 import { persistor } from '../..'
 
 function Sidebar(){
@@ -67,7 +67,7 @@ function Sidebar(){
         }
 
         try {
-            const logout = await fetch('https://palbucks-api.onrender.com/users/api/logout/', {
+            const logout = await fetch(`${baseUrl}/users/api/logout/`, {
                 method: 'POST',
             });
 

@@ -26,7 +26,7 @@ function Changeusername(){
             const access_token = localStorage.getItem('access_token')
             const formdata = new FormData()
             formdata.append("username",username)
-            const changeUsername = await fetch(`https://palbucks-api.onrender.com/users/api/profile/`,{
+            const changeUsername = await fetch(`${baseUrl}/users/api/profile/`,{
                 method:'PATCH',
                 headers:{
                     Authorization: `Bearer ${access_token}`,

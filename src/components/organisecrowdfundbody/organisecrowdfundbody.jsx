@@ -30,6 +30,7 @@ import Loadingspinner from "../loadingspinner/loadingSpinner";
 import { useMediaQuery } from "react-responsive";
 import Select from "react-select";
 import SuccessfulCrowdfundLaunchModal from "./successfulcrowdfundlaunch";
+import { baseUrl } from "../../auth/checkauthentication";
 
 // Variables and components for Category react select
 export const options = [
@@ -100,7 +101,7 @@ function Organisecrowdfundbody(){
         target_price:0,
         amt_raised:0,
         tags:'',
-        location:'',
+        location: userInfo.location ? userInfo.location : '',
         co_organisers:[],
     })
 
@@ -176,7 +177,7 @@ function Organisecrowdfundbody(){
         
         const access_token = localStorage.getItem('access_token')
 
-        const sendCrowdfund = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+        const sendCrowdfund = await fetch(`${baseUrl}/funding/api/`,{
             method:'POST',
             body: form,
             headers: {
@@ -477,7 +478,7 @@ function Organisecrowdfundbody(){
                     <div className={` ${managetoggles.location? 'block' : 'hidden' } p-3 md:p-[30px]`} >
                         <button className="flex justify-between mb-[10px] md:mb-5 rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg py-[2px] md:py-1 px-[10px] md:px-4 items-center h-[34px] md:h-14 min-w-[106px] md:min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
                             <span className="text-xs md:text-base" >
-                                Nigeria
+                                {userInfo.location && userInfo.location}
                             </span>
                             <img src={removeicon} alt="remove icon" className="w-[18px] md:w-6 " />
                         </button>

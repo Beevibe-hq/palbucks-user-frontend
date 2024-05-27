@@ -19,6 +19,7 @@ import user2 from "../../images/user2.svg"
 import user3 from "../../images/user3.svg"
 import user4 from "../../images/user4.svg"
 import user from "../../images/user.png"
+import { baseUrl } from "../../auth/checkauthentication"
 
 
 function DiscoverPage() {
@@ -41,7 +42,7 @@ function DiscoverPage() {
         // Get crowdfund details
         const getCrowdfunds = async() => {                            
             try{
-                const response = await fetch('https://palbucks-api.onrender.com/funding/api/')                
+                const response = await fetch(`${baseUrl}/funding/api/`)                
                 const crowdfunds = await response.json()
                 if(response.ok){                                  
                     //dispatch(loadCrowdfundEvents(crowdfunds))

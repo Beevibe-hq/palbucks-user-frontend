@@ -2,6 +2,7 @@ import { useState } from "react"
 import arrowdown from "../../images/arrowdown.svg"
 import arrowup from "../../images/arrowup.svg"
 import Loadingspinner from "../loadingspinner/loadingSpinner"
+import { baseUrl } from "../../auth/checkauthentication"
 
 function Changemail(){
 
@@ -22,7 +23,7 @@ function Changemail(){
             const access_token = localStorage.getItem('access_token')
             const formdata = new FormData()
             formdata.append("email",email)
-            const changeEmail = await fetch(`https://palbucks-api.onrender.com/users/api/profile/`,{
+            const changeEmail = await fetch(`${baseUrl}/users/api/profile/`,{
                 method:'PATCH',
                 headers:{
                     Authorization: `Bearer ${access_token}`,
