@@ -10,11 +10,12 @@ import { infoicon } from "../../images"
 import Activity from "../activity/activity"
 import Transactions from "../transactions/transactions"
 import Activities from "../activities/activities"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import Select from 'react-select'
 import WithdrawalModal from "../withdrawalModal/withdrawalModal"
 import FundingModal from "../fundingModal/fundingModal"
+import { baseUrl } from "../../auth/checkauthentication"
 
 function Walletbody(){
     
@@ -63,6 +64,34 @@ function Walletbody(){
     const [withdrawalModal, setWithdrawalModal] = useState(false)
     const [fundingModal, setFundingModal] = useState(false)
 
+    const [balance, setBalance] = useState({
+        walletBalance: '0.00',
+        amountEarned: '0.00'
+    })
+
+    useEffect(() => {
+        // Fetch my wallet balance and amount earned from the server
+        const fetchWalletBalance = async () => {
+            try {
+                const response = await fetch(`${baseUrl}/pay/api/wallet`,{
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                }
+            })
+            const resp = await response.json()
+                if (response.ok) {
+                    setBalance({
+                        walletBalance: resp.total_balance,
+                        amountEarned: resp.donation
+                    })    
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchWalletBalance()
+    },[])
+
     return(
         <div className = 'fold:px-2 phones:px-[20px] md:px-3 lg:pl-[31px] lg:pr-[43px] pt-8 md:pt-[37px] pb-5 mt-[90px] md:mt-[100px] font-arial w-full h-full '>
             <h1 className="font-black text-[22px] md:text-[32px] mb-[5px] md:mb-4 font-merriweather " >
@@ -109,7 +138,7 @@ function Walletbody(){
                                 <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >
                                     <h4 className="text-base md:text-lg text-[#525252]" >Wallet Balance</h4>
-                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{/* 9922778 */}0 USD</h4>
+                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{balance.walletBalance }</h4>
                                     <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 USD </h4>
                                 </section>
                             </div>
@@ -175,7 +204,7 @@ function Walletbody(){
                                         
                                     />
                                     <h4 className="text-[#525252] text-base md:text-lg " >Amount Earned</h4>
-                                    <h4 className="font-black text-lg md:text-[22px] leading-6 " >{/* 123908 */}0 USD</h4>
+                                    <h4 className="font-black text-lg md:text-[22px] leading-6 " >{balance.amountEarned}</h4>
                                 </section>
                             </div>
                         </div>

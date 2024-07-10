@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { checkAuthentication } from "../../auth/checkauthentication"
+import { baseUrl, checkAuthentication } from "../../auth/checkauthentication"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
 import SignUpHeader from "../../components/signUpHeader/signUpHeader"
 
@@ -50,7 +50,7 @@ const Completesignup = () => {
             const updatedSignupInfo = { ...signupInfo, ...personalInfo };
             console.log(updatedSignupInfo)
       
-            const signupRequest = await fetch('https://palbucks-api.onrender.com/users/api/complete-signup/', {
+            const signupRequest = await fetch(`${baseUrl}/users/api/complete-signup/`, {
             method: 'POST',
             body: JSON.stringify(updatedSignupInfo),
             headers: {

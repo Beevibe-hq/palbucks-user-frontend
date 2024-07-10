@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { checkAuthentication } from "../../auth/checkauthentication"
+import { baseUrl, checkAuthentication } from "../../auth/checkauthentication"
 import { setLogoutLoading } from "../../actions/actions"
 import emailPasswordValidation from "../../auth/inputValidation"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
@@ -63,7 +63,7 @@ const Signin = () => {
             
                     console.log(signinInfo)
               
-                    const signinRequest = await fetch('https://palbucks-api.onrender.com/users/api/login/', {
+                    const signinRequest = await fetch(`${baseUrl}/users/api/login/`, {
                     method: 'POST',
                     body: JSON.stringify(signinInfo),
                     headers: {

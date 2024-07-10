@@ -26,7 +26,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import Activities from "../activities/activities"
 import CommentModal from "../commentModal/commentModal"
 import Activity from "../../components/activity/activity"
-import { activityData } from "../activities/activities"
+//import { activityData } from "../activities/activities"
 import DonationModal from "../donationModal/donationModal"
 import CryptoDonationModal from "../cryptoDonationModal/cryptoDonationModal"
 import { baseUrl } from "../../auth/checkauthentication"
@@ -34,13 +34,13 @@ import { baseUrl } from "../../auth/checkauthentication"
 function Detailedevent(props){
     const access_token = localStorage.getItem('access_token')
     const userInfo = JSON.parse(localStorage.getItem("userInfo")) 
-    console.log(userInfo)
+    //console.log(userInfo)
     /*
     This selects homebodydata from redux store so as to get the complete details of the selected funding event.
     When the fundevent is clicked, an id is passed from the url params to select particular event.
     */
     let homebodydata = useSelector(state => state.crowdfundEvents)
-    console.log(homebodydata)
+    //console.log(homebodydata)
     const dispatch = useDispatch()
     const params = useParams()
     const navigate = useNavigate()
@@ -99,13 +99,36 @@ function Detailedevent(props){
                     totaldonations = formatnumber(data.no_of_donors)
 
                 } else {
-                    console.error(await response.json())
-                    console.log('ran')
+                    console.error(await response.json())                    
                 }
             }        
             getCrowdfund()        
         }
-    },[])
+    }, [])
+
+    const [ activityData, setActivityData ] = useState([])
+    
+    // Fetch real donation activities data from the backend using eventdetails.id
+    useEffect(() => {
+
+        const getActivities = async () => {
+            const response = await fetch(`${baseUrl}/funding/api/${eventid}/activity/`,{
+                headers:{
+                    Authorization: `Bearer ${access_token}`
+                }
+            })
+            const data = await response.json()
+            if (response.ok) {
+                console.log(data)
+                console.log(data.donation_activity[0])
+                setActivityData(data.donation_activity)
+            }else{
+                console.log('Failed to get activities')
+            }
+        }
+        getActivities()
+
+    }, [])
 
     
     
@@ -133,7 +156,7 @@ function Detailedevent(props){
         event.stopPropagation();
         
         const likeOrUnlikeCrowdfund = async(status) => {
-            const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${eventid}/like/`,{
+            const response = await fetch(`${baseUrl}/funding/api/${eventid}/like/`,{
                 method:'POST',
                 body:JSON.stringify({status:status}),
                 headers:{
@@ -210,7 +233,7 @@ function Detailedevent(props){
                     
         //Fetch the comments for this event from the backend
         const getComments = async() => {
-            const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${eventid}/comments/`,{
+            const response = await fetch(`${baseUrl}/funding/api/${eventid}/comments/`,{
                 headers:{
                     Authorization: `Bearer ${access_token}`
                 }
@@ -287,7 +310,7 @@ function Detailedevent(props){
     
         if (eventdetails) {
             //alert('no')    
-            console.log(eventdetails)
+            //console.log(eventdetails)
         }
 
         if (!eventdetails) {
@@ -548,7 +571,7 @@ function Detailedevent(props){
                                                 {
                                                     activityData.length ? activityData.map((item, i) => {
                                                         return (
-                                                            <Activity key={i} userdp={item.userdp} time={item.time} amt={item.amt} username={item.username}
+                                                            <Activity key={i} dp={item.dp} timestamp={item.timestamp} amount={item.amount} donor={item.donor}
                                                             background = "none"
                                                             />
                                                         )
@@ -575,7 +598,8 @@ function Detailedevent(props){
                                         total_donors = {totaldonations}
                                         eventid={eventid}
                                         setDisplayModals={setDisplayModals}
-                                        displayModals = {displayModals}
+                                        displayModals={displayModals}
+                                        activityData = {activityData}
                                     />
                                 </div>
                             </div>                       
@@ -612,7 +636,7 @@ function Comment(props){
 }
 
 //  Calculate time difference between now and the time the comment was made
-export  const timeDifference = (timestamp) => {
+export const timeDifference = (timestamp) => {
     const now = new Date();
     const commentTime = new Date(timestamp);
     const difference = now - commentTime;

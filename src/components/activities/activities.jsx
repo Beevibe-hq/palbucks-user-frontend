@@ -104,11 +104,11 @@ function Activities(props) {
                 ) : null
 
             }
-            <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''} ${activityData.length ? '': 'flex items-center justify-center'} `} >                            
+            <div className={`md:py-2 md:px-5 flex flex-col gap-4 ${expanded ? 'h-[450px] overflow-scroll activitiesScrollBar' : ''} ${props.activityData.length ? '': 'flex items-center justify-center'} `} >                            
                 {
-                    activityData.length ? activityData.map((item, i) => {
+                    props.activityData.length ? props.activityData.map((item, i) => {
                         return (
-                            <Activity key={i} userdp={item.userdp} time={item.time} amt={item.amt} username={item.username} />
+                            <Activity key={i} dp={item.userdp} timestamp={item.timestamp} amount={item.amount} donor={item.donor} />
                         )
                     }) :
                     <p className="text-[#8E8E93] text-sm md:text-lg flex gap-2 items-center" >
@@ -118,11 +118,11 @@ function Activities(props) {
                 }
             </div>
             <div className="flex flex-col items-center justify-center rounded-b-[10px] py-3 gap-2 " >
-                <span className={`text-xs font-black text-center ${activityData.length ? '' : 'text-[#D8D8D8]'} `} >
+                <span className={`text-xs font-black text-center ${props.activityData.length ? '' : 'text-[#D8D8D8]'} `} >
                     { expanded ? 'Click on button to go up' : 'Click on button to go down' }
                 </span>
                 <img 
-                    src={activityData.length? downButton: downButton2} 
+                    src={props.activityData.length? downButton: downButton2} 
                     alt="down button" 
                     className={`w-8 cursor-pointer transform ${expanded ?  'rotate-180 duration-slow' :'duration-slow'  }`}
                     onClick={toggleExpansion} 
@@ -137,40 +137,40 @@ export default Activities;
 
 
 export let activityData = [
-    /* {
-        userdp: user12,
-        username: 'Doggo',
-        time: '5 mins ago',
-        amt: '5000',
+    {
+        dp: user12,
+        donor: 'Doggo',
+        timestamp: '5 mins ago',
+        amount: '5000',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
     },
     {
-        userdp: user8,
-        username: 'EricatheBoss',
-        time: '1 hour ago',
-        amt: '100',
+        dp: user8,
+        donor: 'EricatheBoss',
+        timestamp: '1 hour ago',
+        amount: '100',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
     },
     {
-        userdp: user10,
-        username: 'Anonymous',
-        time: '1 hour ago',
-        amt: '10',
+        dp: user10,
+        donor: 'Anonymous',
+        timestamp: '1 hour ago',
+        amount: '10',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
     },
     {
-        userdp: user8,
-        username: 'Sir Bob',
-        time: '7 hours ago',
-        amt: '200',
+        dp: user8,
+        donor: 'Sir Bob',
+        timestamp: '7 hours ago',
+        amount: '200',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
     },
     {
-        userdp: user12,
-        username: 'Micheal',
-        time: '20 hours ago',
-        amt: '120000',
+        dp: user12,
+        donor: 'Micheal',
+        timestamp: '20 hours ago',
+        amount: '120000',
         activity: 'Made a donation of 500USDT to your crowdfund campaign'
-    }, */
+    },
     
 ]

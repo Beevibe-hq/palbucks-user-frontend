@@ -15,6 +15,7 @@ import {options} from "../../components/organisecrowdfundbody/organisecrowdfundb
 //Fallbacks for the props
 import userimg from '../../images/user2.svg'
 import profileImgPlaceholder from "../../images/profileplaceholder.svg"
+import { baseUrl } from "../../auth/checkauthentication.js";
 
 
 
@@ -47,7 +48,7 @@ function Fundevent(props){
         event.stopPropagation();
 
         const likeOrUnlikeCrowdfund = async (status) => {
-            const response = await fetch(`https://palbucks-api.onrender.com/funding/api/${props.id}/like/`, {
+            const response = await fetch(`${baseUrl}/funding/api/${props.id}/like/`, {
                 method: 'POST',
                 body: JSON.stringify({ status: status }),
                 headers: {

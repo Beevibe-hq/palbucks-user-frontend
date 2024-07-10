@@ -2,7 +2,8 @@
 import { setIsAuthenticated, setLogoutLoading } from "../actions/actions"
 
 // Base url for the api requests
-export const baseUrl = 'https://palbucks-api.onrender.com'
+//export const baseUrl = 'https://palbucks-api.onrender.com'
+export const baseUrl = 'https://octopus-app-oy6v5.ondigitalocean.app'
 
 export const checkAuthentication = async(dispatch) => {
         
@@ -13,7 +14,7 @@ export const checkAuthentication = async(dispatch) => {
     if(access_token){
 
         try{
-            const verifyToken = await fetch('https://palbucks-api.onrender.com/auth/token/verify/',{
+            const verifyToken = await fetch(`${baseUrl}/auth/token/verify/`,{
                 method: 'POST',
                 body:JSON.stringify({
                     "token":access_token
@@ -33,7 +34,7 @@ export const checkAuthentication = async(dispatch) => {
                 const refresh_token = localStorage.getItem('refresh_token')
                 if(refresh_token){
                     try{
-                        const newToken = await fetch('https://palbucks-api.onrender.com/auth/token/refresh/',{
+                        const newToken = await fetch(`${baseUrl}/auth/token/refresh/`,{
                             method: 'POST',
                             body:JSON.stringify({
                                 "refresh":refresh_token

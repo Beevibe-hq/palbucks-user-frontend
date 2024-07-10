@@ -19,6 +19,7 @@ import user2 from "../../images/user2.svg"
 import user3 from "../../images/user3.svg"
 import user4 from "../../images/user4.svg"
 import user from "../../images/user.png"
+import { baseUrl } from "../../auth/checkauthentication"
 
 
 function DiscoverPage() {
@@ -41,7 +42,7 @@ function DiscoverPage() {
         // Get crowdfund details
         const getCrowdfunds = async() => {                            
             try{
-                const response = await fetch('https://palbucks-api.onrender.com/funding/api/')                
+                const response = await fetch(`${baseUrl}/funding/api/`)                
                 const crowdfunds = await response.json()
                 if(response.ok){                                  
                     //dispatch(loadCrowdfundEvents(crowdfunds))
@@ -81,11 +82,11 @@ function DiscoverPage() {
     //const numRows = Math.ceil(data.length / maxItemsPerRow);
 
 
-    if (data.length === 0) {
+    /* if (data.length === 0) {
         return (
             <div>Loading...</div>       
         )
-    }
+    } */
     return (
         <div className="font-merriweather" >
             <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-10 lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >

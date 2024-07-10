@@ -10,6 +10,7 @@ import { loadCrowdfundEvents } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
 import {refreshToken} from "../../auth/refreshToken"
 import KycModal from "../../components/kyc/kycModal";
+import { baseUrl } from "../../auth/checkauthentication";
 
 function Home(){
 
@@ -36,7 +37,7 @@ function Home(){
 
             // Send the image using Fetch API
             try{
-                const response = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+                const response = await fetch(`${baseUrl}/funding/api/`,{
                     headers:{
                         Authorization:`Bearer ${access_token}`,
                     }

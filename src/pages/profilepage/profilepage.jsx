@@ -245,7 +245,7 @@ const EditProfile = ({goback}) => {
             formData.append(key, value);
         }
 
-        const updateProfile = await fetch(`https://palbucks-api.onrender.com/users/api/profile/`,{
+        const updateProfile = await fetch(`${baseUrl}/users/api/profile/`,{
             method:'PATCH',
             headers:{
                 Authorization: `Bearer ${access_token}`
@@ -416,7 +416,7 @@ const EditProfile = ({goback}) => {
                 <div className={` ${managetoggles.location? 'block' : 'hidden' } py-3 px-4 md:p-[30px]`} >                    
                     <button className="flex justify-between rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg py-[2px] md:py-1 px-[10px] md:px-4 items-center h-[34px] md:h-14 min-w-[106px] md:min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
                         <span className="text-xs md:text-base" >
-                            Nigeria
+                            {userInfo.location && userInfo.location}
                         </span>
                         <img src={removeicon} alt="remove icon" className="w-[18px] md:w-6 " />
                     </button>            
