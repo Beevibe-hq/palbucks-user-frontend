@@ -82,11 +82,11 @@ function DiscoverPage() {
     //const numRows = Math.ceil(data.length / maxItemsPerRow);
 
 
-    if (data.length === 0) {
+    /* if (data.length === 0) {
         return (
             <div>Loading...</div>       
         )
-    }
+    } */
     return (
         <div className="font-merriweather" >
             <header className="w-full z-50 py-4 md:py-6 lg:py-[30px] px-5 md:px-10 lg:px-[95px] flex justify-between shadow-[0px_0px_16px_0px_rgba(0,0,0,0.04)] bg-white fixed top-0 " >
