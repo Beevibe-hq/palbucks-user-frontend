@@ -9,6 +9,7 @@ import Select from 'react-select'
 import { useMediaQuery } from 'react-responsive'
 import arrowdown from '../../images/arrowdown.svg'
 import profileImgPlaceholder from "../../images/profileplaceholder.svg"
+import cancelMenuIcon from "../../images/hamburger menu.svg"
 
 import eventImg from "../../images/eventimg.png"
 import eventImg2 from "../../images/eventimg2.png"
@@ -115,6 +116,41 @@ function DiscoverPage() {
                 </nav>
                 <img src={menuicon} alt="menu icon" className="w-5 h-5 md:hidden" onClick={handleMobileMenu} />
             </header>
+
+            <div className={` ${mobileMenu == 'open' ? '' : 'hidden'} md:hidden font-arial h-full w-full z-50 bg-white fixed top-0 pt-4 px-5`}>
+                <div className="mb-6 flex justify-between items-center ">
+                    <div className=" flex gap-[10px] md:gap-4 items-center " >
+                        <img src={palbuckslogo} alt="Palbucks logo" className="w-5 md:w-7 lg:w-[33.4px]" />
+                        <img src={palbucksgroup} alt="palbucks" className="w-[77px] md:w-[108px] lg:w-[138px] h-[14px] md:h-5 lg:h-[24px] "  />
+                    </div>
+                    <img src={cancelMenuIcon} alt="cancel menu icon" className="w-6" onClick={handleMobileMenu} />
+                </div>
+                <nav className="mb-8 flex flex-col gap-2">
+                    <Link to = '/howitworks' className="py-3"  >
+                        <span>How it works</span>
+                    </Link>
+                    <Link to = '/discover' className="py-3"  >
+                        <span>Discover campaigns</span>
+                    </Link>
+                    <Link to = '/helpcenter' className="py-3"  >
+                        <span>Help center</span>
+                    </Link>
+                    <Link to = '/communityguidelines' className="py-3"  >
+                        <span>Community guidelines</span>
+                    </Link>
+                </nav>
+
+                <button className="mb-5 bg-[#000] rounded w-full py-[10px] px-5 font-bold text-[#FFF]" 
+                    onClick={()=>{navigate('/anonymouscrowdfundformtitle')}} 
+                >
+                    Start a crowdfund
+                </button>
+                <button className="border-[1px] border-[#8E8E93] rounded w-full py-[10px] px-5 font-bold text-[#000]" 
+                    onClick={()=> {navigate('/signin')}}
+                >
+                    Sign in
+                </button>
+            </div>
 
             <main className="pt-3 md:pt-[70px] lg:pt-[125px] pb-10 mt-[103px] px-3  phones:px-5 md:px-8 lg:px-[94px] " >
                 <h2 className="mx-auto mb-3 md:mb-6 
