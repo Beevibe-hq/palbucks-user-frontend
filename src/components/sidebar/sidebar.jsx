@@ -94,6 +94,7 @@ function Sidebar(){
         }
     };
 
+    const [supportView, setSupportView] = useState(false)
       
     
     return(
@@ -194,15 +195,19 @@ function Sidebar(){
                 </NavLink>
 
                 <div className="px-[15px] py-[30px]">
-                    <div className={` md:hidden border-t-[#888888] border-t-[0.5px] `} >
-                        
-                        <div className={`flex gap-[10px] items-center justify-between cursor-pointer py-6 `}  >
+                    <div className={` md:hidden border-t-[#888888] border-t-[0.5px] `} >                        
+                        <div
+                            onClick={() => {
+                                setSupportView(!supportView)
+                            }}
+                            className={`flex gap-[10px] items-center justify-between cursor-pointer py-6 `}
+                        >
                             <h2 className='text-base leading-4 text-[#525252] ' >
                                 Support & Legal
                             </h2>
-                            <img src={arrowDown} alt="down arrow" className='w-[18px]' />
+                            <img src={arrowDown} alt="down arrow" className={`w-[18px] ${supportView? 'rotate-180' : ''} `} />
                         </div>
-                        <ul className='text-[#525252] text-sm border-l-[1px] border-l-[#37BCF7] pl-2 flex flex-col gap-1 ' >
+                        <ul className={` ${supportView ? '' : 'hidden'} text-[#525252] text-sm border-l-[1px] border-l-[#37BCF7] pl-2 flex flex-col gap-1 `} >
                             <Link to='/howitworks'
                                 onClick={() => {
                                     dispatch(closesidebar())
