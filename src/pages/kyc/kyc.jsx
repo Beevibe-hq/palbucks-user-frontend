@@ -14,6 +14,8 @@ import uploadIcon from "../../images/kyc/Upload.svg"
 import flyIcon from "../../images/kyc/Group 841.svg"
 import uploadingImage from "../../images/kyc/uploadingImage.svg"
 import uploadedImage from "../../images/kyc/uploadedImage.svg"
+import { baseUrl } from "../../auth/checkauthentication";
+import Loadingspinner from "../../components/loadingspinner/loadingSpinner";
 
 function Kyc() {
 
@@ -65,9 +67,9 @@ function Kyc() {
     })
 
     const idOptions = [
-        {value: 'passport', label: 'Passport'},
-        {value: 'nationalID', label: 'National ID'},
-        {value: 'driversLicense', label: 'Drivers License' },                
+        {value: 'intl_passport', label: 'Passport'},
+        {value: 'nin', label: 'National ID'},
+        {value: 'drivers_licence', label: 'Drivers License' },                
         {value: 'votersCard', label: 'Voters Card'},
     ]
 
@@ -80,14 +82,16 @@ function Kyc() {
     ]
 
     const [selectedDocuments, setSelectedDocuments] = useState({
-        idType: '',
-        id_front: '',
-        id_back: '',
-        bank_document: ''
+        country:'',
+        id_type: '',
+        front_image: null,
+        rear_image: null,
+        bankDocumentType:'bankStatement',
+        bank_document: null
     })
 
     const [fileUploadManager, setFileUploadManager] = useState({
-        id_front: {
+        front_image: {
             inactive: true,
             uploading: false,
             uploadSuccess: false,
@@ -95,7 +99,7 @@ function Kyc() {
             filename: '',
             file: null
         },
-        id_back: {
+        rear_image: {
             inactive: true,
             uploading: false,
             uploadSuccess: false,
@@ -148,6 +152,12 @@ function Kyc() {
                 }
             });
 
+            // set the file to selected documents
+            setSelectedDocuments({
+                ...selectedDocuments,
+                [event.target.name]: file
+            })
+
             // Simulate failure and setfileuploadmanager for the event.target.name to be failure
             /* setFileUploadManager({
                 ...fileUploadManager,
@@ -165,8 +175,29 @@ function Kyc() {
         }, 2000);
     };
 
-
     
+    /* const truncateFilename = (filename) => {
+        if (filename.length > 14) {
+            return filename.slice(0, 14) + '...'
+        }
+
+        return filename;
+    } */
+    const truncateFilename = (filename) => {
+        const extensionIndex = filename.lastIndexOf('.');
+        if (extensionIndex === -1) return filename; // In case there is no extension
+
+        const name = filename.substring(0, extensionIndex);
+        const extension = filename.substring(extensionIndex);
+
+        if (name.length > 10) {
+            return `${name.substring(0, 10)}...${extension}`;
+        }
+
+        return filename;
+    };
+
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <div className="font-arial">
@@ -177,7 +208,7 @@ function Kyc() {
                 }}>
                     <img src={applogo} alt="Palbucks logo" className = 'cursor-pointer w-5 md:w-6 ' />
                     {/* <h1 className = {` ${ isMobile ? 'block' : sidebarslid ? 'hidden' : 'block' } font-bold text-[#033F59] text-xl md:text-2xl leading-6 tracking-tighter `} >Palbucks</h1> */}
-                    <img src={palbucks} alt="palbucks" className = {` w-[100px] h-[18px] `} />
+                    <img src={palbucks} alt="palbucks" className = {` w-[100px] h-[18px] cursor-pointer `} />
                 </div>
                 <div className=" flex gap-[10px] items-center">
                     <img
@@ -230,8 +261,10 @@ function Kyc() {
                                     options={countryOptions}
                                     placeholder="Select your country"
                                     onChange={(e) => {
-                                        setSelectedCountry(e.value)
+                                        //setSelectedCountry(e.value)
+                                        setSelectedDocuments({...selectedDocuments, country: e.value})
                                     }}
+                                    value={countryOptions.find(option => option.value === selectedCountry)}
                                     components={{
                                         DropdownIndicator: CustomDropdownIndicator,
                                         IndicatorSeparator : () => null
@@ -277,7 +310,7 @@ function Kyc() {
                                     options={idOptions}
                                     placeholder="Select an ID type"
                                     onChange={(e) => {
-                                        setSelectedDocuments({...selectedDocuments, idType: e.value})
+                                        setSelectedDocuments({...selectedDocuments, id_type: e.value})
                                     }}
                                     components={{
                                         DropdownIndicator: CustomDropdownIndicator,
@@ -323,48 +356,48 @@ function Kyc() {
                                 <img
                                     src={uploadIcon}
                                     alt="upload icon"
-                                    className={` ${fileUploadManager.id_front.inactive ? 'block' : 'hidden'} mx-auto mb-[18px] w-[48px] h-[48px]`}
+                                    className={` ${fileUploadManager.front_image.inactive ? 'block' : 'hidden'} mx-auto mb-[18px] w-[48px] h-[48px]`}
                                 />
                                 <img
-                                    src={fileUploadManager.id_front.uploading ? uploadingImage : uploadedImage}
+                                    src={fileUploadManager.front_image.uploading ? uploadingImage : uploadedImage}
                                     alt="uploading icon"
-                                    className={` ${fileUploadManager.id_front.inactive ? 'hidden' : fileUploadManager.id_front.uploading ? 'w-[60px] md:w-[95px] ' : 'w-[40px] '} mt-8 mb-5 mx-auto`}
+                                    className={` ${fileUploadManager.front_image.inactive ? 'hidden' : fileUploadManager.front_image.uploading ? 'w-[60px] md:w-[95px] ' : 'w-[40px] '} mt-8 mb-5 mx-auto`}
                                 />{/* Image for uploading */}
                                 
-                                <h4 className={` ${fileUploadManager.id_front.inactive ? '' : 'hidden'} mb-3 text-[18px] font-bold text-center`}>
+                                <h4 className={` ${fileUploadManager.front_image.inactive ? '' : 'hidden'} mb-3 text-[18px] font-bold text-center`}>
                                     Front side of your ID
                                 </h4>
-                                <h4 className={` ${fileUploadManager.id_front.inactive ? 'hidden' : ''} mb-7 text-[15px] text-center`}>
+                                <h4 className={` ${fileUploadManager.front_image.inactive ? 'hidden' : ''} mb-7 text-[15px] text-center`}>
                                     {
-                                        fileUploadManager.id_front.uploading && (
+                                        fileUploadManager.front_image.uploading && (
                                             <p>
-                                                <span className="text-[#2CA9F2] font-bold" > Uploading </span> {fileUploadManager.id_front.filename}
+                                                <span className="text-[#2CA9F2] font-bold" > Uploading </span> {truncateFilename(fileUploadManager.front_image.filename)}
                                             </p>
                                     )}
                                     {
-                                        fileUploadManager.id_front.uploadSuccess && (
+                                        fileUploadManager.front_image.uploadSuccess && (
                                             <p>
-                                                <span className="text-[#2CA9F2] font-bold" >{fileUploadManager.id_front.filename}</span> uploaded successfully
+                                                <span className="text-[#2CA9F2] font-bold" >{truncateFilename(fileUploadManager.front_image.filename)}</span> uploaded successfully
                                             </p>
                                    )}
                                     {
-                                        fileUploadManager.id_front.uploadError && (
+                                        fileUploadManager.front_image.uploadError && (
                                             <span className="font-bold text-[#D52B1E]" >
-                                                {` ${fileUploadManager.id_front.filename} upload failed`}
+                                                {` ${truncateFilename(fileUploadManager.front_image.filename)} upload failed`}
                                             </span>
                                     )}
                                 </h4>
                                 
-                                <p className={` ${fileUploadManager.id_front.inactive ? '' : 'hidden'} text-[10px] mb-[22px] text-center`}>
+                                <p className={` ${fileUploadManager.front_image.inactive ? '' : 'hidden'} text-[10px] mb-[22px] text-center`}>
                                     Upload the front side of your ID <br />Supports: JPG, PNG, PDF
                                 </p>
-                                <label htmlFor="id_front" className="mx-auto h-full block w-fit">
+                                <label htmlFor="front_image" className="mx-auto h-full block w-fit">
                                     <div className="py-3 px-8 border-2 border-black rounded-md mx-auto block text-[14px] font-bold cursor-pointer ">
                                         Choose a file
                                         <input
                                             type="file"
-                                            name="id_front"
-                                            id="id_front"
+                                            name="front_image"
+                                            id="front_image"
                                             accept="image/*, application/pdf"
                                             className="hidden"
                                             onChange={handleFileChange}
@@ -377,46 +410,46 @@ function Kyc() {
                                 <img
                                     src={uploadIcon}
                                     alt="upload icon"
-                                    className={` ${fileUploadManager.id_back.inactive ? 'block' : 'hidden'} mx-auto mb-[18px] w-[48px] h-[48px]`}
+                                    className={` ${fileUploadManager.rear_image.inactive ? 'block' : 'hidden'} mx-auto mb-[18px] w-[48px] h-[48px]`}
                                 />
                                 <img
-                                    src={fileUploadManager.id_back.uploading ? uploadingImage : uploadedImage}
+                                    src={fileUploadManager.rear_image.uploading ? uploadingImage : uploadedImage}
                                     alt="uploading icon"
-                                    className={` ${fileUploadManager.id_back.inactive ? 'hidden' : fileUploadManager.id_back.uploading ? 'w-[60px] md:w-[95px] ' : 'w-[40px] '} mt-8 mb-5 mx-auto`}
+                                    className={` ${fileUploadManager.rear_image.inactive ? 'hidden' : fileUploadManager.rear_image.uploading ? 'w-[60px] md:w-[95px] ' : 'w-[40px] '} mt-8 mb-5 mx-auto`}
                                 />{/* Image for uploading */}
-                                <h4 className={` ${fileUploadManager.id_back.inactive ? '' : 'hidden'} mb-3 text-[18px] font-bold text-center`}>
+                                <h4 className={` ${fileUploadManager.rear_image.inactive ? '' : 'hidden'} mb-3 text-[18px] font-bold text-center`}>
                                     Back side of your ID
                                 </h4>
-                                <h4 className={` ${fileUploadManager.id_back.inactive ? 'hidden' : ''} mb-7 text-[15px] text-center`}>
+                                <h4 className={` ${fileUploadManager.rear_image.inactive ? 'hidden' : ''} mb-7 text-[15px] text-center`}>
                                     {
-                                        fileUploadManager.id_back.uploading && (
+                                        fileUploadManager.rear_image.uploading && (
                                             <p>
-                                                <span className="text-[#2CA9F2] font-bold" > Uploading </span> {fileUploadManager.id_back.filename}
+                                                <span className="text-[#2CA9F2] font-bold" > Uploading </span> {truncateFilename(fileUploadManager.rear_image.filename)}
                                             </p>
                                     )}
                                     {
-                                        fileUploadManager.id_back.uploadSuccess && (
+                                        fileUploadManager.rear_image.uploadSuccess && (
                                             <p>
-                                                <span className="text-[#2CA9F2] font-bold" >{fileUploadManager.id_back.filename}</span> uploaded successfully
+                                                <span className="text-[#2CA9F2] font-bold" >{truncateFilename(fileUploadManager.rear_image.filename)}</span> uploaded successfully
                                             </p>
                                    )}
                                     {
-                                        fileUploadManager.id_back.uploadError && (
+                                        fileUploadManager.rear_image.uploadError && (
                                             <span className="font-bold text-[#D52B1E]" >
-                                                {` ${fileUploadManager.id_front.filename} upload failed`}
+                                                {` ${fileUploadManager.front_image.filename} upload failed`}
                                             </span>
                                     )}
                                 </h4>
-                                <p className={` ${fileUploadManager.id_back.inactive ? '' : 'hidden'} text-[10px] mb-[22px] text-center`}>
+                                <p className={` ${fileUploadManager.rear_image.inactive ? '' : 'hidden'} text-[10px] mb-[22px] text-center`}>
                                     Upload the front side of your ID <br />Supports: JPG, PNG, PDF
                                 </p>
-                                <label htmlFor="id_back" className="mx-auto h-full block w-fit">
+                                <label htmlFor="rear_image" className="mx-auto h-full block w-fit">
                                     <div className="py-3 px-8 border-2 border-black rounded-md mx-auto block text-[14px] font-bold cursor-pointer ">
                                         Choose a file
                                         <input
                                             type="file"
-                                            name="id_back"
-                                            id="id_back"
+                                            name="rear_image"
+                                            id="rear_image"
                                             accept="image/*, application/pdf"
                                             className="hidden"
                                             onChange={handleFileChange}
@@ -433,7 +466,16 @@ function Kyc() {
                                 Note that your data is securely encrypted and protected as we prioritize your privacy.
                             </p>
                             <button className="w-full bg-black rounded-lg py-[10px] md:py-5 px-5 md:px-8 tect-[15px] md:text-[28px] text-[#FFFFFF] font-bold "
-                                onClick={() => setPageDisplay('bank_document')}
+                                onClick={() => {
+                                    
+                                    if( selectedDocuments.country === '' || selectedDocuments.id_type === '' || selectedDocuments.front_image === null || selectedDocuments.rear_image === null) {
+                                        alert('Please fill all fields')
+                                    }else {
+                                        setPageDisplay('bank_document')
+                                    }
+                                    console.log(selectedDocuments)     
+                                    //setPageDisplay('bank_document')
+                                }}
                             >
                                 Continue
                             </button>
@@ -453,8 +495,10 @@ function Kyc() {
                                     <Select
                                         options={bank_documentOptions}
                                         placeholder="Select a document type"
+                                        value={bank_documentOptions.find(option => option.value === selectedDocuments.bankDocumentType)}
                                         onChange={(e) => {
-                                            setSelectedDocuments({...selectedDocuments, bank_document: e.value})
+                                            //alert('I changed')
+                                            setSelectedDocuments({...selectedDocuments, bankDocumentType: e.value})
                                         }}
                                         components={{
                                             DropdownIndicator: CustomDropdownIndicator,
@@ -555,8 +599,48 @@ function Kyc() {
                                     Note that your data is securely encrypted and protected as we prioritize your privacy.
                                 </p>
                                 <button className="w-full bg-black rounded-lg py-[10px] md:py-5 px-5 md:px-8 tect-[15px] md:text-[28px] text-[#FFFFFF] font-bold "
-                                onClick={() => {setPageDisplay('successfulSubmission')}}>
-                                    Continue
+                                    onClick={async() => {
+                                        if( selectedDocuments.bank_document === null) {
+                                            alert('Please fill all fields')
+                                            return;
+                                        }
+                                        setIsLoading(true)
+                                        console.log(selectedDocuments)
+                                        const form = new FormData();
+                                        for (const [key, value] of Object.entries(selectedDocuments)) {
+                                            form.append(key, value);
+                                        }                                        
+                                        const access_token = localStorage.getItem('access_token')
+                                        const resp = await fetch(`${baseUrl}/users/api/kyc/`, {
+                                            method: 'POST',
+                                            headers: {                                            
+                                                Authorization:`Bearer ${access_token}`
+                                            },
+                                            body: form
+                                        })
+                                        const data = await resp.json()
+                                        console.log(data)
+                                        if (data.message && data.message.includes('KYC documents submitted successfully and pending verification')) {
+                                            setPageDisplay('successfulSubmission')
+                                        } else if(data.message && data.message.includes('You have already submitted kyc documents')) {
+                                            alert(`Error: ${data.message}`)                                        
+                                            navigate('/home')
+                                        } else if (data.message && data.message.includes('Cannot submit KYC. User Location not set')) {
+                                            alert(`Error: ${data.message}, Navigate to settings page to set location`)
+                                            navigate('/settings')
+                                        } else {
+                                            alert('Error submitting kyc documents: please try again')
+                                            window.location.reload()
+                                        }                                      
+                                        setIsLoading(false)
+                                    }}>
+                                    
+                                    <div className={` ${isLoading ? 'block' : 'hidden' } `}>
+                                        <Loadingspinner width = '28px' height = '28px' />
+                                    </div>
+                                    <span className={` ${isLoading ? 'hidden' : 'block' } `} >
+                                        Continue
+                                    </span>
                                 </button>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ import profilePlaceholder from "../../images/profileplaceholder.svg"
 
 import { useDispatch, useSelector } from 'react-redux';
 import { opensidebar, setnotificationspageactive, setprofilepageactive, setprofilepageinactive } from '../../actions/actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -38,13 +38,20 @@ function Navbar(props){
     }
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     const profilepage = () => {
+        if (location.pathname === '/profilepage') {
+            return
+        }
         navigate('/profilepage')        
         dispatch(setprofilepageactive())
     }
 
-     const notificationspage = () => {
+    const notificationspage = () => {
+        if (location.pathname === '/notificationspage') {
+            return
+        }
         navigate('/notificationspage')
         dispatch(setnotificationspageactive())
      }
