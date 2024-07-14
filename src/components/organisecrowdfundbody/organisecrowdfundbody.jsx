@@ -189,14 +189,15 @@ function Organisecrowdfundbody(){
         const resp = await sendCrowdfund.json();
         console.log(resp)
 
-        if(sendCrowdfund.ok){
+        if(resp.success){
             console.log('success')            
             dispatch(addCrowdfundEvent(resp))
-
 
             // Display successful crowdfund launch modal
             setSuccessfulLaunchModal({display:true, crowdfundData:resp})
             //navigate('/home')
+        } else {
+            setIsLoading(false)
         }
         
         setIsLoading(false)

@@ -79,7 +79,8 @@ const Signin = () => {
                         if(access_token && refresh_token && user){
                             localStorage.setItem('access_token',access_token)
                             localStorage.setItem('refresh_token',refresh_token);
-                            localStorage.setItem('userInfo',JSON.stringify(user))                    
+                            localStorage.setItem('userInfo', JSON.stringify(user))  
+                            console.log(user)
                         }
         
                         // Call checkauthentication to dispatch the actions
