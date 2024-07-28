@@ -22,10 +22,10 @@ import wishLabel from "../../images/categoryImages/Wish label.svg"
 import { useEffect, useState } from "react";
 import CropImage from "../cropping/cropimage/cropimage";
 import { urltoFile } from "../cropping/cropimage/cropimage";
-import { useDispatch } from "react-redux";
-import { addCrowdfundEvent } from "../../actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addCrowdfundEvent, editEventData } from "../../actions/actions";
 import SearchCoOrganiser from "../searchCoOrganiser/searchCoOrganiser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loadingspinner from "../loadingspinner/loadingSpinner";
 import { useMediaQuery } from "react-responsive";
 import Select from "react-select";
@@ -58,9 +58,21 @@ function Organisecrowdfundbody(){
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const params = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
     const [displaySearchCoOrganiser, setdisplaySearchCoOrganiser] = useState(false)
+
+    const [crowdfundMode, setCrowdfundMode] = useState('new')
+    useEffect(() => {
+        params.id ? setCrowdfundMode('edit') : setCrowdfundMode('new')
+    }, [])
+    
+    const eventid = params.id ? params.id : null
+    let homebodydata = useSelector(state => state.crowdfundEvents)
+    const [eventdetails, setEventDetails] = useState(homebodydata.filter(item => item.id == eventid)[0]);
+    //console.log(eventdetails)
+    const [EditFormData, setEditFormData] = useState({ })
 
     //Date formatting to prevent past date selection and limit to max period of 90 days
     const today = new Date();
@@ -106,16 +118,24 @@ function Organisecrowdfundbody(){
     })
 
     const handleInputChange = (event)=>{
-        if(event.target.name === 'end_date'){
-            const formattedDate = new Date(event.target.value).toISOString()
-            console.log(formattedDate)
-            setformdata((prevdata)=> ({
-                ...prevdata,
-                end_date:formattedDate
-            }) )    
+        if(crowdfundMode == 'new'){
+            if (event.target.name === 'end_date') {
+                console.log(event.target.value)
+                const formattedDate = new Date(event.target.value).toISOString()
+                console.log(formattedDate)
+                setformdata((prevdata)=> ({
+                    ...prevdata,
+                    end_date:formattedDate
+                }) )    
 
-        } else {
-            setformdata((prevdata)=> ({
+            } else {
+                setformdata((prevdata)=> ({
+                    ...prevdata,
+                    [event.target.name]:event.target.value
+                }) )
+            }
+        } else if (crowdfundMode == 'edit') {
+            setEditFormData((prevdata)=> ({
                 ...prevdata,
                 [event.target.name]:event.target.value
             }) )
@@ -138,11 +158,7 @@ function Organisecrowdfundbody(){
             setIsLoading(false)
             return;
         }
-        /* if (formdata.description === '') {
-            alert('Please enter a description for your crowdfund')
-            setIsLoading(false)
-            return;
-        } */
+        
         if (formdata.tags === '') {
             alert('Please select a category for your crowdfund')
             setIsLoading(false)
@@ -203,6 +219,50 @@ function Organisecrowdfundbody(){
         setIsLoading(false)
     };
 
+    
+    const [selectedOption, setSelectedOption] = useState(null)
+    const editCrowdfund = async () => {
+        setIsLoading(true)
+        const access_token = localStorage.getItem('access_token')
+        console.log(EditFormData)
+        const form = new FormData();
+        // Iterate over the properties of the formdata object
+        for (const [key, value] of Object.entries(EditFormData)) {
+            form.append(key, value);
+        }
+        const sendCrowdfund = await fetch(`${baseUrl}/funding/api/${eventid}/`,{
+            method:'PATCH',
+            body: form,
+            headers: {
+                Authorization: `Bearer ${access_token}`,  
+                //'Content-Type': 'application/json'
+            }
+        })
+             
+        try {
+            const resp = await sendCrowdfund.json();
+            console.log(resp);
+
+            if (resp.success) {
+                console.log('success');
+                dispatch(editEventData({
+                    id: eventid,
+                    ...EditFormData
+                }));
+
+                // Display successful crowdfund launch modal
+                setSuccessfulLaunchModal({ display: true, crowdfundData: resp });
+                // navigate('/home')
+            } else {
+                alert('An error occurred, please try again later.');
+            }
+        } catch (error) {
+            console.error('Error updating crowdfund:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     const [successfulLaunchModal, setSuccessfulLaunchModal] = useState({
         display: false,
         crowdfundData: {
@@ -251,8 +311,8 @@ function Organisecrowdfundbody(){
                         <h3 className="font-black text-xl " >Upload campaign image</h3>
                     </div>
                     <div className="p-3 md:p-7 flex flex-col items-center relative " >
-                        <CropImage formdata = {formdata} setformdata = {setformdata}  />
-                        <div className={` ${ formdata.banner ? '' : 'mt-4 md:mt-5' } flex gap-3 items-center py-1 `} >
+                        <CropImage formdata = {formdata} setformdata = {setformdata} crowdfundMode={crowdfundMode} eventdetails={eventdetails} params = {params}  />
+                        <div className={` ${crowdfundMode == 'edit'? 'hidden' : ''}  ${ formdata.banner ? '' : 'mt-4 md:mt-5' } flex gap-3 items-center py-1 `} >
                             <img src={formdata.banner ? uploadSuccessIcon:infoicon} alt="info icon" />
                             <p className={` ${formdata.banner ? 'text-[#37BCF7]':'text-[#8E8E93]'} text-sm md:text-base`} >
                                 {
@@ -285,10 +345,13 @@ function Organisecrowdfundbody(){
                             type="text" 
                             id="title"
                             name="title" 
+                            defaultValue={crowdfundMode == 'edit'  ? eventdetails.title : null }
                             className={`px-[10px] md:px-5 py-3 mb-3 md:mb-5 w-full md:h-[56px] border-[1px] bg-white border-[#8E8E93] rounded-[4px] 
                             hover:border-[#37BCF7] hover:border-2 active:border-2 hover:bg-[#F9F9F9] 
                             outline-[#37BCF7] active:bg-[#FFFFFF] focus:caret-[#2CA9F2]
-                            text-sm md:text-base      `} 
+                            text-sm md:text-base
+                            ${crowdfundMode == 'edit' ? 'text-[#888888]' : ''}    `}
+                            readOnly = {crowdfundMode === 'edit'}
                             placeholder="What is the title of your crowdfund?"                         
                             onChange={handleInputChange}
                         />
@@ -307,8 +370,11 @@ function Organisecrowdfundbody(){
                                 options={options}
                                 placeholder="Select your category"
                                 onChange={(e) => {                                    
-                                    setformdata((prevdata)=> ({...prevdata, tags:e.value }) )
+                                    setformdata((prevdata) => ({ ...prevdata, tags: e.value }))
+                                    setSelectedOption(e)
                                 }}
+                                value={crowdfundMode == 'edit' ? options.find(option => option.value === eventdetails.tags) : selectedOption }
+                                isDisabled={crowdfundMode === 'edit'}
                                 components={{
                                     DropdownIndicator: CustomDropdownIndicator,
                                     IndicatorSeparator : () => null 
@@ -347,6 +413,7 @@ function Organisecrowdfundbody(){
                             name="description" 
                             id="description" 
                             rows="10" 
+                            defaultValue={crowdfundMode == 'edit'  ? eventdetails.description : null }
                             className={` mb-[10px] md:mb-5 w-full p-[10px] md:p-5 text-sm md:text-base outline-none border-[1px] border-[#8E8E93] focus:border-[#37BCF7] focus:border-2 `} 
                             placeholder="Tell us a bit more about your crowdfund in other to make people understand your reason for your crowdfund. A story can also go a long way." 
                             onChange={handleInputChange}
@@ -393,10 +460,12 @@ function Organisecrowdfundbody(){
                             <div className="flex flex-col w-full md:w-4/6 gap-[10px] md:gap-5 ">
                                 <input
                                     type="number"
+                                    defaultValue={crowdfundMode == 'edit'  ? eventdetails.target_price : null }
                                     className={`md:h-[56px] w-full rounded text-sm md:text-base px-[10px] md:px-5 py-3 outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
                                     border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2
                                     ${formdata.target_price > 9999999 ? 'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150]': ''}
-                                    `}
+                                    ${crowdfundMode == 'edit' ? 'text-[#888888]' : ''}    `}
+                                    readOnly = {crowdfundMode === 'edit'}
                                     min='100'
                                     max='9999999'
                                     maxLength="6"
@@ -478,7 +547,7 @@ function Organisecrowdfundbody(){
                     </div>
                     <div className={` ${managetoggles.location? 'block' : 'hidden' } p-3 md:p-[30px]`} >
                         <button className="flex justify-between mb-[10px] md:mb-5 rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg py-[2px] md:py-1 px-[10px] md:px-4 items-center h-[34px] md:h-14 min-w-[106px] md:min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >
-                            <span className="text-xs md:text-base" >
+                            <span className={`text-xs md:text-base ${crowdfundMode == 'edit' ? 'text-[#888888]' : ''} `} >
                                 {userInfo.location && userInfo.location}
                             </span>
                             <img src={removeicon} alt="remove icon" className="w-[18px] md:w-6 " />
@@ -511,8 +580,11 @@ function Organisecrowdfundbody(){
                             type="date"
                             name="end_date"
                             id="end_date"
+                            defaultValue={crowdfundMode == 'edit'  ? (new Date(eventdetails.end_date).toISOString().split('T')[0] ) : null }
                             className={`md:h-[56px] w-[250px] md:w-[393px] rounded px-[8px] md:px-5 py-[10px] outline-[#37BCF7] outline-2 
-                            focus:caret-[#37BCF7] border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5`}
+                            focus:caret-[#37BCF7] border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2 mr-5 mb-5
+                            ${crowdfundMode == 'edit' ? 'text-[#888888]' : ''}    `}
+                            readOnly = {crowdfundMode === 'edit'}
                             min={formatDate(today)}
                             max={maxDateFormatted}
                             onChange = {handleInputChange}
@@ -525,16 +597,18 @@ function Organisecrowdfundbody(){
                 </div>
 
                 <button className="bg-[#37BCF7] mb-3 md:mb-4 mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[300px] w-fit md:w-1/2 md:min-h-[48px] rounded md:rounded-[10px] text-white font-bold text-base md:text-[18px] block  " 
-                    onClick={startCrowdfund}
+                    onClick={crowdfundMode == 'edit' ? editCrowdfund : startCrowdfund}
                 >
                     <div className={` ${isLoading ? 'block' : 'hidden' } `}>
                         <Loadingspinner width = '28px' height = '28px' />
                     </div>
                     <span className={` ${isLoading ? 'hidden' : 'block' } `} >
-                        All done, begin your crowdfund
+                        { crowdfundMode == 'new' ?  'All done, begin your crowdfund' : 'Make changes to campaign'  }
                     </span>
                 </button>
-                <button className="text-[#37BCF7] mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[250px] w-fit md:w-1/2 md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >Not now, save for later</button>
+                <button className="text-[#37BCF7] mx-auto px-5 py-[10.4px] min-w-full phones:min-w-[250px] w-fit md:w-1/2 md:h-[48px] rounded md:rounded-[10px] hover:bg-white font-bold text-base md:text-[18px] block " >
+                    { crowdfundMode == 'new' ? 'Not now, save for later' : 'Go back' }
+                </button>
                 
                 <SuccessfulCrowdfundLaunchModal successfulLaunchModal = {successfulLaunchModal} setSuccessfulLaunchModal = {setSuccessfulLaunchModal} />
             </div>

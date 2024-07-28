@@ -22,7 +22,7 @@ import Settings from "./pages/settings/settings";
 import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { addNotification, loadCrowdfundEvents, sethomebodydata, setIsAuthenticated } from './actions/actions'
+import { addNotification } from './actions/actions'
 import Organisecrowdfund from './pages/organisecrowdfund/organisecrowdfund'
 import Wallet from './pages/wallet/wallet'
 import Notificationspage from './pages/notificationspage/notificationspage'
@@ -161,6 +161,9 @@ function App() {
 
             <Route path='/organisecrowdfund' element = { <PrivateRoute element = { <Organisecrowdfund /> } /> } >
               <Route path='/organisecrowdfund' element = {<Organisecrowdfund />} />              
+            </Route>
+            <Route path='/organisecrowdfund/:id' element = { <PrivateRoute element = { <Organisecrowdfund /> } /> } >
+              <Route path='/organisecrowdfund/:id' element = {<Organisecrowdfund />} />              
             </Route>
 
             <Route path='/profilepage' element = { <PrivateRoute element = { <Profilepage /> } /> } >
