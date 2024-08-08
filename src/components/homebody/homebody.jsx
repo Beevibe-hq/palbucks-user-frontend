@@ -116,7 +116,7 @@ function Homebody(){
                 <h1 className = 'font-black text-xl phones:text-xl md:text-3xl leading-7 tracking-[0.5px] mb-[15px] font-merriweather' >
                   Crowdfunding is better when done together.
                 </h1>
-                <p className = 'hidden md:block font-normal text-lg tracking-[0.8px]' >Raise funds for a project or cause in USDT, the prominent stable coin</p>
+                <p className = 'hidden md:block font-normal text-lg tracking-[0.8px]' >Raise funds for a project or cause in a matter of seconds!</p>
             </div>
 
             <div className = 'flex fold:gap-4 phones:gap-4 font-black mb-4 md:mb-5 text-base tracking-[0.06px] leading-5'>

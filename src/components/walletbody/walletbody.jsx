@@ -98,7 +98,7 @@ function Walletbody(){
                 Wallet
             </h1>
             <p className=" text-base md:text-lg mb-7 md:mb-8 " >
-                Check your wallet balance, connect to your external wallet, withdraw  your funds
+                Check your wallet balance, withdraw  your funds
             </p>
 
             <div className="flex lg:hidden md:gap-3 mb-7 " >

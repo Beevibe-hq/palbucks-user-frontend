@@ -10,7 +10,7 @@ const Landingcampaign = (props) => {
 
         <div className="pr-3 lg:pr-[30px]">
             <h3 className='mb-[11px] lg:mb-[12px] text-sm leading-5 lg:text-[34px] lg:leading-[40px] font-bold lg:tracking-[0.128px]' >
-                The Fight for our Environment in Lagos Begins Today
+                {props.title ? props.title : 'Campaign Title'}
             </h3>
 
             <p className='mb-0 lg:mb-[16px] line-clamp-2 text-[#011217] text-xs lg:text-[20px] leading-5 lg:leading-[30px] font-arial tracking-[-0.021px;] ' >
@@ -21,7 +21,7 @@ const Landingcampaign = (props) => {
             <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  
             className='landingpageprogressbar w-full h-[9px] lg:h-[18px] appearance-none rounded-full  mb-0 md:mb-[12px]' />        
             
-            <p className='text-xs lg:text-[22px] font-bold ' >${props.value} raised </p>
+            <p className='text-xs lg:text-[22px] font-bold ' >{props.value} raised </p>
 
         </div>
     </div>
