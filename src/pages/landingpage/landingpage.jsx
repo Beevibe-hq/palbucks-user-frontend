@@ -216,7 +216,7 @@ function LandingPage(){
                     From your wallet to <br className="hidden md:block" /> their hearts
                 </h2>
                 <p className="mb-5 md:mb-7 lg:mb-[60px] text-sm md:text-xl lg:text-[33px] font-merriweather md:font-arial text-center lg:leading-[45px] tracking-[0.5px] " >
-                    Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your bank card or USDT
+                    Start your crowdfunding campaign. Make online donation <br className="hidden md:block" /> by using your bank card or via transfer
                 </p>
                 <button className="max-w-[85%] mb-7 md:mb-14 lg:mb-[100px] 
                     px-8 md:px-12 lg:px-[52px] hover:md:px-12 hover:lg:px-[72.5px]
@@ -309,9 +309,9 @@ function LandingPage(){
                         handleScrollCheck()
                     }}
                 >                    
-                    <Landingcampaign image={landingcampaignimg3} value="23,543" target="100000" />
-                    <Landingcampaign image={landingcampaignimg} value="1034" target="1500" />
-                    <Landingcampaign image={landingcampaignimg2} value="54,223" target="250000" />
+                    <Landingcampaign title={'The Fight for our Environment in Lagos Begins Today'} image={landingcampaignimg3} value="$23,543" target="100000" />
+                    <Landingcampaign title={'Help Henry set up his art studio'} image={landingcampaignimg} value="₦1034" target="1500" />
+                    <Landingcampaign title={'Together we can build a better community'}  image={landingcampaignimg2} value="$54,223" target="250000" />
                 </div>
 
 
@@ -382,7 +382,7 @@ function LandingPage(){
                                         20 hours ago
                                     </p>   
                                     <p className="text-xs lg:text-[26px] lg:leading-8  " >
-                                        Made a donation of <span className="font-bold" >5000USDT</span> to your crowdfund campaign 
+                                        Made a donation of <span className="font-bold" >₦5000</span> to your crowdfund campaign 
                                     </p>
                                 </div>
                             </div>
@@ -443,15 +443,15 @@ function LandingPage(){
                     </div>
 
                     <h6 className="mb-5 lg:mb-[89px] text-center text-white text-xl lg:text-[74px] font-black leading-8 lg:leading-[113px] tracking-[0.08px] " >
-                        Withdraw Donations into <br className="hidden lg:block" /> your <span className="text-[#35FAA0]" >Crypto Wallet</span> or Directly <br className="hidden lg:block" /> into your <span className="text-[#35FAA0]" >Bank Account</span>
+                        Withdraw Donations into <br className="hidden lg:block" /> any <span className="text-[#35FAA0]" >Verified Account</span> or Directly <br className="hidden lg:block" /> into your <span className="text-[#35FAA0]" >Bank Account</span>
                     </h6>
                     <p className="mb-[50px] lg:mb-[100px] font-arial text-center text-lg lg:text-[36px] text-white lg:leading-[70px]  " >
-                        All funds generated from your donation can be withdrawn <br className="hidden lg:block" /> immediately into your USDT cryptocurrency wallet or can be <br className="hidden lg:block" />
+                        All funds generated from your donation can be withdrawn <br className="hidden lg:block" /> immediately into any verified account {/* your USDT cryptocurrency wallet */} or can be <br className="hidden lg:block" />
                          sent directly into your local bank account
                     </p>
                     {/* I commented this part out cause it hinders my mobile view up, uncomment when mobile gets to this stage */}
                     <div className="w-fit max-w-[90%] mx-auto">
-                        <Landingnotification date = '13' amount = '5000 USDT' />
+                        <Landingnotification date = '13' amount = '₦5000' />
                         <Landingnotification date = '9' amount = '$987' />
                         <Landingnotification date = '3' amount = '$5783' />
                     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Cropper from 'react-easy-crop';
 import '../styles.css'
 
@@ -29,7 +29,7 @@ export function urltoFile(url, filename, mimeType) {
     });
 }
 
-const Demo = ({ formdata, setformdata }) => {
+const Demo = ({ formdata, setformdata, crowdfundMode, eventdetails, params }) => {
 
   const [fileName, setFileName] = useState(null)
   
@@ -43,6 +43,13 @@ const Demo = ({ formdata, setformdata }) => {
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
+
+  useEffect(() => {
+    if (params.id) {
+      setCroppedImage(eventdetails.banner)  
+      setImageSrc(eventdetails.banner)
+    }     
+  }, [eventdetails, params.id])
 
   const showCroppedImage = useCallback(async () => {
     try {
@@ -108,7 +115,11 @@ const Demo = ({ formdata, setformdata }) => {
           {croppedImage ? (
             <div className="w-full md:w-[550px] mx-auto mt-5 ">
               <label htmlFor="campaignimage">
-                <img src={croppedImage} alt="Cropped" className="mx-auto w-full border-[2px] border-[#37BCF7] cursor-pointer" />
+                <img
+                  src={croppedImage}
+                  alt="Cropped Crowdfund banner"
+                  className={`mx-auto w-full border-[2px] border-[#37BCF7] ${crowdfundMode !== 'edit' ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                />
               </label>
             </div>
           ) :(
@@ -188,7 +199,14 @@ const Demo = ({ formdata, setformdata }) => {
                 <label htmlFor="campaignimage" className={`cursor-pointer bg-[#37BCF7] px-4 py-[10px] text-white font-semibold shrink-0 shadow-[0px_3px_1px_-2px_rgba(0,0,0,0.2)] rounded hover:bg-[#0baef4]`}>
                   <span className="">Change Image</span>
                 </label>
-                <input type="file" onChange={onFileChange} accept="image/*" className="hidden" id="campaignimage" />
+                <input
+                  type="file"
+                  onChange={onFileChange}
+                  accept="image/*"
+                  className="hidden"
+                  id="campaignimage"
+                  disabled = {crowdfundMode === 'edit'}
+                />
               </div>
 
               {/* <button
@@ -218,7 +236,14 @@ const Demo = ({ formdata, setformdata }) => {
           <label htmlFor="campaignimage" className={`cursor-pointer`}>
             <img src={uploadicon} alt="upload icon" className="w-9 h-11" />
           </label>
-          <input type="file" onChange={onFileChange} accept="image/*" className="hidden" id="campaignimage" />
+            <input
+              disabled = {crowdfundMode === 'edit'}
+              type="file"
+              onChange={onFileChange}
+              accept="image/*"
+              className="hidden"
+              id="campaignimage"
+            />
         </div>
       )}
     </div>

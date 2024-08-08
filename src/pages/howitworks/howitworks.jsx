@@ -51,7 +51,7 @@ function Howitworks(){
                         How does Palbucks crowdfunding work?
                     </h1>                    
                     <p className=" text-base md:text-lg mb-14 md:mb-16 " >
-                        Palbucks is a platform that enables you crowdfund for a cause in USDT
+                        Palbucks is a platform that enables you crowdfund for a cause.
                     </p>
 
                     <h2 className="text-lg md:text-2xl font-black mb-5 md:mb-6 " >
@@ -93,7 +93,7 @@ let setup_crowdfunding_guide = [
     {
         step:'Enter Target Amount',
         icon:icon3,
-        description:'Next you will have to enter your target amount (denomination value is USDT). This amount will be between 100 USDT to 1 million USDT. ',
+        description:'Next you will have to enter your target amount (denomination value is USD). This amount will be between 100 USD to 1 million USD. ',
         background:'white',
     },
     {

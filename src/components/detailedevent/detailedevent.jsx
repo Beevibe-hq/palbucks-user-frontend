@@ -308,6 +308,10 @@ function Detailedevent(props){
     // Loop through the options array, check if the category matches the option and return the image
     const categoryImg = options.filter(item => item.value === eventdetails?.tags? eventdetails.tags: null).map(item => item.icon) 
     
+    const editCampaign = () => { 
+        navigate(`/organisecrowdfund/${eventid}`)
+    }
+
         if (eventdetails) {
             //alert('no')    
             //console.log(eventdetails)
@@ -395,7 +399,8 @@ function Detailedevent(props){
                                             </button>
 
                                             {/* Edit button for personal host view */}
-                                            <button 
+                                            <button
+                                                onClick={editCampaign}    
                                                 className = {` ${ userInfo && eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 
                                                 'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-[#37BCF7] rounded-lg md:rounded-[10px] w-full py-[7px] md:py-[10px] md:max-h-[40px] px-3 md:px-4 text-sm md:text-base text-[#37BCF7] h-fit font-black ' 
                                                 : 'hidden' } `}
