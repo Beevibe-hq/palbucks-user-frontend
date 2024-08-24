@@ -6,6 +6,7 @@ import { baseUrl } from "../../auth/checkauthentication"
 
 function Changemail(){
 
+    const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : ''
     const [openemail, setopenemail] = useState(true)
     const [email, setemail] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -79,7 +80,7 @@ function Changemail(){
                     </button>
 
                 </div>
-                <p className = "hidden md:block font-medium text-base leading-6 text-[#7D7D7D] " >@youremailaddress@email.com</p>
+                <p className = "hidden md:block font-medium text-base leading-6 text-[#7D7D7D] " >@{userInfo.email}</p>
             </div>
 
         </div>
