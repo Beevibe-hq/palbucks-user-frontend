@@ -205,7 +205,7 @@ function Organisecrowdfundbody(){
         const resp = await sendCrowdfund.json();
         console.log(resp)
 
-        if(resp.success){
+        if(sendCrowdfund.status === 201){
             console.log('success')            
             dispatch(addCrowdfundEvent(resp))
 

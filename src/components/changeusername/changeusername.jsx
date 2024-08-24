@@ -91,7 +91,7 @@ function Changeusername(){
                     </button>
 
                 </div>
-                <p className = "hidden md:block font-medium text-base leading-6 text-[#7D7D7D] " >@formalusername</p>
+                <p className = "hidden md:block font-medium text-base leading-6 text-[#7D7D7D] " >@{userInfo.username}</p>
             </div>
 
         </div>
