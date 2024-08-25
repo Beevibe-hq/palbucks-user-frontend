@@ -38,6 +38,7 @@ function DiscoverPage() {
     }
 
     const [data, setData] = useState([])
+    const [searchFieldValue, setSearchFieldValue] = useState('')
 
     useEffect(() => {
         // Get crowdfund details
@@ -171,8 +172,7 @@ function DiscoverPage() {
                       `}
                     placeholder='Search'
                     onChange={(e) => {
-                        console.log(e.target.value)
-
+                        setSearchFieldValue(e.target.value)
                     }}                
                 />
 
@@ -254,8 +254,8 @@ function DiscoverPage() {
                 </div> */}
 
                 {/* Add empty divs to fill the last row if it's not full */}
-                <div className="flex flex-wrap justify-between w-full py-7 md:py-[35px] gap-6">
-                    {data.map((item, index) => (
+                <div className="flex flex-wrap justify-between w-full py-7 md:py-[35px] gap-8 md:gap-6 ">
+                    {/* {data.map((item, index) => (
                         <DiscoverPageCrowdfunds
                             key={index}
                             banner={item.banner}
@@ -264,7 +264,40 @@ function DiscoverPage() {
                             value={item.amt_raised}
                             target={item.target_price}
                         />
-                    ))}
+                    ))} */}
+                    {
+                        searchFieldValue.length > 0 ? data.filter((crowdfund) => crowdfund.title.toLowerCase().includes(searchFieldValue.toLowerCase())).map((crowdfund, index) => (
+                            <DiscoverPageCrowdfunds
+                                key={index}
+                                banner={crowdfund.banner}
+                                title={crowdfund.title}
+                                organiser={crowdfund.organiser}
+                                value={crowdfund.amt_raised}
+                                target={crowdfund.target_price}
+                            />
+                        )) :
+                            selectedOption === 'all' ? data.map((crowdfund, index) => (
+                                <DiscoverPageCrowdfunds
+                                    key={index}
+                                    banner={crowdfund.banner}
+                                    title={crowdfund.title}
+                                    organiser={crowdfund.organiser}
+                                    value={crowdfund.amt_raised}
+                                    target={crowdfund.target_price}
+                                />
+                            )) :
+                                data.filter((crowdfund) => crowdfund.tags === selectedOption).map((crowdfund, index) => (
+                                    <DiscoverPageCrowdfunds
+                                        key={index}
+                                        banner={crowdfund.banner}
+                                        title={crowdfund.title}
+                                        organiser={crowdfund.organiser}
+                                        value={crowdfund.amt_raised}
+                                        target={crowdfund.target_price}
+                                    />
+                                ))
+                    }
+
 
                     
                     {Array(maxItemsPerRow - (data.length % maxItemsPerRow)).fill().map((_, index) => (
@@ -294,27 +327,27 @@ function DiscoverPageCrowdfunds(props) {
             <img
                 src={props.banner? props.banner:eventImg4}
                 alt="Campaign pic"
-                className="mb-[18px] rounded-[10px] object-cover w-full 
+                className="mb-4 rounded-[10px] object-cover w-full 
                 h-[196px] phones:h-[196px] xphones:h-[196px]"
             />
-            <h3 className="text-xl font-bold mb-3 line-clamp-1 tracking-[-0.466px] " >
+            <h3 className="text-lg lg:text-xl font-bold mb-1 lg:mb-3 line-clamp-1 tracking-[-0.466px] " >
                 {props.title ? props.title : "Help our Lucy survive cancer"}
             </h3>
 
-            <div className="mb-8 flex gap-[6px] items-center " >
+            <div className="mb-1 lg:mb-4 flex gap-[6px] items-center " >
                 <img
                     src={props.organiser.dp !== null ? props.organiser.dp : profileImgPlaceholder}
                     alt="crowdfund organiser"
-                    className="rounded-full w-[30px] h-[30px] "
+                    className="rounded-full w-6 h-6 lg:w-[30px] lg:h-[30px] "
                 />
-                <p className="text-lg" >
+                <p className="lg:text-lg" >
                     organized by <span className="font-black" >{props.organiser?.first_name ? props.organiser.first_name : 'Lucy'}</span>
                 </p>
             </div>
 
             <progress
                 value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}  
-                className='landingpageprogressbar w-full h-[5px] lg:h-[12px] appearance-none rounded-full mb-0 md:mb-[18px]'
+                className='landingpageprogressbar w-full h-[5px] lg:h-[12px] appearance-none rounded-full mb-0'
             />
             
             <p className='text-xs lg:text-base font-bold ' >${props.value ? props.value : '23,543'} raised </p>

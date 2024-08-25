@@ -74,15 +74,17 @@ function Walletbody(){
         const fetchWalletBalance = async () => {
             try {
                 const response = await fetch(`${baseUrl}/pay/api/wallet`,{
-                headers:{
-                    Authorization: `Bearer ${localStorage.getItem('access_token')}`
-                }
-            })
-            const resp = await response.json()
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                    }
+                })
+                const resp = await response.json()
+                console.log(resp.wallet_balances.total_balance)
+                //console.log(resp)
                 if (response.ok) {
                     setBalance({
-                        walletBalance: resp.total_balance,
-                        amountEarned: resp.donation
+                        walletBalance: resp.wallet_balances.total_balance,
+                        amountEarned: resp.wallet_balances.donation
                     })    
                 }
             } catch (error) {
@@ -138,7 +140,7 @@ function Walletbody(){
                                 <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >
                                     <h4 className="text-base md:text-lg text-[#525252]" >Wallet Balance</h4>
-                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{balance.walletBalance }</h4>
+                                    <h4 className="text-lg md:text-[22px] font-black leading-6 " >{balance.walletBalance}</h4>
                                     <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 USD </h4>
                                 </section>
                             </div>

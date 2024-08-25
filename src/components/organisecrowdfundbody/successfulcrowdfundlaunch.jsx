@@ -66,7 +66,7 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                     <h5 className="mb-2 font-black text-[16px] md:text-[28px]" >
                                         Share to potential donors
                                     </h5>
-                                    <p className=" mb-8 md:mb-[36px] text-xs md:text-[18px] leading-[32px] font-bold " >
+                                    <p className=" mb-8 md:mb-[36px] text-xs md:text-[18px] leading-6 md:leading-[32px] font-bold " >
                                         Encourage support by regularly sharing your campaign
                                     </p>
                                     <div className="flex items-start gap-3 mb-4 md:mb-10">
@@ -90,7 +90,7 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                             <span className="text-[12px] md:text-sm " >{`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`}</span>    
                                         </div>    
                                     </div>
-                                    <div className="mb-11 bg-[#35FAA01A] rounded-[10px] py-[10px] md:py-4 px-3 md:pl-6 md:pr-[93px] mx-auto " >
+                                    <div className=" w-full md:w-fit mb-11 bg-[#35FAA01A] rounded-[10px] py-[10px] md:py-4 px-3 md:pl-6 md:pr-[93px] mx-auto " >
                                         <p className="text-[12px] xphones:text-[13px] md:text-[18px]" >Share to your social media using the links below</p>        
                                     </div>
                                     <div className="flex flex-col md:flex-row gap-[24px] md:gap-[30%] " >
