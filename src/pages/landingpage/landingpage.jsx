@@ -437,7 +437,7 @@ function LandingPage(){
                         <img src={plus} alt="plus icon" className="w-[24px] lg:w-[90px] h-[55px] lg:h-[206px] " />
                         <div className="flex">
                             <img src={profileimage5} alt="" className="w-[60px] lg:w-[180px] xl:w-[217px] h-[60px] lg:h-[180px] xl:h-[217px] rounded-full" />
-                            <img src={profileimage6} alt="" className="w-[60px] lg:w-[180px] xl:w-[217px] h-[60px] lg:h-[180px] xl::h-[217px] rounded-full relative -left-4 lg:-left-16 " />
+                            <img src={profileimage6} alt="" className="w-[60px] lg:w-[180px] xl:w-[217px] h-[60px] lg:h-[180px] xl:h-[217px] rounded-full relative -left-4 lg:-left-16 " />
                         </div>
                         
                     </div>
@@ -534,9 +534,13 @@ function LandingPage(){
                                 <img src={copyrighticon} alt="copyright icon" className="w-[18px] lg:w-6" />
                                 <span className=" text-[#525252] text-base lg:text-lg " >2023 Palbucks</span>
                             </div>
-                            <div className=" order-1 lg:order-2 flex gap-[30px] lg:gap-[38px] items-center">
-                                <img src={twittericon} alt="twitter icon" className="w-[15px] lg:w-5 h-3 lg:h-4" />
-                                <img src={instagramicon} alt="instagram icon" className="w-[15px] lg:w-5" />
+                            <div className=" order-1 lg:order-2 flex gap-[30px] lg:gap-[38px] items-center">                                
+                                <a target="_blank" href="https://x.com/palbucksco">
+                                    <img src={twittericon} alt="twitter icon" className="w-[15px] lg:w-5 h-3 lg:h-4" />
+                                </a>
+                                <a target="_blank" href="https://www.instagram.com/palbucks?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">
+                                    <img src={instagramicon} alt="instagram icon" className="w-[15px] lg:w-5" />
+                                </a>
                             </div>
                         </div>
 

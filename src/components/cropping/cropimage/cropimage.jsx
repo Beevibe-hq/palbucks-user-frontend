@@ -45,11 +45,11 @@ const Demo = ({ formdata, setformdata, crowdfundMode, eventdetails, params }) =>
   }, []);
 
   useEffect(() => {
-    if (params.id) {
+    if (params?.id) {
       setCroppedImage(eventdetails.banner)  
       setImageSrc(eventdetails.banner)
     }     
-  }, [eventdetails, params.id])
+  }, [eventdetails, params?.id])
 
   const showCroppedImage = useCallback(async () => {
     try {

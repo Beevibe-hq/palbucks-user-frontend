@@ -479,9 +479,9 @@ function Organisecrowdfundbody(){
                                     <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >$100 - $9999999 </p>
                                 </div>
                             </div>
-                            <span className="text-sm md:text-lg md:pt-4 leading-[22px] text-[#2CA9F2] font-black cursor-pointer " >
+                            {/* <span className="text-sm md:text-lg md:pt-4 leading-[22px] text-[#2CA9F2] font-black cursor-pointer " >
                                 What is USDT?
-                            </span>
+                            </span> */}
                         </div>
                     </div>
                 </div>
