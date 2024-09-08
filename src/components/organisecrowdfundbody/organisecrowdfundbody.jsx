@@ -114,7 +114,7 @@ function Organisecrowdfundbody(){
         amt_raised:0,
         tags:'',
         location: userInfo.location ? userInfo.location : '',
-        co_organisers:[],
+        //co_organisers:[],
     })
 
     const handleInputChange = (event)=>{

@@ -14,6 +14,7 @@ import uploadSuccessIcon from "../../images/organiseCrowdfund/Information icon.p
 import likeIcon from "../../images/authpages/like.svg"
 import { addCrowdfundEvent } from "../../actions/actions"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
+import { baseUrl } from "../../auth/checkauthentication"
 
 function AnonymousCrowdfundFormBanner() {
     const isMobile = useMediaQuery({
@@ -104,7 +105,7 @@ function AnonymousCrowdfundFormBanner() {
                                 }
                                 const access_token = localStorage.getItem('access_token')
                                 console.log(form)
-                                const sendCrowdfund = await fetch('https://palbucks-api.onrender.com/funding/api/',{
+                                const sendCrowdfund = await fetch(`${baseUrl}/funding/api/`,{
                                     method:'POST',
                                     body: form,
                                     headers: {
