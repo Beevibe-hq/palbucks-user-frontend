@@ -169,7 +169,7 @@ const Coorganiser = ({user, pk, selected, setSelected, formdata ,setformdata}) =
                 <img src={user.dp == null ? profilePlaceholder : user.dp } alt="Profile pic" className="w-10 xphones:w-12 h-10 xphones:h-12 md:w-[60px] md:h-[60px] rounded-full " />                
                 <p className="text-xs phones:text-sm md:text-base font-black " >{user.first_name} {user.last_name}</p>
             </div>
-            <button className={` ${formdata.co_organisers.includes(pk) ? 'bg-[#37BCF7] text-white ' : 'border-[3px] border-[#37BCF7] hover:bg-[#37BCF71A] text-[#37BCF7]'} 
+            <button className={` ${formdata.co_organisers?.includes(pk) ? 'bg-[#37BCF7] text-white ' : 'border-[3px] border-[#37BCF7] hover:bg-[#37BCF71A] text-[#37BCF7]'} 
                 flex items-center justify-center gap-1 md:gap-2 py-1 xphones:py-[6px] pr-[2px] phones:pl-1 phones:pr-[6px] md:px-3 rounded-xl w-fit min-w-[100px] `}
                 onClick={() => {
 
@@ -183,23 +183,23 @@ const Coorganiser = ({user, pk, selected, setSelected, formdata ,setformdata}) =
                       alert('You can only add 2 co-organisers');
                       return;
                     }
-                    if (formdata.co_organisers.includes(pk)) {
+                    if (formdata.co_organisers?.includes(pk)) {
                         // Remove the user from the selected list
                         setSelected(selected.filter((selectedUser) => selectedUser.pk !== pk));
                         setformdata({...formdata, co_organisers: formdata.co_organisers.filter((selectedUser) => selectedUser !== pk)})
                     } else {
                         // Add the user to the selected list
                         setSelected([...selected, user]);
-                        setformdata({...formdata, co_organisers: [...formdata.co_organisers, Number(pk)]})
+                        setformdata({...formdata, co_organisers: formdata.co_organisers ? [...formdata.co_organisers, Number(pk)] : [Number(pk)]})
                     }
                                         
                   }}
                   
             >
-                <img src={formdata.co_organisers.includes(pk) ? addIcon2 : addIcon} alt="add Icon" className="w-6 md:w-[30px]" />    
+                <img src={formdata.co_organisers?.includes(pk) ? addIcon2 : addIcon} alt="add Icon" className="w-6 md:w-[30px]" />    
                 <p className="text-xs phones:text-sm md:text-base font-black pt-1 " >
                     {
-                        formdata.co_organisers.includes(pk) ? 'Invited User' : 'Invite user'
+                        formdata.co_organisers?.includes(pk) ? 'Invited User' : 'Invite user'
                     }
                 </p>
             </button>

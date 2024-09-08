@@ -129,6 +129,10 @@ function App() {
         dispatch(addNotification(data));
         console.log(data);
       });
+      notificationsChannel.bind("co-organiser-request", (data) => {
+        dispatch(addNotification(data));
+        console.log(data);
+      });
     }
 
     return () => {

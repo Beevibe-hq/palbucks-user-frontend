@@ -101,8 +101,8 @@ function Notificationspage(){
                                 return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
                             }else if (data.type == 'milestone') {
                                 return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                            }else if (data.type == 'request') {
-                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
+                            }else if (data.type == 'co-organiser-request') {
+                                return <Requestnotification userdp={data.userdp} username={data.invited_by} time={data.time} key = {i} />
                             }else if (data.type == 'accept') {
                                 return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                             }
@@ -126,7 +126,7 @@ function Notificationspage(){
                                 return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
                             }else if (data.type == 'milestone') {
                                 return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                            }else if (data.type == 'request') {
+                            }else if (data.type == 'co-organiser-request') {
                                 return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                             }else if (data.type == 'accept') {
                                 return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
@@ -148,7 +148,7 @@ function Notificationspage(){
                                 return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
                             }else if (data.type == 'milestone') {
                                 return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                            }else if (data.type == 'request') {
+                            }else if (data.type == 'co-organiser-request') {
                                 return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                             }else if (data.type == 'accept') {
                                 return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
