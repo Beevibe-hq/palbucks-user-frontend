@@ -83,79 +83,27 @@ function Notificationspage(){
                     </h1>
                     <p className=" text-base md:text-lg mb-8 " >
                         See notifications about your crowdfunding campaigns
-                    </p>                   
+                    </p>                                                           
                     
-                    <h2 className={` ${todayNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6 `} >
-                        Today
-                    </h2>
-                    <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
-                        {/* <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Carlos' time = '2 hours ago' />
-                        <Commentnotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '5 hours ago' />
-                        <Campaignnotification time = '12 hours ago' campaignstate = '100%' />
-                        <Requestnotification userdp={useravatar2} username='Franca' time = '13 hours ago' /> */}
-                        {
-                            todayNotifications.reverse().map((data, i) => {
-                            if (data.type == 'like') {
-                                return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
-                            } else if (data.type == 'comment') {
-                                return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
-                            }else if (data.type == 'milestone') {
-                                return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                            }else if (data.type == 'co-organiser-request') {
-                                return <Requestnotification userdp={data.userdp} username={data.invited_by} time={data.time} key = {i} />
-                            }else if (data.type == 'accept') {
-                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
-                            }
-                        }) 
-                        }
-                    </div>
+                    <PeriodNotificationContainer
+                        period={"Today"}
+                        periodNotifications={todayNotifications}
+                    />
 
+                    <PeriodNotificationContainer
+                        period={"This week"}
+                        periodNotifications={weekNotifications}
+                    />
 
+                    <PeriodNotificationContainer
+                        period="This month"
+                        periodNotifications={monthNotifications}
+                    />
 
-                    <h2 className={` ${weekNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6`} >
-                        This week
-                    </h2>
-                    <div className="mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 ">
-                        {/* <Campaignnotification timestamp = '1 day ago' percentage_reached = '50' />
-                        <Acceptnotification username = 'Timothy' userdp={useravatar3} time = '2 days ago' /> */}
-                        {
-                           weekNotifications.reverse().map((data, i) => {
-                            if (data.type == 'like') {
-                                return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
-                            } else if (data.type == 'comment') {
-                                return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
-                            }else if (data.type == 'milestone') {
-                                return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                            }else if (data.type == 'co-organiser-request') {
-                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
-                            }else if (data.type == 'accept') {
-                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
-                            }
-                        }) 
-                        }
-                    </div>
-
-                    <h2 className={` ${monthNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6 `} >
-                        This month
-                    </h2>
-                    <div>
-                        {/* <Likenotification userdp = {'users/display_pictures/680649c3a91e4c649c930766f3d1bb2b_2023-03-13-154301.jpg'} username = 'Tochi' time = '2 weeks ago' /> */}
-                        {
-                           monthNotifications.reverse().map((data, i) => {
-                            if (data.type == 'like') {
-                                return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
-                            } else if (data.type == 'comment') {
-                                return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
-                            }else if (data.type == 'milestone') {
-                                return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                            }else if (data.type == 'co-organiser-request') {
-                                return <Requestnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
-                            }else if (data.type == 'accept') {
-                                return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
-                            }
-                        }) 
-                        }
-                    </div>
+                    <PeriodNotificationContainer
+                        period="This year"
+                        periodNotifications={yearNotifications}
+                    />
 
                     <div className={` ${notificationsData.length == 0 ? 'flex mr-auto w-fit items-center justify-center gap-5 px-20 xl:px-40': 'hidden' }  `} >
                         <img src={infoicon2} alt="info icon" className="w-6" />
@@ -172,3 +120,33 @@ function Notificationspage(){
 }
 
 export default Notificationspage;
+
+
+
+function PeriodNotificationContainer({period, periodNotifications}) {
+    
+    return (
+        <>
+            <h2 className={` ${periodNotifications.length == 0 ? 'hidden' : 'block'} text-base md:text-xl font-bold mb-[18px] md:mb-6 `} >
+                {period}
+            </h2>
+            <div className={` ${periodNotifications.length == 0 ? 'hidden' : 'block'} mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 `}> 
+                {
+                    periodNotifications.reverse().map((data, i) => {
+                    if (data.type == 'like') {
+                        return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
+                    } else if (data.type == 'comment') {
+                        return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
+                    }else if (data.type == 'milestone') {
+                        return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
+                    }else if (data.type == 'co-organiser-request') {
+                        return <Requestnotification userdp={data.userdp} username={data.invited_by} time={data.time} key = {i} />
+                    }else if (data.type == 'accept') {
+                        return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
+                    }
+                }) 
+                }
+            </div>
+        </>
+    )
+}

@@ -8,7 +8,7 @@ import checker3 from "../../images/authpages/checker3.svg"
 
 
 
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 import { useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -20,7 +20,8 @@ const Completesignup = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    const [searchParams] = useSearchParams()
+    const emailFromUrl = searchParams.get('email');
     const [isLoginLoading, setIsLoginLoading] = useState(false)
 
     const signupInfo = useSelector( state => state.signupInfo)
@@ -32,7 +33,7 @@ const Completesignup = () => {
         gender:1,
         phone:'293',
         bio:'Humble man',
-        email:signupInfo.email,        
+        email: emailFromUrl ? emailFromUrl: signupInfo.email,        
     })
 
     const [responseDetail,setResponseDetail] = useState({
@@ -76,7 +77,7 @@ const Completesignup = () => {
                 await checkAuthentication(dispatch)
 
                 navigate('/home')
-            }else if(response.username && response.username[0] == 'A user with that username already exists.'){
+            }else if(response.message === "Username already taken."){
                 setResponseDetail(prevInfo => ({...prevInfo, username: 'Username already exists'}))
             }
 

@@ -154,7 +154,7 @@ function Fundevent(props){
                     </div>
                 </div>
                 <div className = 'relative w-full rounded-t-[10px]'>
-                    <img src={props.crowdfundImage? props.crowdfundImage:eventimg} alt="Fund event" className = 'rounded-t-[10px] w-full h-[196px] phones:h-[196px] xphones:h-[196px] lg:h-[135px] object-cover ' />
+                    <img src={props.crowdfundImage? props.crowdfundImage:eventimg} alt="Fund event" className = 'rounded-t-[10px] w-full h-[196px] phones:h-[196px] xphones:h-[196px] brkpoint:h-[135px] object-cover ' />
                 
                     {/* <div className = 'absolute top-4 left-5 bg-white flex items-center justify-center gap-[5px] px-[8px] rounded-lg py-[4px]'>
                         <img src={categoryImg.length !== 0 ? categoryImg : options.slice(-1)[0].icon } alt="Event category icon" className = 'w-[15px] h-[15px] ' />
@@ -162,7 +162,7 @@ function Fundevent(props){
                     </div> */}
                 </div>
                 
-                <div className = {`bg-white pt-2 phones:pt-3 xphones:pt-[17px] brkpoint:py-3 rounded-b-[10px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] h-fit  lg:h-[205.5px] 
+                <div className = {`bg-white pt-2 phones:pt-3 xphones:pt-[17px] brkpoint:py-3 rounded-b-[10px] pb-2 px-[10px] xphones:px-[15px] md:px-[10px] h-fit brkpoint:h-[205.5px] 
                     relative shadow-[0px_0px_35.2294px_rgba(0,0,0,0.04)] hover:bg-[#033F591A] hover:border-[0.1px] hover:border-[#D2D2D4]  `}>
 
                     <div className="flex justify-between items-center mb-[10px] ">
@@ -176,10 +176,10 @@ function Fundevent(props){
                     </div>
 
                     <div className = 'mb-3 phones:mb-5 xphones:mb-6 brkpoint:mb-5 mx-auto'>
-                        <h5 className = "font-black text-base brkpoint:text-base leading-5 tracking-[0.06px] mb-[5px] phones:mb-[8px] xphones:mb-[11px] lg:mb-[15px] line-clamp-2 " >
+                        <h5 className = "font-black text-base brkpoint:text-base leading-5 tracking-[0.06px] mb-[5px] phones:mb-[8px] xphones:mb-[11px] brkpoint:mb-[15px] line-clamp-2 " >
                             {props.title ? props.title: "This is the title of the main user's Crowdfunding"}
                         </h5>
-                        <p className='leading-[18px] -tracking-[0.01px] text-sm lg:text-[15px] line-clamp-2 '>
+                        <p className='leading-[18px] -tracking-[0.01px] text-sm brkpoint:text-[15px] line-clamp-2 '>
                             {
                                 isMobile ? 'Click to know more about this campaign': props.description ?
                                 props.description :
@@ -187,7 +187,7 @@ function Fundevent(props){
                             }
                         </p>
                     </div>
-                    <div className = 'lg:absolute w-full lg:w-[93.5%] mx-auto lg:bottom-2'>
+                    <div className = 'brkpoint:absolute w-full brkpoint:w-[93.5%] mx-auto brkpoint:bottom-2'>
                         <progress 
                             value={props.amt_raised ? props.amt_raised : '23543'} 
                             max={props.target_price ? props.target_price : '150000'}  

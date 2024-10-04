@@ -258,6 +258,8 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             console.log(selectedCurrency)
 
             const access_token = localStorage.getItem('access_token')
+            
+            // Old payment api commented out to try the new one
             const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate-fiat/`,{
                 method:'POST',
                 headers:{
@@ -267,7 +269,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                 body: JSON.stringify({
                     amount: donationDetails.amount,
                     currency:selectedCurrency.value
-                    /* donor: donationDetails.donor */
+                    //donor: donationDetails.donor
                 })
             })
             const response = await makeDonation.json()
@@ -279,6 +281,8 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             }
 
             setIsLoading(false)    
+
+            //const makePayment = await fetch(`${}`)
         }
         
     }

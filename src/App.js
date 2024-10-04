@@ -133,6 +133,10 @@ function App() {
         dispatch(addNotification(data));
         console.log(data);
       });
+      notificationsChannel.bind("co_organiser_response", (data) => {
+        dispatch(addNotification(data));
+        console.log(data);
+      });
     }
 
     return () => {
