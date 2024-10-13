@@ -56,6 +56,7 @@ export default function Donate() {
         const txn_ref = searchParams.get('reference');
         const transaction_id = searchParams.get('transaction_id');
         console.log(txn_ref)
+        let verifyCount = 0;
         /* if (status === 'successful' ){ */
         if(txn_ref){
             setpageDisplay('verifyingPayment')
@@ -77,7 +78,25 @@ export default function Donate() {
                 console.log(response)
                 if(verify.status == 200){
                     //window.open(response.data.link, '_blank')
-                    setpageDisplay('donationSuccessful')                    
+                    
+                    // If payment is still pending, setTimeout to verify again
+                    if (response.data.status == "completed") {
+                        setpageDisplay('donationSuccessful')
+                    } else if (response.data.status == "pending") {
+                        if (verifyCount > 5) {
+                            alert('An error occured we couldnt verify this payment,Please refresh the page or try again')
+                            setpageDisplay('donationDetails')
+                            return;
+                        }
+                        setTimeout(() => {
+                            verifyTransaction()
+                        }, 5000);
+                        verifyCount += 1;
+                    } else {
+                        alert('An error occured we couldnt verify this payment,Please refresh the page or try again')
+                        setpageDisplay('donationDetails')
+                    }
+                    
                 }else{
                     alert('An error occured we couldnt verify this payment,Please refresh the page or try again')
                     setpageDisplay('donationDetails')
@@ -278,7 +297,9 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             if (makeDonation.status == 200) {
                 //console.log(makeDonation.status)
                 window.open(response.data.url, '_self')
-            }else{
+            }else if(response.status == 400 && response.message == "Minimum amount is 100 Naira" ){
+                alert('Minimum amount is 100 Naira')
+            } else {
                 alert('An error occured, please try again')
             }
 
