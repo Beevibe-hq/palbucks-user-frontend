@@ -25,8 +25,8 @@ function Home(){
     const isMobile = useMediaQuery({
         query: '(max-width: 940px)'
     })
-
-    const [kycModal, setKycModal] = useState(true)
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    const [kycModal, setKycModal] = useState(!userInfo.is_kyc_submitted)
 
     useEffect(()=>{
         dispatch(setlinkcolor('home'))

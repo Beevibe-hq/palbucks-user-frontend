@@ -16,19 +16,17 @@ import Emptycampaign from '../emptycampaign/emptycampaign'
 import Select from 'react-select'
 import { options } from "../../components/organisecrowdfundbody/organisecrowdfundbody"
 import { useMediaQuery } from 'react-responsive'
+import { baseUrl } from '../../auth/checkauthentication'
 
 function Homebody(){
 
   const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-
-  //stores all the events data in redux store so it can be accessed anywhere
   const dispatch = useDispatch()
   
   //Read the scroll position from redux store when the page loads.
   const scrollposition = useSelector(state => state.homescrollposition)
 
   const searchFieldValue = useSelector(state => state.homePageSearchField)
-
   // Not working yet
   const filterOutdatedEvents = (date) => {
     const now = new Date()
@@ -45,6 +43,29 @@ function Homebody(){
   
   const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.username !== null && item.organiser.username == userInfo.username)) //(item => item.organiser.first_name == userInfo.first_name))
   
+  // TODO: Get expired personal data from the backend
+  const [forYouData, setForYouData] = useState([])
+  useEffect(() => {
+    async function GetPersonalCrowdfunds() {
+      
+      const response = await fetch(`${baseUrl}/funding/api/mine?filter=expired`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        }
+      })
+      const data = await response.json()
+      
+      // Add the newly fetched expired foryoudata to active personalEvents
+      const newData = personalEvents.concat(data)
+      setForYouData(newData)      
+    }
+    GetPersonalCrowdfunds()
+  }, [])
+  
+  
+  
+
+
   const lastScrollPositionRef = useRef(null);
   
   //sets state for the homepage's display
@@ -58,7 +79,7 @@ function Homebody(){
 
   //custom dropdown indicator for Select tag/component
   const CustomDropdownIndicator = () => (
-        <img src = {arrowdown} alt = 'down arrow' className="w-[15px] h-[14px] " />
+    <img src = {arrowdown} alt = 'down arrow' className="w-[15px] h-[14px] " />
   )
 
   const isMobile = useMediaQuery({
@@ -78,7 +99,7 @@ function Homebody(){
     // Calculate difference in milliseconds between the two dates and convert to days
     const daysLeft = Math.ceil((campaignEndDate - today) / (1000 * 60 * 60 * 24));
         
-    if (daysDifference < 0) {
+    if (daysDifference <= 0) {      
       return {
         campaignStatus :'ended',
       }
@@ -108,6 +129,8 @@ function Homebody(){
       }
         }
   }, [])
+
+  
   
 
     return(
@@ -327,9 +350,9 @@ function Homebody(){
                           
                         } */}
                         {
-                          personalEvents.length === 0 ? 
+                          forYouData.length === 0 ? 
                             <Emptycampaign /> :                          
-                          personalEvents.map((item,i) =>(
+                          forYouData.map((item,i) =>(
                             checkCampaignStatus(item.end_date).campaignStatus === 'ended' ? 
                               (
                                 <Endedcampaign img = {item.banner} id = {item.id} title = {item.title} key = {item.id} />
@@ -360,17 +383,17 @@ function Homebody(){
                             Make edits and also view your dashboard for your active campaign
                           </p>
                           {/* {
-                              foryoudata.filter(item => item.campaignstatus == 'active').length == 0 ? 
+                              forYouData.filter(item => item.campaignstatus == 'active').length == 0 ? 
                               <Emptycampaign title = 'You have no active campaign to show here' /> 
                               :
-                              foryoudata.filter(item => item.campaignstatus == 'active').map((item,i) =>(
+                              forYouData.filter(item => item.campaignstatus == 'active').map((item,i) =>(
                               <Activecampaign img = {item.img} title = {item.title} daysleft = {item.daysleft} key = {i} />
                             ))                                                                               
                           } */}
                           {
-                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').length == 0 ?
+                            forYouData.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').length == 0 ?
                               <Emptycampaign title = 'You have no active campaign to show here' /> :
-                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').map((item,i) =>(
+                            forYouData.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'active').map((item,i) =>(
                               <Activecampaign img = {item.banner} id = {item.id} title = {item.title} daysleft = {checkCampaignStatus(item.end_date).daysLeft} key = {item.id} />
                             ))
                           }
@@ -389,16 +412,16 @@ function Homebody(){
                               time frame. They will automatically be deleted after 30 days.
                             </p>
                           {/* {
-                            foryoudata.filter(item => item.campaignstatus == 'ended').length == 0 ? 
+                            forYouData.filter(item => item.campaignstatus == 'ended').length == 0 ? 
                             <Emptycampaign /> : 
-                            foryoudata.filter(item => item.campaignstatus == 'ended').map((item,i) =>(
+                            forYouData.filter(item => item.campaignstatus == 'ended').map((item,i) =>(
                               <Endedcampaign img = {item.img} title = {item.title} key = {i} />
                             ))
                           } */}
                           {
-                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').length == 0 ?
+                            forYouData.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').length == 0 ?
                               <Emptycampaign /> :
-                            personalEvents.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').map((item,i) =>(
+                            forYouData.filter(item => checkCampaignStatus(item.end_date).campaignStatus === 'ended').map((item,i) =>(
                               <Endedcampaign img = {item.banner} id = {item.id} title = {item.title} key = {item.id} />
                             ))
                           }

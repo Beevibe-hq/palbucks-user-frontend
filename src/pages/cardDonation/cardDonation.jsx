@@ -53,17 +53,17 @@ export default function Donate() {
     useEffect(() => {
         // Access the individual query parameters
         const status = searchParams.get('status');
-        const tx_ref = searchParams.get('tx_ref');
+        const txn_ref = searchParams.get('reference');
         const transaction_id = searchParams.get('transaction_id');
-
-        if (status === 'successful' ){
-            
+        console.log(txn_ref)
+        /* if (status === 'successful' ){ */
+        if(txn_ref){
             setpageDisplay('verifyingPayment')
 
             // Make an api call to verify the transaction
             const access_token = localStorage.getItem('access_token')
             const verifyTransaction = async() => {
-                const verify = await fetch(`${baseUrl}/pay/api/${id}/donate/?tx_ref=${tx_ref}&transaction_id=${transaction_id}`,{
+                const verify = await fetch(`${baseUrl}/pay/api/${id}/donate/?txn_ref=${txn_ref}&transaction_id=${transaction_id}`,{
                     headers:{
                         Authorization: `Bearer ${access_token}`,
                         'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default function Donate() {
                 console.log(response)
                 if(verify.status == 200){
                     //window.open(response.data.link, '_blank')
-                    setpageDisplay('donationSuccessful')
+                    setpageDisplay('donationSuccessful')                    
                 }else{
                     alert('An error occured we couldnt verify this payment,Please refresh the page or try again')
                     setpageDisplay('donationDetails')
@@ -255,10 +255,12 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             
             /* setpageDisplay('cardDetails');
             window.scrollTo(0,0) */
-            console.log(selectedCurrency)
+            console.log(donationDetails.amount, typeof(selectedCurrency.value))
 
             const access_token = localStorage.getItem('access_token')
-            const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate-fiat/`,{
+            
+            // Old payment api commented out to try the new one
+            const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate/`,{
                 method:'POST',
                 headers:{
                     Authorization: `Bearer ${access_token}`,
@@ -266,19 +268,23 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                 },
                 body: JSON.stringify({
                     amount: donationDetails.amount,
-                    currency:selectedCurrency.value
-                    /* donor: donationDetails.donor */
+                    currency: selectedCurrency.value,
+                    channel:"squad",
+                    //donor: donationDetails.donor
                 })
             })
             const response = await makeDonation.json()
             console.log(response)
-            if(makeDonation.status == 200){
-                window.open(response.data.authorization_url, '_self')
+            if (makeDonation.status == 200) {
+                //console.log(makeDonation.status)
+                window.open(response.data.url, '_self')
             }else{
                 alert('An error occured, please try again')
             }
 
             setIsLoading(false)    
+
+            //const makePayment = await fetch(`${}`)
         }
         
     }

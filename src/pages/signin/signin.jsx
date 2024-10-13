@@ -88,12 +88,16 @@ const Signin = () => {
                         dispatch(setLogoutLoading(false))
         
                         navigate('/home', {replace:true})
-                    }else if(response.non_field_errors[0] == 'Unable to log in with provided credentials.'){
+                    }/* else if(response.non_field_errors[0] === 'Unable to log in with provided credentials.'){ */
+                    else if(response.message === 'Email or password incorrect.'){
                         setValidateInput(prevState => ({
                             ...prevState,                             
                             password: 'Password or email is incorrect'
                         }))
-                    }else{
+                    } else if (response.message === "You must complete registration before you login.") {
+                        alert("You must complete registration before you login.")
+                        navigate(`/completesignup?email=${signinInfo.email}`)
+                    }else {
                         console.log(response)
                     }
                     

@@ -17,7 +17,7 @@ import medicalLabel from "../../images/categoryImages/medical label.svg"
 import othersLabel from "../../images/categoryImages/Others icon.svg"
 import travelLabel from "../../images/categoryImages/travel label.svg"
 import wishLabel from "../../images/categoryImages/Wish label.svg"
-
+import profilePlaceholder from "../../images/profileplaceholder.svg"
 
 import { useEffect, useState } from "react";
 import CropImage from "../cropping/cropimage/cropimage";
@@ -295,8 +295,23 @@ function Organisecrowdfundbody(){
 
     // Storing the selected coOrganisers
     const [selectedCoOrganisers, setSelectedCoOrganisers] = useState([])
+    useEffect(() => {
+        console.log(selectedCoOrganisers)
+    },[selectedCoOrganisers])
     
-        
+    const numberInputOnWheelPreventChange = (e) => {
+        // Prevent the input value change
+        e.target.blur()
+
+        // Prevent the page/container scrolling
+        e.stopPropagation()
+
+        // Refocus immediately, on the next tick (after the current function is done)
+        setTimeout(() => {
+            e.target.focus()
+        }, 0)
+    }
+    
     return(
         
         <div className = 'fold:px-2 phones:px-5 md:px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-arial '>
@@ -471,6 +486,7 @@ function Organisecrowdfundbody(){
                                     maxLength="6"
                                     placeholder="How much do you want to raise(amount is in $)?"
                                     onChange={handleInputChange}
+                                    onWheel={numberInputOnWheelPreventChange}
                                     id = "target_price"
                                     name="target_price"
                                 />
@@ -503,31 +519,62 @@ function Organisecrowdfundbody(){
                         />
                     </div>
                     <div className={` ${managetoggles.co_organisers? 'block' : 'hidden' } p-3 md:p-[30px]`} >
-                        <button className="flex justify-between mb-[10px] md:mb-5 rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg  py-1 px-[10px] md:px-4 items-center h-[40px] md:h-14 w-[165px] md:w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]"
-                         onClick={() => {
-                            setdisplaySearchCoOrganiser(true)
-                         }}
-                         >
-                            <span className="text-xs md:text-base" >
-                                {
-                                    selectedCoOrganisers.length === 0 ? 'Add co-organiser':
-                                    selectedCoOrganisers.length > 1 ? 
-                                    'Added co-organisers':
-                                    'Added co-organiser'
-                                }
-                            </span>
-                            <img src={plusicon} alt="plus icon" />
-                        </button>
+                        <div className="flex gap-5 lg:gap-10 items-center mb-[10px] md:mb-5">
+                            {
+                                selectedCoOrganisers.length > 0 ?
+                                selectedCoOrganisers.map((coOrganiser, index) => (
+                                    <button key={index} className="flex justify-between rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg py-[2px] md:py-1 px-[10px] md:px-4 items-center h-[34px] md:h-14 min-w-[106px] md:min-w-[183px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]   " >                                        
+                                        <p className="text-sm md:text-lg font-black" >{coOrganiser.username}</p>
+                                        <img src={removeicon} alt="remove icon" className="w-[18px] md:w-6 "
+                                            onClick={() => {
+                                                // Remove the selected co-organiser from both selectedCoOrganisers and formdata using pk
+                                                //setSelectedCoOrganisers(selectedCoOrganisers.filter((item) => item.username !== coOrganiser.username))
+                                                setSelectedCoOrganisers(selectedCoOrganisers.filter((selectedUser) => selectedUser.pk !== coOrganiser.pk));
+                                                /* setformdata((prevdata) => {
+                                                    const newCoOrganisers = prevdata.co_organisers.filter((item) => item.username !== coOrganiser.username)
+                                                    return {
+                                                        ...prevdata,
+                                                        co_organisers: newCoOrganisers
+                                                    }
+                                                }) */
+                                                setformdata({...formdata, co_organisers: formdata.co_organisers.filter((selectedUser) => selectedUser !== coOrganiser.pk)})
+                                            }}
+                                        />
+                                    </button>                                    
+                                )) : null
+                            }
+                            <button className={` ${selectedCoOrganisers.length > 1 ? "hidden" : "flex"} 
+                                justify-between rounded-r-[14px] md:rounded-r-[24px] rounded-l-[5px] md:rounded-l-lg
+                                py-1 px-[10px] md:px-4 items-center h-[35px] md:h-14 w-[145px] md:w-[294px] border-[1px] border-[#8E8E93] bg-[#F9F9F9]`}
+                             onClick={() => {
+                                setdisplaySearchCoOrganiser(true)
+                             }}
+                             >
+                                <span className="text-xs md:text-base" >
+                                    {
+                                        'Add co-organiser'                                        
+                                    }
+                                </span>
+                                <img src={plusicon} alt="plus icon" />
+                            </button>
+                            
+                        </div>
                         <div className="flex gap-2 items-center">
                             <img src={infoicon} alt="info icon" className="w-[15px] md:w-[20px] " />
                             <p className="text-[#8E8E93] text-xs md:text-base leading-5 tracking-[0.1px]" >
-                                A maximum of three(3) users can be added
+                                A maximum of two(2) users can be added
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <SearchCoOrganiser displaySearchCoOrganiser = {displaySearchCoOrganiser} setdisplaySearchCoOrganiser = {setdisplaySearchCoOrganiser} formdata = {formdata} setformdata = {setformdata} selected = {selectedCoOrganisers} setSelected = {setSelectedCoOrganisers} />
+                <SearchCoOrganiser
+                    displaySearchCoOrganiser={displaySearchCoOrganiser}
+                    setdisplaySearchCoOrganiser={setdisplaySearchCoOrganiser}
+                    formdata={formdata} setformdata={setformdata}
+                    selected={selectedCoOrganisers}
+                    setSelected={setSelectedCoOrganisers}
+                />
 
                 <div className="bg-white mb-6 md:mb-[59px] " >                    
                     <div 
