@@ -288,7 +288,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                 body: JSON.stringify({
                     amount: donationDetails.amount,
                     currency: selectedCurrency.value,
-                    channel:"squad",
+                    channel:"squad", // [squad, rexpay]
                     //donor: donationDetails.donor
                 })
             })

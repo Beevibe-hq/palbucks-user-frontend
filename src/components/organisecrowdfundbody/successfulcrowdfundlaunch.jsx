@@ -96,20 +96,20 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                     <div className="flex flex-col md:flex-row gap-[24px] md:gap-[30%] " >
                                         
                                         <div className="flex flex-col gap-6 md:gap-11" >
-                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
                                                 window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));        
                                             } } >
                                                 <img src={facebookIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Facebook</span>
                                             </div>
-                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
                                                 const text = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
                                                 window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text));
                                             } } >
                                                 <img src={xIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >X</span>
                                             </div>
-                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
                                                 window.open("fb-messenger://share/?link=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));
 
                                             } } >
@@ -119,7 +119,7 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                         </div>
                                         
                                         <div className="flex flex-col gap-6 md:gap-11" >
-                                            <div className="flex items-center gap-3 " onClick={() => {
+                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {
                                                     /* const text = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
                                                     window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text)); */
                                                     
@@ -132,13 +132,13 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                                 <img src={whatsappIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Whatsapp</span>
                                             </div>       
-                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
                                                 window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));        
                                             } } >
                                                 <img src={instagramIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Instagram</span>
                                             </div>
-                                            <div className="flex items-center gap-3 " onClick={() => {                                                
+                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
                                                 const subject = "Check out this link";
                                                 const body = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
                                                 window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);

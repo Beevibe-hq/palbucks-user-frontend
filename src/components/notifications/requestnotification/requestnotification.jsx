@@ -4,6 +4,7 @@ import profilePlaceholder from "../../../images/profileplaceholder.svg"
 function Requestnotification(props){
     
     async function acceptRequest() {
+        console.log("accepting request")
         try{
             const response = await fetch(`${baseUrl}/funding/api/${props.id}/organiser/response/`, {
                 method: "POST",
@@ -27,6 +28,7 @@ function Requestnotification(props){
     }
 
     async function rejectRequest() {
+        console.log("rejecting request")
         try {
             const response = await fetch(`${baseUrl}/funding/api/${props.id}/organiser/response/`, {
                 method: "POST",

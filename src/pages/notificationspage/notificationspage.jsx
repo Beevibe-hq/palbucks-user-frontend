@@ -140,7 +140,7 @@ function PeriodNotificationContainer({period, periodNotifications}) {
                     }else if (data.type == 'milestone') {
                         return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
                     }else if (data.type == 'co-organiser-request') {
-                        return <Requestnotification userdp={data.userdp} username={data.invited_by} time={data.time} key = {i} />
+                        return <Requestnotification userdp={data.userdp} username={data.invited_by} time={data.time} id = {data.crowdfund_id} key = {i} />
                     }else if (data.type == 'accept') {
                         return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                     }

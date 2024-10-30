@@ -3,7 +3,8 @@ import { setIsAuthenticated, setLogoutLoading } from "../actions/actions";
 // Base url for the api requests
 //export const baseUrl = 'https://palbucks-api.onrender.com'
 //export const baseUrl = 'https://octopus-app-oy6v5.ondigitalocean.app';
-export const baseUrl = "https://palbucks-aad4f76ec2a6.herokuapp.com";
+//export const baseUrl = "https://palbucks-aad4f76ec2a6.herokuapp.com";
+export const baseUrl = "http://api.palbucks.co";
 
 export const checkAuthentication = async (dispatch) => {
   const access_token = localStorage.getItem("access_token");
