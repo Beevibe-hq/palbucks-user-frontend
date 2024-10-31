@@ -24,7 +24,7 @@ function Activities(props) {
 
     useEffect(()=>{
         /* console.log(props.amt_raised)
-        console.log(props.target_price) */
+        console.log(props.target_amount) */
     },[])
   
     return (
@@ -38,7 +38,7 @@ function Activities(props) {
                             }
                             <span className="tracking-[0.06px] text-base text-[#8E8E93] leading-5 " >
                                 {
-                                    ' of $' + props.target_price
+                                    ' of $' + props.target_amount
                                 }
                             </span>
                         </p>
@@ -66,11 +66,11 @@ function Activities(props) {
                             }
                             <span className="tracking-[0.06px] text-base text-[#8E8E93] leading-5 " >
                                 {
-                                    ' of ' + props.target_price + ' USDT'
+                                    ' of ' + props.target_amount + ' USDT'
                                 }
                             </span>
                         </p>
-                        <progress value={props.amt_raised ? props.amt_raised : '23543'} max={props.target_price ? props.target_price : '150000'}
+                        <progress value={props.amt_raised ? props.amt_raised : '23543'} max={props.target_amount ? props.target_amount : '150000'}
                             className='landingpageprogressbar w-full h-[10px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-4' 
                         />
                         <p className="text-lg text-[#C5C5C5] font-medium mb-6 " >

@@ -110,7 +110,7 @@ function Organisecrowdfundbody(){
         title:'',
         description:'',
         start_date:today.toISOString(),
-        target_price:0,
+        target_amount:0,
         amt_raised:0,
         tags:'',
         location: userInfo.location ? userInfo.location : '',
@@ -164,12 +164,12 @@ function Organisecrowdfundbody(){
             setIsLoading(false)
             return;
         }
-        if (formdata.target_price <= 0) {
+        if (formdata.target_amount <= 0) {
             alert('Please enter a valid target price for your crowdfund')
             setIsLoading(false)
             return;
         }
-        if (formdata.target_price > 9999999) {
+        if (formdata.target_amount > 9999999) {
             alert("You've exceeded the maximum target amount")
             setIsLoading(false)
             return;
@@ -468,17 +468,17 @@ function Organisecrowdfundbody(){
                     </div>
                     
                     <div className={` ${managetoggles.amountdetails? 'block' : 'hidden' } p-3 md:p-[30px] `} >                        
-                        <label htmlFor="target_price" className="block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4  " >
+                        <label htmlFor="target_amount" className="block text-sm md:text-xl leading-[20px] tracking-[1px] font-bold mb-3 md:mb-4  " >
                             Target amount*
                         </label> 
                         <div className="flex flex-col md:flex-row gap-5 ">
                             <div className="flex flex-col w-full md:w-4/6 gap-[10px] md:gap-5 ">
                                 <input
                                     type="number"
-                                    defaultValue={crowdfundMode == 'edit'  ? eventdetails.target_price : null }
+                                    defaultValue={crowdfundMode == 'edit'  ? eventdetails.target_amount : null }
                                     className={`md:h-[56px] w-full rounded text-sm md:text-base px-[10px] md:px-5 py-3 outline-[#37BCF7] outline-2 focus:caret-[#37BCF7]
                                     border-[1px] border-[#8E8E93] hover:border-[#37BCF7] hover:border-2
-                                    ${formdata.target_price > 9999999 ? 'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150]': ''}
+                                    ${formdata.target_amount > 9999999 ? 'border-[#FD6150] outline-[#FD6150] focus:border-[#FD6150] focus:caret-[#FD6150]': ''}
                                     ${crowdfundMode == 'edit' ? 'text-[#888888]' : ''}    `}
                                     readOnly = {crowdfundMode === 'edit'}
                                     min='100'
@@ -487,8 +487,8 @@ function Organisecrowdfundbody(){
                                     placeholder="How much do you want to raise(amount is in $)?"
                                     onChange={handleInputChange}
                                     onWheel={numberInputOnWheelPreventChange}
-                                    id = "target_price"
-                                    name="target_price"
+                                    id = "target_amount"
+                                    name="target_amount"
                                 />
                                 <div className="flex gap-2 items-center">
                                     <img src={infoicon} alt="info icon" />

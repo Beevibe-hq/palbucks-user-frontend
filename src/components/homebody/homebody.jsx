@@ -249,7 +249,7 @@ function Homebody(){
                           return (
                             <Fundevent category={item.tags} crowdfundImage={item.banner} accountimages={item.organizerimg}
                               organiser={item.organiser} title={item.title} co_organisers={item.co_organisers} description={item.description}
-                              amt_raised={item.amt_raised} target_price={item.target_price} categoryimg={item.categoryimg}
+                              amt_raised={item.amt_raised} target_amount={item.target_amount} categoryimg={item.categoryimg}
                               location={item.location} key={item.id} eventimg={item.placeholder} liked={item.liked} id={item.id}
                               organizer={item.user_name} is_liked={item.is_liked}
                             />
@@ -262,7 +262,7 @@ function Homebody(){
                               return(
                                 <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
                                 organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
-                                amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
+                                amt_raised = {item.amt_raised} target_amount = {item.target_amount} categoryimg = {item.categoryimg}
                                 location = {item.location} key = {item.id} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
                                 organizer = {item.user_name} is_liked = {item.is_liked}
                                 />
@@ -273,7 +273,7 @@ function Homebody(){
                             return(
                               <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
                               organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
-                              amt_raised = {item.amt_raised} target_price = {item.target_price} categoryimg = {item.categoryimg}
+                              amt_raised = {item.amt_raised} target_amount = {item.target_amount} categoryimg = {item.categoryimg}
                               location = {item.location} key = {item.id} eventimg = {item.placeholder} liked = {item.liked} id = {item.id}
                               organizer = {item.user_name} is_liked = {item.is_liked}
                               />

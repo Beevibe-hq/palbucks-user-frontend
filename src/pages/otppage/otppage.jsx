@@ -47,6 +47,7 @@ const Otppage = () => {
     }, [])
 
     const handleOtpVerification = async() => {
+        console.log(otp)
         setIsLoading(true)
         console.log(signupInfo.otp)
         const response = await fetch (`${baseUrl}/users/api/verify-email/` , 
@@ -66,6 +67,8 @@ const Otppage = () => {
         if(data.status == true){            
             dispatch(setOtpVerified(true))
             alert('Email verified successfully')            
+        } else if (data.status == false && data.message == "Provided OTP invalid or expired") {
+            alert('The OTP provided is invalid or expired. Please try again')
         }
         else{
             alert('Email verification failed')
