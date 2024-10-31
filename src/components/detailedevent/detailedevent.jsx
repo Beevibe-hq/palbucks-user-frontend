@@ -429,11 +429,11 @@ function Detailedevent(props){
                                                 }
                                                 <span className="tracking-[0.06px] text-xs md:text-base text-[#8E8E93] leading-5 " >
                                                     {
-                                                        ' of ' + eventdetails.target_price + ' USDT'
+                                                        ' of ' + eventdetails.target_amount + ' USDT'
                                                     }
                                                 </span>
                                             </p>
-                                            <progress value={eventdetails.amt_raised ? eventdetails.amt_raised : '23543'} max={eventdetails.target_price ? eventdetails.target_price : '150000'}
+                                            <progress value={eventdetails.amt_raised ? eventdetails.amt_raised : '23543'} max={eventdetails.target_amount ? eventdetails.target_amount : '150000'}
                                                 className='progressbar w-full h-[10px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-4' 
                                             />
                                             <p className="text-sm md:text-lg text-[#C5C5C5] font-medium mb-4 " >
@@ -598,7 +598,7 @@ function Detailedevent(props){
                                 <div className="hidden xl:block" >
                                     <Activities
                                         header={eventdetails.organiser.username !== null && userInfo && eventdetails.organiser.username == userInfo.username  ? 'personalCampaign' : 'campaign'} 
-                                        target_price = {eventdetails.target_price} 
+                                        target_amount = {eventdetails.target_amount} 
                                         amt_raised = {eventdetails.amt_raised}
                                         total_donors = {totaldonations}
                                         eventid={eventid}

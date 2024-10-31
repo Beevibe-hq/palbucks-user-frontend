@@ -40,8 +40,7 @@ export default function Donate() {
         cvv: '',
         cardName: ''
     })
-    
-    
+        
     // Obtain the crowdfund id and the payment status id (if available) from the url
     const params = useParams()
     const id = params.id
@@ -110,6 +109,34 @@ export default function Donate() {
         }
     }, [searchParams]);
 
+    const crowdfundEvents = useSelector(state => state.crowdfundEvents)
+    //const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
+    const [crowdfund, setCrowdfund] = useState(crowdfundEvents.find(crowdfund => crowdfund.id == id))
+    console.log(crowdfund)
+    useEffect(() => {
+        if (!crowdfund) {
+            //alert('m')
+            const getCrowdfund = async () => {
+                const response = await fetch(`${baseUrl}/funding/api/${id}`, {
+                    /* headers: {
+                        Authorization: `Bearer ${access_token}`,                    
+                    } */
+                })
+
+                if (response.ok) {
+                    let data = await response.json()        
+                    console.log(data)
+                    setCrowdfund(data)
+                    //totaldonations = formatnumber(data.no_of_donors)
+
+                } else {
+                    console.error(await response.json())                    
+                }
+            }        
+            getCrowdfund()        
+        }
+    }, [])
+
     const [displayModals, setDisplayModals] = useState({
         cryptoDonationModal: false,
         cryptoDonationData: {
@@ -128,6 +155,10 @@ export default function Donate() {
     const navigate = useNavigate()
     const [pageDisplay, setpageDisplay] = useState('donationSuccessful')
 
+    if (!crowdfund) {
+        console.log("No crowdfund")
+        return <div>Loading...</div>;
+    }    
     return (
         <div className='bg-[#F9F9F9] min-h-full font-arial ' >
             <Navbar sidebar = {false} onDonorPage = {true} />
@@ -180,7 +211,7 @@ export default function Donate() {
                 </div>
                 {
                     pageDisplay == 'donationDetails' ?
-                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} displayModals = {displayModals} setDisplayModals = {setDisplayModals} /> :
+                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} displayModals = {displayModals} setDisplayModals = {setDisplayModals} crowdfund = {crowdfund} /> :
                     pageDisplay == 'cardDetails' ?
                     <CardDetails setpageDisplay={setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} /> :
                     pageDisplay == 'donationSuccessful' ?
@@ -202,10 +233,13 @@ export default function Donate() {
 }
 
 
-const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile , displayModals, setDisplayModals}) => {
+const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile , displayModals, setDisplayModals, crowdfund}) => {
 
-    const crowdfundEvents = useSelector(state => state.crowdfundEvents)
-    const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
+    
+    //const crowdfundEvents = useSelector(state => state.crowdfundEvents)
+    //const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
+    
+
     const [cryptoDonationAmount, setCryptoDonationAmount] = useState(0)
     const paymentMode = useSelector(state => state.paymentMode)
 
@@ -281,14 +315,16 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             // Old payment api commented out to try the new one
             const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate/`,{
                 method:'POST',
-                headers:{
+                headers: {
+                    // Set the authorization to bearer access token only if access token exists, else ignore the authorization else ignore the authorization and add an  "anonymous_donor": "sirconnell.ik@gmail.com"  key/value to the body
+                    
                     Authorization: `Bearer ${access_token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     amount: donationDetails.amount,
                     currency: selectedCurrency.value,
-                    channel:"squad", // [squad, rexpay]
+                    channel:"rexpay", // [squad, rexpay]
                     //donor: donationDetails.donor
                 })
             })
