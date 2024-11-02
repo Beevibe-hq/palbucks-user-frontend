@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import likeIcon from "../../images/authpages/like.svg"
 import { useNavigate } from "react-router-dom";
 import copyIcon from "../../images/organiseCrowdfund/copy.svg"
@@ -11,8 +11,15 @@ import instagramIcon from "../../images/organiseCrowdfund/instagram.svg"
 
 const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLaunchModal}) => {
     
-    const [currentDisplay, setCurrentDisplay] = useState('congrats')
-    const navigate = useNavigate()
+    const [currentDisplay, setCurrentDisplay] = useState(successfulLaunchModal.launchedCampaign ? 'congrats' : 'share');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Only update the display when `successfulLaunchModal.launchedCampaign` changes
+        if (successfulLaunchModal.launchedCampaign === false) {
+            setCurrentDisplay('share');
+        }
+    }, [successfulLaunchModal.launchedCampaign]);
 
     return (
         <div className={`w-full fixed z-50 inset-0 overflow-y-auto ${successfulLaunchModal.display ? 'block' : 'hidden'}`}>
@@ -57,7 +64,12 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                              <div className="flex flex-col">
                                 <button className="mb-[28px] md:mb-8 text-[14px] md:text-[26px] font-bold ml-auto "
                                     onClick={() => {
-                                    navigate('/home')
+                                        // Only navigate back to home if launchedCampaign is true else just navigate back once
+                                        if (successfulLaunchModal.launchedCampaign) {
+                                            navigate('/home');
+                                        } else {
+                                            setSuccessfulLaunchModal((prev) => ({...prev, display: false}));
+                                        }                                        
                                 }}
                                 >
                                     Cancel
@@ -131,13 +143,27 @@ const SuccessfulCrowdfundLaunchModal = ({successfulLaunchModal, setSuccessfulLau
                                             }} >
                                                 <img src={whatsappIcon} alt="" className="w-[30px]" />        
                                                 <span className="text-[18px] font-bold " >Whatsapp</span>
-                                            </div>       
-                                            <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
-                                                window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(`https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`));        
-                                            } } >
-                                                <img src={instagramIcon} alt="" className="w-[30px]" />        
-                                                <span className="text-[18px] font-bold " >Instagram</span>
-                                            </div>
+                                                </div>   
+                                            {/* Instagram is disabled for now */}    
+                                            {/* <div 
+                                                className="flex items-center gap-3 cursor-pointer" 
+                                                onClick={() => {
+                                                    // Check if on mobile for best experience with Instagram sharing
+                                                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                                                    
+                                                    if (isMobile) {
+                                                    // Opens Instagram if installed on mobile (Android intent or iOS deep link)
+                                                    window.location.href = `instagram://story-camera`; 
+                                                    alert("You can take a screenshot of the campaign and share on your story, or copy the link to share in a post.");
+                                                    } else {
+                                                    // Fallback message for desktop users
+                                                    alert("To share on Instagram, please open this link on a mobile device or copy the link to share manually.");
+                                                    }
+                                                }}
+                                                >
+                                                <img src={instagramIcon} alt="Instagram" className="w-[30px]" />
+                                                <span className="text-[18px] font-bold">Instagram</span>
+                                            </div> */}
                                             <div className="flex items-center gap-3 cursor-pointer " onClick={() => {                                                
                                                 const subject = "Check out this link";
                                                 const body = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;

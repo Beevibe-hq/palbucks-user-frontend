@@ -12,7 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import PasswordInput from "../../components/password/password"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { addOtp, setSignupInfo } from "../../actions/actions"
+import { addOtp, setOtpVerified, setSignupInfo } from "../../actions/actions"
 import emailPasswordValidation from "../../auth/inputValidation"
 import { baseUrl } from "../../auth/checkauthentication"
 import Loadingspinner from "../../components/loadingspinner/loadingSpinner"
@@ -92,7 +92,9 @@ const Signup = () => {
                         // Dispatch the sign up info to redux store                        
                         const updatedSignupInfo = {email: accountInfo.email, password: accountInfo.password, otp: data.otp}
                         dispatch(setSignupInfo(updatedSignupInfo))
-                        dispatch(addOtp(data.otp))   
+                        dispatch(addOtp(data.otp)) 
+                        
+                        dispatch(setOtpVerified(false)) // This isnt needed, I'm only setting it here cos the reducer is currently persisting the value so as to prevent falsely showing verified otp on the otp page until I remove the persisting of the value in the reducer
                         
                         const {access_token, refresh_token} = data
                         if(access_token && refresh_token){

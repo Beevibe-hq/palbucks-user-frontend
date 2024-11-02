@@ -210,7 +210,7 @@ function Organisecrowdfundbody(){
             dispatch(addCrowdfundEvent(resp))
 
             // Display successful crowdfund launch modal
-            setSuccessfulLaunchModal({display:true, crowdfundData:resp})
+            setSuccessfulLaunchModal({display:true, launchedCampaign: true, crowdfundData:resp})
             //navigate('/home')
         } else {
             setIsLoading(false)
@@ -251,7 +251,7 @@ function Organisecrowdfundbody(){
                 }));
 
                 // Display successful crowdfund launch modal
-                setSuccessfulLaunchModal({ display: true, crowdfundData: resp });
+                setSuccessfulLaunchModal({ display: true,launchedCampaign: true, crowdfundData: resp });
                 // navigate('/home')
             } else {
                 alert('An error occurred, please try again later.');
@@ -265,6 +265,7 @@ function Organisecrowdfundbody(){
 
     const [successfulLaunchModal, setSuccessfulLaunchModal] = useState({
         display: false,
+        launchedCampaign: true,
         crowdfundData: {
             id:10
         }

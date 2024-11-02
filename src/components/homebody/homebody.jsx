@@ -88,7 +88,12 @@ function Homebody(){
 
   // Add all to the options array
   const optionsWithAll = [{ label: 'All', value: 'all' }, ...options]  
-  const [selectedOption, setSelectedOption] = useState('all')
+  const [selectedFilterOption, setSelectedFilterOption] = useState({
+    category: "all",
+    type:"Popular"
+  })
+
+  
   
   const checkCampaignStatus = (date) => {
     const today = new Date()
@@ -171,77 +176,134 @@ function Homebody(){
 
                 //The others page starts here
                 <>
-                  <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-arial '>
-                      <button className = {`bg-white fold:w-[118px] phones:w-[120px] md:w-[172px] h-[38px] md:h-[39px] flex items-center justify-between pr-5 pl-3 
-                      rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none `}>
-                          <span className ='text-[13px] md:text-base ' >Popular</span>
-                          <img src={arrowdown} alt="down arrow icon" />
-                      </button>
-                  <div className="bg-white min-w-[90px] phones:min-w-[120px] md:min-w-[150px] h-[30px] md:h-[39px]
-                    rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none">
-                    <Select
-                      options={optionsWithAll}
-                      placeholder="All"
-                      onChange={(e) => { 
-                        setSelectedOption(e.value)
-                      }}
-                      components={{
-                          DropdownIndicator: CustomDropdownIndicator,
-                          IndicatorSeparator : () => null
-                      }}
-                      styles={{
-                          control: (base, state) => ({
-                              ...base,
-                              width:'100%',
-                              height:'100%',
-                              border: state.isFocused ? 0 : 0,
-                              // This line disable the blue border
-                              boxShadow: state.isFocused ? 0 : 0,
-                              "&:hover": {
-                                  border: state.isFocused ? 0 : 0,
-                              },
-                              cursor:'pointer',
-                              caretColor:'transparent',
-                              paddingRight: isMobile ? '12px' : '20px',
-                              paddingLeft:isMobile ? '4px':'12px',
-                              borderTopLeftRadius:'10px',
-                              borderBottomLeftRadius:'10px',
-                              borderTopRightRadius:'30px',
-                              borderBottomRightRadius:'30px',
-                              color: 'black',
-                              z:'10'
-                          }),
-                          menu: base => ({
-                            ...base,
-                            width: '200%',
-                            zIndex: '30',      
-                            color: 'black',
-                          }),
-                          menuList: base => ({
-                            ...base,
-                            // kill the white space on first and last option
-                            padding: 0,
-                          }),
-                          placeholder: base => ({
-                            ...base,
-                            color: 'black',
-                            fontSize:isMobile ? '13px':'16px'
-                          })
-                      }}
-                      formatOptionLabel={(option, { isSelected}) => (
-                          <div className="flex items-center gap-2 pl-0 ">
-                          {
-                            selectedOption !== option.value && option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
-                          }
-                              <span className="text-[13px] md:text-base pt-1 " >{option.label}</span>
-                          </div>
-                      )}
-                    />
-                  </div>
-                      
-                  </div>
-                  <div className = 'eventparent w-full py-7 md:py-[35px]'>
                 
+                  <div className = 'flex gap-3 font-normal text-base leading-3 tracking-[0.1px] font-arial '>                      
+                      <div className="bg-white min-w-[90px] phones:min-w-[120px] md:min-w-[150px] h-[30px] md:h-[39px]
+                        rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none">
+                        <Select
+                          options= {[{ label: 'Popular', value: 'popular' }, {label: 'New', value: 'new'}]}
+                          placeholder="Popular"
+                          onChange={(e) => { 
+                            setSelectedFilterOption((prev) => ({
+                              ...prev,
+                              type:e.value
+                            }))
+                          }}
+                          components={{
+                              DropdownIndicator: CustomDropdownIndicator,
+                              IndicatorSeparator : () => null
+                          }}
+                          styles={{
+                              control: (base, state) => ({
+                                  ...base,
+                                  width:'100%',
+                                  height:'100%',
+                                  border: state.isFocused ? 0 : 0,
+                                  // This line disable the blue border
+                                  boxShadow: state.isFocused ? 0 : 0,
+                                  "&:hover": {
+                                      border: state.isFocused ? 0 : 0,
+                                  },
+                                  cursor:'pointer',
+                                  caretColor:'transparent',
+                                  paddingRight: isMobile ? '12px' : '20px',
+                                  paddingLeft:isMobile ? '4px':'12px',
+                                  borderTopLeftRadius:'10px',
+                                  borderBottomLeftRadius:'10px',
+                                  borderTopRightRadius:'30px',
+                                  borderBottomRightRadius:'30px',
+                                  color: 'black',
+                                  z:'10'
+                              }),
+                              menu: base => ({
+                                ...base,
+                                width: '200%',
+                                zIndex: '30',      
+                                color: 'black',
+                              }),
+                              menuList: base => ({
+                                ...base,
+                                // kill the white space on first and last option
+                                padding: 0,
+                              }),
+                              placeholder: base => ({
+                                ...base,
+                                color: 'black',
+                                fontSize:isMobile ? '13px':'16px'
+                              })
+                          }}
+                          formatOptionLabel={(option, { isSelected}) => (                              
+                            <span className="text-[13px] md:text-base pt-1 " >{option.label}</span>
+                          )}
+                        />
+                      </div>
+                      <div className="bg-white min-w-[90px] phones:min-w-[120px] md:min-w-[150px] h-[30px] md:h-[39px]
+                        rounded-r-[30px] rounded-l-[10px] shadow-[0px_0px_32px_rgba(0,0,0,0.04)] md:shadow-none">
+                        <Select
+                          options={optionsWithAll}
+                          placeholder="All"
+                          onChange={(e) => { 
+                            setSelectedFilterOption((prev) => ({
+                              ...prev,
+                              category:e.value
+                            }))
+                          }}
+                          components={{
+                              DropdownIndicator: CustomDropdownIndicator,
+                              IndicatorSeparator : () => null
+                          }}
+                          styles={{
+                              control: (base, state) => ({
+                                  ...base,
+                                  width:'100%',
+                                  height:'100%',
+                                  border: state.isFocused ? 0 : 0,
+                                  // This line disable the blue border
+                                  boxShadow: state.isFocused ? 0 : 0,
+                                  "&:hover": {
+                                      border: state.isFocused ? 0 : 0,
+                                  },
+                                  cursor:'pointer',
+                                  caretColor:'transparent',
+                                  paddingRight: isMobile ? '12px' : '20px',
+                                  paddingLeft:isMobile ? '4px':'12px',
+                                  borderTopLeftRadius:'10px',
+                                  borderBottomLeftRadius:'10px',
+                                  borderTopRightRadius:'30px',
+                                  borderBottomRightRadius:'30px',
+                                  color: 'black',
+                                  z:'10'
+                              }),
+                              menu: base => ({
+                                ...base,
+                                width: '200%',
+                                zIndex: '30',      
+                                color: 'black',
+                              }),
+                              menuList: base => ({
+                                ...base,
+                                // kill the white space on first and last option
+                                padding: 0,
+                              }),
+                              placeholder: base => ({
+                                ...base,
+                                color: 'black',
+                                fontSize:isMobile ? '13px':'16px'
+                              })
+                          }}
+                          formatOptionLabel={(option, { isSelected}) => (
+                              <div className="flex items-center gap-2 pl-0 ">
+                              {
+                                selectedFilterOption.category !== option.value && option.icon && <img src={option.icon} alt="category icon" className="w-4 h-4" />
+                              }
+                                  <span className="text-[13px] md:text-base pt-1 " >{option.label}</span>
+                              </div>
+                          )}
+                        />
+                      </div>                      
+                  </div>
+                  
+                  <div className = 'eventparent w-full py-7 md:py-[35px]'>                
                     {
                       
                         searchFieldValue.length > 0 ?
@@ -257,7 +319,7 @@ function Homebody(){
                         })
                         :                                          
                         // Display all the events if the selected option is all or filter the events by the selected option
-                          selectedOption == 'all' ?                        
+                          selectedFilterOption.category == 'all' ?                        
                           crowdfundEvents.map((item,i)=>{
                               return(
                                 <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
@@ -269,7 +331,7 @@ function Homebody(){
                               )
                           })
                           :
-                          crowdfundEvents.filter(item => item.tags == selectedOption).map((item,i)=>{
+                          crowdfundEvents.filter(item => item.tags == selectedFilterOption.category).map((item,i)=>{
                             return(
                               <Fundevent category = {item.tags} crowdfundImage = {item.banner} accountimages = {item.organizerimg}
                               organiser = {item.organiser} title = {item.title} co_organisers = {item.co_organisers} description = {item.description}
