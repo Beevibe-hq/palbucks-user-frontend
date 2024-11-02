@@ -49,6 +49,9 @@ export default function Donate() {
     const isMobile = useMediaQuery({
         query: '(max-width: 768px)'
     })
+
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    const [isAnonymous, setIsAnonymous] = useState(userInfo ? false : true)
     useEffect(() => {
         // Access the individual query parameters
         const status = searchParams.get('status');
@@ -65,7 +68,7 @@ export default function Donate() {
             const verifyTransaction = async() => {
                 const verify = await fetch(`${baseUrl}/pay/api/${id}/donate/?txn_ref=${txn_ref}&transaction_id=${transaction_id}`,{
                     headers:{
-                        Authorization: `Bearer ${access_token}`,
+                        ...(isAnonymous ? {} : { Authorization: `Bearer ${access_token}` }),
                         'Content-Type': 'application/json'
                     },
                     /* body: JSON.stringify({
@@ -112,7 +115,7 @@ export default function Donate() {
     const crowdfundEvents = useSelector(state => state.crowdfundEvents)
     //const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
     const [crowdfund, setCrowdfund] = useState(crowdfundEvents.find(crowdfund => crowdfund.id == id))
-    console.log(crowdfund)
+    //console.log(crowdfund)
     useEffect(() => {
         if (!crowdfund) {
             //alert('m')
@@ -211,7 +214,7 @@ export default function Donate() {
                 </div>
                 {
                     pageDisplay == 'donationDetails' ?
-                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} displayModals = {displayModals} setDisplayModals = {setDisplayModals} crowdfund = {crowdfund} /> :
+                    <DonationDetails id={id} setpageDisplay = {setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} isMobile = {isMobile} displayModals = {displayModals} setDisplayModals = {setDisplayModals} crowdfund = {crowdfund} isAnonymous = {isAnonymous} /> :
                     pageDisplay == 'cardDetails' ?
                     <CardDetails setpageDisplay={setpageDisplay} donationDetails = {donationDetails} setdonationDetails = {setdonationDetails} /> :
                     pageDisplay == 'donationSuccessful' ?
@@ -233,12 +236,7 @@ export default function Donate() {
 }
 
 
-const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile , displayModals, setDisplayModals, crowdfund}) => {
-
-    
-    //const crowdfundEvents = useSelector(state => state.crowdfundEvents)
-    //const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
-    
+const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDetails, isMobile , displayModals, setDisplayModals, crowdfund, isAnonymous}) => {
 
     const [cryptoDonationAmount, setCryptoDonationAmount] = useState(0)
     const paymentMode = useSelector(state => state.paymentMode)
@@ -256,7 +254,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
 
     const [isLoading, setIsLoading] = useState(false)
     
-    const handleClick = async () => {
+    const makeDonation = async () => {
         
         if (paymentMode == 'crypto') {   
             
@@ -306,9 +304,23 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                 return
             }
             
-            /* setpageDisplay('cardDetails');
-            window.scrollTo(0,0) */
-            console.log(donationDetails.amount, typeof(selectedCurrency.value))
+            if (isAnonymous && donationDetails.anonymous_donor == '') {
+                alert('Please fill in your email')
+                setIsLoading(false)
+                return
+            }         
+            
+            const requestBody = {
+                amount: donationDetails.amount,
+                currency: selectedCurrency.value,
+                channel:"rexpay", // [squad, rexpay]                
+            }
+
+            // Add the anonymous_donor key if isAnonymous is true
+            if (isAnonymous) {
+                requestBody.anonymous_donor = donationDetails.anonymous_donor
+            }
+            
 
             const access_token = localStorage.getItem('access_token')
             
@@ -316,17 +328,11 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             const makeDonation = await fetch(`${baseUrl}/pay/api/${id}/donate/`,{
                 method:'POST',
                 headers: {
+                    'Content-Type': 'application/json',
                     // Set the authorization to bearer access token only if access token exists, else ignore the authorization else ignore the authorization and add an  "anonymous_donor": "sirconnell.ik@gmail.com"  key/value to the body
-                    
-                    Authorization: `Bearer ${access_token}`,
-                    'Content-Type': 'application/json'
+                    ...(isAnonymous ? {} : { Authorization: `Bearer ${access_token}` })                    
                 },
-                body: JSON.stringify({
-                    amount: donationDetails.amount,
-                    currency: selectedCurrency.value,
-                    channel:"rexpay", // [squad, rexpay]
-                    //donor: donationDetails.donor
-                })
+                body: JSON.stringify(requestBody)
             })
             const response = await makeDonation.json()
             console.log(response)
@@ -432,12 +438,28 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
                         />
                     </div>
                 </div>
+                <div className={` ${isAnonymous ? "flex" : "hidden"} mt-5 lg:mt-8 flex-col gap-3 md:gap-5 `} >
+                    <label htmlFor="amount" className="text-sm md:text-lg font-bold" >
+                        Please enter your email
+                    </label>
+                    <div className="relative h-12 md:h-[70px] flex items-center ">
+                        <input
+                            type="email"
+                            name="anonymous_donor"
+                            id="anonymous_donor"
+                            placeholder="Enter your email"
+                            className="w-full h-12 md:h-[70px] py-1 md:py-[10px] px-3 md:px-5 border-[1.5px] border-black rounded bg-white
+                            placeholder-[#888888] text-sm md:text-lg tracking-[0.8px] focus:border-2 focus:border-[#37BCF7] focus:caret-[#2CA9F2] "
+                            onChange={handleInputChange}
+                        />                        
+                    </div>
+                </div>
                 
             </div>
 
             <button className="mx-auto w-fit min-w-[200px] md:min-w-[280px] block py-[10px] md:py-5 px-[18px] md:px-9 rounded md:rounded-lg bg-[#000000] 
             text-white text-[15px] md:text-[28px] font-bold md:leading-[43px] md:-tracking-[0.188px] " 
-                onClick={ handleClick }
+                onClick={ makeDonation }
             >
                 
                 <div className={` ${isLoading ? 'block' : 'hidden' } `}>
