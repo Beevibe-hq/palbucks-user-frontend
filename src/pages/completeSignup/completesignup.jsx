@@ -30,9 +30,9 @@ const Completesignup = () => {
         last_name:'',
         dateOfBirth:'',
         username:'',
-        gender:1,
-        phone:'293',
-        bio:'Humble man',
+        //gender:1,
+        //phone:'293',
+        //bio:'Humble man',
         email: emailFromUrl ? emailFromUrl: signupInfo.email,        
     })
 
@@ -47,16 +47,14 @@ const Completesignup = () => {
     const finishSignup = async (e) => {
         //dispatch(setLogoutLoading(true))
         setIsLoginLoading(true)
-        try {
-            const updatedSignupInfo = { ...signupInfo, ...personalInfo };
-            console.log(updatedSignupInfo)
-      
+        //console.log(personalInfo)
+        try {      
             const signupRequest = await fetch(`${baseUrl}/users/api/complete-signup/`, {
-            method: 'POST',
-            body: JSON.stringify(updatedSignupInfo),
-            headers: {
-                'Content-Type': 'application/json', // Specify the content type as JSON
-            },
+                method: 'POST',
+                body: JSON.stringify(personalInfo),
+                headers: {
+                    'Content-Type': 'application/json', // Specify the content type as JSON
+                },
             });
       
             const response = await signupRequest.json();

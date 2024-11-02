@@ -57,7 +57,7 @@ const Otppage = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    otp: signupInfo.otp,
+                    otp: otp,
                     email: signupInfo.email
                 })
             }

@@ -30,6 +30,7 @@ import Activity from "../../components/activity/activity"
 import DonationModal from "../donationModal/donationModal"
 import CryptoDonationModal from "../cryptoDonationModal/cryptoDonationModal"
 import { baseUrl } from "../../auth/checkauthentication"
+import SuccessfulCrowdfundLaunchModal from "../organisecrowdfundbody/successfulcrowdfundlaunch"
 
 function Detailedevent(props){
     const access_token = localStorage.getItem('access_token')
@@ -312,6 +313,14 @@ function Detailedevent(props){
         navigate(`/organisecrowdfund/${eventid}`)
     }
 
+    const [successfulLaunchModal, setSuccessfulLaunchModal] = useState({
+        display: false,
+        launchedCampaign: false,
+        crowdfundData: {
+            id:133
+        }
+    })
+
         if (eventdetails) {
             //alert('no')    
             //console.log(eventdetails)
@@ -362,11 +371,20 @@ function Detailedevent(props){
                                                 className={` ${isMobile && (!userInfo || eventdetails.organiser.username !== userInfo.username) ? 'border-[2px] border-black order-2' : 'bg-[#58cdff] text-white '} 
                                                 flex flex-1 gap-2 py-2 md:py-[10px] px-3 md:px-4 w-full sm:w-fit 
                                                 rounded-lg md:rounded-xl font-black text-sm md:text-base justify-center items-center `}
+                                                onClick={() => { 
+                                                    setSuccessfulLaunchModal({
+                                                        display: true,
+                                                        launchedCampaign: false,
+                                                        crowdfundData: {
+                                                            id: eventdetails.id
+                                                        }
+                                                    })
+                                                }}
                                             >
                                                 <img src={share} alt="share icon" className="w-[15px] sm:w-[20px] hidden md:block " />
                                                 <span>Share Campaign</span>
                                             </button>
-
+                                            <SuccessfulCrowdfundLaunchModal successfulLaunchModal = {successfulLaunchModal} setSuccessfulLaunchModal = {setSuccessfulLaunchModal} />
 
                                             {/* Like campaign button for desktop */}
                                             <button 
