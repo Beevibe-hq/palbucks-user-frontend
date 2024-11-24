@@ -353,7 +353,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
     }
 
     const options = [
-        {value:'USD' , label:'', image:usdIcon},
+        /* {value:'USD' , label:'', image:usdIcon}, */
         {value:'NGN', label:'', image:nairaIcon}
     ]
     const [selectedCurrency, setSelectedCurrency] = useState(options[0])

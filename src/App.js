@@ -172,7 +172,12 @@ function App() {
 
           <Route path="/detailed/:id" element={<Detailedevent />} />
           <Route path="/:id/donate" element={<Donate />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/settings"
+            element={<PrivateRoute element={<Settings />} />}
+          >
+            <Route path="/settings" element={<Settings />} />
+          </Route>
 
           <Route
             path="/organisecrowdfund"

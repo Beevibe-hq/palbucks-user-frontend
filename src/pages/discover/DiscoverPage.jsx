@@ -297,8 +297,6 @@ function DiscoverPage() {
                                     />
                                 ))
                     }
-
-
                     
                     {Array(maxItemsPerRow - (data.length % maxItemsPerRow)).fill().map((_, index) => (
                         <div key={index} className="invisible w-[calc(25%-12px)] md:w-[calc(33.3333%-12px)] lg:w-[calc(25%-12px)]"></div>
@@ -350,7 +348,7 @@ function DiscoverPageCrowdfunds(props) {
                 className='landingpageprogressbar w-full h-[5px] lg:h-[12px] appearance-none rounded-full mb-0'
             />
             
-            <p className='text-xs lg:text-base font-bold ' >${props.value ? props.value : '23,543'} raised </p>
+            <p className='text-xs lg:text-base font-bold ' >₦{props.value ? props.value : '23,543'} raised </p>
 
         </div>
     )

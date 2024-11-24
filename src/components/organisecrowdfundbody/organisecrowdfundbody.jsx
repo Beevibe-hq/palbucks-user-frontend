@@ -485,7 +485,7 @@ function Organisecrowdfundbody(){
                                     min='100'
                                     max='9999999'
                                     maxLength="6"
-                                    placeholder="How much do you want to raise(amount is in $)?"
+                                    placeholder="How much do you want to raise(amount is in ₦)?"
                                     onChange={handleInputChange}
                                     onWheel={numberInputOnWheelPreventChange}
                                     id = "target_amount"
@@ -493,7 +493,7 @@ function Organisecrowdfundbody(){
                                 />
                                 <div className="flex gap-2 items-center">
                                     <img src={infoicon} alt="info icon" />
-                                    <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >$100 - $9999999 </p>
+                                    <p className="text-[#8E8E93] text-base leading-5 tracking-[0.1px]" >₦100 - ₦9999999 </p>
                                 </div>
                             </div>
                             {/* <span className="text-sm md:text-lg md:pt-4 leading-[22px] text-[#2CA9F2] font-black cursor-pointer " >

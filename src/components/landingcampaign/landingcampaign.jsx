@@ -21,7 +21,7 @@ const Landingcampaign = (props) => {
               <progress value={props.value ? props.value : '23543'} max={props.target ? props.target : '150000'}
               className='landingpageprogressbar w-full h-[9px] lg:h-[18px] appearance-none rounded-full  mb-0 md:mb-[12px]' />
               
-              <p className='text-xs lg:text-[22px] font-bold ' >{props.value} raised </p>
+              <p className='text-xs lg:text-[22px] font-bold ' >₦{props.amount} raised </p>
             </div>
 
         </div>

@@ -194,8 +194,8 @@ function Fundevent(props){
                             className='progressbar w-full h-[8.5px] appearance-none rounded-[5px] mb-2 phones:mb-[15px] xphones:mb-4 md:mb-[8px]' 
                         />
                 
-                        <p className= 'fold:text-[11px] phones:text-[13px] brkpoint:text-[11px] leading-[18px] -tracking-[0.08px] font-black'>${props.amt_raised ? props.amt_raised.toLocaleString() : '23,543'} raised
-                        <span className='text-[#8E8E93]' > of ${props.target_amount ? props.target_amount.toLocaleString() : '150,000'}</span>
+                        <p className= 'fold:text-[11px] phones:text-[13px] brkpoint:text-[11px] leading-[18px] -tracking-[0.08px] font-black'>₦{props.amt_raised ? props.amt_raised.toLocaleString() : '23,543'} raised
+                            <span className='text-[#8E8E93]' > of ₦{props.target_amount ? props.target_amount.toLocaleString() : '150,000'}</span>
                         </p>
                     </div>
                 </div>

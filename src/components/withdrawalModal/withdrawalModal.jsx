@@ -44,10 +44,10 @@ const WithdrawalModal = ({ withdrawalModal, setWithdrawalModal }) => {
                                 <div className="mb-[24px] md:mb-[65px] w-full flex justify-between items-center " >
                                     <div className="flex gap-2 items-center " >
                                         <img src={tetherIcon} alt="Bank" className="w-[29px] md:w-[48px]  " />
-                                        <h3 className="text-[12px] md:text-[22px] font-bold text-[#011217] " >Withdraw into USDT wallet</h3>
+                                        <h3 className="text-[12px] md:text-[22px] font-bold text-[#011217]" >Withdraw into USDT wallet (Unavailable) </h3>
                                     </div>
-                                    <button className="py-[5px] md:py-3 px-[9px] md:px-5 rounded-sm md:rounded-md border-[1px] md:border-2 border-black text-[10px] md:text-[18px] font-bold "
-                                        onClick={()=> navigate('/usdtwithdrawal')}
+                                    <button className="min-w-fit py-[5px] md:py-3 px-[9px] md:px-5 rounded-sm md:rounded-md border-[1px] md:border-2 border-black text-[10px] md:text-[18px] font-bold "
+                                        /* onClick={()=> navigate('/usdtwithdrawal')} */
                                     >
                                         Add address
                                     </button>

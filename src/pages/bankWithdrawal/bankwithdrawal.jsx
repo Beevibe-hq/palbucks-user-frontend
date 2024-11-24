@@ -292,7 +292,7 @@ function BankWithdrawal() {
                                             <label htmlFor="amount" className= "text-[13px] md:text-[20px] font-bold " >
                                                 How much do you intend to withdraw?
                                             </label>
-                                            <p className="hidden md:block md:text-[18px] text-[#525252] " >Balance: $150,000</p>
+                                            <p className="hidden md:block md:text-[18px] text-[#525252] " >Balance: ₦150,000</p>
                                         </div>
                                         <input
                                             type="number"
@@ -303,7 +303,7 @@ function BankWithdrawal() {
                                             px-3 md:px-[22px] py-[11px] rounded-[5px] "
                                             ref={numberInputRef}
                                         />
-                                        <p className="md:hidden text-[12px] text-[#525252] " >Balance: $150,000</p>
+                                        <p className="md:hidden text-[12px] text-[#525252] " >Balance: ₦150,000</p>
                                     </div>
 
                                     <p className="mb-6 text-[15px] text-[#525252] " >

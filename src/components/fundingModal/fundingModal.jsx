@@ -44,10 +44,10 @@ const FundingModal = ({ fundingModal, setFundingModal }) => {
                                 <div className="mb-[24px] md:mb-[65px] w-full flex justify-between items-center " >
                                     <div className="flex gap-2 items-center " >
                                         <img src={tetherIcon} alt="Bank" className="w-[29px] md:w-[48px]  " />
-                                        <h3 className="text-[12px] md:text-[22px] font-bold text-[#011217] " >Fund using USDT(Crypto) </h3>
+                                        <h3 className="text-[12px] md:text-[22px] font-bold text-[#011217] " >Fund using <span className="text-[#37BCF7]" >USDT</span>(Unavailable){/* (Crypto) */} </h3>
                                     </div>
                                     <button className="py-[5px] md:py-3 px-[9px] md:px-5 rounded-sm md:rounded-md border-[1px] md:border-2 border-black text-[10px] md:text-[18px] font-bold "
-                                        onClick={()=> navigate('/cryptofunding')}
+                                        /* onClick={()=> navigate('/cryptofunding')} */
                                     >
                                         Fund wallet
                                     </button>

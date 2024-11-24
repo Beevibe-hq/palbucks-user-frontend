@@ -70,11 +70,12 @@ function FundWalletWithBank() {
                                 type="number"
                                 name="amount"
                                 id="amount"
-                                placeholder="Enter the amount"
+                                placeholder="Enter the amount(NGN)"
                                 className="border-[1.5px] border-black bg-[#F9F9F9] w-full h-[50px] md:h-[62px]
                                 px-3 md:px-[22px] py-[11px] rounded-[5px] "
                             />
-                            <img src={usdIcon} alt="" className="absolute right-3 md:right-5 transform cursor-pointer top-1/2 -translate-y-1/2 w-3 md:w-4 " />
+                            {/* <img src={usdIcon} alt="" className="absolute right-3 md:right-5 transform cursor-pointer top-1/2 -translate-y-1/2 w-3 md:w-4 " /> */}
+                            
                         </div>
                     </div>
                     <div className="max-w-[800px] mx-auto" >
