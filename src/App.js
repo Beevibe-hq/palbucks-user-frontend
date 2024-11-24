@@ -26,7 +26,7 @@ import Home from "./pages/home/home";
 import Settings from "./pages/settings/settings";
 import Detailedevent from "./components/detailedevent/detailedevent";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addNotification } from "./actions/actions";
 import Organisecrowdfund from "./pages/organisecrowdfund/organisecrowdfund";
 import Wallet from "./pages/wallet/wallet";
@@ -42,7 +42,7 @@ import Signuppage from "./pages/signup/signup";
 import Otppage from "./pages/otppage/otppage";
 import Completesignup from "./pages/completeSignup/completesignup";
 import PrivateRoute from "./components/privateroute/privateroute";
-import { checkAuthentication } from "./auth/checkauthentication";
+import { baseUrl, checkAuthentication } from "./auth/checkauthentication";
 import { refreshToken } from "./auth/refreshToken";
 import Loadingspinner from "./components/loadingspinner/loadingSpinner";
 import Donate from "./pages/cardDonation/cardDonation";
@@ -146,6 +146,35 @@ function App() {
     };
   }, [isAuthenticated]);
 
+  // Fetch CrowdfundData for SSR prerendering for detailedEvent social media sharing link preview
+  const [crowdfundData, setCrowdfundData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getCrowdfunds = async () => {
+      try {
+        const response = await fetch(`${baseUrl}/funding/api`);
+        const crowdfunds = await response.json();
+
+        if (response.ok) {
+          setCrowdfundData(crowdfunds);
+        } else {
+          console.error("Failed to fetch crowdfunds:", crowdfunds);
+        }
+      } catch (error) {
+        console.error("Error fetching crowdfunds:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getCrowdfunds();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   if (logoutLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -170,7 +199,17 @@ function App() {
             <Route path="/home" element={<Home />} />
           </Route>
 
-          <Route path="/detailed/:id" element={<Detailedevent />} />
+          {/* <Route path="/detailed/:id" element={<Detailedevent />} /> */}
+          {/* SSR For detailed crowdfund event for social media preview */}
+          {/* Dynamically generate routes for crowdfund details */}
+          {crowdfundData.map((crowdfund) => (
+            <Route
+              key={crowdfund.id}
+              path={`/detailed/${crowdfund.id}`}
+              element={<Detailedevent eventid={crowdfund.id} />}
+            />
+          ))}
+
           <Route path="/:id/donate" element={<Donate />} />
           <Route
             path="/settings"
