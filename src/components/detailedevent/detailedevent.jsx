@@ -31,6 +31,7 @@ import DonationModal from "../donationModal/donationModal"
 import CryptoDonationModal from "../cryptoDonationModal/cryptoDonationModal"
 import { baseUrl } from "../../auth/checkauthentication"
 import SuccessfulCrowdfundLaunchModal from "../organisecrowdfundbody/successfulcrowdfundlaunch"
+import { Helmet } from "react-helmet"
 
 function Detailedevent(props){
     const access_token = localStorage.getItem('access_token')
@@ -48,7 +49,8 @@ function Detailedevent(props){
     
     
     //This selects the particular event from the homebodydata array
-    let eventid = params.id
+    //let eventid = params.id
+    let eventid = props.eventid
     
     //var eventdetails = homebodydata.filter(item => item.id == eventid)[0]
     const [eventdetails, setEventDetails] = useState(homebodydata.filter(item => item.id == eventid)[0]);
@@ -330,305 +332,300 @@ function Detailedevent(props){
             return <div>Loading...</div>;
         }else{
             return(
-                <div className=' bg-[#F9F9F9] min-h-full relative ' >
-                    <Sidebar />
-                    <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isTablet && sidebaropen ? 'blur-sm' : '' }
-                    `} >
-                        <Navbar />
-                        <div className = 'fold:px-1 phones:px-3 md:px-6 lg:px-10 pt-6 md:pt-8 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-arial '>
+                <>
+                    <Helmet>
+                        <title>{eventdetails.title}</title>
+                        <meta name="description" content={eventdetails.description} />
+                        <meta property="og:title" content={eventdetails.title} />
+                        <meta property="og:description" content={eventdetails.description} />
+                        <meta property="og:image" content={eventdetails.banner} />
+                    </Helmet>
+                    <div className=' bg-[#F9F9F9] min-h-full relative ' >
+                        <Sidebar />
+                        <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isTablet && sidebaropen ? 'blur-sm' : '' }
+                        `} >
+                            <Navbar />
+                            <div className = 'fold:px-1 phones:px-3 md:px-6 lg:px-10 pt-6 md:pt-8 pb-16 md:pb-20 mt-[90px] md:mt-[100px] w-full h-full font-arial '>
                     
-                            <img src={backarrow} alt="back arrow" className = {`w-[22px] md:w-8 mb-5 md:mb-[34px] cursor-pointer`}
-                            onClick = {
-                                () => {
-                                    //dispatch(sethomeorevent('home'))
-                                    //navigate(-1) This is navigating back to the campaign image page so I'm taking it to home for now
-                                    navigate('/home')
+                                <img src={backarrow} alt="back arrow" className = {`w-[22px] md:w-8 mb-5 md:mb-[34px] cursor-pointer`}
+                                onClick = {
+                                    () => {
+                                        //dispatch(sethomeorevent('home'))
+                                        //navigate(-1) This is navigating back to the campaign image page so I'm taking it to home for now
+                                        navigate('/home')
+                                    }
                                 }
-                            }
-                            />
+                                />
                     
-                            <div className="bg-[#636363] mb-4 md:mb-[30px] flex gap-2 px-3 md:px-5 py-2 w-fit rounded-[14px] md:rounded-2xl justify-center items-center text-white ">
-                                <img src={date} alt="calendar icon" className = "w-4 hidden md:block " />
-                                <span className="font-semibold text-sm md:text-base " >{`${eventdetails.end_date ? daysLeft : eventdetails.days } days remaining`}</span>
-                            </div>
+                                <div className="bg-[#636363] mb-4 md:mb-[30px] flex gap-2 px-3 md:px-5 py-2 w-fit rounded-[14px] md:rounded-2xl justify-center items-center text-white ">
+                                    <img src={date} alt="calendar icon" className = "w-4 hidden md:block " />
+                                    <span className="font-semibold text-sm md:text-base " >{`${eventdetails.end_date ? daysLeft : eventdetails.days } days remaining`}</span>
+                                </div>
                     
-                            <div className="w-full flex flex-col xl:flex-row gap-3 xl:justify-between 2xl:gap-11 2xl:justify-start ">
-                                <div className="w-full xl:w-[60%] ">
-                                    <div className =" relative w-full shrink-0 mb-4 md:mb-8 " >
-                                        <img src={eventdetails.banner} alt="Fund event" className = {`w-full h-[200px] xphones:h-[215px] sm:h-[350px] rounded-[5px] md:rounded-xl object-cover `} />
-                                        <div className = 'absolute top-4 left-5 bg-white flex gap-1 md:gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
-                                            <img src={categoryImg.length !== 0 ? categoryImg : options.slice(-1)[0].icon } alt="Event category icon" className = 'w-3 md:w-[17px] md:h-[17px] ' />
-                                            <span className = 'text-xs md:text-base font-black' >
-                                                {eventdetails.tags ? eventdetails.tags : 'Others'}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className = "w-full" >
-                                        <div className="flex gap-3 md:gap-10 px-1 md:px-3 mb-7 md:mb-8 ">
-
-                                            {/* Share campaign button  */}
-                                            <button 
-                                                className={` ${isMobile && (!userInfo || eventdetails.organiser.username !== userInfo.username) ? 'border-[2px] border-black order-2' : 'bg-[#58cdff] text-white '} 
-                                                flex flex-1 gap-2 py-2 md:py-[10px] px-3 md:px-4 w-full sm:w-fit 
-                                                rounded-lg md:rounded-xl font-black text-sm md:text-base justify-center items-center `}
-                                                onClick={() => { 
-                                                    setSuccessfulLaunchModal({
-                                                        display: true,
-                                                        launchedCampaign: false,
-                                                        crowdfundData: {
-                                                            id: eventdetails.id
-                                                        }
-                                                    })
-                                                }}
-                                            >
-                                                <img src={share} alt="share icon" className="w-[15px] sm:w-[20px] hidden md:block " />
-                                                <span>Share Campaign</span>
-                                            </button>
-                                            <SuccessfulCrowdfundLaunchModal successfulLaunchModal = {successfulLaunchModal} setSuccessfulLaunchModal = {setSuccessfulLaunchModal} />
-
-                                            {/* Like campaign button for desktop */}
-                                            <button 
-                                                className = {` ${ userInfo && eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 
-                                                    'hidden ' : 
-                                                    isMobile ? 'hidden':'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-black rounded-[10px] w-full py-[10px] max-h-[40px] px-4 text-base text-[#000000] font-semibold ' 
-                                                } `}
-                                                onClick={managelikes}
-                                            >
-                                                {/* <img src={likeicon} alt = 'like icon' className = "w-[16px]" /> */}
-                                                <Likeicon liked = {liked} color = {liked ? '':'black'} />
-                                                <span>{liked ? 'Liked Campaign' : 'Like Campaign '}</span>
-                                            </button>
-
-                                            {/* Donate button */}
-                                            <button
-                                                className={` ${isMobile && ( !userInfo || eventdetails.organiser.username !== userInfo.username) ? '' : 'hidden'}
-                                                bg-[#58cdff] text-white flex flex-1 gap-2 py-2 md:py-[10px] px-3 md:px-4 w-full sm:w-fit 
-                                                rounded-lg md:rounded-xl font-black text-sm md:text-base justify-center items-center `}
-                                                onClick={() => {
-                                                    setDisplayModals((prev) => (
-                                                        {
-                                                            ...prev,
-                                                            donateModal: true
-                                                        }
-                                                    ))
-                                                }}
-                                            >                                            
-                                                Donate now
-                                            </button>
-
-                                            {/* Edit button for personal host view */}
-                                            <button
-                                                onClick={editCampaign}    
-                                                className = {` ${ userInfo && eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ? 
-                                                'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-[#37BCF7] rounded-lg md:rounded-[10px] w-full py-[7px] md:py-[10px] md:max-h-[40px] px-3 md:px-4 text-sm md:text-base text-[#37BCF7] h-fit font-black ' 
-                                                : 'hidden' } `}
-                                                >                                            
-                                                <img src={editIcon} alt="Edit icon" className="w-5 hidden md:block " />
-                                                <span>Edit Campaign</span>
-                                            </button>
-                                        </div>
-
-                                        <DonationModal                                        
-                                            displayModals={displayModals}
-                                            setDisplayModals={setDisplayModals}
-                                            eventid = {eventid}
-                                        />
-
-                                        <CryptoDonationModal 
-                                            displayModals={displayModals}
-                                            setDisplayModals={setDisplayModals}
-                                            eventid={eventid}                                        
-                                        />
-                                        
-                                        <div className={` md:hidden `}>
-                                            <p className={`text-sm md:text-lg font-black md:leading-4 mb-4`} >
-                                                {
-                                                    eventdetails.amt_raised + ' USDT raised'
-                                                }
-                                                <span className="tracking-[0.06px] text-xs md:text-base text-[#8E8E93] leading-5 " >
-                                                    {
-                                                        ' of ' + eventdetails.target_amount + ' USDT'
-                                                    }
+                                <div className="w-full flex flex-col xl:flex-row gap-3 xl:justify-between 2xl:gap-11 2xl:justify-start ">
+                                    <div className="w-full xl:w-[60%] ">
+                                        <div className =" relative w-full shrink-0 mb-4 md:mb-8 " >
+                                            <img src={eventdetails.banner} alt="Fund event" className = {`w-full h-[200px] xphones:h-[215px] sm:h-[350px] rounded-[5px] md:rounded-xl object-cover `} />
+                                            <div className = 'absolute top-4 left-5 bg-white flex gap-1 md:gap-2 px-2 md:px-4 rounded-lg py-1 items-center'>
+                                                <img src={categoryImg.length !== 0 ? categoryImg : options.slice(-1)[0].icon } alt="Event category icon" className = 'w-3 md:w-[17px] md:h-[17px] ' />
+                                                <span className = 'text-xs md:text-base font-black' >
+                                                    {eventdetails.tags ? eventdetails.tags : 'Others'}
                                                 </span>
-                                            </p>
-                                            <progress value={eventdetails.amt_raised ? eventdetails.amt_raised : '23543'} max={eventdetails.target_amount ? eventdetails.target_amount : '150000'}
-                                                className='progressbar w-full h-[10px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-4' 
-                                            />
-                                            <p className="text-sm md:text-lg text-[#C5C5C5] font-medium mb-4 " >
-                                                {
-                                                    totaldonations == null ? '2.2k donations so far' : totaldonations == 1 ? totaldonations + ' donation so far' : totaldonations + ' donations so far'
-                                                } 
-                                            </p>
-
-                                            {/* <button className="mx-auto block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] " >
-                                                Donate using USDT wallet
-                                            </button>
-
-                                            <button 
-                                                className="mx-auto block px-[30px] pt-[15px] rounded-[10px] text-lg font-black leading-6 tracking-[0.073px] text-[#37BCF7] " 
+                                            </div>
+                                        </div>
+                                        <div className = "w-full" >
+                                            <div className="flex gap-3 md:gap-10 px-1 md:px-3 mb-7 md:mb-8 ">
+                                                {/* Share campaign button  */}
+                                                <button
+                                                    className={` ${isMobile && (!userInfo || eventdetails.organiser.username !== userInfo.username) ? 'border-[2px] border-black order-2' : 'bg-[#58cdff] text-white '}
+                                                    flex flex-1 gap-2 py-2 md:py-[10px] px-3 md:px-4 w-full sm:w-fit
+                                                    rounded-lg md:rounded-xl font-black text-sm md:text-base justify-center items-center `}
                                                     onClick={() => {
-                                                        console.log(props.eventid)
-                                                        navigate(`/${props.eventid}/donate`)
-                                                    }
-                                                }
+                                                        setSuccessfulLaunchModal({
+                                                            display: true,
+                                                            launchedCampaign: false,
+                                                            crowdfundData: {
+                                                                id: eventdetails.id
+                                                            }
+                                                        })
+                                                    }}
                                                 >
-                                                Donate using card payment
-                                            </button> */}
-                                        </div>
-
-
-
-                                        <hr className = "border-[1px] border-[#dcdbdb] mb-[14px] md:mb-7 " />
-                                        <h1 className = "font-black text-base md:text-[22px] mb-3 md:mb-4 md:leading-7 " >
-                                            {eventdetails.title? eventdetails.title : 'This is the title of the main user’s crowdfunding'}
-                                        </h1>
-                                        <p className ={` font-medium md:font-normal mb-1 md:mb-2 text-sm md:text-lg ${eventDetailsDisplay.readMore ? 'line-clamp-3 md:line-clamp-[3] lg:line-clamp-4': ''} `} >
-                                            {
-                                                eventdetails.description ? eventdetails.description :
-                                                `This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
-                                                Users are allowed to read the complete reason why this use is requesting for money from people.
-                                                Why other users read this, if it is totally convincing enough then this user reading it can fund this project.
-                                                If not he will move elsewhere to search for where to put their money. This can go on and on and on till its stops.`
-                                            }
-                                        </p>
-                                        <button
-                                            className={`text-sm md:text-base mb-4 md:mb-5 border-b-2 border-black ${eventDetailsDisplay.displayButton ? 'block':'hidden'} `}
-                                            onClick={() => {
-                                                
-                                                setEventDetailsDisplay((prevDisplay) => ({
-                                                    ...prevDisplay,
-                                                    readMore: !prevDisplay.readMore
-                                                }))
-
-
-                                            }}    
-                                            >
-                                            {
-                                                eventDetailsDisplay.readMore ? 'Read more' : 'Read less'
-                                            }
-                                        </button>
-                                        <button className = "mb-4 flex items-center justify-center gap-[3px] h-[28px] rounded-[9px] md:py-3 text-base font-semibold " >
-                                            <img src = {locateicon} alt = 'location icon' className = "w-[16px] " />
-                                            <span>{eventdetails.location ? eventdetails.location : 'NIGERIA' }</span>
-                                        </button>
-                                        <hr className = "border-[1px] border-[#dcdbdb] mb-5 md:mb-8 " />
-                                        <Campaignorganizers co_organisers={eventdetails.co_organisers} organiser={eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage={eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder} />
-                                        
-                                        <div className= {`flex  xl:hidden mt-[35px]`} >
-                                            <button className={` ${commentsActivitiesView == 'comments' ? 'bg-[#000000] rounded-[5px] text-white  text-sm  ' :
-                                                'text-[#8E8E93]'} py-[10px] px-[15px] font-black `}
-                                                onClick = {()=>setCommentsActivitiesView('comments')}
-                                            >
-                                                Comments
-                                            </button>
-                                            <button className={` ${commentsActivitiesView == 'activities' ? 'bg-[#000000] rounded-[5px] text-white text-sm  ' :
-                                                'text-[#8E8E93]'} py-[10px] px-[15px] font-black `}
-                                                onClick = {()=>setCommentsActivitiesView('activities')}
-                                            >
-                                                Activities
-                                            </button>
-                                        </div>
-                                        
-                                        <div className={` ${isMobile && commentsActivitiesView !== 'comments' ? 'hidden' : 'block'} `} >
-                                            <button className={`mt-[25px] md:mt-10 items-center flex justify-center gap-2 py-[3px] md:py-[5px] px-3 
-                                                rounded-[20px] bg-[#FFFFFF]
-                                                border-[2px] border-[#37BCF7] shadow-[0px_0px_15.786517143249512px_0px_rgba(0,0,0,0.04)]
-                                            `}
-                                                onClick={
-                                                    () => {
-                                                        setDisplayModals((prev) => ({
-                                                            ...prev,
-                                                            commentModal: true
-                                                        }))
-                                                    }
-                                                }
+                                                    <img src={share} alt="share icon" className="w-[15px] sm:w-[20px] hidden md:block " />
+                                                    <span>Share Campaign</span>
+                                                </button>
+                                                <SuccessfulCrowdfundLaunchModal successfulLaunchModal = {successfulLaunchModal} setSuccessfulLaunchModal = {setSuccessfulLaunchModal} />
+                                                {/* Like campaign button for desktop */}
+                                                <button
+                                                    className = {` ${ userInfo && eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ?
+                                                        'hidden ' :
+                                                        isMobile ? 'hidden':'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-black rounded-[10px] w-full py-[10px] max-h-[40px] px-4 text-base text-[#000000] font-semibold '
+                                                    } `}
+                                                    onClick={managelikes}
                                                 >
-                                                <img 
-                                                    src={commentIcon} 
-                                                    alt="comment icon" 
-                                                    className="w-4"    
-                                                />
-                                                <span className="text-sm md:text-base " >
-                                                    Write a comment
-                                                </span>
-                                            </button>
-                                            <CommentModal
+                                                    {/* <img src={likeicon} alt = 'like icon' className = "w-[16px]" /> */}
+                                                    <Likeicon liked = {liked} color = {liked ? '':'black'} />
+                                                    <span>{liked ? 'Liked Campaign' : 'Like Campaign '}</span>
+                                                </button>
+                                                {/* Donate button */}
+                                                <button
+                                                    className={` ${isMobile && ( !userInfo || eventdetails.organiser.username !== userInfo.username) ? '' : 'hidden'}
+                                                    bg-[#58cdff] text-white flex flex-1 gap-2 py-2 md:py-[10px] px-3 md:px-4 w-full sm:w-fit
+                                                    rounded-lg md:rounded-xl font-black text-sm md:text-base justify-center items-center `}
+                                                    onClick={() => {
+                                                        setDisplayModals((prev) => (
+                                                            {
+                                                                ...prev,
+                                                                donateModal: true
+                                                            }
+                                                        ))
+                                                    }}
+                                                >
+                                                    Donate now
+                                                </button>
+                                                {/* Edit button for personal host view */}
+                                                <button
+                                                    onClick={editCampaign}
+                                                    className = {` ${ userInfo && eventdetails.organiser.username !== null && eventdetails.organiser.username == userInfo.username ?
+                                                    'flex items-center flex-1 justify-center gap-[8px] border-[2px] border-[#37BCF7] rounded-lg md:rounded-[10px] w-full py-[7px] md:py-[10px] md:max-h-[40px] px-3 md:px-4 text-sm md:text-base text-[#37BCF7] h-fit font-black '
+                                                    : 'hidden' } `}
+                                                    >
+                                                    <img src={editIcon} alt="Edit icon" className="w-5 hidden md:block " />
+                                                    <span>Edit Campaign</span>
+                                                </button>
+                                            </div>
+                                            <DonationModal
+                                                displayModals={displayModals}
+                                                setDisplayModals={setDisplayModals}
+                                                eventid = {eventid}
+                                            />
+                                            <CryptoDonationModal
                                                 displayModals={displayModals}
                                                 setDisplayModals={setDisplayModals}
                                                 eventid={eventid}
-                                                setCommentData={setCommentData}
                                             />
-
-                                            <h3 className="mt-6 mb-6 md:mb-7 text-base md:text-lg font-bold " >
-                                                Comments ({commentData.length})
-                                            </h3>
-                                            <div className=" flex flex-col gap-5 md:gap-8">
-                                                {
-                                                    commentData.slice(0,commentsNumber).map((item,i) =>{
-                                                        return(
-                                                            <Comment key={i} image={item.user.dp ? item.user.dp : profileImgPlaceholder} name={item.user.first_name} time={item.timestamp} comment={item.comment} />
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                            <button className={ ` ${commentData.length == 0 || commentData.length < 4 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
-                                            rounded-[10px] font-black text-base tracking-[0.06px] `} 
-                                                onClick={() => {
-                                                    // If there's more comments to see, set all others to display, else if all is already being displayed, set minimum to display
-                                                    if (commentsNumber < commentData.length) {
-                                                        setCommentsNumber(commentData.length)
-                                                    } else if (commentsNumber == commentData.length && commentsNumber > 3) {
-                                                        setCommentsNumber(Math.ceil(commentData.length/2 < 3 ? 3 : commentData.length/2))
+                    
+                                            <div className={` md:hidden `}>
+                                                <p className={`text-sm md:text-lg font-black md:leading-4 mb-4`} >
+                                                    {
+                                                        eventdetails.amt_raised + ' USDT raised'
                                                     }
-                                                    
-                                                }}
-                                            >
-                                                { commentsNumber < commentData.length ? 'See more' : 'See less'}
-                                            </button>
-                                        </div>
-                                        <div className={` ${isMobile && commentsActivitiesView == 'activities' ? 'block' : 'hidden'} `} >
-                                            <h3 className="mt-6 mb-6 md:mb-7 text-base md:text-lg font-bold " >
-                                                Activities
-                                            </h3>
-                                            <div className={`flex flex-col gap-5 md:gap-8`} >                            
-                                                {
-                                                    activityData.length ? activityData.map((item, i) => {
-                                                        return (
-                                                            <Activity key={i} dp={item.dp} timestamp={item.timestamp} amount={item.amount} donor={item.donor}
-                                                            background = "none"
-                                                            />
-                                                        )
-                                                    }) :
-                                                    <p className="text-[#8E8E93] text-sm md:text-lg flex gap-2 items-center" >
-                                                        <img src={infoicon} alt="info icon" className="" />
-                                                        <span>No latest activity </span>
-                                                    </p>
-                                                }
+                                                    <span className="tracking-[0.06px] text-xs md:text-base text-[#8E8E93] leading-5 " >
+                                                        {
+                                                            ' of ' + eventdetails.target_amount + ' USDT'
+                                                        }
+                                                    </span>
+                                                </p>
+                                                <progress value={eventdetails.amt_raised ? eventdetails.amt_raised : '23543'} max={eventdetails.target_amount ? eventdetails.target_amount : '150000'}
+                                                    className='progressbar w-full h-[10px] appearance-none rounded-[5px] mb-2 phones:mb-3 md:mb-4'
+                                                />
+                                                <p className="text-sm md:text-lg text-[#C5C5C5] font-medium mb-4 " >
+                                                    {
+                                                        totaldonations == null ? '2.2k donations so far' : totaldonations == 1 ? totaldonations + ' donation so far' : totaldonations + ' donations so far'
+                                                    }
+                                                </p>
+                                                {/* <button className="mx-auto block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] " >
+                                                    Donate using USDT wallet
+                                                </button>
+                                                <button
+                                                    className="mx-auto block px-[30px] pt-[15px] rounded-[10px] text-lg font-black leading-6 tracking-[0.073px] text-[#37BCF7] "
+                                                        onClick={() => {
+                                                            console.log(props.eventid)
+                                                            navigate(`/${props.eventid}/donate`)
+                                                        }
+                                                    }
+                                                    >
+                                                    Donate using card payment
+                                                </button> */}
                                             </div>
-                                            <button className={ ` hidden ${commentData.length == 0 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
-                                            rounded-[10px] font-black text-base tracking-[0.06px] `}                                         
-                                            >
-                                                See more
+                                            <hr className = "border-[1px] border-[#dcdbdb] mb-[14px] md:mb-7 " />
+                                            <h1 className = "font-black text-base md:text-[22px] mb-3 md:mb-4 md:leading-7 " >
+                                                {eventdetails.title? eventdetails.title : 'This is the title of the main user’s crowdfunding'}
+                                            </h1>
+                                            <p className ={` font-medium md:font-normal mb-1 md:mb-2 text-sm md:text-lg ${eventDetailsDisplay.readMore ? 'line-clamp-3 md:line-clamp-[3] lg:line-clamp-4': ''} `} >
+                                                {
+                                                    eventdetails.description ? eventdetails.description :
+                                                    `This a  complete description for the crowdfunding to aid others fund this particular crowdfunding.
+                                                    Users are allowed to read the complete reason why this use is requesting for money from people.
+                                                    Why other users read this, if it is totally convincing enough then this user reading it can fund this project.
+                                                    If not he will move elsewhere to search for where to put their money. This can go on and on and on till its stops.`
+                                                }
+                                            </p>
+                                            <button
+                                                className={`text-sm md:text-base mb-4 md:mb-5 border-b-2 border-black ${eventDetailsDisplay.displayButton ? 'block':'hidden'} `}
+                                                onClick={() => {
+                    
+                                                    setEventDetailsDisplay((prevDisplay) => ({
+                                                        ...prevDisplay,
+                                                        readMore: !prevDisplay.readMore
+                                                    }))
+                                                }}
+                                                >
+                                                {
+                                                    eventDetailsDisplay.readMore ? 'Read more' : 'Read less'
+                                                }
                                             </button>
+                                            <button className = "mb-4 flex items-center justify-center gap-[3px] h-[28px] rounded-[9px] md:py-3 text-base font-semibold " >
+                                                <img src = {locateicon} alt = 'location icon' className = "w-[16px] " />
+                                                <span>{eventdetails.location ? eventdetails.location : 'NIGERIA' }</span>
+                                            </button>
+                                            <hr className = "border-[1px] border-[#dcdbdb] mb-5 md:mb-8 " />
+                                            <Campaignorganizers co_organisers={eventdetails.co_organisers} organiser={eventdetails.organiser.first_name + ' ' + eventdetails.organiser.last_name} organiserimage={eventdetails.organiser.dp ? eventdetails.organiser.dp : profileImgPlaceholder} />
+                    
+                                            <div className= {`flex  xl:hidden mt-[35px]`} >
+                                                <button className={` ${commentsActivitiesView == 'comments' ? 'bg-[#000000] rounded-[5px] text-white  text-sm  ' :
+                                                    'text-[#8E8E93]'} py-[10px] px-[15px] font-black `}
+                                                    onClick = {()=>setCommentsActivitiesView('comments')}
+                                                >
+                                                    Comments
+                                                </button>
+                                                <button className={` ${commentsActivitiesView == 'activities' ? 'bg-[#000000] rounded-[5px] text-white text-sm  ' :
+                                                    'text-[#8E8E93]'} py-[10px] px-[15px] font-black `}
+                                                    onClick = {()=>setCommentsActivitiesView('activities')}
+                                                >
+                                                    Activities
+                                                </button>
+                                            </div>
+                    
+                                            <div className={` ${isMobile && commentsActivitiesView !== 'comments' ? 'hidden' : 'block'} `} >
+                                                <button className={`mt-[25px] md:mt-10 items-center flex justify-center gap-2 py-[3px] md:py-[5px] px-3
+                                                    rounded-[20px] bg-[#FFFFFF]
+                                                    border-[2px] border-[#37BCF7] shadow-[0px_0px_15.786517143249512px_0px_rgba(0,0,0,0.04)]
+                                                `}
+                                                    onClick={
+                                                        () => {
+                                                            setDisplayModals((prev) => ({
+                                                                ...prev,
+                                                                commentModal: true
+                                                            }))
+                                                        }
+                                                    }
+                                                    >
+                                                    <img
+                                                        src={commentIcon}
+                                                        alt="comment icon"
+                                                        className="w-4"
+                                                    />
+                                                    <span className="text-sm md:text-base " >
+                                                        Write a comment
+                                                    </span>
+                                                </button>
+                                                <CommentModal
+                                                    displayModals={displayModals}
+                                                    setDisplayModals={setDisplayModals}
+                                                    eventid={eventid}
+                                                    setCommentData={setCommentData}
+                                                />
+                                                <h3 className="mt-6 mb-6 md:mb-7 text-base md:text-lg font-bold " >
+                                                    Comments ({commentData.length})
+                                                </h3>
+                                                <div className=" flex flex-col gap-5 md:gap-8">
+                                                    {
+                                                        commentData.slice(0,commentsNumber).map((item,i) =>{
+                                                            return(
+                                                                <Comment key={i} image={item.user.dp ? item.user.dp : profileImgPlaceholder} name={item.user.first_name} time={item.timestamp} comment={item.comment} />
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                                <button className={ ` ${commentData.length == 0 || commentData.length < 4 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
+                                                rounded-[10px] font-black text-base tracking-[0.06px] `}
+                                                    onClick={() => {
+                                                        // If there's more comments to see, set all others to display, else if all is already being displayed, set minimum to display
+                                                        if (commentsNumber < commentData.length) {
+                                                            setCommentsNumber(commentData.length)
+                                                        } else if (commentsNumber == commentData.length && commentsNumber > 3) {
+                                                            setCommentsNumber(Math.ceil(commentData.length/2 < 3 ? 3 : commentData.length/2))
+                                                        }
+                    
+                                                    }}
+                                                >
+                                                    { commentsNumber < commentData.length ? 'See more' : 'See less'}
+                                                </button>
+                                            </div>
+                                            <div className={` ${isMobile && commentsActivitiesView == 'activities' ? 'block' : 'hidden'} `} >
+                                                <h3 className="mt-6 mb-6 md:mb-7 text-base md:text-lg font-bold " >
+                                                    Activities
+                                                </h3>
+                                                <div className={`flex flex-col gap-5 md:gap-8`} >
+                                                    {
+                                                        activityData.length ? activityData.map((item, i) => {
+                                                            return (
+                                                                <Activity key={i} dp={item.dp} timestamp={item.timestamp} amount={item.amount} donor={item.donor}
+                                                                background = "none"
+                                                                />
+                                                            )
+                                                        }) :
+                                                        <p className="text-[#8E8E93] text-sm md:text-lg flex gap-2 items-center" >
+                                                            <img src={infoicon} alt="info icon" className="" />
+                                                            <span>No latest activity </span>
+                                                        </p>
+                                                    }
+                                                </div>
+                                                <button className={ ` hidden ${commentData.length == 0 ? 'hidden' : ''} bg-[#D8D8D8] py-[5px] px-4 block mx-auto mt-10
+                                                rounded-[10px] font-black text-base tracking-[0.06px] `}
+                                                >
+                                                    See more
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>                                
+                                    </div>
+                                    <div className="hidden xl:block" >
+                                        <Activities
+                                            header={eventdetails.organiser.username !== null && userInfo && eventdetails.organiser.username == userInfo.username  ? 'personalCampaign' : 'campaign'}
+                                            target_amount = {eventdetails.target_amount}
+                                            amt_raised = {eventdetails.amt_raised}
+                                            total_donors = {totaldonations}
+                                            eventid={eventid}
+                                            setDisplayModals={setDisplayModals}
+                                            displayModals={displayModals}
+                                            activityData = {activityData}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="hidden xl:block" >
-                                    <Activities
-                                        header={eventdetails.organiser.username !== null && userInfo && eventdetails.organiser.username == userInfo.username  ? 'personalCampaign' : 'campaign'} 
-                                        target_amount = {eventdetails.target_amount} 
-                                        amt_raised = {eventdetails.amt_raised}
-                                        total_donors = {totaldonations}
-                                        eventid={eventid}
-                                        setDisplayModals={setDisplayModals}
-                                        displayModals={displayModals}
-                                        activityData = {activityData}
-                                    />
-                                </div>
-                            </div>                       
+                            </div>
                         </div>
                     </div>
-                </div>
+                </>
             )
         }
 }

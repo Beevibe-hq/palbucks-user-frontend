@@ -62,11 +62,11 @@ function Activities(props) {
                     <div className={`py-[35px] px-[23px] border-b-[0.5px] border-[#D8D8D8]`}>                
                         <p className={`text-lg font-black leading-4 mb-4`} >
                             {
-                                props.amt_raised + ' USDT raised'
+                                props.amt_raised + ' NGN raised'
                             }
                             <span className="tracking-[0.06px] text-base text-[#8E8E93] leading-5 " >
                                 {
-                                    ' of ' + props.target_amount + ' USDT'
+                                    ' of ' + props.target_amount + ' NGN'
                                 }
                             </span>
                         </p>
@@ -79,7 +79,8 @@ function Activities(props) {
                             } 
                         </p>
 
-                        <button className="mx-auto block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] "
+                        {/* <button 
+                            className="mx-auto block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] "
                             onClick={() => {
                                 console.log(props.eventid)
                                 navigate(`/${props.eventid}/donate`)
@@ -87,10 +88,11 @@ function Activities(props) {
                             }}
                         >
                             Donate using USDT wallet
-                        </button>
+                        </button> */}
 
                         <button 
-                            className="mx-auto block px-[30px] pt-[15px] rounded-[10px] text-lg font-black leading-6 tracking-[0.073px] text-[#37BCF7] " 
+                            /* className="mx-auto block px-[30px] pt-[15px] rounded-[10px] text-lg font-black leading-6 tracking-[0.073px] text-[#37BCF7] "  */
+                            className="mx-auto w-full block px-[30px] py-[15px] rounded-[10px] bg-[#37BCF7] text-lg font-black leading-6 tracking-[0.073px] text-[#FFFFFF] "
                             onClick={() => {
                                 console.log(props.eventid)
                                 navigate(`/${props.eventid}/donate`)
@@ -98,7 +100,7 @@ function Activities(props) {
                             }
                             }
                             >
-                            Donate using card payment
+                            Donate {/* using card payment */}
                         </button>
                     </div>
                 ) : null

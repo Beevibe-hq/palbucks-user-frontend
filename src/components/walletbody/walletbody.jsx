@@ -5,6 +5,8 @@ import user12 from "../../images/user12.svg"
 import user10 from "../../images/user10.svg"
 import downButton from "../../images/wallet/downbutton.svg"
 import downButton2 from "../../images/wallet/downbutton2.svg"
+import walletIcon from "../../images/wallet/wallet.png"
+
 import { infoicon } from "../../images"
 
 import Activity from "../activity/activity"
@@ -137,18 +139,18 @@ function Walletbody(){
                                 bg-white py-3 phones:py-5 md:py-[25px] 2xl:py-[30px] px-[15px] phones:px-[30px] rounded-[10px]
                                 shadow-[0px_0px_16px_rgba(0,0,0,0.04)] w-full "
                             >
-                                <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
+                                <img src={walletIcon} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >
                                     <h4 className="text-base md:text-lg text-[#525252]" >Wallet Balance</h4>
                                     <h4 className="text-lg md:text-[22px] font-black leading-6 " >{balance.walletBalance}</h4>
-                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 USD </h4>
+                                    <h4 className="text-base leading-5 text-[#37BCF7] font-black" >+0 NGN </h4>
                                 </section>
                             </div>
                             <div className="flex items-center md:justify-center gap-2 phones:gap-5 xl:gap-14 2xl:gap-5 md:min-w-[380px] 2xl:min-w-[350px] 
                                 bg-white py-3 phones:py-5 md:py-[25px] 2xl:py-[30px] px-[15px] phones:px-[30px] rounded-[10px]
                                 shadow-[0px_0px_16px_rgba(0,0,0,0.04)] "
                             >
-                                <img src={usdtlogo} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
+                                <img src={walletIcon} alt="USDT logo" className="w-[52px] md:w-[68px] h-[48px] md:h-[64px] "  />
                                 <section className="flex flex-col gap-2 md:gap-3" >                                    
                                     <Select
                                         options={amountEarnedOptions}

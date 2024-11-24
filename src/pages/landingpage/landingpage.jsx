@@ -309,9 +309,9 @@ function LandingPage(){
                         handleScrollCheck()
                     }}
                 >                    
-                    <Landingcampaign title={'The Fight for our Environment in Lagos Begins Today'} image={landingcampaignimg3} value="$23,543" target="100000" />
-                    <Landingcampaign title={'Help Henry set up his art studio'} image={landingcampaignimg} value="₦1034" target="1500" />
-                    <Landingcampaign title={'Together we can build a better community'}  image={landingcampaignimg2} value="$54,223" target="250000" />
+                    <Landingcampaign title={'The Fight for our Environment in Lagos Begins Today'} image={landingcampaignimg3} amount="23,543" value="23543" target="100000" />
+                    <Landingcampaign title={'Help Henry set up his art studio'} image={landingcampaignimg} amount="1034" value="1034" target="20000" />
+                    <Landingcampaign title={'Together we can build a better community'}  image={landingcampaignimg2} amount="54,223" value="54223" target="100000" />
                 </div>
 
 

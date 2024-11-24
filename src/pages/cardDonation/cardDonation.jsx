@@ -112,8 +112,7 @@ export default function Donate() {
         }
     }, [searchParams]);
 
-    const crowdfundEvents = useSelector(state => state.crowdfundEvents)
-    //const crowdfund = crowdfundEvents.find(crowdfund => crowdfund.id == id)
+    const crowdfundEvents = useSelector(state => state.crowdfundEvents)    
     const [crowdfund, setCrowdfund] = useState(crowdfundEvents.find(crowdfund => crowdfund.id == id))
     //console.log(crowdfund)
     useEffect(() => {
@@ -353,7 +352,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
     }
 
     const options = [
-        {value:'USD' , label:'', image:usdIcon},
+        /* {value:'USD' , label:'', image:usdIcon}, */
         {value:'NGN', label:'', image:nairaIcon}
     ]
     const [selectedCurrency, setSelectedCurrency] = useState(options[0])
