@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "postinstall": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true",
+    "postinstall": "apt-get install -y chromium-browser",
     "build": "react-scripts build && react-snap",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
