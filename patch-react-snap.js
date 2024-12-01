@@ -1,12 +1,12 @@
-const fs = require("fs");
-const path = require("path");
+import { readFile, writeFile } from "fs";
+import { resolve } from "path";
 
-const reactSnapPath = path.resolve(
+const reactSnapPath = resolve(
   __dirname,
   "node_modules/react-snap/lib/puppeteer_utils.js"
 );
 
-fs.readFile(reactSnapPath, "utf8", (err, data) => {
+readFile(reactSnapPath, "utf8", (err, data) => {
   if (err) {
     console.error("Error reading react-snap file:", err);
     process.exit(1);
@@ -14,14 +14,14 @@ fs.readFile(reactSnapPath, "utf8", (err, data) => {
 
   const patchedContent = data.replace(
     "const puppeteer = require('puppeteer');",
-    "const chromium = require('chrome-aws-lambda');\nconst puppeteer = chromium.puppeteer;"
+    "const puppeteer = require('puppeteer-core');"
   );
 
-  fs.writeFile(reactSnapPath, patchedContent, "utf8", (writeErr) => {
+  writeFile(reactSnapPath, patchedContent, "utf8", (writeErr) => {
     if (writeErr) {
       console.error("Error writing patched react-snap file:", writeErr);
       process.exit(1);
     }
-    console.log("Successfully patched react-snap to use chrome-aws-lambda.");
+    console.log("Successfully patched react-snap to use puppeteer-core.");
   });
 });
