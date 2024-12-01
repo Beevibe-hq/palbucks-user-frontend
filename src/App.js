@@ -146,6 +146,7 @@ function App() {
     };
   }, [isAuthenticated]);
 
+  /* "prebuild": "node node_modules/puppeteer/install.js", */
   // Fetch CrowdfundData for SSR prerendering for detailedEvent social media sharing link preview
   const [crowdfundData, setCrowdfundData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
