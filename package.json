@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "postinstall": "node patch-react-snap.js && npx puppeteer-core install",
+    "postinstall": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true",
     "build": "react-scripts build && react-snap",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
