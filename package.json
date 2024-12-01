@@ -11,8 +11,10 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "chrome-aws-lambda": "^10.1.0",
     "get-orientation": "^1.1.2",
     "puppeteer": "^23.9.0",
+    "puppeteer-core": "^23.9.0",
     "pusher-js": "^8.3.0",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
@@ -35,9 +37,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "prebuild": "node node_modules/puppeteer/install.js",
+    "start": "react-scripts start",    
     "build": "react-scripts build && react-snap",
+    "postinstall": "node patch-react-snap.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
