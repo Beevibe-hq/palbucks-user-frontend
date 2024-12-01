@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "hooks": {
+    "build": "apt-get update && apt-get install -y chromium"
+  },
+  "env": {
+    "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium"
+  }
+}
