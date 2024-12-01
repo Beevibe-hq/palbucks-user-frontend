@@ -7,6 +7,8 @@ const reactSnapPath = path.resolve(
 );
 
 const fileContent = fs.readFileSync(reactSnapPath, "utf8");
+
+// Add Puppeteer arguments and fix executablePath for Vercel
 const modifiedContent = fileContent.replace(
   "const browser = await puppeteer.launch(",
   `
@@ -19,4 +21,5 @@ const modifiedContent = fileContent.replace(
   });`
 );
 
-fs.writeFileSync(reactSnapPath, modifiedContent);
+fs.writeFileSync(reactSnapPath, modifiedContent, "utf8");
+console.log("react-snap has been patched for Puppeteer");
