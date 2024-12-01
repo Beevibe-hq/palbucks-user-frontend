@@ -1,14 +1,1 @@
-{
-  "functions": {
-    "api/*": {
-      "runtime": "nodejs18.x",
-      "maxDuration": 10
-    }
-  },
-  "build": {
-    "env": {
-      "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
-      "CHROMIUM_PATH": "/usr/bin/chromium-browser"
-    }
-  }
-}
+
