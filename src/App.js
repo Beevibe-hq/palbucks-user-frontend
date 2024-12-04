@@ -149,7 +149,7 @@ function App() {
   /* "prebuild": "node node_modules/puppeteer/install.js", */
   // Fetch CrowdfundData for SSR prerendering for detailedEvent social media sharing link preview
   const [crowdfundData, setCrowdfundData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getCrowdfunds = async () => {
