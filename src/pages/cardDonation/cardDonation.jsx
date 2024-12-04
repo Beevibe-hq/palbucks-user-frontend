@@ -109,6 +109,7 @@ export default function Donate() {
 
         }else{
             setpageDisplay('donationDetails')
+            //setpageDisplay('donationSuccessful')
         }
     }, [searchParams]);
 
@@ -312,7 +313,7 @@ const DonationDetails = ({id, setpageDisplay , donationDetails , setdonationDeta
             const requestBody = {
                 amount: donationDetails.amount,
                 currency: selectedCurrency.value,
-                channel:"rexpay", // [squad, rexpay]                
+                channel:"squad", // [squad, rexpay]                
             }
 
             // Add the anonymous_donor key if isAnonymous is true
@@ -653,56 +654,106 @@ const CardDetails = ({setpageDisplay, donationDetails , setdonationDetails}) => 
 }
 
 const DonationSuccessful = () => {
-    
+    const params = useParams()
+    const crowdfundId = params.id
     return(
         <div className="">
 
-            <div className="mb-[57px] bg-white max-w-[788px] mx-auto shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded-[10px] " >
-                <div className=" py-[31px] px-[48px] border-b-2 border-[#dfdbdb] flex gap-[15px] items-center justify-center ">
-                    <img src={heartIcon} alt="heart icon" className=" w-[30px] h-[30px] " />
-                    <h2 className="text-xl font-black tracking-[0.069px] text-center " >
+            <div className="mb-8 lg:mb-[57px] bg-white max-w-[788px] mx-auto shadow-[0px_0px_32px_0px_rgba(0,0,0,0.04)] rounded-[10px] " >
+                <div className=" py-5 lg:py-[31px] px-5 lg:px-[48px] border-b-2 border-[#dfdbdb] flex gap-2.5 lg:gap-[15px] items-center justify-center ">
+                    <img src={heartIcon} alt="heart icon" className=" w-6 lg:w-[30px] h-6 lg:h-[30px] " />
+                    <h2 className="text-base lg:text-xl font-black tracking-[0.069px] text-center " >
                         Thank you for your donation, you are simply a joy to the world.
                     </h2>
                 </div>
-                <div className="pt-5 pb-[38px] px-[52px] " >
-                    <img src={successIcon} alt="donation successful" className="w-[114px] h-[120px] mx-auto rotate-[35.26deg] " />
-                    <h3 className="mb-4 text-[28px] font-black text-center " >
+                <div className="pt-3 lg:pt-5 pb-[38px] px-5 lg:px-[52px] " >
+                    <img src={successIcon} alt="donation successful" className=" w-[84px] lg:w-[114px]  h-[90px] lg:h-[120px] mx-auto rotate-[35.26deg] " />
+                    <h3 className="mb-3 lg:mb-4 text-xl lg:text-3xl font-black text-center " >
                         Help this campaign be a complete success
                     </h3>
-                    <p className="mb-[31px] text-xl text-center tracking-[0.069px]" >
+                    <p className="mb-[31px] text-sm lg:text-xl text-center tracking-[0.069px]" >
                         Use the social links below to share this campaign around the world. By doing so, this campaign will certainly be a success  
                     </p>
                     <hr className="mb-[22px] w-[90%] h-[0.5px] bg-black mx-auto " />
-                    <div className="mb-[49px] flex justify-between gap-2 " >
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer bg-[#35FAA01A] py-[10px] px-[31px] rounded-[10px] ">
-                            <img src={facebookIcon} alt="facebook link" className="w-[25px] h-[25px] " />
-                            <span className="text-[22px] " >
+                    <div className="mb-4 lg:mb-[49px] flex justify-center lg:justify-between gap-1 md:gap-2 " >
+                        <div
+                            className="flex items-center justify-center gap-2 md:gap-[17px] cursor-pointer 
+                            bg-[#35FAA01A] py-[10px] px-5 md:px-[31px] rounded-lg lg:rounded-[10px] "
+                            onClick={() => {                                                
+                                window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(`https://www.palbucks.co/detailed/${crowdfundId}`));        
+                            }}
+                        >
+                            <img src={facebookIcon} alt="facebook link" className="w-[15px] lg:w-[25px] h-[15px] lg:h-[25px] " />
+                            <span className="text-xs md:text-sm lg:text-2xl" >
                                 Facebook
                             </span>
                         </div>
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer bg-[#35FAA01A] py-[10px] px-[31px] rounded-[10px] ">
-                            <img src={whatsappIcon} alt="whatsapp link" className="w-[25px] h-[25px] " />
-                            <span className="text-[22px]" >
+                        <div
+                            className="flex items-center justify-center gap-2 md:gap-[17px] cursor-pointer
+                         bg-[#35FAA01A] py-[10px] px-5 md:px-[31px] rounded-lg lg:rounded-[10px] "                            
+                             onClick={() => {
+                                    /* const text = "Check out this link: " + `https://www.palbucks.co/detailed/${successfulLaunchModal.crowdfundData.id}`;
+                                    window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text)); */
+                                    
+                                    const text = "Check out this link: " + `https://www.palbucks.co/detailed/${crowdfundId}`;
+                                    const imageUrl = "https://palbucks-bucket.s3.amazonaws.com/crowdfunding/banners/66a4b9eff63f4605807b0f081aa07caf_Screenshot_from_2024-04-16_04-39-23.png"
+                                    const encodedText = encodeURIComponent(text);
+                                    const encodedImageUrl = encodeURIComponent(imageUrl);
+                                    window.open(`https://wa.me/?text=${encodedText}&attachment=${encodedImageUrl}`);
+                            }}
+                        >
+                            <img src={whatsappIcon} alt="whatsapp link" className="w-[15px] lg:w-[25px] h-[15px] lg:h-[25px] " />
+                            <span className="text-xs md:text-sm lg:text-2xl" >
                                 Whatsapp
                             </span>
                         </div>
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer bg-[#35FAA01A] py-[10px] px-[31px] rounded-[10px] ">
-                            <img src={twitterIcon} alt="twitter link" className="w-[25px] h-[25px] " />
-                            <span className="text-[22px]" >
+                        <div
+                            className="flex items-center justify-center gap-2 md:gap-[17px] cursor-pointer
+                          bg-[#35FAA01A] py-[10px] px-5 md:px-[31px] rounded-lg lg:rounded-[10px] "
+                            onClick={() => {                                                
+                                const text = "Check out this link: " + `https://www.palbucks.co/detailed/${crowdfundId}`;
+                                window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text));
+                            }}
+                        >
+                            <img src={twitterIcon} alt="twitter link" className="w-[15px] lg:w-[25px] h-[15px] lg:h-[25px] " />
+                            <span className="text-xs md:text-sm lg:text-2xl" >
                                 Twitter
                             </span>
                         </div>
                     </div>
-                    <div className="flex justify-center gap-10 " >
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer border-[1px] border-black py-[10px] px-[31px] rounded-[10px] md:w-[250px] ">
-                            <img src={mailIcon} alt="mail link" className="w-[25px] h-[25px] " />
-                            <span className="text-[22px]" >
+                    <div className="flex justify-between xphones:justify-center gap-4 lg:gap-10 " >
+                        <div
+                            className="flex items-center justify-center gap-2.5 lg:gap-[17px] cursor-pointer
+                            border-[1px] border-black py-[10px] px-6 lg:px-[31px] rounded-[10px] md:w-[250px] "
+                            onClick={() => {                                                
+                                const subject = "Check out this link";
+                                const body = "Check out this link: " + `https://www.palbucks.co/detailed/${crowdfundId}`;
+                                window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                            } }
+                        >
+                            <img src={mailIcon} alt="mail link" className="w-[18px] lg:w-[25px] h-[18px] lg:h-[25px] " />
+                            <span className="text-sm lg:text-2xl" >
                                 Send Email
                             </span>
                         </div>
-                        <div className="flex items-center justify-center gap-[17px] cursor-pointer border-[1px] border-black py-[10px] px-[31px] rounded-[10px] md:w-[250px] ">
-                            <img src={copyIcon} alt="copy link" className="w-[25px] h-[25px] " />
-                            <span className="text-[22px]" >
+                        <div
+                            className="flex items-center justify-center gap-2.5 lg:gap-[17px] cursor-pointer
+                             border-[1px] border-black py-[10px] px-6 lg:px-[31px] rounded-[10px] md:w-[250px] "
+                            onClick={() => {
+                                const textToCopy = `https://www.palbucks.co/detailed/${crowdfundId}`;
+                                navigator.clipboard.writeText(textToCopy)
+                                .then(() => {
+                                    console.log('Text copied to clipboard:', textToCopy);
+                                    alert('Text copied to clipboard!');
+                                })
+                                .catch(err => {
+                                    console.error('Unable to copy text:', err);
+                                    alert('Failed to copy text to clipboard. Please try again.');
+                                });        
+                            }}
+                        >                        
+                            <img src={copyIcon} alt="copy link" className="w-[18px] lg:w-[25px] h-[18px] lg:h-[25px] " />
+                            <span className="text-sm lg:text-2xl" >
                                 Copy link
                             </span>
                         </div>
@@ -710,8 +761,8 @@ const DonationSuccessful = () => {
                 </div>
             </div>
 
-            <button className="mx-auto w-fit min-w-[280px] md:min-w-[350px] block py-5 px-9 rounded-lg bg-[#000000] 
-            text-white text-[28px] font-bold leading-[43px] -tracking-[0.188px] "                 
+            <button className="mx-auto w-fit block py-2 lg:py-5 px-14 lg:px-16 rounded-lg bg-[#000000] 
+            text-white text-base lg:text-[28px] font-bold leading-[43px] -tracking-[0.188px] "                 
             >
                 View your receipt
             </button>
