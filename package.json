@@ -43,6 +43,8 @@
     "eject": "react-scripts eject"
   },
   "reactSnap": {    
+    "skipThirdPartyRequests": true,
+    "puppeteer": { "timeout": 90000 },
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox"

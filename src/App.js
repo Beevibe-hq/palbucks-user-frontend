@@ -158,6 +158,7 @@ function App() {
         const crowdfunds = await response.json();
 
         if (response.ok) {
+          console.log(crowdfunds);
           setCrowdfundData(crowdfunds);
         } else {
           console.error("Failed to fetch crowdfunds:", crowdfunds);
