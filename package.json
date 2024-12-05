@@ -47,6 +47,7 @@
       "--no-sandbox",
       "--disable-setuid-sandbox"
     ],
+    "timeout": 60000,
     "inlineCss": true
   },
   
