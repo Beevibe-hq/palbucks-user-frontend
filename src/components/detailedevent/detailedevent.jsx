@@ -88,6 +88,7 @@ function Detailedevent(props){
     useEffect(() => {
         if (!eventdetails) {
             //alert('m')
+            console.log(eventid)
             const getCrowdfund = async () => {
                 const response = await fetch(`${baseUrl}/funding/api/${eventid}`, {
                     /* headers: {
@@ -325,7 +326,7 @@ function Detailedevent(props){
 
         if (eventdetails) {
             //alert('no')    
-            //console.log(eventdetails)
+            console.log(eventdetails.title, eventdetails.description)
         }
 
         if (!eventdetails) {
@@ -333,12 +334,19 @@ function Detailedevent(props){
         }else{
             return(
                 <>
-                    <Helmet>
+                    {/* <Helmet>
                         <title>{eventdetails.title}</title>
                         <meta name="description" content={eventdetails.description} />
                         <meta property="og:title" content={eventdetails.title} />
                         <meta property="og:description" content={eventdetails.description} />
                         <meta property="og:image" content={eventdetails.banner} />
+                    </Helmet> */}
+                    <Helmet>
+                        <title>This is the dummy title</title>
+                        <meta name="description" content="dummy desc" />
+                        <meta property="og:title" content="dummy title again" />
+                        <meta property="og:description" content="dummydesc again" />
+                        <meta property="og:image" content="https://palbucks-bucket.s3.amazonaws.com/crowdfunding/banners/692faa88b1e34184861effb21542ba5b_4.png" />
                     </Helmet>
                     <div className=' bg-[#F9F9F9] min-h-full relative ' >
                         <Sidebar />
