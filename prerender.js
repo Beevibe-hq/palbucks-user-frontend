@@ -1,19 +1,11 @@
-import { fileURLToPath } from "url";
+const puppeteer = require("puppeteer");
+const fs = require("fs");
+const path = require("path");
 
-import puppeteer from "puppeteer";
-import fs from "fs";
-//const fs = require("fs");
-//const path = require("path");
-import path from "path";
+// Base URL
+const Base_Url = "http://localhost:3000";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-//import { baseUrl } from "./src/auth/checkauthentication";
-
-//export const Base_Url = "http://localhost:3000";
-export const Base_Url = "https://www.palbucks.co";
-
-// Fetch your crowdfund data dynamically (adjust this to your API)
+// Fetch your crowdfund data dynamically
 const getCrowdfundData = async () => {
   const response = await fetch(
     `${"https://palbucks-api.onrender.com"}/funding/api`
@@ -31,14 +23,13 @@ const getCrowdfundData = async () => {
   try {
     const crowdfundData = await getCrowdfundData();
 
-    // Iterate through each event and prerender its page
     for (const crowdfund of crowdfundData) {
       const url = `${Base_Url}/detailed/${crowdfund.id}`;
       console.log(`Rendering page: ${url}`);
 
-      await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
-
+      await page.goto(url, { waitUntil: "networkidle0" });
       const content = await page.content();
+
       const filePath = path.resolve(
         __dirname,
         "../public",
