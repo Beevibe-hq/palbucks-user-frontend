@@ -341,7 +341,7 @@ function Detailedevent(props){
                         <meta property="og:title" content={eventdetails.title} />
                         <meta property="og:description" content={eventdetails.description} />
                         <meta property="og:image" content={eventdetails.banner} />
-                        {/* <meta property="og:url" content={`${Base_Url}/detailed/${eventid}`} /> */}
+                        <meta property="og:url" content={`https://www.palbucks.co/detailed/${eventid}`} />
                     </Helmet>
                     {/* <Helmet>
                         <title>This is the dummy title</title>
