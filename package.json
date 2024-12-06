@@ -42,16 +42,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "reactSnap": {    
-    "skipThirdPartyRequests": true,
-    "puppeteer": { "timeout": 90000 },
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ],
-    "timeout": 60000,
-    "inlineCss": true
-  },
+  "reactSnap": {
+  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+  "puppeteer": { "timeout": 90000 },
+  "inlineCss": true
+},
   
   "eslintConfig": {
     "extends": [
