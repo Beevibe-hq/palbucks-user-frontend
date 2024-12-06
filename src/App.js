@@ -148,7 +148,7 @@ function App() {
 
   /* "prebuild": "node node_modules/puppeteer/install.js", */
   // Fetch CrowdfundData for SSR prerendering for detailedEvent social media sharing link preview
-  const [crowdfundData, setCrowdfundData] = useState([]);
+  /* const [crowdfundData, setCrowdfundData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -176,7 +176,7 @@ function App() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+ */
   if (logoutLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -204,13 +204,14 @@ function App() {
           {/* <Route path="/detailed/:id" element={<Detailedevent />} /> */}
           {/* SSR For detailed crowdfund event for social media preview */}
           {/* Dynamically generate routes for crowdfund details */}
-          {crowdfundData.map((crowdfund) => (
+          {/* {crowdfundData.map((crowdfund) => (
             <Route
               key={crowdfund.id}
               path={`/detailed/${crowdfund.id}`}
               element={<Detailedevent eventid={crowdfund.id} />}
             />
-          ))}
+          ))} */}
+          <Route path="/detailed/:id" element={<Detailedevent />} />
 
           <Route path="/:id/donate" element={<Donate />} />
           <Route

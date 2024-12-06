@@ -33,6 +33,7 @@ import { baseUrl } from "../../auth/checkauthentication"
 import SuccessfulCrowdfundLaunchModal from "../organisecrowdfundbody/successfulcrowdfundlaunch"
 import { Helmet } from "react-helmet"
 
+
 function Detailedevent(props){
     const access_token = localStorage.getItem('access_token')
     const userInfo = JSON.parse(localStorage.getItem("userInfo")) 
@@ -49,8 +50,8 @@ function Detailedevent(props){
     
     
     //This selects the particular event from the homebodydata array
-    //let eventid = params.id
-    let eventid = props.eventid
+    let eventid = params.id
+    //let eventid = props.eventid
     
     //var eventdetails = homebodydata.filter(item => item.id == eventid)[0]
     const [eventdetails, setEventDetails] = useState(homebodydata.filter(item => item.id == eventid)[0]);
@@ -334,20 +335,21 @@ function Detailedevent(props){
         }else{
             return(
                 <>
-                    {/* <Helmet>
+                    <Helmet>
                         <title>{eventdetails.title}</title>
                         <meta name="description" content={eventdetails.description} />
                         <meta property="og:title" content={eventdetails.title} />
                         <meta property="og:description" content={eventdetails.description} />
                         <meta property="og:image" content={eventdetails.banner} />
-                    </Helmet> */}
-                    <Helmet>
+                        {/* <meta property="og:url" content={`${Base_Url}/detailed/${eventid}`} /> */}
+                    </Helmet>
+                    {/* <Helmet>
                         <title>This is the dummy title</title>
                         <meta name="description" content="dummy desc" />
                         <meta property="og:title" content="dummy title again" />
                         <meta property="og:description" content="dummydesc again" />
                         <meta property="og:image" content="https://palbucks-bucket.s3.amazonaws.com/crowdfunding/banners/692faa88b1e34184861effb21542ba5b_4.png" />
-                    </Helmet>
+                    </Helmet> */}
                     <div className=' bg-[#F9F9F9] min-h-full relative ' >
                         <Sidebar />
                         <div className = {`${sidebarslid ? 'brkpoint:ml-[100px]' :' brkpoint:ml-[250px] lg:ml-[280px] xl:ml-[320px]' } ${isTablet && sidebaropen ? 'blur-sm' : '' }
