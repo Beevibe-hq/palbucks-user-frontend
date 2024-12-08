@@ -338,7 +338,7 @@ function Detailedevent(props){
                     <Helmet>
                         <title>Title for crowdfund {eventid} </title>
                         <meta name="description" content={eventdetails.description} />
-                        <meta property="og:title" content={eventdetails.title} />
+                        <meta property="og:title" content="Test for ogtitle" />
                         <meta property="og:description" content={eventdetails.description} />
                         <meta property="og:image" content={eventdetails.banner} />
                         <meta property="og:url" content={`https://www.palbucks.co/detailed/${eventid}`} />
