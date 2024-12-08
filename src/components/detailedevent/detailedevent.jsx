@@ -336,7 +336,7 @@ function Detailedevent(props){
             return(
                 <>
                     <Helmet>
-                        <title>{eventdetails.title}</title>
+                        <title>Title for crowdfund {eventid} </title>
                         <meta name="description" content={eventdetails.description} />
                         <meta property="og:title" content={eventdetails.title} />
                         <meta property="og:description" content={eventdetails.description} />
