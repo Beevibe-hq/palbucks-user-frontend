@@ -1,8 +1,11 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "https://service.prerender.io/http://www.palbucks.co/$1"
+      "source": "/:path*", 
+      "has": [
+        { "type": "header", "key": "user-agent", "value": "(googlebot|bingbot|facebookexternalhit|twitterbot)" }
+      ],
+      "destination": "https://service.prerender.io/https://www.palbucks.co/:path*"
     }
   ]
 }
