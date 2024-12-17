@@ -21,6 +21,7 @@ import Campaignnotification from "../../components/notifications/campaignnotific
 import Requestnotification from "../../components/notifications/requestnotification/requestnotification";
 import Acceptnotification from "../../components/notifications/acceptnotification/acceptnotification";
 import { timeDifference } from "../../components/detailedevent/detailedevent";
+import { baseUrl } from "../../auth/checkauthentication";
 
 function Notificationspage(){
 
@@ -61,7 +62,23 @@ function Notificationspage(){
             dispatch(setnotificationspageinactive())
         }
     }, [])
+
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            const response = await fetch(`${baseUrl}/notifications`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            const result = await response.json()
+            console.log(result)
+        }
+        fetchNotifications()
+    },[])
     
+
     // Remove the notification alert when the user visits the notifications page
     useEffect(() => { 
         if (newNotificationsAlert) {
@@ -69,7 +86,7 @@ function Notificationspage(){
         }
     },[newNotificationsAlert])
 
-    console.log(notificationsData.length)
+    //console.log(notificationsData.length)
     return(
         <div className='bg-[#F9F9F9] min-h-full overflow-y-auto max-h-[100vh]'>
             <Sidebar />
@@ -133,15 +150,15 @@ function PeriodNotificationContainer({period, periodNotifications}) {
             <div className={` ${periodNotifications.length == 0 ? 'hidden' : 'block'} mb-10 md:mb-[45px] flex flex-col gap-[15px] md:gap-0 `}> 
                 {
                     periodNotifications.reverse().map((data, i) => {
-                    if (data.type == 'like') {
+                    if (data.category == 'like') {
                         return <Likenotification userdp={data.dp} username={data.name} time={data.time} key = {i} />
-                    } else if (data.type == 'comment') {
+                    } else if (data.category == 'comment') {
                         return <Commentnotification userdp={data.dp} username={data.name} time={data.time} comment = {data.comment} key = {i} />
-                    }else if (data.type == 'milestone') {
+                    }else if (data.category == 'milestone') {
                         return <Campaignnotification timestamp={data.time} percentage_reached={data.percentage_reached} key = {i} />
-                    }else if (data.type == 'co-organiser-request') {
+                    }else if (data.category == 'co-organiser-request') {
                         return <Requestnotification userdp={data.userdp} username={data.invited_by} time={data.time} id = {data.crowdfund_id} key = {i} />
-                    }else if (data.type == 'accept') {
+                    }else if (data.category == 'accept') {
                         return <Acceptnotification userdp={data.userdp} username={data.username} time={data.time} key = {i} />
                     }
                 }) 

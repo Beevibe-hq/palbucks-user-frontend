@@ -327,7 +327,7 @@ function Detailedevent(props){
 
         if (eventdetails) {
             //alert('no')    
-            console.log(eventdetails.title, eventdetails.description)
+            //console.log(eventdetails.title, eventdetails.description)
         }
 
         if (!eventdetails) {

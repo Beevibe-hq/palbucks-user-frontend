@@ -41,7 +41,7 @@ function Homebody(){
   const crowdfundEvents = useSelector(state => state.crowdfundEvents.filter(filterOutdatedEvents));
   //console.log(crowdfundEvents)
   
-  const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.username !== null && item.organiser.username == userInfo.username)) //(item => item.organiser.first_name == userInfo.first_name))
+  const personalEvents = useSelector(state => state.crowdfundEvents.filter(item => item.organiser.username !== null && item.organiser.username === userInfo.username))
   
   // TODO: Get expired personal data from the backend
   const [forYouData, setForYouData] = useState([])

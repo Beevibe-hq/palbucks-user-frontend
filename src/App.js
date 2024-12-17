@@ -59,6 +59,7 @@ import BankWithdrawal from "./pages/bankWithdrawal/bankwithdrawal";
 import UsdtWithdrawal from "./pages/usdtWithdrawal/usdtWithdrawal";
 import FundWalletWithBank from "./pages/fundWallet/fundWallet";
 import FundWalletWithCrypto from "./pages/fundWallet/fundWalletWithCrypto";
+import { io } from "socket.io-client";
 
 function App() {
   const userInfo = localStorage.getItem("userInfo")
@@ -100,12 +101,9 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    /* Implement Real time Notifications system for the app if user is signed in */
-
-    //alert('I run')
+  /* Implement Real time Notifications system for the app if user is signed in */
+  /* useEffect(() => {
     if (userInfo !== null) {
-      //alert('true')
       // Configure pusher for notifications
       var pusher = new Pusher("a6fc775946470e47c0d0", {
         cluster: "eu",
@@ -144,7 +142,93 @@ function App() {
       notificationsChannel?.unbind_all();
       pusher?.unsubscribe(userInfo.email);
     };
-  }, [isAuthenticated]);
+  }, [isAuthenticated]); */
+  useEffect(() => {
+    let socket;
+
+    const access_token = localStorage.getItem("access_token");
+    if (userInfo !== null) {
+      // Initialize Socket.IO client connection
+      socket = io(baseUrl, {
+        auth: { token: access_token },
+      });
+
+      socket.on("connect", () => {
+        console.log(socket.id);
+        console.log("Successfully connected to the Socket.IO server");
+      });
+
+      socket.on("connect_error", (error) => {
+        console.error("Failed to connect to the Socket.IO server:", error);
+      });
+
+      socket.on("disconnect", () => {
+        console.warn("Disconnected from the Socket.IO server");
+      });
+
+      socket.on("notification", (data, callback) => {
+        dispatch(addNotification(data));
+        console.log("Notification received:", data);
+
+        callback({
+          id: data.id,
+        });
+      });
+
+      // Listen for different notification events
+      socket.on("like", (data, callback) => {
+        dispatch(addNotification(data));
+        console.log("Like notification received:", data);
+
+        callback({
+          id: data.id,
+        });
+      });
+
+      socket.on("comment", (data, callback) => {
+        dispatch(addNotification(data));
+        console.log("Comment notification received:", data);
+
+        callback({
+          id: data.id,
+        });
+      });
+
+      socket.on("milestone", (data, callback) => {
+        dispatch(addNotification(data));
+        console.log("Milestone notification received:", data);
+
+        callback({
+          id: data.id,
+        });
+      });
+
+      socket.on("co-organiser-request", (data, callback) => {
+        dispatch(addNotification(data));
+        console.log("Co-organiser request received:", data);
+
+        callback({
+          id: data.id,
+        });
+      });
+
+      socket.on("co_organiser_response", (data, callback) => {
+        dispatch(addNotification(data));
+        console.log("Co-organiser response received:", data);
+
+        callback({
+          id: data.id,
+        });
+      });
+    }
+
+    return () => {
+      // Clean up the Socket.IO connection on component unmount
+      if (socket) {
+        socket.disconnect();
+      }
+    };
+  }, [isAuthenticated, userInfo, dispatch]);
 
   /* "prebuild": "node node_modules/puppeteer/install.js", */
   // Fetch CrowdfundData for SSR prerendering for detailedEvent social media sharing link preview
